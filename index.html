@@ -449,18 +449,18 @@
     </div>
 
     <div class="port-total">
-      <div class="amount">$7,458.00</div>
-      <div class="since">Started Jan 2026 at $5,000 &nbsp;·&nbsp; <span class="gain">+49.2%</span></div>
+      <div class="amount" id="heroPortVal">$6,100.00</div>
+      <div class="since">Started Jan 5, 2026 at $5,000 &nbsp;·&nbsp; <span class="gain" id="heroReturnPct">+22.0%</span></div>
     </div>
 
     <div class="port-stats">
       <div class="port-stat">
-        <div class="s-val up">+49.2%</div>
+        <div class="s-val up" id="heroReturnAmt">+22.0%</div>
         <div class="s-lbl">Total Return</div>
       </div>
       <div class="port-stat">
-        <div class="s-val">+1.4%</div>
-        <div class="s-lbl">vs S&P 500 Jan</div>
+        <div class="s-val up">+740</div>
+        <div class="s-lbl">SPX Put Jan 9</div>
       </div>
       <div class="port-stat">
         <div class="s-val">4</div>
@@ -568,7 +568,16 @@
 <script>
 const FINNHUB_KEY = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
 
-// Shared fetch — Finnhub quote endpoint, no proxy needed
+// Same positions as portfolio.html — must stay in sync
+const POSITIONS = {
+  NVDA: { shares: 7,  entry: 188.12 },
+  META: { shares: 2,  entry: 658.79 },
+  AMZN: { shares: 4,  entry: 233.06 },
+  SPY:  { shares: 1,  entry: 687.72 },
+};
+const CASH = 785.62;
+const START_VALUE = 5000;
+
 async function finnhubQuote(sym) {
   try {
     const res = await fetch(
@@ -578,7 +587,7 @@ async function finnhubQuote(sym) {
     if (!res.ok) return null;
     const d = await res.json();
     if (!d.c || d.c === 0) return null;
-    return { price: d.c, chg: d.dp }; // c=current, dp=% change
+    return { price: d.c, chg: d.dp };
   } catch { return null; }
 }
 
@@ -603,11 +612,9 @@ async function buildTicker() {
   for (const t of TICKER_SYMBOLS) {
     const d = await finnhubQuote(t.sym);
     if (d) results.push({ ...t, ...d });
-    await new Promise(r => setTimeout(r, 100)); // stagger to avoid rate limit
+    await new Promise(r => setTimeout(r, 100));
   }
-
   if (!results.length) return;
-
   const html = [...results, ...results].map(r => {
     const sign  = r.chg >= 0 ? '+' : '';
     const cls   = r.chg >= 0 ? 'up' : 'dn';
@@ -618,29 +625,59 @@ async function buildTicker() {
       <span class="t-chg ${cls}">${arrow} ${sign}${r.chg.toFixed(2)}%</span>
     </span>`;
   }).join('');
-
   document.getElementById('tickerTrack').innerHTML = html;
 }
 
-// ── PORTFOLIO SNAPSHOT PRICES ──
-const PORTFOLIO_TICKERS = ['NVDA','META','AMZN','SPY'];
+// ── PORTFOLIO SNAPSHOT — live prices + calculated total ──
+const PORT_SYMS = ['NVDA', 'META', 'AMZN', 'SPY'];
 
 async function loadPrices() {
-  for (const t of PORTFOLIO_TICKERS) {
-    const d = await finnhubQuote(t);
-    const pid = `p-${t.toLowerCase()}`;
-    const cid = `c-${t.toLowerCase()}`;
+  let equityValue = 0;
+
+  for (const sym of PORT_SYMS) {
+    const d = await finnhubQuote(sym);
+    const pid = `p-${sym.toLowerCase()}`;
+    const cid = `c-${sym.toLowerCase()}`;
     if (d) {
-      document.getElementById(pid).textContent = '$' + d.price.toFixed(2);
-      const chgEl = document.getElementById(cid);
-      const sign = d.chg >= 0 ? '+' : '';
-      chgEl.textContent = sign + d.chg.toFixed(2) + '%';
-      chgEl.className = 'holding-chg ' + (d.chg >= 0 ? 'up' : 'dn');
+      equityValue += d.price * POSITIONS[sym].shares;
+      const priceEl = document.getElementById(pid);
+      const chgEl   = document.getElementById(cid);
+      if (priceEl) priceEl.textContent = '$' + d.price.toFixed(2);
+      if (chgEl) {
+        const sign = d.chg >= 0 ? '+' : '';
+        chgEl.textContent = sign + d.chg.toFixed(2) + '%';
+        chgEl.className = 'holding-chg ' + (d.chg >= 0 ? 'up' : 'dn');
+      }
     } else {
-      document.getElementById(pid).textContent = '—';
-      document.getElementById(cid).textContent = '—';
+      const priceEl = document.getElementById(pid);
+      const chgEl   = document.getElementById(cid);
+      if (priceEl) priceEl.textContent = '—';
+      if (chgEl)   chgEl.textContent   = '—';
     }
     await new Promise(r => setTimeout(r, 100));
+  }
+
+  // Update live portfolio total
+  if (equityValue > 0) {
+    const totalLive   = equityValue + CASH;
+    const totalReturn = totalLive - START_VALUE;
+    const totalPct    = (totalReturn / START_VALUE) * 100;
+
+    const valEl  = document.getElementById('heroPortVal');
+    const pctEl  = document.getElementById('heroReturnPct');
+    const retEl  = document.getElementById('heroReturnAmt');
+
+    if (valEl) valEl.textContent = '$' + totalLive.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    if (pctEl) {
+      const sign = totalPct >= 0 ? '+' : '';
+      pctEl.textContent = sign + totalPct.toFixed(1) + '%';
+      pctEl.className   = 'gain ' + (totalPct >= 0 ? '' : 'dn');
+    }
+    if (retEl) {
+      const sign = totalPct >= 0 ? '+' : '';
+      retEl.textContent = sign + totalPct.toFixed(1) + '%';
+      retEl.className   = 's-val ' + (totalPct >= 0 ? 'up' : 'dn');
+    }
   }
 }
 

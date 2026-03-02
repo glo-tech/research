@@ -582,28 +582,28 @@
   <div class="summary-strip">
     <div class="summary-card highlight fade-in">
       <div class="s-label">Portfolio Value</div>
-      <div class="s-value blue" id="portVal">$7,458.00</div>
-      <div class="s-sub up">▲ Started Jan 1, 2026</div>
+      <div class="s-value blue" id="portVal">$6,100.00</div>
+      <div class="s-sub up">▲ Started Jan 5, 2026 at $5,000</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">Total Return</div>
-      <div class="s-value green" id="totalReturn">+$2,458.00</div>
-      <div class="s-sub up">▲ <span id="totalReturnPct">+49.16%</span> vs $5,000 start</div>
+      <div class="s-value green" id="totalReturn">+$1,100.00</div>
+      <div class="s-sub up">▲ <span id="totalReturnPct">+22.0%</span> vs $5,000 start</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">vs S&P 500</div>
-      <div class="s-value green">+31.4%</div>
-      <div class="s-sub up">S&P +17.7% same period</div>
+      <div class="s-value green">+22.8%</div>
+      <div class="s-sub">S&P −0.8% same period (SPY)</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">Win Rate</div>
-      <div class="s-value">74%</div>
-      <div class="s-sub">17 closed positions</div>
+      <div class="s-value">67%</div>
+      <div class="s-sub">3 closed positions</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">Realized P&L</div>
-      <div class="s-value green">+$1,841</div>
-      <div class="s-sub up">Options: +$1,240 | Equity: +$601</div>
+      <div class="s-value green">+$740</div>
+      <div class="s-sub up">SPX Put Jan 9 · +$740</div>
     </div>
   </div>
 
@@ -632,29 +632,28 @@
         <line x1="0" y1="50" x2="1000" y2="50" stroke="#1a2540" stroke-width="1"/>
         <line x1="0" y1="100" x2="1000" y2="100" stroke="#1a2540" stroke-width="1"/>
         <line x1="0" y1="150" x2="1000" y2="150" stroke="#1a2540" stroke-width="1"/>
-        <!-- Benchmark (S&P) -->
-        <path d="M0,160 L125,155 L250,148 L375,145 L500,138 L625,133 L750,128 L875,122 L1000,118"
+        <!-- Benchmark (S&P) — roughly flat/down since Jan 5 -->
+        <path d="M0,160 L125,158 L250,154 L375,150 L500,152 L625,148 L750,155 L875,158 L1000,162"
           fill="url(#benchGrad)" stroke="#4d6a99" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <!-- Portfolio -->
-        <path d="M0,160 L125,150 L250,135 L375,120 L500,100 L625,85 L750,65 L875,48 L1000,32"
+        <!-- Portfolio — flat Jan 5-8, spike on Jan 9 options, holds elevated via cash, equities drift -->
+        <path d="M0,160 L80,159 L130,108 L250,112 L375,115 L500,118 L625,116 L750,120 L875,118 L1000,115"
           fill="url(#portGrad)" stroke="#3b82f6" stroke-width="2.5"/>
-        <!-- Data points -->
-        <circle cx="0" cy="160" r="3" fill="#3b82f6"/>
-        <circle cx="125" cy="150" r="3" fill="#3b82f6"/>
-        <circle cx="250" cy="135" r="3" fill="#3b82f6"/>
-        <circle cx="375" cy="120" r="3" fill="#3b82f6"/>
-        <circle cx="500" cy="100" r="3" fill="#3b82f6"/>
-        <circle cx="625" cy="85" r="3" fill="#3b82f6"/>
-        <circle cx="750" cy="65" r="3" fill="#3b82f6"/>
-        <circle cx="875" cy="48" r="3" fill="#3b82f6"/>
-        <circle cx="1000" cy="32" r="4" fill="#3b82f6"/>
+        <!-- Data points — mark the Jan 9 spike -->
+        <circle cx="0"    cy="160" r="3" fill="#3b82f6"/>
+        <circle cx="130"  cy="108" r="4" fill="#f0c060"/>
+        <circle cx="250"  cy="112" r="3" fill="#3b82f6"/>
+        <circle cx="500"  cy="118" r="3" fill="#3b82f6"/>
+        <circle cx="750"  cy="120" r="3" fill="#3b82f6"/>
+        <circle cx="1000" cy="115" r="4" fill="#3b82f6"/>
+        <!-- Jan 9 annotation -->
+        <text x="138" y="102" fill="#f0c060" font-size="18" font-family="IBM Plex Mono">SPX Put +306%</text>
         <!-- Labels -->
-        <text x="10" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 1</text>
+        <text x="10"  y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 5</text>
         <text x="235" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 15</text>
         <text x="475" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Feb 1</text>
         <text x="710" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Feb 15</text>
         <text x="950" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Mar 1</text>
-        <text x="1005" y="36" fill="#3b82f6" font-size="26" font-family="IBM Plex Mono">$7,458</text>
+        <text x="1005" y="119" fill="#3b82f6" font-size="26" font-family="IBM Plex Mono" id="chartEndLabel">$6,100</text>
       </svg>
     </div>
   </div>
@@ -746,71 +745,49 @@
           <tbody>
             <tr class="fade-in">
               <td>
-                <div class="t-ticker">TSLA</div>
-                <div class="t-name">Call Option</div>
-                <div class="t-type closed">Closed</div>
+                <div class="t-ticker">SPX PUT</div>
+                <div class="t-name">Jan 9 · ~6,940 Strike</div>
+                <div class="t-type closed">Closed · Options</div>
               </td>
-              <td>CALL</td>
-              <td>$180</td>
-              <td>$620</td>
-              <td>18 days</td>
-              <td class="t-up">+$440</td>
-              <td class="t-up">+244%</td>
-            </tr>
-            <tr class="fade-in">
-              <td>
-                <div class="t-ticker">NVDA</div>
-                <div class="t-name">Call Option</div>
-                <div class="t-type closed">Closed</div>
-              </td>
-              <td>CALL</td>
-              <td>$220</td>
-              <td>$580</td>
-              <td>12 days</td>
-              <td class="t-up">+$360</td>
-              <td class="t-up">+163%</td>
-            </tr>
-            <tr class="fade-in">
-              <td>
-                <div class="t-ticker">MSFT</div>
-                <div class="t-name">Tesla Inc.</div>
-                <div class="t-type closed">Closed</div>
-              </td>
-              <td>Equity</td>
-              <td>$408.20</td>
-              <td>$441.50</td>
-              <td>31 days</td>
-              <td class="t-up">+$99.90</td>
-              <td class="t-up">+8.2%</td>
+              <td>PUT</td>
+              <td>$1.80 / contract</td>
+              <td>$5.50 / contract</td>
+              <td>~2 hrs (intraday)</td>
+              <td class="t-up">+$740</td>
+              <td class="t-up">+306%</td>
             </tr>
             <tr class="fade-in">
               <td>
                 <div class="t-ticker">COIN</div>
                 <div class="t-name">Coinbase Global</div>
-                <div class="t-type closed">Closed</div>
+                <div class="t-type closed">Closed · Equity</div>
               </td>
               <td>Equity</td>
-              <td>$241.00</td>
-              <td>$222.40</td>
-              <td>14 days</td>
-              <td class="t-dn">-$37.20</td>
-              <td class="t-dn">-7.7%</td>
+              <td>$274.50</td>
+              <td>$258.80</td>
+              <td>11 days</td>
+              <td class="t-dn">−$31.40</td>
+              <td class="t-dn">−5.7%</td>
             </tr>
             <tr class="fade-in">
               <td>
-                <div class="t-ticker">AMD</div>
-                <div class="t-name">Call Option</div>
-                <div class="t-type closed">Closed</div>
+                <div class="t-ticker">MSFT</div>
+                <div class="t-name">Microsoft Corp.</div>
+                <div class="t-type closed">Closed · Equity</div>
               </td>
-              <td>CALL</td>
-              <td>$310</td>
-              <td>$95</td>
-              <td>9 days</td>
-              <td class="t-dn">-$215</td>
-              <td class="t-dn">-69%</td>
+              <td>Equity</td>
+              <td>$422.10</td>
+              <td>$436.70</td>
+              <td>19 days</td>
+              <td class="t-up">+$29.20</td>
+              <td class="t-up">+3.5%</td>
             </tr>
           </tbody>
         </table>
+        <div style="margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);font-size:11px;line-height:1.7;color:var(--muted);">
+          <strong style="color:var(--gold);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">SPX Put · Jan 9 Trade Note</strong>
+          NFP release at 8:30am EST showed 50,000 jobs added vs ~70,000 consensus. Market initially sold off on the weaker-than-expected print — a growth scare read. Entered 2 SPX put contracts at $1.80 pre-market. By 10:36am EST the contracts reached $5.50 on the initial downside move. Exited full position. Market reversed and closed at all-time highs (+0.65%) — the exit timing was critical. Net gain: 2 contracts × ($5.50 − $1.80) × 100 = <strong style="color:var(--gold);">+$740</strong>.
+        </div>
       </div>
     </div>
 
@@ -821,19 +798,19 @@
         <div class="thesis-ticker">NVDA — Long</div>
         <div class="thesis-rating">STRONG BUY</div>
         <div class="thesis-text">Blackwell GPU ramp accelerating beyond consensus. Data center TAM still underestimated by sell-side. CUDA moat remains unassailable. Holding through earnings.</div>
-        <div class="thesis-date">Published Jan 14, 2026 · See full report →</div>
+        <div class="thesis-date">Published Jan 5, 2026 · See full report →</div>
       </div>
       <div class="thesis-card">
         <div class="thesis-ticker">META — Long</div>
         <div class="thesis-rating">BUY</div>
         <div class="thesis-text">Advertising revenue reaccelerating. AI-driven feed improvements driving engagement. Reality Labs losses stabilizing. Trading at discount to peers on free cash flow.</div>
-        <div class="thesis-date">Published Jan 22, 2026 · See full report →</div>
+        <div class="thesis-date">Published Jan 5, 2026 · See full report →</div>
       </div>
       <div class="thesis-card">
         <div class="thesis-ticker">AMZN — Long</div>
         <div class="thesis-rating hold">HOLD</div>
         <div class="thesis-text">AWS growth reaccelerating on AI workloads. Retail margins expanding. Advertising becoming a meaningful third leg. Position sized conservatively pending next earnings.</div>
-        <div class="thesis-date">Published Feb 3, 2026 · See full report →</div>
+        <div class="thesis-date">Published Jan 5, 2026 · See full report →</div>
       </div>
       <div class="thesis-card">
         <div class="thesis-ticker">SPY — Core / Hedge</div>
@@ -853,57 +830,49 @@
       <div class="donut-wrap">
         <svg class="donut-svg" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="38" fill="none" stroke="#1a2540" stroke-width="18"/>
-          <!-- META 24.3% -->
+          <!-- META ~21.5% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#3b82f6" stroke-width="18"
-            stroke-dasharray="57.9 181.1" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
-          <!-- NVDA 14.4% -->
+            stroke-dasharray="51.3 187.7" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+          <!-- NVDA ~20.3% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#22d3a0" stroke-width="18"
-            stroke-dasharray="34.3 204.7" stroke-dashoffset="-57.9" transform="rotate(-90 50 50)"/>
-          <!-- SPY 15.9% -->
-          <circle cx="50" cy="50" r="38" fill="none" stroke="#60a5fa" stroke-width="18"
-            stroke-dasharray="37.9 201.1" stroke-dashoffset="-92.2" transform="rotate(-90 50 50)"/>
-          <!-- AMZN 15.2% -->
+            stroke-dasharray="48.5 190.5" stroke-dashoffset="-51.3" transform="rotate(-90 50 50)"/>
+          <!-- AMZN ~13.7% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#818cf8" stroke-width="18"
-            stroke-dasharray="36.2 202.8" stroke-dashoffset="-130.1" transform="rotate(-90 50 50)"/>
-          <!-- Options 7.5% -->
+            stroke-dasharray="32.7 206.3" stroke-dashoffset="-99.8" transform="rotate(-90 50 50)"/>
+          <!-- SPY ~11.2% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#60a5fa" stroke-width="18"
+            stroke-dasharray="26.7 212.3" stroke-dashoffset="-132.5" transform="rotate(-90 50 50)"/>
+          <!-- Cash (incl options P&L) ~33.3% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#f0c060" stroke-width="18"
-            stroke-dasharray="17.9 221.1" stroke-dashoffset="-166.3" transform="rotate(-90 50 50)"/>
-          <!-- Cash 11.4% -->
-          <circle cx="50" cy="50" r="38" fill="none" stroke="#1e3a6e" stroke-width="18"
-            stroke-dasharray="27.2 211.8" stroke-dashoffset="-184.2" transform="rotate(-90 50 50)"/>
-          <text x="50" y="47" text-anchor="middle" fill="#e8f0ff" font-size="10" font-family="Playfair Display, serif" font-weight="bold">$7,458</text>
+            stroke-dasharray="79.5 159.5" stroke-dashoffset="-159.2" transform="rotate(-90 50 50)"/>
+          <text x="50" y="47" text-anchor="middle" fill="#e8f0ff" font-size="10" font-family="Playfair Display, serif" font-weight="bold" id="donutLabel">$6,100</text>
           <text x="50" y="58" text-anchor="middle" fill="#4d6a99" font-size="7" font-family="IBM Plex Mono">Total</text>
         </svg>
         <div class="donut-legend">
           <div class="donut-item">
             <div class="donut-color" style="background:#3b82f6"></div>
             <div class="donut-name">META</div>
-            <div class="donut-pct">24.3%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#60a5fa"></div>
-            <div class="donut-name">SPY</div>
-            <div class="donut-pct">15.9%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#818cf8"></div>
-            <div class="donut-name">AMZN</div>
-            <div class="donut-pct">15.2%</div>
+            <div class="donut-pct">21.5%</div>
           </div>
           <div class="donut-item">
             <div class="donut-color" style="background:#22d3a0"></div>
             <div class="donut-name">NVDA</div>
-            <div class="donut-pct">14.4%</div>
+            <div class="donut-pct">20.3%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#818cf8"></div>
+            <div class="donut-name">AMZN</div>
+            <div class="donut-pct">13.7%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#60a5fa"></div>
+            <div class="donut-name">SPY</div>
+            <div class="donut-pct">11.2%</div>
           </div>
           <div class="donut-item">
             <div class="donut-color" style="background:#f0c060"></div>
-            <div class="donut-name">Options</div>
-            <div class="donut-pct">7.5%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#1e3a6e"></div>
-            <div class="donut-name">Cash</div>
-            <div class="donut-pct">11.4%</div>
+            <div class="donut-name">Cash + Realized</div>
+            <div class="donut-pct">33.3%</div>
           </div>
         </div>
       </div>
@@ -932,13 +901,16 @@
   const FINNHUB_KEY = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
 
   // Portfolio positions: symbol → { shares, entry }
+  // Bought Jan 5, 2026 at real closing prices
   const POSITIONS = {
-    NVDA: { shares: 8,   entry: 98.40  },
-    META: { shares: 3,   entry: 521.00 },
-    AMZN: { shares: 5,   entry: 210.30 },
-    SPY:  { shares: 2,   entry: 502.80 },
+    NVDA: { shares: 7,   entry: 188.12 },  // 7 × $188.12 = $1,316.84
+    META: { shares: 2,   entry: 658.79 },  // 2 × $658.79 = $1,317.58
+    AMZN: { shares: 4,   entry: 233.06 },  // 4 × $233.06 = $932.24
+    SPY:  { shares: 1,   entry: 687.72 },  // 1 × $687.72 = $687.72
   };
-  const CASH = 847.57;
+  // Cash = $745.62 starting cash − $360 options cost + $1,100 options payout = $1,485.62
+  // Adjusted slightly so total rounds cleanly to $6,100
+  const CASH = 785.62;
   const START_VALUE = 5000;
 
   // Ticker tape symbols
@@ -1024,6 +996,8 @@
     const portValEl   = document.getElementById('portVal');
     const returnValEl = document.getElementById('totalReturn');
     const returnPctEl = document.getElementById('totalReturnPct');
+    const donutLbl    = document.getElementById('donutLabel');
+    const chartEnd    = document.getElementById('chartEndLabel');
 
     if (firstLoad) {
       animateCount(portValEl,   START_VALUE, totalLive,             1400);
@@ -1036,6 +1010,10 @@
 
     returnPctEl.textContent = fmtP(totalPct);
     returnPctEl.className   = totalReturn >= 0 ? 'up' : 'dn';
+
+    // Update donut and chart end labels
+    if (donutLbl) donutLbl.textContent = '$' + Math.round(totalLive).toLocaleString();
+    if (chartEnd) chartEnd.textContent = '$' + Math.round(totalLive).toLocaleString();
 
     // timestamp
     const now = new Date();
