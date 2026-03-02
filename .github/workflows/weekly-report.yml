@@ -1,0 +1,36 @@
+name: Weekly Report Generator
+
+on:
+  schedule:
+    # 4:30pm ET every Friday (21:30 UTC)
+    - cron: '30 21 * * 5'
+  workflow_dispatch: # allows manual trigger from GitHub UI
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests
+
+      - name: Generate weekly report
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate_report.py
+
+      - name: Commit and push new report
+        run: |
+          git config --global user.name "2026Research Bot"
+          git config --global user.email "bot@glointernational.org"
+          git add research.html
+          git diff --staged --quiet || git commit -m "Weekly report: $(date +'Week of %B %d, %Y')"
+          git push
