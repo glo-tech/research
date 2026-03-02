@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About · 2026Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0a0e18;
+    --surface: #0f1520;
+    --border: #1a2540;
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --blue-dim: #1e3a6e;
+    --text: #c8d8f0;
+    --muted: #4d6a99;
+    --green: #22d3a0;
+    --white: #e8f0ff;
+    --gold: #f0c060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(6,8,16,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue-bright); }
+  .nav-badge { background: var(--blue); color: #fff; padding: 6px 16px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+  .nav-badge:hover { background: var(--blue-bright); }
+
+  /* LAYOUT */
+  .page {
+    position: relative; z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 48px 96px;
+  }
+
+  /* HEADER */
+  .page-eyebrow {
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--blue-bright); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .page-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-bright); }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px; font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin-bottom: 48px;
+  }
+  .page-title em { font-style: italic; color: var(--blue-bright); }
+
+  /* MAIN PROSE */
+  .about-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .prose { }
+
+  .prose p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .prose p.lead {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+
+  .prose h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin: 36px 0 12px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .prose strong { color: var(--white); }
+  .prose em { font-style: italic; color: var(--gold); }
+
+  /* SIDEBAR */
+  .sidebar { }
+
+  .sidebar-card {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-label {
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(26,37,64,0.5);
+    font-size: 11px;
+  }
+  .sidebar-item:last-child { border-bottom: none; }
+  .sidebar-item .si-key { color: var(--muted); letter-spacing: 0.05em; }
+  .sidebar-item .si-val { color: var(--white); font-weight: 500; text-align: right; }
+  .sidebar-item .si-val.blue { color: var(--blue-bright); }
+
+  .sidebar-disclaimer {
+    padding: 16px;
+    background: var(--surface);
+    border-left: 2px solid var(--blue-dim);
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 40px;
+  }
+  .section-divider span {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PRINCIPLES GRID */
+  .principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 8px;
+  }
+  .principle {
+    background: var(--deep);
+    padding: 24px;
+  }
+  .principle-num {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--blue-dim);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .principle-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .principle-desc {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+  footer .logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--white); text-decoration: none; }
+  footer .logo span { color: var(--blue-bright); }
+  footer p { font-size: 10px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .page { padding: 48px 20px 64px; }
+    .page-title { font-size: 40px; }
+    .about-body { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+    .principles { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">2026<span>Research</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+  <a href="index.html#newsletter" class="nav-badge">Subscribe</a>
+</nav>
+
+<div class="page">
+
+  <div class="page-eyebrow">About This Project</div>
+  <h1 class="page-title">This is a<br><em>side project.</em></h1>
+
+  <div class="about-body">
+
+    <div class="prose">
+      <p class="lead">Nothing more, nothing less. A finance student at Fordham's Gabelli School of Business trying to build a stronger, more honest foundation in how markets actually work.</p>
+
+      <p>The classroom gives you the frameworks. What it doesn't give you is the discipline of showing up every week, reading what happened, and being forced to explain it clearly enough to write it down. That gap — between understanding concepts and understanding markets in real time — is what this project is trying to close.</p>
+
+      <p>It's easy to have opinions about markets. It's harder to commit them to paper before you know how things play out. So that's the exercise: read, synthesize, write, publish, and look back later. The paper trail is the whole point.</p>
+
+      <h3>The Portfolio</h3>
+
+      <p>There's a portfolio tracker on this site. The positions are real, the prices are live, and the performance is tracked against the S&P 500. But the portfolio is not the focus — it's <em>accountability infrastructure.</em> It gives the research something to be measured against and keeps the analysis grounded in something with actual stakes.</p>
+
+      <p>The numbers are not the point. <strong>The research is the point.</strong> If the portfolio does well, great. If it doesn't, that's a learning outcome too, and it'll be documented honestly either way.</p>
+
+      <h3>What Gets Published</h3>
+
+      <p>A <strong>Weekly Wrap</strong> every week — what happened in markets, what the data showed, what to watch going into the next week. Occasional <strong>Special Reports</strong> when something significant happens mid-cycle that warrants coverage immediately: a Fed surprise, a macro shock, an earnings result that changes the picture.</p>
+
+      <p>All macro data is sourced from primary publications — BLS, BEA, the Federal Reserve, FactSet. Everything cited. When the analysis is wrong, that gets acknowledged too.</p>
+
+      <h3>A Note on Advice</h3>
+
+      <p>Nothing written here is financial advice. This is a student research project. If you're making investment decisions based on anything published on this site, please reconsider. The goal here is to learn how to think about markets clearly — not to tell anyone else what to do with their money.</p>
+    </div>
+
+    <div class="sidebar">
+
+      <div class="sidebar-card">
+        <div class="sidebar-label">Project Details</div>
+        <div class="sidebar-item">
+          <span class="si-key">Author</span>
+          <span class="si-val">Finance Student</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">School</span>
+          <span class="si-val" style="text-align:right;line-height:1.4">Gabelli School<br>of Business</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">University</span>
+          <span class="si-val">Fordham</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">Launched</span>
+          <span class="si-val">Jan 5, 2026</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">Cadence</span>
+          <span class="si-val blue">Weekly</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">Benchmark</span>
+          <span class="si-val">S&P 500 (SPY)</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-label">Report Types</div>
+        <div class="sidebar-item">
+          <span class="si-key">● Weekly Wrap</span>
+          <span class="si-val blue">Every week</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">★ Special Report</span>
+          <span class="si-val">As needed</span>
+        </div>
+      </div>
+
+      <div class="sidebar-disclaimer">
+        ⚠ Not financial advice. This is a student research project published for educational and accountability purposes only.
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section-divider"><span>How the Research Works</span></div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-title">Read First</div>
+      <div class="principle-desc">Primary sources only — BLS releases, Fed statements, company filings, FactSet data. No recycled takes.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-title">Write It Down</div>
+      <div class="principle-desc">If you can't explain it clearly in writing, you don't understand it yet. The writing is the test.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-title">Cite Everything</div>
+      <div class="principle-desc">Every data point sourced and attributed. No numbers without a reference. No winging it.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-title">Be Wrong Honestly</div>
+      <div class="principle-desc">The record stays. If a call was wrong, it gets documented. That's the whole accountability structure.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html" class="logo">2026<span>Research</span></a>
+  <p>Not financial advice. Educational purposes only.</p>
+</footer>
+
+</body>
+</html>
