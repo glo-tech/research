@@ -927,8 +927,9 @@
 
 <script>
   // ─────────────────────────────────────────────
-  // LIVE PRICE ENGINE — Yahoo Finance via CORS proxy
+  // LIVE PRICE ENGINE — Finnhub
   // ─────────────────────────────────────────────
+  const FINNHUB_KEY = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
 
   // Portfolio positions: symbol → { shares, entry }
   const POSITIONS = {
@@ -940,40 +941,41 @@
   const CASH = 847.57;
   const START_VALUE = 5000;
 
-  // Ticker tape symbols (order shown in tape)
-  const TAPE_SYMBOLS = ['SPY','QQQ','NVDA','META','AMZN','TSLA','BTC-USD','GC=F','CL=F'];
-
-  // CORS proxies — we try each in order if the previous fails
-  const PROXIES = [
-    sym => `https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`)}`,
-    sym => `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`)}`,
-  ];
+  // Ticker tape symbols
+  const TAPE_SYMBOLS = ['SPY','QQQ','NVDA','META','AMZN','TSLA','AAPL','MSFT'];
 
   const priceCache = {};
 
   async function fetchPrice(symbol) {
     if (priceCache[symbol]) return priceCache[symbol];
-    for (const proxyFn of PROXIES) {
-      try {
-        const res = await fetch(proxyFn(symbol), { signal: AbortSignal.timeout(6000) });
-        if (!res.ok) continue;
-        const data = await res.json();
-        const meta = data?.chart?.result?.[0]?.meta;
-        if (!meta) continue;
-        const price  = meta.regularMarketPrice;
-        const prev   = meta.chartPreviousClose || meta.previousClose;
-        const change = price - prev;
-        const pct    = (change / prev) * 100;
-        const result = { price, change, pct, symbol };
-        priceCache[symbol] = result;
-        return result;
-      } catch(e) { /* try next proxy */ }
-    }
-    return null; // all proxies failed
+    try {
+      const res = await fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`,
+        { signal: AbortSignal.timeout(6000) }
+      );
+      if (!res.ok) return null;
+      const d = await res.json();
+      // Finnhub returns: c=current, pc=prev close, d=change, dp=change%
+      if (!d.c || d.c === 0) return null;
+      const result = {
+        symbol,
+        price:  d.c,
+        change: d.d,
+        pct:    d.dp,
+      };
+      priceCache[symbol] = result;
+      return result;
+    } catch(e) { return null; }
   }
 
   async function fetchAll(symbols) {
-    return Promise.all(symbols.map(fetchPrice));
+    // Stagger requests slightly to avoid rate limiting
+    const results = [];
+    for (const sym of symbols) {
+      results.push(await fetchPrice(sym));
+      await new Promise(r => setTimeout(r, 120));
+    }
+    return results;
   }
 
   // ─── FORMAT HELPERS ───

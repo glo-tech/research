@@ -566,7 +566,21 @@
 </footer>
 
 <script>
-const proxy = 'https://corsproxy.io/?';
+const FINNHUB_KEY = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
+
+// Shared fetch — Finnhub quote endpoint, no proxy needed
+async function finnhubQuote(sym) {
+  try {
+    const res = await fetch(
+      `https://finnhub.io/api/v1/quote?symbol=${sym}&token=${FINNHUB_KEY}`,
+      { signal: AbortSignal.timeout(6000) }
+    );
+    if (!res.ok) return null;
+    const d = await res.json();
+    if (!d.c || d.c === 0) return null;
+    return { price: d.c, chg: d.dp }; // c=current, dp=% change
+  } catch { return null; }
+}
 
 // ── TICKER TAPE ──
 const TICKER_SYMBOLS = [
@@ -584,33 +598,20 @@ const TICKER_SYMBOLS = [
   { sym: 'TLT',  label: '20Y BOND' },
 ];
 
-async function fetchTickerPrice(sym) {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`;
-  try {
-    const res = await fetch(proxy + encodeURIComponent(url));
-    const data = await res.json();
-    const meta = data?.chart?.result?.[0]?.meta;
-    if (!meta?.regularMarketPrice) return null;
-    const price = meta.regularMarketPrice;
-    const prev  = meta.previousClose;
-    const chg   = ((price - prev) / prev * 100);
-    return { price, chg };
-  } catch { return null; }
-}
-
 async function buildTicker() {
-  const results = await Promise.all(TICKER_SYMBOLS.map(async t => {
-    const d = await fetchTickerPrice(t.sym);
-    return { ...t, ...d };
-  }));
+  const results = [];
+  for (const t of TICKER_SYMBOLS) {
+    const d = await finnhubQuote(t.sym);
+    if (d) results.push({ ...t, ...d });
+    await new Promise(r => setTimeout(r, 100)); // stagger to avoid rate limit
+  }
 
-  const valid = results.filter(r => r.price);
-  if (!valid.length) return;
+  if (!results.length) return;
 
-  const html = [...valid, ...valid].map(r => {
-    const sign   = r.chg >= 0 ? '+' : '';
-    const cls    = r.chg >= 0 ? 'up' : 'dn';
-    const arrow  = r.chg >= 0 ? '▲' : '▼';
+  const html = [...results, ...results].map(r => {
+    const sign  = r.chg >= 0 ? '+' : '';
+    const cls   = r.chg >= 0 ? 'up' : 'dn';
+    const arrow = r.chg >= 0 ? '▲' : '▼';
     return `<span class="ticker-item">
       <span class="t-sym">${r.label}</span>
       <span class="t-price">$${r.price.toFixed(2)}</span>
@@ -621,28 +622,12 @@ async function buildTicker() {
   document.getElementById('tickerTrack').innerHTML = html;
 }
 
-buildTicker();
-
-// ── LIVE PRICES ──
-const tickers = ['NVDA','META','AMZN','SPY'];
-
-async function fetchPrice(ticker) {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`;
-  try {
-    const res = await fetch(proxy + encodeURIComponent(url));
-    const data = await res.json();
-    const result = data?.chart?.result?.[0];
-    const price = result?.meta?.regularMarketPrice;
-    const prev  = result?.meta?.previousClose;
-    if (!price || !prev) return null;
-    const chg = ((price - prev) / prev * 100);
-    return { price, chg };
-  } catch { return null; }
-}
+// ── PORTFOLIO SNAPSHOT PRICES ──
+const PORTFOLIO_TICKERS = ['NVDA','META','AMZN','SPY'];
 
 async function loadPrices() {
-  for (const t of tickers) {
-    const d = await fetchPrice(t);
+  for (const t of PORTFOLIO_TICKERS) {
+    const d = await finnhubQuote(t);
     const pid = `p-${t.toLowerCase()}`;
     const cid = `c-${t.toLowerCase()}`;
     if (d) {
@@ -655,9 +640,11 @@ async function loadPrices() {
       document.getElementById(pid).textContent = '—';
       document.getElementById(cid).textContent = '—';
     }
+    await new Promise(r => setTimeout(r, 100));
   }
 }
 
+buildTicker();
 loadPrices();
 </script>
 </body>
