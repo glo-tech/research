@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio · 2026Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0a0e18;
+    --surface: #0f1520;
+    --surface2: #141c2a;
+    --border: #1a2540;
+    --border2: #223060;
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --blue-dim: #1e3a6e;
+    --blue-glow: rgba(59,130,246,0.12);
+    --text: #c8d8f0;
+    --muted: #4d6a99;
+    --green: #22d3a0;
+    --red: #f05a5a;
+    --white: #e8f0ff;
+    --gold: #f0c060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* GRID BACKGROUND */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(37,99,235,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--blue);
+    overflow: hidden;
+    padding: 5px 0;
+    position: relative;
+    z-index: 10;
+  }
+  .ticker-track {
+    display: flex;
+    animation: ticker 45s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 28px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.06em;
+  }
+  .ticker-item .up { color: #86efca; }
+  .ticker-item .dn { color: #fca5a5; }
+  .ticker-sep { opacity: 0.3; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6,8,16,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue-bright); }
+  .nav-badge {
+    background: var(--blue);
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-badge:hover { background: var(--blue-bright); }
+
+  /* PAGE WRAPPER */
+  .page { position: relative; z-index: 1; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 64px 64px 48px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 32px;
+    background: linear-gradient(180deg, rgba(37,99,235,0.04) 0%, transparent 100%);
+  }
+  .page-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--blue-bright);
+  }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .page-title em { font-style: italic; color: var(--blue-bright); }
+  .page-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+  .header-disclaimer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    padding: 16px 20px;
+    max-width: 340px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .header-disclaimer strong { color: var(--blue-bright); display: block; margin-bottom: 4px; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* SUMMARY CARDS */
+  .summary-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-card {
+    background: var(--deep);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .summary-card:hover { background: var(--surface); }
+  .summary-card.highlight { background: var(--surface); }
+  .summary-card.highlight::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+  }
+  .s-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .s-value {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .s-value.green { color: var(--green); }
+  .s-value.blue { color: var(--blue-bright); }
+  .s-sub {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .s-sub.up { color: var(--green); }
+  .s-sub.dn { color: var(--red); }
+
+  /* PERFORMANCE CHART AREA */
+  .chart-section {
+    padding: 48px 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .chart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .chart-legend {
+    display: flex;
+    gap: 24px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .legend-dot.port { background: var(--blue-bright); }
+  .legend-dot.bench { background: var(--muted); }
+
+  .chart-container {
+    position: relative;
+    height: 220px;
+    width: 100%;
+  }
+  svg.chart {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* MAIN CONTENT GRID */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  /* HOLDINGS TABLE */
+  .holdings-section {
+    background: var(--deep);
+    padding: 48px;
+  }
+  .sec-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sec-title span { color: var(--muted); font-size: 9px; }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 10px 20px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .tab.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  /* TABLE */
+  .holdings-table { width: 100%; border-collapse: collapse; }
+  .holdings-table th {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 400;
+  }
+  .holdings-table th:not(:first-child) { text-align: right; }
+  .holdings-table td {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    font-size: 12px;
+  }
+  .holdings-table td:not(:first-child) { text-align: right; }
+  .holdings-table tr:hover td { background: rgba(37,99,235,0.04); }
+  .holdings-table tr:last-child td { border-bottom: none; }
+
+  .t-ticker { font-size: 14px; font-weight: 600; color: var(--white); }
+  .t-name { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .t-type {
+    display: inline-block;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid;
+    margin-top: 4px;
+  }
+  .t-type.equity { color: var(--blue-bright); border-color: var(--blue-dim); }
+  .t-type.closed { color: var(--muted); border-color: var(--border); }
+  .t-up { color: var(--green); }
+  .t-dn { color: var(--red); }
+  .t-neutral { color: var(--muted); }
+
+  .bar-wrap {
+    width: 80px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+  .bar-fill { height: 100%; border-radius: 2px; }
+  .bar-fill.up { background: var(--green); }
+  .bar-fill.dn { background: var(--red); }
+
+  /* THESIS SIDEBAR */
+  .thesis-section {
+    background: var(--surface);
+    padding: 40px 36px;
+  }
+  .thesis-card {
+    border: 1px solid var(--border);
+    background: var(--deep);
+    padding: 24px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .thesis-card:hover { border-color: var(--blue-dim); background: var(--surface2); }
+  .thesis-card.active { border-color: var(--blue); }
+  .thesis-card.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--blue-bright);
+  }
+  .thesis-ticker { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .thesis-rating {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .thesis-rating.hold { color: var(--gold); }
+  .thesis-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .thesis-date { font-size: 9px; color: var(--muted); margin-top: 10px; opacity: 0.6; }
+
+
+
+  /* ALLOCATION DONUT */
+  .allocation-section {
+    padding: 48px 64px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .donut-svg { width: 160px; height: 160px; flex-shrink: 0; }
+  .donut-legend { flex: 1; }
+  .donut-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .donut-item:last-child { border-bottom: none; }
+  .donut-color { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .donut-name { flex: 1; color: var(--text); }
+  .donut-pct { color: var(--muted); }
+
+  .methodology-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+  .methodology-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .methodology-box p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .methodology-box p:last-child { margin-bottom: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+  }
+  footer .logo span { color: var(--blue-bright); }
+  footer p { font-size: 10px; color: var(--muted); max-width: 500px; text-align: right; line-height: 1.5; }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; animation: fadeIn 0.6s ease both; }
+  .fade-in:nth-child(1) { animation-delay: 0.05s; }
+  .fade-in:nth-child(2) { animation-delay: 0.1s; }
+  .fade-in:nth-child(3) { animation-delay: 0.15s; }
+  .fade-in:nth-child(4) { animation-delay: 0.2s; }
+  .fade-in:nth-child(5) { animation-delay: 0.25s; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">SPY <strong>$591.14</strong> <span class="up">▲ +0.91%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">NVDA <strong>$134.22</strong> <span class="up">▲ +3.12%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">META <strong>$604.88</strong> <span class="up">▲ +1.44%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">TSLA <strong>$289.40</strong> <span class="dn">▼ -1.08%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">AMZN <strong>$226.75</strong> <span class="up">▲ +0.78%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">BTC/USD <strong>$89,200</strong> <span class="up">▲ +2.11%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">10Y <strong>4.38%</strong> <span class="dn">▼ -3bps</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">VIX <strong>18.4</strong> <span class="up">▲ +0.8</span></span>
+    <span class="ticker-item">SPY <strong>$591.14</strong> <span class="up">▲ +0.91%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">NVDA <strong>$134.22</strong> <span class="up">▲ +3.12%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">META <strong>$604.88</strong> <span class="up">▲ +1.44%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">TSLA <strong>$289.40</strong> <span class="dn">▼ -1.08%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">AMZN <strong>$226.75</strong> <span class="up">▲ +0.78%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">BTC/USD <strong>$89,200</strong> <span class="up">▲ +2.11%</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">10Y <strong>4.38%</strong> <span class="dn">▼ -3bps</span></span>
+    <span class="ticker-item ticker-sep">|</span>
+    <span class="ticker-item">VIX <strong>18.4</strong> <span class="up">▲ +0.8</span></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">2026<span>Research</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#">Research</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="#">Macro</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <a href="#" class="nav-badge">Subscribe</a>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <div class="page-eyebrow">Live Portfolio · Jan 2026 – Present</div>
+      <h1 class="page-title">Portfolio<br><em>Tracker</em></h1>
+      <p class="page-subtitle">Real-time tracking of a $5,000 starting portfolio across equities and options. Every position is documented with a published thesis. This project is primarily a research and learning exercise.</p>
+    </div>
+    <div class="header-disclaimer">
+      <strong>⚠ Educational Disclaimer</strong>
+      This portfolio is maintained as a learning exercise in investment research and market analysis. Nothing published here constitutes financial advice. All positions and theses are documented for educational purposes only.
+    </div>
+  </div>
+
+  <!-- SUMMARY STRIP -->
+  <div class="summary-strip">
+    <div class="summary-card highlight fade-in">
+      <div class="s-label">Portfolio Value</div>
+      <div class="s-value blue" id="portVal">$7,458.00</div>
+      <div class="s-sub up">▲ Started Jan 1, 2026</div>
+    </div>
+    <div class="summary-card fade-in">
+      <div class="s-label">Total Return</div>
+      <div class="s-value green" id="totalReturn">+$2,458.00</div>
+      <div class="s-sub up">▲ <span id="totalReturnPct">+49.16%</span> vs $5,000 start</div>
+    </div>
+    <div class="summary-card fade-in">
+      <div class="s-label">vs S&P 500</div>
+      <div class="s-value green">+31.4%</div>
+      <div class="s-sub up">S&P +17.7% same period</div>
+    </div>
+    <div class="summary-card fade-in">
+      <div class="s-label">Win Rate</div>
+      <div class="s-value">74%</div>
+      <div class="s-sub">17 closed positions</div>
+    </div>
+    <div class="summary-card fade-in">
+      <div class="s-label">Realized P&L</div>
+      <div class="s-value green">+$1,841</div>
+      <div class="s-sub up">Options: +$1,240 | Equity: +$601</div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE CHART -->
+  <div class="chart-section">
+    <div class="chart-header">
+      <div class="chart-title">Portfolio Performance vs S&P 500 · Jan–Mar 2026</div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot port"></div> 2026Research Portfolio</div>
+        <div class="legend-item"><div class="legend-dot bench"></div> S&P 500 (Benchmark)</div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <svg class="chart" viewBox="0 0 1000 200" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="portGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="benchGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4d6a99" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#4d6a99" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- Grid lines -->
+        <line x1="0" y1="50" x2="1000" y2="50" stroke="#1a2540" stroke-width="1"/>
+        <line x1="0" y1="100" x2="1000" y2="100" stroke="#1a2540" stroke-width="1"/>
+        <line x1="0" y1="150" x2="1000" y2="150" stroke="#1a2540" stroke-width="1"/>
+        <!-- Benchmark (S&P) -->
+        <path d="M0,160 L125,155 L250,148 L375,145 L500,138 L625,133 L750,128 L875,122 L1000,118"
+          fill="url(#benchGrad)" stroke="#4d6a99" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- Portfolio -->
+        <path d="M0,160 L125,150 L250,135 L375,120 L500,100 L625,85 L750,65 L875,48 L1000,32"
+          fill="url(#portGrad)" stroke="#3b82f6" stroke-width="2.5"/>
+        <!-- Data points -->
+        <circle cx="0" cy="160" r="3" fill="#3b82f6"/>
+        <circle cx="125" cy="150" r="3" fill="#3b82f6"/>
+        <circle cx="250" cy="135" r="3" fill="#3b82f6"/>
+        <circle cx="375" cy="120" r="3" fill="#3b82f6"/>
+        <circle cx="500" cy="100" r="3" fill="#3b82f6"/>
+        <circle cx="625" cy="85" r="3" fill="#3b82f6"/>
+        <circle cx="750" cy="65" r="3" fill="#3b82f6"/>
+        <circle cx="875" cy="48" r="3" fill="#3b82f6"/>
+        <circle cx="1000" cy="32" r="4" fill="#3b82f6"/>
+        <!-- Labels -->
+        <text x="10" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 1</text>
+        <text x="235" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 15</text>
+        <text x="475" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Feb 1</text>
+        <text x="710" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Feb 15</text>
+        <text x="950" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Mar 1</text>
+        <text x="1005" y="36" fill="#3b82f6" font-size="26" font-family="IBM Plex Mono">$7,458</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- HOLDINGS + THESIS -->
+  <div class="content-grid">
+    <div class="holdings-section">
+      <div class="sec-title">
+        Current Holdings & Closed Positions
+        <span id="lastRefreshed">Loading…</span>
+        <span id="priceBadge" style="margin-left:12px;font-size:9px;letter-spacing:0.1em;color:var(--muted);">⟳ Fetching…</span>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('open', this)">Open Positions</div>
+        <div class="tab" onclick="switchTab('closed', this)">Closed Positions</div>
+      </div>
+
+      <!-- OPEN EQUITIES -->
+      <div class="tab-panel active" id="tab-open">
+        <table class="holdings-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Current Price</th>
+              <th>Today's Change</th>
+              <th>% Gain (Position)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fade-in" data-symbol="NVDA">
+              <td>
+                <div class="t-ticker">NVDA</div>
+                <div class="t-name">NVIDIA Corp.</div>
+                <div class="t-type equity">Equity</div>
+              </td>
+              <td class="live-price">—</td>
+              <td class="live-today">—</td>
+              <td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="META">
+              <td>
+                <div class="t-ticker">META</div>
+                <div class="t-name">Meta Platforms</div>
+                <div class="t-type equity">Equity</div>
+              </td>
+              <td class="live-price">—</td>
+              <td class="live-today">—</td>
+              <td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="AMZN">
+              <td>
+                <div class="t-ticker">AMZN</div>
+                <div class="t-name">Amazon.com Inc.</div>
+                <div class="t-type equity">Equity</div>
+              </td>
+              <td class="live-price">—</td>
+              <td class="live-today">—</td>
+              <td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="SPY">
+              <td>
+                <div class="t-ticker">SPY</div>
+                <div class="t-name">S&P 500 ETF</div>
+                <div class="t-type equity">Equity</div>
+              </td>
+              <td class="live-price">—</td>
+              <td class="live-today">—</td>
+              <td class="live-return t-neutral">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CLOSED -->
+      <div class="tab-panel" id="tab-closed">
+        <table class="holdings-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Type</th>
+              <th>Entry</th>
+              <th>Exit</th>
+              <th>Hold Period</th>
+              <th>Realized P&L</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fade-in">
+              <td>
+                <div class="t-ticker">TSLA</div>
+                <div class="t-name">Call Option</div>
+                <div class="t-type closed">Closed</div>
+              </td>
+              <td>CALL</td>
+              <td>$180</td>
+              <td>$620</td>
+              <td>18 days</td>
+              <td class="t-up">+$440</td>
+              <td class="t-up">+244%</td>
+            </tr>
+            <tr class="fade-in">
+              <td>
+                <div class="t-ticker">NVDA</div>
+                <div class="t-name">Call Option</div>
+                <div class="t-type closed">Closed</div>
+              </td>
+              <td>CALL</td>
+              <td>$220</td>
+              <td>$580</td>
+              <td>12 days</td>
+              <td class="t-up">+$360</td>
+              <td class="t-up">+163%</td>
+            </tr>
+            <tr class="fade-in">
+              <td>
+                <div class="t-ticker">MSFT</div>
+                <div class="t-name">Tesla Inc.</div>
+                <div class="t-type closed">Closed</div>
+              </td>
+              <td>Equity</td>
+              <td>$408.20</td>
+              <td>$441.50</td>
+              <td>31 days</td>
+              <td class="t-up">+$99.90</td>
+              <td class="t-up">+8.2%</td>
+            </tr>
+            <tr class="fade-in">
+              <td>
+                <div class="t-ticker">COIN</div>
+                <div class="t-name">Coinbase Global</div>
+                <div class="t-type closed">Closed</div>
+              </td>
+              <td>Equity</td>
+              <td>$241.00</td>
+              <td>$222.40</td>
+              <td>14 days</td>
+              <td class="t-dn">-$37.20</td>
+              <td class="t-dn">-7.7%</td>
+            </tr>
+            <tr class="fade-in">
+              <td>
+                <div class="t-ticker">AMD</div>
+                <div class="t-name">Call Option</div>
+                <div class="t-type closed">Closed</div>
+              </td>
+              <td>CALL</td>
+              <td>$310</td>
+              <td>$95</td>
+              <td>9 days</td>
+              <td class="t-dn">-$215</td>
+              <td class="t-dn">-69%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- THESIS SIDEBAR -->
+    <div class="thesis-section">
+      <div class="sec-title">Investment Theses</div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">NVDA — Long</div>
+        <div class="thesis-rating">STRONG BUY</div>
+        <div class="thesis-text">Blackwell GPU ramp accelerating beyond consensus. Data center TAM still underestimated by sell-side. CUDA moat remains unassailable. Holding through earnings.</div>
+        <div class="thesis-date">Published Jan 14, 2026 · See full report →</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-ticker">META — Long</div>
+        <div class="thesis-rating">BUY</div>
+        <div class="thesis-text">Advertising revenue reaccelerating. AI-driven feed improvements driving engagement. Reality Labs losses stabilizing. Trading at discount to peers on free cash flow.</div>
+        <div class="thesis-date">Published Jan 22, 2026 · See full report →</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-ticker">AMZN — Long</div>
+        <div class="thesis-rating hold">HOLD</div>
+        <div class="thesis-text">AWS growth reaccelerating on AI workloads. Retail margins expanding. Advertising becoming a meaningful third leg. Position sized conservatively pending next earnings.</div>
+        <div class="thesis-date">Published Feb 3, 2026 · See full report →</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-ticker">SPY — Core / Hedge</div>
+        <div class="thesis-rating hold">BENCHMARK</div>
+        <div class="thesis-text">Held as both a benchmark comparison and partial hedge. Allows direct comparison of stock-picking alpha vs passive indexing — a core part of this research exercise.</div>
+        <div class="thesis-date">Published Jan 2, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALLOCATION + METHODOLOGY -->
+  <div class="allocation-section">
+    <div>
+      <div class="sec-title" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-bright);margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+        Portfolio Allocation
+      </div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#1a2540" stroke-width="18"/>
+          <!-- META 24.3% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#3b82f6" stroke-width="18"
+            stroke-dasharray="57.9 181.1" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+          <!-- NVDA 14.4% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#22d3a0" stroke-width="18"
+            stroke-dasharray="34.3 204.7" stroke-dashoffset="-57.9" transform="rotate(-90 50 50)"/>
+          <!-- SPY 15.9% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#60a5fa" stroke-width="18"
+            stroke-dasharray="37.9 201.1" stroke-dashoffset="-92.2" transform="rotate(-90 50 50)"/>
+          <!-- AMZN 15.2% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#818cf8" stroke-width="18"
+            stroke-dasharray="36.2 202.8" stroke-dashoffset="-130.1" transform="rotate(-90 50 50)"/>
+          <!-- Options 7.5% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#f0c060" stroke-width="18"
+            stroke-dasharray="17.9 221.1" stroke-dashoffset="-166.3" transform="rotate(-90 50 50)"/>
+          <!-- Cash 11.4% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#1e3a6e" stroke-width="18"
+            stroke-dasharray="27.2 211.8" stroke-dashoffset="-184.2" transform="rotate(-90 50 50)"/>
+          <text x="50" y="47" text-anchor="middle" fill="#e8f0ff" font-size="10" font-family="Playfair Display, serif" font-weight="bold">$7,458</text>
+          <text x="50" y="58" text-anchor="middle" fill="#4d6a99" font-size="7" font-family="IBM Plex Mono">Total</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="donut-item">
+            <div class="donut-color" style="background:#3b82f6"></div>
+            <div class="donut-name">META</div>
+            <div class="donut-pct">24.3%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#60a5fa"></div>
+            <div class="donut-name">SPY</div>
+            <div class="donut-pct">15.9%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#818cf8"></div>
+            <div class="donut-name">AMZN</div>
+            <div class="donut-pct">15.2%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#22d3a0"></div>
+            <div class="donut-name">NVDA</div>
+            <div class="donut-pct">14.4%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#f0c060"></div>
+            <div class="donut-name">Options</div>
+            <div class="donut-pct">7.5%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-color" style="background:#1e3a6e"></div>
+            <div class="donut-name">Cash</div>
+            <div class="donut-pct">11.4%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="methodology-box">
+      <h3>Methodology & Purpose</h3>
+      <p>This portfolio exists primarily as a <em>research and learning vehicle</em>. Each position is backed by a published thesis that precedes the trade. The goal is to develop a rigorous, repeatable process for investment analysis — not to generate returns.</p>
+      <p>Equities are selected based on fundamental analysis: earnings quality, competitive moat, management track record, and valuation relative to growth. Options are used to learn derivatives mechanics, understand volatility pricing, and manage risk — not to speculate aggressively.</p>
+      <p>Every trade — including losses — is logged transparently. The S&P 500 (SPY) serves as the benchmark. Beating it consistently would be a secondary goal; understanding <em>why</em> positions work or fail is the primary one.</p>
+    </div>
+  </div>
+
+
+</div><!-- end .page -->
+
+<footer>
+  <a href="index.html" class="logo">2026<span>Research</span></a>
+  <p>Not financial advice. All content is for educational and research purposes only. This portfolio is maintained as a learning exercise. Past performance does not guarantee future results.</p>
+</footer>
+
+<script>
+  // ─────────────────────────────────────────────
+  // LIVE PRICE ENGINE — Yahoo Finance via CORS proxy
+  // ─────────────────────────────────────────────
+
+  // Portfolio positions: symbol → { shares, entry }
+  const POSITIONS = {
+    NVDA: { shares: 8,   entry: 98.40  },
+    META: { shares: 3,   entry: 521.00 },
+    AMZN: { shares: 5,   entry: 210.30 },
+    SPY:  { shares: 2,   entry: 502.80 },
+  };
+  const CASH = 847.57;
+  const START_VALUE = 5000;
+
+  // Ticker tape symbols (order shown in tape)
+  const TAPE_SYMBOLS = ['SPY','QQQ','NVDA','META','AMZN','TSLA','BTC-USD','GC=F','CL=F'];
+
+  // CORS proxies — we try each in order if the previous fails
+  const PROXIES = [
+    sym => `https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`)}`,
+    sym => `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`)}`,
+  ];
+
+  const priceCache = {};
+
+  async function fetchPrice(symbol) {
+    if (priceCache[symbol]) return priceCache[symbol];
+    for (const proxyFn of PROXIES) {
+      try {
+        const res = await fetch(proxyFn(symbol), { signal: AbortSignal.timeout(6000) });
+        if (!res.ok) continue;
+        const data = await res.json();
+        const meta = data?.chart?.result?.[0]?.meta;
+        if (!meta) continue;
+        const price  = meta.regularMarketPrice;
+        const prev   = meta.chartPreviousClose || meta.previousClose;
+        const change = price - prev;
+        const pct    = (change / prev) * 100;
+        const result = { price, change, pct, symbol };
+        priceCache[symbol] = result;
+        return result;
+      } catch(e) { /* try next proxy */ }
+    }
+    return null; // all proxies failed
+  }
+
+  async function fetchAll(symbols) {
+    return Promise.all(symbols.map(fetchPrice));
+  }
+
+  // ─── FORMAT HELPERS ───
+  const fmt  = n => '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtS = n => (n >= 0 ? '+' : '-') + fmt(n);
+  const fmtP = n => (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
+  const cls  = n => n >= 0 ? 't-up' : 't-dn';
+  const clsS = n => n >= 0 ? 'up'   : 'dn';
+
+  // ─── UPDATE HOLDINGS TABLE ───
+  let firstLoad = true;
+  function updateHoldingsTable(prices) {
+    let equityValue = 0;
+
+    // rows keyed by data-symbol attribute
+    document.querySelectorAll('tr[data-symbol]').forEach(row => {
+      const sym  = row.dataset.symbol;
+      const pos  = POSITIONS[sym];
+      const p    = prices[sym];
+      if (!pos || !p) return;
+
+      equityValue += p.price * pos.shares;
+
+      // Current price
+      row.querySelector('.live-price').textContent = fmt(p.price);
+
+      // Today's % change
+      const todayEl = row.querySelector('.live-today');
+      if (todayEl) {
+        todayEl.innerHTML = `<span class="${cls(p.pct)}">${p.pct >= 0 ? '▲' : '▼'} ${fmtP(p.pct)}</span>`;
+      }
+
+      // % gain from our entry price
+      const pnlPct = ((p.price - pos.entry) / pos.entry) * 100;
+      const barPct = Math.min(Math.abs(pnlPct) * 2, 100);
+      const retEl  = row.querySelector('.live-return');
+      retEl.innerHTML = `<span class="${cls(pnlPct)}">${fmtP(pnlPct)}</span>
+        <span class="bar-wrap"><span class="bar-fill ${clsS(pnlPct)}" style="width:${barPct}%"></span></span>`;
+    });
+
+    // ─── UPDATE SUMMARY CARDS ───
+    const totalLive   = equityValue + CASH;
+    const totalReturn = totalLive - START_VALUE;
+    const totalPct    = (totalReturn / START_VALUE) * 100;
+
+    const portValEl   = document.getElementById('portVal');
+    const returnValEl = document.getElementById('totalReturn');
+    const returnPctEl = document.getElementById('totalReturnPct');
+
+    if (firstLoad) {
+      animateCount(portValEl,   START_VALUE, totalLive,             1400);
+      animateCount(returnValEl, 0,           Math.abs(totalReturn), 1400, totalReturn >= 0 ? '+$' : '-$');
+      firstLoad = false;
+    } else {
+      portValEl.textContent   = fmt(totalLive);
+      returnValEl.textContent = (totalReturn >= 0 ? '+$' : '-$') + Math.abs(totalReturn).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    }
+
+    returnPctEl.textContent = fmtP(totalPct);
+    returnPctEl.className   = totalReturn >= 0 ? 'up' : 'dn';
+
+    // timestamp
+    const now = new Date();
+    document.getElementById('lastRefreshed').textContent =
+      'Live · ' + now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+  }
+
+  // ─── UPDATE TICKER TAPE ───
+  function updateTicker(prices) {
+    const labelMap = {
+      'SPY':'SPY','QQQ':'QQQ','NVDA':'NVDA','META':'META',
+      'AMZN':'AMZN','TSLA':'TSLA','BTC-USD':'BTC/USD','GC=F':'GOLD','CL=F':'WTI OIL'
+    };
+    const tracks = document.querySelectorAll('.ticker-track');
+    tracks.forEach(track => {
+      const items = [];
+      TAPE_SYMBOLS.forEach(sym => {
+        const p = prices[sym];
+        const label = labelMap[sym] || sym;
+        if (p) {
+          const arrow = p.pct >= 0 ? '▲' : '▼';
+          const cl    = p.pct >= 0 ? 'up' : 'dn';
+          items.push(`<span class="ticker-item">${label} <strong>${fmt(p.price)}</strong> <span class="${cl}">${arrow} ${fmtP(p.pct)}</span></span><span class="ticker-item ticker-sep">|</span>`);
+        }
+      });
+      // duplicate for seamless loop
+      const html = items.join('') + items.join('');
+      track.innerHTML = html;
+    });
+  }
+
+  // ─── LOADING STATE ───
+  function setLoadingState(loading) {
+    const badge = document.getElementById('priceBadge');
+    if (loading) {
+      badge.textContent = '⟳ Fetching live prices…';
+      badge.style.color = 'var(--muted)';
+    } else {
+      badge.textContent = '● Live';
+      badge.style.color = 'var(--green)';
+    }
+  }
+
+  // ─── MAIN REFRESH ───
+  async function refreshPrices() {
+    setLoadingState(true);
+    const allSyms   = [...Object.keys(POSITIONS), ...TAPE_SYMBOLS];
+    const unique    = [...new Set(allSyms)];
+    const results   = await fetchAll(unique);
+    const priceMap  = {};
+    results.forEach(r => { if (r) priceMap[r.symbol] = r; });
+
+    updateHoldingsTable(priceMap);
+    updateTicker(priceMap);
+    setLoadingState(false);
+  }
+
+  // ─── ANIMATE COUNTER ───
+  function animateCount(el, start, end, duration, prefix='$') {
+    if (!el) return;
+    let startTime = null;
+    const neg = end < 0;
+    const absEnd = Math.abs(end);
+    const absStart = Math.abs(start);
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = absStart + (absEnd - absStart) * ease;
+      el.textContent = (neg ? '-$' : prefix) + val.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // ─── TAB SWITCHING ───
+  function switchTab(name, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+
+  // ─── THESIS CARDS ───
+  document.querySelectorAll('.thesis-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.thesis-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+
+  // ─── INIT ───
+  window.addEventListener('load', () => {
+    refreshPrices();
+    // Auto-refresh every 60 seconds
+    setInterval(refreshPrices, 60000);
+  });
+</script>
+</body>
+</html>
