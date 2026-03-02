@@ -61,24 +61,120 @@
 
   .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 64px 48px 96px; }
 
-  .page-header { margin-bottom: 56px; }
+  .page-header { margin-bottom: 48px; }
   .page-eyebrow { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
   .page-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-bright); }
   .page-title { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; color: var(--white); letter-spacing: -0.03em; line-height: 1; margin-bottom: 12px; }
   .page-title em { font-style: italic; color: var(--blue-bright); }
   .page-sub { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 500px; }
 
+  /* CONTENT + SIDEBAR LAYOUT */
+  .content-layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .report-column { min-width: 0; }
+
+  /* SIDEBAR */
+  .research-sidebar {
+    position: sticky;
+    top: 80px;
+  }
+
+  .sidebar-pinned {
+    border: 1px solid rgba(240,192,96,0.2);
+    background: var(--deep);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-pinned-header {
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid rgba(240,192,96,0.15);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .sidebar-pinned-header:hover { background: rgba(240,192,96,0.04); }
+
+  .sidebar-pinned-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .sidebar-pinned-eyebrow::before { content: '📌 '; }
+
+  .sidebar-pinned-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+  .sidebar-pinned-header:hover .sidebar-pinned-title { color: var(--gold); }
+
+  .sidebar-pinned-date {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .sidebar-meth {
+    padding: 14px 16px;
+  }
+
+  .sidebar-meth-label {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-meth-item {
+    margin-bottom: 14px;
+  }
+  .sidebar-meth-item:last-child { margin-bottom: 0; }
+
+  .sidebar-meth-title {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .sidebar-meth-desc {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .sidebar-meth-desc em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
   .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 52px; }
   .tab { padding: 12px 28px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; user-select: none; }
   .tab.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
   .tab:hover:not(.active) { color: var(--text); }
 
-  /* WEEK GROUP */
   .week-group { margin-bottom: 52px; }
   .week-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; display: flex; align-items: center; gap: 16px; }
   .week-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* REPORT ROW */
   .report-row {
     display: grid;
     grid-template-columns: 64px 1fr 20px;
@@ -99,7 +195,83 @@
 
   .report-tag { display: inline-block; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; padding: 2px 7px; border: 1px solid; margin-bottom: 7px; }
   .report-tag.weekly { color: var(--blue-bright); border-color: var(--blue-dim); }
-  .report-tag.special { color: var(--gold); border-color: rgba(240,192,96,0.35); }
+  .report-tag.special { color: var(--blue-bright); border-color: var(--blue-dim); }
+  .report-tag.monthly-pick { color: var(--gold); border-color: rgba(240,192,96,0.4); }
+
+  /* FEATURED CARD for Monthly Pick */
+  .report-featured {
+    background: var(--deep);
+    border: 1px solid rgba(240,192,96,0.25);
+    padding: 24px 28px;
+    margin: 0 -12px 2px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.15s;
+  }
+  .report-featured:hover { border-color: rgba(240,192,96,0.55); background: rgba(240,192,96,0.03); }
+
+  .featured-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .featured-date-block { text-align: center; min-width: 40px; }
+  .featured-date-block .day { font-size: 28px; font-weight: 300; color: var(--gold); display: block; letter-spacing: -0.03em; line-height: 1; }
+  .featured-date-block .mon { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  .featured-divider { width: 1px; height: 40px; background: rgba(240,192,96,0.2); }
+
+  .featured-label-block { }
+  .featured-eyebrow { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; opacity: 0.8; }
+  .featured-ticker { font-size: 22px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; line-height: 1; }
+
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+  .report-featured:hover .featured-title { color: var(--gold); }
+
+  .featured-excerpt {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .featured-stats {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .featured-stat {
+    background: var(--surface);
+    padding: 10px 14px;
+    flex: 1;
+  }
+  .featured-stat .fs-val { font-size: 14px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 2px; }
+  .featured-stat .fs-val.up { color: var(--green); }
+  .featured-stat .fs-val.dn { color: var(--red); }
+  .featured-stat .fs-lbl { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  .featured-arrow { color: rgba(240,192,96,0.3); font-size: 16px; padding-top: 2px; transition: color 0.2s, transform 0.2s; flex-shrink: 0; }
+  .report-featured:hover .featured-arrow { color: var(--gold); transform: translateX(3px); }
 
   .report-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 5px; transition: color 0.2s; }
   .report-row:hover .report-title { color: var(--blue-bright); }
@@ -147,6 +319,8 @@
     .report-row { grid-template-columns: 48px 1fr 16px; gap: 12px; }
     .modal { padding: 32px 20px; }
     .modal-data-strip { grid-template-columns: 1fr 1fr; }
+    .content-layout { grid-template-columns: 1fr; }
+    .research-sidebar { position: static; }
   }
 </style>
 </head>
@@ -170,14 +344,46 @@
     <p class="page-sub">Market analysis published every week. Real data, cited sources. Not financial advice — this is a finance student research project.</p>
   </div>
 
-  <div class="tabs">
-    <div class="tab active" onclick="filterReports('all', this)">All Reports</div>
-    <div class="tab" onclick="filterReports('weekly', this)">Weekly Wraps</div>
-    <div class="tab" onclick="filterReports('special', this)">Special Reports</div>
-  </div>
+  <div class="content-layout">
 
-  <div id="reportList"></div>
-  <div class="empty-state" id="emptyState">No reports in this category yet.</div>
+    <!-- MAIN REPORT COLUMN -->
+    <div class="report-column">
+      <div class="tabs">
+        <div class="tab active" onclick="filterReports('all', this)">All Reports</div>
+        <div class="tab" onclick="filterReports('weekly', this)">Weekly Wraps</div>
+        <div class="tab" onclick="filterReports('monthly-pick', this)">Monthly Pick</div>
+      </div>
+      <div id="reportList"></div>
+      <div class="empty-state" id="emptyState">No reports in this category yet.</div>
+    </div>
+
+    <!-- STICKY SIDEBAR -->
+    <div class="research-sidebar">
+      <div class="sidebar-pinned">
+        <div class="sidebar-pinned-header" onclick="openReport('r1')">
+          <div class="sidebar-pinned-eyebrow">First Report</div>
+          <div class="sidebar-pinned-title">What This Project Is and How We'll Cover the Markets</div>
+          <div class="sidebar-pinned-date">January 5, 2026 · Issue No. 1</div>
+        </div>
+        <div class="sidebar-meth">
+          <div class="sidebar-meth-label">How We Trade</div>
+          <div class="sidebar-meth-item">
+            <div class="sidebar-meth-title">Research First</div>
+            <div class="sidebar-meth-desc">No position goes on without a written thesis. On Jan 9, NFP came in at 50K vs. a 70K estimate. We had a bearish macro view going in. That context made the put setup obvious.</div>
+          </div>
+          <div class="sidebar-meth-item">
+            <div class="sidebar-meth-title">Unusual Whales</div>
+            <div class="sidebar-meth-desc">Tracks exact options flow by strike, expiry, and contract count. Before NFP on Jan 9, flow showed put positioning in SPX. That's a green light.</div>
+          </div>
+          <div class="sidebar-meth-item">
+            <div class="sidebar-meth-title">Heatseeker</div>
+            <div class="sidebar-meth-desc">Maps dealer gamma exposure at every strike. On Jan 9, Hedge Nodes sat well below price. The selloff moved straight into negative gamma territory — sharp, fast, exactly what the map showed. Sold at <em>+306%</em> before the reversal.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <footer>
@@ -195,6 +401,24 @@
 <script>
 const reports = [
   {
+    id:'mp1', type:'monthly-pick', week:'March 2026', date:'Mar 2, 2026', day:'02', month:'Mar',
+    ticker: '———',
+    title:'Monthly Pick: Coming Soon',
+    excerpt:'The first equity deep dive is in progress. This will be a full research note covering business model, competitive positioning, valuation, and a base/bull/bear DCF. Check back soon.',
+    keyData:[
+      {val:'TBD',cls:'',label:'Target Price'},
+      {val:'TBD',cls:'',label:'Upside / Downside'},
+      {val:'TBD',cls:'',label:'Rating'}
+    ],
+    body:`
+      <p>The first Monthly Pick is being prepared. Each Monthly Pick will follow a full equity research format:</p>
+      <h3>What to Expect</h3>
+      <p>Business overview and competitive positioning. Revenue model breakdown. Historical financials and margin analysis. Valuation: comparable companies, EV/EBITDA, P/E, and a three-scenario DCF (bear, base, bull). Key risks and thesis invalidation triggers. A final rating and price target.</p>
+      <h3>The Goal</h3>
+      <p>This is the most serious research on the site. Weekly Wraps cover the macro. Monthly Picks go deep on a single name, the way a junior analyst at a fund or bank would be expected to. That's the standard we're holding ourselves to.</p>`,
+    sources:'First Monthly Pick forthcoming. Check back soon.'
+  },
+  {
     id:'r9', type:'weekly', week:'Week 9', date:'Feb 28, 2026', day:'28', month:'Feb',
     title:'February Closes Red: AI Spending Concerns and Late-Month Inflation Data Weigh',
     excerpt:'The S&P 500 and Nasdaq finished February in negative territory. AI capex ROI doubts and a late-month inflation reading hit sentiment hard.',
@@ -202,120 +426,118 @@ const reports = [
     body:`
       <p>February 2026 ended on a sour note for equities. The S&P 500 and Nasdaq both finished the month in negative territory, dragged down by renewed concerns about AI capital expenditure returns and a late-month inflation reading. The Dow fell over <strong>500 points on February 26</strong> after fresh data and mounting AI skepticism hit simultaneously.</p>
       <h3>AI Capex Skepticism</h3>
-      <p>The narrative dominating February was straightforward: hyperscalers are committing hundreds of billions to AI infrastructure — but where are the revenues? Microsoft, Amazon, and Alphabet all guided for continued heavy capex through 2026. Investors are increasingly scrutinizing whether this spending will generate proportionate returns. Semiconductor names and AI infrastructure plays bore the brunt of the pressure.</p>
+      <p>The narrative dominating February was straightforward: hyperscalers are committing hundreds of billions to AI infrastructure, but where are the revenues? Microsoft, Amazon, and Alphabet all guided for continued heavy capex through 2026. Investors are increasingly scrutinizing whether this spending will generate proportionate returns. Semiconductor names and AI infrastructure plays bore the brunt of the pressure.</p>
       <h3>Macro Backdrop</h3>
-      <p>Despite the monthly decline, January's <strong>+1.4%</strong> gain means the "January Barometer" remains positive for 2026. Per Stock Trader's Almanac, a positive January has preceded a full-year advance in 41 of 46 historical instances, with an average return of approximately 17% in those years. The broader environment remains mixed: inflation cooling, Fed on hold, tariff risk elevated, earnings growth still healthy.</p>
+      <p>Despite the monthly decline, January's <strong>+1.4%</strong> gain means the January Barometer remains positive for 2026. Per Stock Trader's Almanac, a positive January has preceded a full-year advance in 41 of 46 historical instances, with an average return of approximately 17% in those years. The broader environment remains mixed: inflation cooling, Fed on hold, tariff risk elevated, earnings growth still healthy.</p>
       <h3>What to Watch in March</h3>
-      <p>Key events: next CPI release, FOMC minutes, continuation of Q4 earnings. February weakness in technology has brought valuations closer to reasonable levels in some names. Defensive sectors — healthcare, utilities, consumer staples — outperformed in February and may continue attracting rotation if macro uncertainty persists.</p>`,
-    sources:'Fidelity Markets. CNBC, "Dow closes 500+ points lower." Motley Fool, January Barometer analysis. Stock Trader\'s Almanac data.'
+      <p>Key events: next CPI release, FOMC minutes, continuation of Q4 earnings. February weakness in technology has brought valuations closer to reasonable levels in some names. Defensive sectors including healthcare, utilities, and consumer staples outperformed in February and may continue attracting rotation if macro uncertainty persists.</p>`,
+    sources:"Fidelity Markets. CNBC, \"Dow closes 500+ points lower.\" Motley Fool, January Barometer analysis. Stock Trader's Almanac data."
   },
   {
     id:'r8', type:'special', week:'Special Report', date:'Feb 17, 2026', day:'17', month:'Feb',
     title:'January CPI at 2.4%: Disinflation Resumes and Rate Cut Timeline Shifts',
-    excerpt:'Headline CPI came in at 2.4% YoY — below the 2.5% consensus. Core CPI at its lowest since April 2021. Markets now pricing two cuts in 2026.',
+    excerpt:'Headline CPI came in at 2.4% YoY, below the 2.5% consensus. Core CPI at its lowest since April 2021. Markets now pricing two cuts in 2026.',
     keyData:[{val:'2.4%',cls:'up',label:'CPI YoY Jan'},{val:'2.5%',cls:'',label:'Core CPI YoY'},{val:'3.0%',cls:'',label:'Shelter Inflation'}],
     body:`
-      <p>The Bureau of Labor Statistics released January 2026 CPI data on February 13. Headline CPI rose <strong>2.4% year-over-year</strong>, down from 2.7% in December 2025 and below the 2.5% consensus. Core CPI held at <strong>2.5%</strong> — the lowest reading since April 2021.</p>
+      <p>The Bureau of Labor Statistics released January 2026 CPI data on February 13. Headline CPI rose <strong>2.4% year-over-year</strong>, down from 2.7% in December 2025 and below the 2.5% consensus. Core CPI held at <strong>2.5%</strong>, the lowest reading since April 2021.</p>
       <h3>What Drove the Decline?</h3>
       <p>Shelter costs rose just <strong>0.2% month-over-month</strong>, bringing the annual rate to 3.0%. Energy fell 1.5%. Used car prices fell 1.8%. Egg prices dropped 7%, now down 34% year-over-year. Airline fares bucked the trend, jumping 6.5%.</p>
       <h3>Fed Implications</h3>
       <p>The Fed held at <strong>3.50–3.75%</strong> on January 28. With this print, markets are pricing <strong>two 25bps cuts in 2026</strong>, most likely beginning in June. The 10Y UST yield sat at approximately 4.38% following the release.</p>
       <h3>Sector Implications</h3>
-      <p>A falling rate environment historically supports growth-oriented sectors. Technology benefits from a lower discount rate on future earnings. Consumer discretionary and real estate also tend to benefit. The key risk remains tariff-driven goods inflation resurgence — the Fed's Beige Book flagged early signs of tariff pass-through in several districts.</p>`,
-    sources:'Bureau of Labor Statistics CPI Release, Feb 13 2026. CNBC, "CPI inflation report January 2026." JPMorgan Wealth Management, "Fed Leaves Rates Unchanged to Start 2026." U.S. Bank, "Federal Reserve Calibrates Interest Rate Policy."'
+      <p>A falling rate environment historically supports growth-oriented sectors. Technology benefits from a lower discount rate on future earnings. Consumer discretionary and real estate also tend to benefit. The key risk remains tariff-driven goods inflation resurgence. The Fed's Beige Book flagged early signs of tariff pass-through in several districts.</p>`,
+    sources:"Bureau of Labor Statistics CPI Release, Feb 13 2026. CNBC, \"CPI inflation report January 2026.\" JPMorgan Wealth Management, \"Fed Leaves Rates Unchanged to Start 2026.\" U.S. Bank, \"Federal Reserve Calibrates Interest Rate Policy.\""
   },
   {
     id:'r7', type:'weekly', week:'Week 5', date:'Feb 2, 2026', day:'02', month:'Feb',
-    title:'Fed Holds at 3.50–3.75%: Two Dissenters, Tariff Risk, and the Powell Succession',
-    excerpt:'The FOMC paused its cutting cycle at the January 28 meeting. Two members dissented in favor of a cut. Powell\'s term expires in May — succession uncertainty grows.',
+    title:"Fed Holds at 3.50–3.75%: Two Dissenters, Tariff Risk, and the Powell Succession",
+    excerpt:"The FOMC paused its cutting cycle at the January 28 meeting. Two members dissented in favor of a cut. Powell's term expires in May and succession uncertainty is growing.",
     keyData:[{val:'3.50%',cls:'',label:'Fed Floor'},{val:'3.75%',cls:'',label:'Fed Ceiling'},{val:'4.4%',cls:'',label:'Unemployment'}],
     body:`
-      <p>The FOMC voted on January 28 to hold the federal funds rate at <strong>3.50–3.75%</strong>, pausing a cutting cycle that delivered three consecutive 25bps reductions in late 2025. Two dissenting votes — both preferring a cut — signaled active internal debate.</p>
+      <p>The FOMC voted on January 28 to hold the federal funds rate at <strong>3.50–3.75%</strong>, pausing a cutting cycle that delivered three consecutive 25bps reductions in late 2025. Two dissenting votes, both preferring a cut, signaled active internal debate.</p>
       <h3>Context</h3>
       <p>The Fed cut rates by a cumulative <strong>175 basis points</strong> between September 2024 and December 2025. At the January meeting, Powell noted economic activity had been expanding at a solid pace and that the balance of risks to the dual mandate was improving.</p>
       <h3>Key Risks: Tariffs and the Chair Transition</h3>
-      <p>Two wildcards dominate: First, tariffs — the Fed's Beige Book noted cost pressures beginning to pass through to consumers. Second, Powell's term expires in <strong>May 2026</strong>. His successor is widely expected to be Kevin Warsh. Markets are pricing two cuts for the full year, with June the earliest probable date.</p>
+      <p>Two wildcards dominate: First, tariffs. The Fed's Beige Book noted cost pressures beginning to pass through to consumers. Second, Powell's term expires in <strong>May 2026</strong>. His successor is widely expected to be Kevin Warsh. Markets are pricing two cuts for the full year, with June the earliest probable date.</p>
       <h3>Market Implications</h3>
-      <p>A Fed on hold is a benign but not stimulative backdrop. The 10Y Treasury yield remains the key variable — a meaningful move higher would pressure high-multiple growth valuations. The current environment broadly supports a constructive stance on equities, with selectivity around rate-sensitive sectors.</p>`,
-    sources:'Federal Reserve FOMC Statement, January 28, 2026. CNBC, "Fed rate decision January 2026." Advisor Perspectives, "Fed\'s Interest Rate Decision." iShares / BlackRock, "Fed Outlook 2026."'
+      <p>A Fed on hold is a benign but not stimulative backdrop. The 10Y Treasury yield remains the key variable. A meaningful move higher would pressure high-multiple growth valuations. The current environment broadly supports a constructive stance on equities, with selectivity around rate-sensitive sectors.</p>`,
+    sources:"Federal Reserve FOMC Statement, January 28, 2026. CNBC, \"Fed rate decision January 2026.\" Advisor Perspectives, \"Fed's Interest Rate Decision.\" iShares / BlackRock, \"Fed Outlook 2026.\""
   },
-
   {
     id:'r5', type:'weekly', week:'Week 3', date:'Jan 24, 2026', day:'24', month:'Jan',
     title:'Week 3: Q4 Earnings Begin, S&P Above 6,900, Valuations Stretched',
-    excerpt:'13% of S&P 500 companies have reported. Forward P/E at 22.1× — above the 5-year average. 2026 EPS growth projected at 14.7%. January Barometer showing +1.4% for the month.',
-    keyData:[{val:'+1.4%',cls:'up',label:'S&P Jan MTD'},{val:'22.1×',cls:'',label:'Fwd P/E'},{val:'14.7%',cls:'up',label:'2026 EPS Est.'}],
+    excerpt:'13% of S&P 500 companies have reported. Forward P/E at 22.1x, above the 5-year average. 2026 EPS growth projected at 14.7%. January Barometer showing +1.4% for the month.',
+    keyData:[{val:'+1.4%',cls:'up',label:'S&P Jan MTD'},{val:'22.1x',cls:'',label:'Fwd P/E'},{val:'14.7%',cls:'up',label:'2026 EPS Est.'}],
     body:`
       <p>The third week of 2026 brought the first meaningful Q4 2025 earnings results. As of January 23, approximately <strong>13% of S&P 500 companies</strong> had reported, with the index on track for its <strong>10th consecutive quarter of year-over-year earnings growth</strong>.</p>
       <h3>Early Earnings Scorecard</h3>
-      <p>Full-year 2026 EPS growth is projected at <strong>14.7%</strong> per FactSet, but the beat rate is running below recent averages — both the rate of positive surprises and their magnitude are softer than the 5-year averages of 78% beats and 7.7% upside. Management guidance will be critical as the season progresses.</p>
+      <p>Full-year 2026 EPS growth is projected at <strong>14.7%</strong> per FactSet, but the beat rate is running below recent averages. Both the rate of positive surprises and their magnitude are softer than the 5-year averages of 78% beats and 7.7% upside. Management guidance will be critical as the season progresses.</p>
       <h3>Valuation</h3>
-      <p>The forward 12-month P/E for the S&P 500 stood at <strong>22.1×</strong> — above the 5-year average of 20.0× and the 10-year average of 18.8×. This premium is defensible in a soft-landing scenario with strong earnings growth, but leaves limited room for disappointment. Sectors at discounts to their historical averages — energy, financials, healthcare — are worth monitoring for relative value.</p>
+      <p>The forward 12-month P/E for the S&P 500 stood at <strong>22.1x</strong>, above the 5-year average of 20.0x and the 10-year average of 18.8x. This premium is defensible in a soft-landing scenario with strong earnings growth, but leaves limited room for disappointment. Sectors at discounts to their historical averages including energy, financials, and healthcare are worth monitoring for relative value.</p>
       <h3>January Barometer</h3>
-      <p>With the S&P up approximately 1.4% for January, the "January Barometer" is positive. A positive January has historically preceded a positive full year in 41 of 46 instances per Stock Trader's Almanac. Worth noting, not predicting.</p>`,
-    sources:'FactSet Earnings Insight, January 23 2026. CNBC, "January Barometer." Stock Trader\'s Almanac via CNBC Pro.'
+      <p>With the S&P up approximately 1.4% for January, the January Barometer is positive. A positive January has historically preceded a positive full year in 41 of 46 instances per Stock Trader's Almanac. Worth noting, not predicting.</p>`,
+    sources:"FactSet Earnings Insight, January 23 2026. CNBC, \"January Barometer.\" Stock Trader's Almanac via CNBC Pro."
   },
   {
     id:'r4', type:'weekly', week:'Week 2', date:'Jan 17, 2026', day:'17', month:'Jan',
     title:'Week 2: Fed Officials Speak, Inflation Expectations, and the AI Capex Debate',
-    excerpt:'A week of Fed speeches and inflation data ahead of the January 28 FOMC meeting. Hyperscaler capex guidance reignites debate about AI infrastructure spend sustainability.',
-    keyData:[{val:'2.7%',cls:'',label:'CPI Dec \'25 YoY'},{val:'4.38%',cls:'',label:'10Y Yield'},{val:'4.4%',cls:'',label:'Unemployment'}],
+    excerpt:'A week of Fed speeches and inflation data ahead of the January 28 FOMC meeting. Hyperscaler capex guidance reignites the debate about AI infrastructure spend sustainability.',
+    keyData:[{val:'2.7%',cls:'',label:"CPI Dec '25 YoY"},{val:'4.38%',cls:'',label:'10Y Yield'},{val:'4.4%',cls:'',label:'Unemployment'}],
     body:`
-      <p>The second week of January brought a string of Federal Reserve official speeches ahead of the January 28 FOMC meeting. Fed Vice Chair Jefferson, speaking on January 16, noted that CPI rose <strong>2.7% year-over-year</strong> in December — unchanged from November — with core CPI also holding at 2.6%. He flagged core goods inflation, running at 1.4% YoY, as the main remaining obstacle to reaching the 2% target. Markets broadly expect the Fed to hold at the January 28 meeting.</p>
+      <p>The second week of January brought a string of Federal Reserve official speeches ahead of the January 28 FOMC meeting. Fed Vice Chair Jefferson, speaking on January 16, noted that CPI rose <strong>2.7% year-over-year</strong> in December, unchanged from November, with core CPI also holding at 2.6%. He flagged core goods inflation, running at 1.4% YoY, as the main remaining obstacle to reaching the 2% target. Markets broadly expect the Fed to hold at the January 28 meeting.</p>
       <h3>Labor Market Context</h3>
-      <p>Following December's soft jobs print of just <strong>50,000 nonfarm payrolls</strong> — released the prior week — labor market weakness is becoming a more prominent part of the Fed conversation. Full-year 2025 payroll growth averaged only 49,000 per month, a sharp deceleration from 168,000 per month in 2024. The unemployment rate held at <strong>4.4%</strong>. Two FOMC members who would later dissent at the January 28 meeting, preferring a cut, are believed to have cited this labor softness.</p>
+      <p>Following December's soft jobs print of just <strong>50,000 nonfarm payrolls</strong>, released the prior week, labor market weakness is becoming a more prominent part of the Fed conversation. Full-year 2025 payroll growth averaged only 49,000 per month, a sharp deceleration from 168,000 per month in 2024. The unemployment rate held at <strong>4.4%</strong>. Two FOMC members who would later dissent at the January 28 meeting, preferring a cut, are believed to have cited this labor softness.</p>
       <h3>The AI Capex Debate</h3>
       <p>Early technology guidance has reignited debate about the sustainability of AI infrastructure spending. The combined capex budgets of the four major hyperscalers are projected to exceed $300 billion in 2026. Bears argue this will compress margins without proportionate revenue. Bulls point to AI-driven productivity gains still in early innings. Goldman Sachs projects <strong>12% S&P 500 EPS growth</strong> for 2026, with AI a key driver. This debate will define technology sector performance throughout the year.</p>`,
-    sources:'Federal Reserve Vice Chair Jefferson speech, January 16 2026. BLS December 2025 Jobs Report, January 9 2026. Goldman Sachs 2026 Equity Outlook, January 6 2026. Bloomberg rates data.'
+    sources:"Federal Reserve Vice Chair Jefferson speech, January 16 2026. BLS December 2025 Jobs Report, January 9 2026. Goldman Sachs 2026 Equity Outlook, January 6 2026. Bloomberg rates data."
   },
   {
     id:'r3', type:'weekly', week:'Week 1', date:'Jan 10, 2026', day:'10', month:'Jan',
     title:'Week 1: Weak Jobs Data, NVIDIA Deep Dive, and the 2026 Macro Framework',
-    excerpt:'December payrolls came in at just 50K — well below the 60K estimate. NVIDIA analysis covers Blackwell architecture, the CUDA moat, and the data center TAM. 2026 macro framework outlined.',
-    keyData:[{val:'50K',cls:'dn',label:'NFP Dec \'25'},{val:'78%',cls:'up',label:'NVDA Data Ctr Growth'},{val:'$35B',cls:'up',label:'NVDA Q3 Revenue'}],
+    excerpt:'December payrolls came in at just 50K, well below the 60K estimate. NVIDIA analysis covers Blackwell architecture, the CUDA moat, and the data center TAM. 2026 macro framework outlined.',
+    keyData:[{val:'50K',cls:'dn',label:"NFP Dec '25"},{val:'78%',cls:'up',label:'NVDA Data Ctr Growth'},{val:'$35B',cls:'up',label:'NVDA Q3 Revenue'}],
     body:`
-      <p>The first full trading week of 2026 brought a weaker-than-expected December jobs report. Nonfarm payrolls rose just <strong>50,000</strong> in December — below the 60,000 consensus estimate and down from a downwardly revised 56,000 in November. The unemployment rate held at <strong>4.4%</strong>. Full-year 2025 payroll growth totalled 584,000, an average monthly gain of 49,000 — well below 2024's pace of 168,000 per month. The soft labor market reinforces the case for the Fed to resume cutting later in 2026.</p>
+      <p>The first full trading week of 2026 brought a weaker-than-expected December jobs report. Nonfarm payrolls rose just <strong>50,000</strong> in December, below the 60,000 consensus estimate and down from a downwardly revised 56,000 in November. The unemployment rate held at <strong>4.4%</strong>. Full-year 2025 payroll growth totalled 584,000, an average monthly gain of 49,000, well below 2024's pace of 168,000 per month. The soft labor market reinforces the case for the Fed to resume cutting later in 2026.</p>
       <h3>NVIDIA: Blackwell and the CUDA Moat</h3>
-      <p>NVIDIA's data center revenue grew <strong>78% year-over-year</strong> in its most recent quarter, with total revenue reaching $35.1 billion. The Blackwell GPU architecture entered volume production in late 2025. Crucially, the CUDA software ecosystem — built over two decades — creates switching costs that are often underweighted in hardware-focused analysis. Migrating AI workloads from Nvidia requires rewriting software stacks, not just swapping chips. This moat is durable.</p>
+      <p>NVIDIA's data center revenue grew <strong>78% year-over-year</strong> in its most recent quarter, with total revenue reaching $35.1 billion. The Blackwell GPU architecture entered volume production in late 2025. Crucially, the CUDA software ecosystem, built over two decades, creates switching costs that are often underweighted in hardware-focused analysis. Migrating AI workloads from Nvidia requires rewriting software stacks, not just swapping chips. This moat is durable.</p>
       <h3>2026 Macro Framework</h3>
       <p>Our framework for 2026 rests on three pillars: inflation continuing toward the 2% target, corporate earnings growing at approximately 12–15% driven by AI productivity tailwinds, and the Fed delivering one to two rate cuts beginning no earlier than June. Goldman Sachs projects 12% EPS growth for the S&P 500 in 2026. Primary risks: tariff-driven goods inflation, fiscal concerns, and the Fed chair transition in May.</p>`,
-    sources:'BLS Employment Situation December 2025, released January 9 2026. NVIDIA Q3 FY2026 Earnings Release. FactSet and Goldman Sachs earnings projections. Federal Reserve Beige Book, January 2026.'
+    sources:"BLS Employment Situation December 2025, released January 9 2026. NVIDIA Q3 FY2026 Earnings Release. FactSet and Goldman Sachs earnings projections. Federal Reserve Beige Book, January 2026."
   },
   {
     id:'r2', type:'weekly', week:'Week 1', date:'Jan 5, 2026', day:'05', month:'Jan',
     title:'2026 Macro Outlook: Soft Landing Achieved — Now the Hard Part',
     excerpt:'Opening the year with a full macro framework. Fed at 3.50–3.75% after 175bps of cuts. CPI at 2.7%. Q3 GDP grew 4.3%. Three key risks for 2026: tariffs, the Fed transition, and fiscal.',
-    keyData:[{val:'2.7%',cls:'',label:'CPI Dec \'25'},{val:'3.63%',cls:'',label:'Fed Midpoint'},{val:'4.3%',cls:'up',label:'Q3 \'25 GDP'}],
+    keyData:[{val:'2.7%',cls:'',label:"CPI Dec '25"},{val:'3.63%',cls:'',label:'Fed Midpoint'},{val:'4.3%',cls:'up',label:"Q3 '25 GDP"}],
     body:`
       <p>We begin 2026 with an economy that has largely achieved what seemed impossible two years ago: inflation declining toward target without a recession. The Fed delivered <strong>175 basis points of cuts</strong> between September 2024 and December 2025. CPI ended 2025 at <strong>2.7% YoY</strong>. GDP grew at <strong>4.3% annualized</strong> in Q3 2025. Unemployment stands at 4.4%.</p>
       <h3>The Soft Landing Scorecard</h3>
-      <p>Inflation has declined from its 9.1% peak in mid-2022 to within roughly 70 basis points of the Fed's 2% target. Corporate earnings remained resilient throughout the rate cycle — Q4 2025 will mark the 10th consecutive quarter of S&P 500 earnings growth. Consumer spending has held up. This is a strong baseline.</p>
+      <p>Inflation has declined from its 9.1% peak in mid-2022 to within roughly 70 basis points of the Fed's 2% target. Corporate earnings remained resilient throughout the rate cycle. Q4 2025 will mark the 10th consecutive quarter of S&P 500 earnings growth. Consumer spending has held up. This is a strong baseline.</p>
       <h3>Three Key Risks for 2026</h3>
-      <p>First, <strong>tariffs</strong>: reimposition of broad tariffs could reignite goods inflation — the primary remaining obstacle to hitting 2%. Second, <strong>Fed succession</strong>: Powell's term expires in May, introducing uncertainty around communication and policy signaling. Third, <strong>fiscal trajectory</strong>: the U.S. deficit path remains unsustainable at current spending levels.</p>
+      <p>First, <strong>tariffs</strong>: reimposition of broad tariffs could reignite goods inflation, the primary remaining obstacle to hitting 2%. Second, <strong>Fed succession</strong>: Powell's term expires in May, introducing uncertainty around communication and policy signaling. Third, <strong>fiscal trajectory</strong>: the U.S. deficit path remains unsustainable at current spending levels.</p>
       <h3>Themes to Watch</h3>
       <p>In a soft-landing environment with rates still above neutral, the most attractive areas tend to have pricing power, strong free cash flow, and earnings visibility. Technology, select healthcare, and disciplined financials fit this description. The AI productivity theme cuts across sectors and is likely to dominate narrative throughout 2026.</p>`,
-    sources:'Federal Reserve Vice Chair Jefferson speech, Jan 16 2026. BLS CPI data December 2025. BEA GDP Q3 2025. iShares / BlackRock Fed Outlook 2026. FactSet 2026 earnings projections.'
+    sources:"Federal Reserve Vice Chair Jefferson speech, Jan 16 2026. BLS CPI data December 2025. BEA GDP Q3 2025. iShares / BlackRock Fed Outlook 2026. FactSet 2026 earnings projections."
   },
   {
     id:'r1', type:'weekly', week:'Week 1', date:'Jan 5, 2026', day:'05', month:'Jan',
-    title:'2026Research: What This Project Is and How We\'ll Cover the Markets',
+    title:"2026Research: What This Project Is and How We'll Cover the Markets",
     excerpt:'A simple side project to stay honest about how well I actually understand markets. The portfolio is filler. The research is the point.',
     keyData:[{val:'Weekly',cls:'',label:'Report Cadence'},{val:'SPY',cls:'',label:'Benchmark'},{val:'Jan 5',cls:'up',label:'Launch Date'}],
     body:`
       <p>This is a side project. Nothing more, nothing less.</p>
-      <p>I'm a finance student who wants to stay honest with myself about how well I actually understand markets — not just in theory, but week to week, when the data comes out and things move. It's easy to have opinions. It's harder to write them down, publish them, and look back at them later.</p>
+      <p>I'm a finance student who wants to stay honest with myself about how well I actually understand markets, not just in theory, but week to week, when the data comes out and things move. It's easy to have opinions. It's harder to write them down, publish them, and look back at them later.</p>
       <p>That's what this is for.</p>
       <h3>What This Is Not</h3>
-      <p>The portfolio tracker and the numbers on this site are filler. They exist to make the project feel real and give the research some skin in the game, but they are not the point. I am not trying to beat the market. I am not running a fund. I am not giving financial advice — not to you, not to anyone. If you are making investment decisions based on anything written here, please don't.</p>
+      <p>The portfolio tracker and the numbers on this site are filler. They exist to make the project feel real and give the research some skin in the game, but they are not the point. I am not trying to beat the market. I am not running a fund. I am not giving financial advice, not to you, not to anyone. If you are making investment decisions based on anything written here, please don't.</p>
       <h3>What This Actually Is</h3>
-      <p>A discipline tool. Every week I have to sit down, read what happened, understand it well enough to write about it clearly, and publish it. That process — reading, synthesizing, writing, being wrong sometimes — is the entire value of this project. The research is the product. Everything else is window dressing.</p>
+      <p>A discipline tool. Every week I have to sit down, read what happened, understand it well enough to write about it clearly, and publish it. That process of reading, synthesizing, writing, and being wrong sometimes is the entire value of this project. The research is the product. Everything else is window dressing.</p>
       <h3>What to Expect</h3>
-      <p>A <strong>Weekly Wrap</strong> every week covering what happened in markets, what the data showed, and what I'm watching going forward. Occasional <strong>Special Reports</strong> when something significant happens mid-week that warrants immediate coverage — a Fed decision, a major earnings print, a macro shock. Real data, cited sources, honest takes. That's the whole thing.</p>`,
-    sources:'This report reflects the author\'s independent research framework. For educational purposes only — not financial advice.'
+      <p>A <strong>Weekly Wrap</strong> every week covering what happened in markets, what the data showed, and what I'm watching going forward. A <strong>Monthly Pick</strong> each month going deep on a single equity: business model, financials, valuation, DCF. Real data, cited sources, honest takes. That's the whole thing.</p>`,
+    sources:"This report reflects the author's independent research framework. For educational purposes only, not financial advice."
   }
 ];
 
-// ── RENDER ──────────────────────────
 function groupByWeek(list) {
   const groups = {};
   list.forEach(r => {
@@ -326,8 +548,26 @@ function groupByWeek(list) {
   return Object.values(groups);
 }
 
+function tagLabel(type) {
+  if (type === 'monthly-pick') return '◆ Monthly Pick';
+  if (type === 'special') return '● Weekly Wrap';
+  return '● Weekly Wrap';
+}
+
+function tagClass(type) {
+  return type === 'monthly-pick' ? 'monthly-pick' : 'weekly';
+}
+
 function renderReports(filter) {
-  const filtered = filter === 'all' ? reports : reports.filter(r => r.type === filter);
+  let filtered;
+  if (filter === 'all') {
+    filtered = reports;
+  } else if (filter === 'weekly') {
+    filtered = reports.filter(r => r.type === 'weekly' || r.type === 'special');
+  } else {
+    filtered = reports.filter(r => r.type === filter);
+  }
+
   const list = document.getElementById('reportList');
   const empty = document.getElementById('emptyState');
 
@@ -341,17 +581,40 @@ function renderReports(filter) {
   list.innerHTML = groupByWeek(filtered).map(g => `
     <div class="week-group">
       <div class="week-label">${g.label}</div>
-      ${g.items.map(r => `
-        <div class="report-row" onclick="openReport('${r.id}')">
-          <div class="report-date"><span class="day">${r.day}</span><span class="mon">${r.month}</span></div>
-          <div>
-            <div class="report-tag ${r.type}">${r.type === 'weekly' ? '● Weekly Wrap' : '★ Special Report'}</div>
-            <div class="report-title">${r.title}</div>
-            <div class="report-excerpt">${r.excerpt}</div>
+      ${g.items.map(r => {
+        if (r.type === 'monthly-pick') {
+          const stats = r.keyData.map(d =>
+            `<div class="featured-stat"><div class="fs-val ${d.cls}">${d.val}</div><div class="fs-lbl">${d.label}</div></div>`
+          ).join('');
+          return `
+            <div class="report-featured" onclick="openReport('${r.id}')">
+              <div class="featured-meta">
+                <div class="featured-date-block"><span class="day">${r.day}</span><span class="mon">${r.month}</span></div>
+                <div class="featured-divider"></div>
+                <div class="featured-label-block">
+                  <div class="featured-eyebrow">Monthly Pick</div>
+                  <div class="featured-ticker">${r.ticker || ''}</div>
+                </div>
+                <div style="margin-left:auto"><span class="report-tag monthly-pick" style="margin:0">◆ Monthly Pick</span></div>
+              </div>
+              <div class="featured-title">${r.title}</div>
+              <div class="featured-excerpt">${r.excerpt}</div>
+              <div class="featured-stats">${stats}</div>
+            </div>
+          `;
+        }
+        return `
+          <div class="report-row" onclick="openReport('${r.id}')">
+            <div class="report-date"><span class="day">${r.day}</span><span class="mon">${r.month}</span></div>
+            <div>
+              <div class="report-tag ${tagClass(r.type)}">${tagLabel(r.type)}</div>
+              <div class="report-title">${r.title}</div>
+              <div class="report-excerpt">${r.excerpt}</div>
+            </div>
+            <div class="report-arrow">→</div>
           </div>
-          <div class="report-arrow">→</div>
-        </div>
-      `).join('')}
+        `;
+      }).join('')}
     </div>
   `).join('');
 }
@@ -362,7 +625,6 @@ function filterReports(filter, el) {
   renderReports(filter);
 }
 
-// ── MODAL ──────────────────────────
 function openReport(id) {
   const r = reports.find(x => x.id === id);
   if (!r) return;
@@ -370,7 +632,7 @@ function openReport(id) {
     `<div class="modal-data-item"><div class="val ${d.cls}">${d.val}</div><div class="lbl">${d.label}</div></div>`
   ).join('');
   document.getElementById('modalBody').innerHTML = `
-    <div class="modal-tag"><span class="report-tag ${r.type}" style="margin:0">${r.type === 'weekly' ? '● Weekly Wrap' : '★ Special Report'}</span></div>
+    <div class="modal-tag"><span class="report-tag ${tagClass(r.type)}" style="margin:0">${tagLabel(r.type)}</span></div>
     <h2 class="modal-title">${r.title}</h2>
     <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
     <div class="modal-data-strip">${strip}</div>

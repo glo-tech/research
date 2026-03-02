@@ -42,7 +42,6 @@
     opacity: 0.35;
   }
 
-  /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(6,8,16,0.96);
@@ -60,7 +59,6 @@
   .nav-badge { background: var(--blue); color: #fff; padding: 6px 16px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
   .nav-badge:hover { background: var(--blue-bright); }
 
-  /* LAYOUT */
   .page {
     position: relative; z-index: 1;
     max-width: 860px;
@@ -68,7 +66,6 @@
     padding: 80px 48px 96px;
   }
 
-  /* HEADER */
   .page-eyebrow {
     font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
     color: var(--blue-bright); margin-bottom: 16px;
@@ -86,15 +83,12 @@
   }
   .page-title em { font-style: italic; color: var(--blue-bright); }
 
-  /* MAIN PROSE */
   .about-body {
     display: grid;
     grid-template-columns: 1fr 280px;
     gap: 64px;
     align-items: start;
   }
-
-  .prose { }
 
   .prose p {
     font-family: 'Libre Baskerville', serif;
@@ -124,9 +118,6 @@
 
   .prose strong { color: var(--white); }
   .prose em { font-style: italic; color: var(--gold); }
-
-  /* SIDEBAR */
-  .sidebar { }
 
   .sidebar-card {
     background: var(--deep);
@@ -167,7 +158,6 @@
     line-height: 1.65;
   }
 
-  /* DIVIDER */
   .section-divider {
     display: flex;
     align-items: center;
@@ -188,7 +178,6 @@
     background: var(--border);
   }
 
-  /* PRINCIPLES GRID */
   .principles {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -222,6 +211,65 @@
     color: var(--muted);
   }
 
+  .methodology-intro {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 24px 0 32px 0;
+    border-left: 2px solid var(--blue-dim);
+    padding-left: 20px;
+  }
+
+  .meth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 1px;
+  }
+
+  .meth-card {
+    background: var(--deep);
+    padding: 28px;
+  }
+
+  .meth-icon {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .meth-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .meth-body {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .meth-disclaimer {
+    background: var(--surface);
+    border-left: 2px solid var(--border);
+    padding: 16px 20px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-top: 1px;
+    margin-bottom: 48px;
+  }
+
   footer {
     background: var(--deep);
     border-top: 1px solid var(--border);
@@ -243,6 +291,7 @@
     .about-body { grid-template-columns: 1fr; }
     .sidebar { order: -1; }
     .principles { grid-template-columns: 1fr; }
+    .meth-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -269,25 +318,25 @@
     <div class="prose">
       <p class="lead">Nothing more, nothing less. A finance student at Fordham's Gabelli School of Business trying to build a stronger, more honest foundation in how markets actually work.</p>
 
-      <p>The classroom gives you the frameworks. What it doesn't give you is the discipline of showing up every week, reading what happened, and being forced to explain it clearly enough to write it down. That gap — between understanding concepts and understanding markets in real time — is what this project is trying to close.</p>
+      <p>The classroom gives you the frameworks. What it doesn't give you is the discipline of showing up every week, reading what happened, and being forced to explain it clearly enough to put it in writing. The gap between understanding concepts and understanding markets in real time is what this project is trying to close.</p>
 
       <p>It's easy to have opinions about markets. It's harder to commit them to paper before you know how things play out. So that's the exercise: read, synthesize, write, publish, and look back later. The paper trail is the whole point.</p>
 
       <h3>The Portfolio</h3>
 
-      <p>There's a portfolio tracker on this site. The positions are real, the prices are live, and the performance is tracked against the S&P 500. But the portfolio is not the focus — it's <em>accountability infrastructure.</em> It gives the research something to be measured against and keeps the analysis grounded in something with actual stakes.</p>
+      <p>There's a portfolio tracker on this site. The positions are real, the prices are live, and the performance is tracked against the S&P 500. The portfolio isn't the focus though. Think of it as <em>accountability infrastructure.</em> It gives the research something to be measured against and keeps the analysis grounded in something with actual stakes.</p>
 
-      <p>The numbers are not the point. <strong>The research is the point.</strong> If the portfolio does well, great. If it doesn't, that's a learning outcome too, and it'll be documented honestly either way.</p>
+      <p>The numbers aren't the point. <strong>The research is the point.</strong> If the portfolio does well, great. If it doesn't, that's a learning outcome too, and it'll be documented honestly either way.</p>
 
       <h3>What Gets Published</h3>
 
-      <p>A <strong>Weekly Wrap</strong> every week — what happened in markets, what the data showed, what to watch going into the next week. Occasional <strong>Special Reports</strong> when something significant happens mid-cycle that warrants coverage immediately: a Fed surprise, a macro shock, an earnings result that changes the picture.</p>
+      <p>A <strong>Weekly Wrap</strong> every week covering what happened in markets, what the data showed, and what to watch going into the next week. Occasional <strong>Special Reports</strong> when something significant happens mid-cycle that warrants coverage right away: a Fed surprise, a macro shock, an earnings result that changes the picture.</p>
 
-      <p>All macro data is sourced from primary publications — BLS, BEA, the Federal Reserve, FactSet. Everything cited. When the analysis is wrong, that gets acknowledged too.</p>
+      <p>All macro data is sourced from primary publications: BLS, BEA, the Federal Reserve, FactSet. Everything cited. When the analysis is wrong, that gets acknowledged too.</p>
 
       <h3>A Note on Advice</h3>
 
-      <p>Nothing written here is financial advice. This is a student research project. If you're making investment decisions based on anything published on this site, please reconsider. The goal here is to learn how to think about markets clearly — not to tell anyone else what to do with their money.</p>
+      <p>Nothing written here is financial advice. This is a student research project. If you're making investment decisions based on anything published on this site, please reconsider. The goal here is to learn how to think about markets clearly, not to tell anyone what to do with their money.</p>
     </div>
 
     <div class="sidebar">
@@ -316,7 +365,7 @@
         </div>
         <div class="sidebar-item">
           <span class="si-key">Benchmark</span>
-          <span class="si-val">S&P 500 (SPY)</span>
+          <span class="si-val">S&amp;P 500 (SPY)</span>
         </div>
       </div>
 
@@ -346,23 +395,61 @@
     <div class="principle">
       <div class="principle-num">01</div>
       <div class="principle-title">Read First</div>
-      <div class="principle-desc">Primary sources only — BLS releases, Fed statements, company filings, FactSet data. No recycled takes.</div>
+      <div class="principle-desc">Primary sources only. BLS releases, Fed statements, company filings, FactSet data. No recycled takes from Twitter or financial media.</div>
     </div>
     <div class="principle">
       <div class="principle-num">02</div>
       <div class="principle-title">Write It Down</div>
-      <div class="principle-desc">If you can't explain it clearly in writing, you don't understand it yet. The writing is the test.</div>
+      <div class="principle-desc">If you can't explain it clearly in writing, you don't understand it yet. The writing is the test, not the grade.</div>
     </div>
     <div class="principle">
       <div class="principle-num">03</div>
       <div class="principle-title">Cite Everything</div>
-      <div class="principle-desc">Every data point sourced and attributed. No numbers without a reference. No winging it.</div>
+      <div class="principle-desc">Every data point sourced and attributed. No numbers without a reference. No winging it and hoping nobody checks.</div>
     </div>
     <div class="principle">
       <div class="principle-num">04</div>
       <div class="principle-title">Be Wrong Honestly</div>
-      <div class="principle-desc">The record stays. If a call was wrong, it gets documented. That's the whole accountability structure.</div>
+      <div class="principle-desc">The record stays. If a call was wrong, it gets documented. That's the whole accountability structure. No deleting, no revising after the fact.</div>
     </div>
+  </div>
+
+  <div class="section-divider"><span>Trading Methodology</span></div>
+
+  <div class="methodology-intro">
+    Trading is not the primary objective here, the research is. That said, positions are taken with real capital and a clear, repeatable process. When a trade goes in, it follows the same rigor as the written work.
+  </div>
+
+  <div class="meth-grid">
+
+    <div class="meth-card">
+      <div class="meth-icon">01</div>
+      <div class="meth-title">Research and Conviction</div>
+      <div class="meth-body">Every position starts with a written thesis. Macro context, sector dynamics, and a specific catalyst or risk/reward setup. Nothing goes on without a reason, and nothing comes off without one either. The portfolio page documents both sides of every trade.</div>
+    </div>
+
+    <div class="meth-card">
+      <div class="meth-icon">02</div>
+      <div class="meth-title">Unusual Whales — Options Flow</div>
+      <div class="meth-body">Unusual Whales tracks real-time options order flow for institutions and retail alike. Exact contract counts, strike, expiration, premium, sweep or block. When large volume clusters at a specific strike ahead of a catalyst, that's informed money taking a position. We use it to confirm or push back on the directional thesis before entering.</div>
+    </div>
+
+    <div class="meth-card">
+      <div class="meth-icon">03</div>
+      <div class="meth-title">Heatseeker — Dealer Exposure</div>
+      <div class="meth-body">Heatseeker by Skylit maps where market makers carry their biggest gamma exposure at each strike and expiration. King Nodes are the highest-exposure levels, where price tends to gravitate near expiry. Gatekeeper Nodes sit in front of them and can cause sharp reversals before price ever gets there. Yellow nodes absorb volatility, purple ones amplify it. On macro days like NFP or FOMC, Hedge Nodes appear well off current price, showing the range dealers are actively protecting. We use all of this to find high-probability entry and exit zones and avoid the no-man's land in the middle of ranges.</div>
+    </div>
+
+    <div class="meth-card">
+      <div class="meth-icon">04</div>
+      <div class="meth-title">Confluence and Execution</div>
+      <div class="meth-body">One signal on its own isn't enough to act on. A trade needs at least two of the three layers pointing the same way: research conviction, unusual options flow, and dealer structure. When all three line up, sizing goes up. Entry is tied to a specific level or catalyst window. Exit is planned before the trade goes on, based on node structure or thesis invalidation, not how it feels in the moment.</div>
+    </div>
+
+  </div>
+
+  <div class="meth-disclaimer">
+    All trades on this site are documented for educational and research purposes. Nothing here constitutes financial advice. Past performance of individual trades does not imply future results.
   </div>
 
 </div>
