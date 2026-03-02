@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research · 2026Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0a0e18;
+    --surface: #0f1520;
+    --surface2: #141c2a;
+    --border: #1a2540;
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --blue-dim: #1e3a6e;
+    --text: #c8d8f0;
+    --muted: #4d6a99;
+    --green: #22d3a0;
+    --red: #f05a5a;
+    --white: #e8f0ff;
+    --gold: #f0c060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(37,99,235,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6,8,16,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue-bright); }
+  .nav-badge {
+    background: var(--blue);
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 64px 64px 48px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(37,99,235,0.04) 0%, transparent 100%);
+  }
+  .page-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-bright); }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .page-title em { font-style: italic; color: var(--blue-bright); }
+  .page-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* FILTER TABS */
+  .filter-bar {
+    padding: 0 64px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    background: var(--deep);
+  }
+  .filter-tab {
+    padding: 16px 24px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .filter-tab.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+  .filter-tab:hover:not(.active) { color: var(--text); }
+
+  /* FEATURED REPORT */
+  .featured-section {
+    padding: 48px 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .featured-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .featured-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--blue-bright); }
+
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 1px;
+    background: var(--border);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .featured-card:hover .featured-left { background: var(--surface); }
+  .featured-left {
+    background: var(--deep);
+    padding: 48px;
+    transition: background 0.2s;
+  }
+  .featured-right {
+    background: var(--surface);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .report-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid;
+    margin-bottom: 20px;
+  }
+  .report-tag.macro { color: var(--blue-bright); border-color: var(--blue-dim); }
+  .report-tag.micro { color: var(--green); border-color: rgba(34,211,160,0.3); }
+  .report-tag.portfolio { color: var(--gold); border-color: rgba(240,192,96,0.3); }
+  .report-tag.weekly { color: var(--muted); border-color: var(--border); }
+
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .featured-excerpt {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .report-meta {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .report-meta .sep { color: var(--border); }
+
+  .key-data { margin-bottom: 32px; }
+  .key-data-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-point {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .data-point:last-child { border-bottom: none; }
+  .data-point .dp-label { color: var(--muted); }
+  .data-point .dp-val { color: var(--white); font-weight: 500; }
+  .data-point .dp-val.up { color: var(--green); }
+  .data-point .dp-val.dn { color: var(--red); }
+
+  .read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    text-decoration: none;
+    border-bottom: 1px solid var(--blue-dim);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .read-link:hover { border-color: var(--blue-bright); }
+
+  /* REPORT GRID */
+  .reports-section {
+    padding: 48px 64px;
+  }
+  .reports-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .reports-header-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+  }
+  .reports-count {
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .reports-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .report-card {
+    background: var(--deep);
+    padding: 32px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .report-card:hover { background: var(--surface); }
+
+  .report-card .report-tag { margin-bottom: 16px; }
+  .report-card .card-date {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .report-card .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .report-card .card-excerpt {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .card-footer .read-time { color: var(--muted); }
+  .card-footer .arrow { color: var(--blue-bright); }
+
+  /* KEY NUMBERS IN CARDS */
+  .card-number {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .cn-item { }
+  .cn-val {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .cn-val.up { color: var(--green); }
+  .cn-val.dn { color: var(--red); }
+  .cn-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(6,8,16,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    overflow-y: auto;
+    padding: 48px;
+  }
+  .modal-overlay.open { display: flex; justify-content: center; align-items: flex-start; }
+  .modal {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    max-width: 760px;
+    width: 100%;
+    padding: 56px;
+    position: relative;
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 32px; height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { color: var(--white); border-color: var(--blue); }
+  .modal-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .modal-meta {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .modal-body {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .modal-body h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin: 28px 0 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .modal-body p { margin-bottom: 16px; }
+  .modal-body strong { color: var(--white); font-weight: 700; }
+  .modal-body em { font-style: italic; color: var(--gold); }
+  .modal-data-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+  .modal-data-item {
+    background: var(--surface);
+    padding: 16px 20px;
+  }
+  .modal-data-item .val {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .modal-data-item .val.up { color: var(--green); }
+  .modal-data-item .val.dn { color: var(--red); }
+  .modal-data-item .lbl {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .modal-source {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    line-height: 1.7;
+  }
+  .modal-source a { color: var(--blue-bright); text-decoration: none; }
+  .modal-disclaimer {
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--surface);
+    border-left: 2px solid var(--blue-dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+  }
+  footer .logo span { color: var(--blue-bright); }
+  footer p { font-size: 10px; color: var(--muted); max-width: 500px; text-align: right; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">2026<span>Research</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+  <a href="index.html#newsletter" class="nav-badge">Subscribe</a>
+</nav>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-eyebrow">Research Archive</div>
+    <h1 class="page-title">Weekly <em>Reports</em></h1>
+    <p class="page-subtitle">Macro and micro investment research published every week since January 2026. Real data, cited sources, documented positions. Educational purposes only.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-tab active" onclick="filterReports('all', this)">All Reports</div>
+    <div class="filter-tab" onclick="filterReports('macro', this)">Macro</div>
+    <div class="filter-tab" onclick="filterReports('micro', this)">Micro</div>
+    <div class="filter-tab" onclick="filterReports('portfolio', this)">Portfolio</div>
+    <div class="filter-tab" onclick="filterReports('weekly', this)">Weekly Wrap</div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-section">
+    <div class="featured-label">Latest Report</div>
+    <div class="featured-card" onclick="openReport('r1')">
+      <div class="featured-left">
+        <div class="report-tag macro">● Macro</div>
+        <h2 class="featured-title">February's Inflation Surprise and What It Means for Rate Cuts in 2026</h2>
+        <p class="featured-excerpt">January CPI came in at 2.4% year-over-year — below the 2.7% expected — marking the lowest reading since May 2025. Core CPI held at 2.5%. With the Fed already on pause at 3.50–3.75%, this print shifts the conversation toward whether June becomes the first cut of the year.</p>
+        <div class="report-meta">
+          <span>Feb 17, 2026</span>
+          <span class="sep">·</span>
+          <span>Week 7</span>
+          <span class="sep">·</span>
+          <span>6 min read</span>
+          <span class="sep">·</span>
+          <span style="color:var(--blue-bright)">Sources: BLS, CNBC, JPMorgan</span>
+        </div>
+      </div>
+      <div class="featured-right">
+        <div class="key-data">
+          <div class="key-data-label">Key Numbers</div>
+          <div class="data-point"><span class="dp-label">CPI YoY (Jan)</span><span class="dp-val up">2.4%</span></div>
+          <div class="data-point"><span class="dp-label">Core CPI YoY</span><span class="dp-val">2.5%</span></div>
+          <div class="data-point"><span class="dp-label">Fed Funds Rate</span><span class="dp-val">3.50–3.75%</span></div>
+          <div class="data-point"><span class="dp-label">Mkt-implied cuts '26</span><span class="dp-val">2×25bps</span></div>
+          <div class="data-point"><span class="dp-label">Shelter inflation</span><span class="dp-val dn">3.0% (↓)</span></div>
+        </div>
+        <span class="read-link">Read Full Report →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORT GRID -->
+  <div class="reports-section">
+    <div class="reports-header">
+      <div class="reports-header-title">All Reports</div>
+      <div class="reports-count" id="reportsCount">9 reports · Jan–Mar 2026</div>
+    </div>
+
+    <div class="reports-grid" id="reportsGrid">
+
+      <!-- REPORT 1 -->
+      <div class="report-card" data-category="weekly" onclick="openReport('r2')">
+        <div class="report-tag weekly">● Weekly Wrap</div>
+        <div class="card-date">Feb 28, 2026 · Week 9</div>
+        <h3 class="card-title">February Closes Red: Tech Weighs as AI Optimism Fades</h3>
+        <p class="card-excerpt">The S&P 500 and Nasdaq finished February in the red amid growing concerns about AI spending ROI. The Dow fell 500+ points on Feb 26 after a hotter-than-expected inflation report.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val dn">−1.4%</div><div class="cn-label">S&P Feb</div></div>
+          <div class="cn-item"><div class="cn-val">18.4</div><div class="cn-label">VIX Close</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">4 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 2 -->
+      <div class="report-card" data-category="macro" onclick="openReport('r1')">
+        <div class="report-tag macro">● Macro</div>
+        <div class="card-date">Feb 17, 2026 · Week 7</div>
+        <h3 class="card-title">January CPI: 2.4% — Below Expectations, Markets React Positively</h3>
+        <p class="card-excerpt">CPI fell to 2.4% YoY in January — the lowest since May 2025. Core CPI held at 2.5%, the lowest since April 2021. Shelter costs rose just 3%, continuing the disinflation trend.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val up">2.4%</div><div class="cn-label">CPI YoY</div></div>
+          <div class="cn-item"><div class="cn-val">2.5%</div><div class="cn-label">Core CPI</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">6 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 3 -->
+      <div class="report-card" data-category="macro" onclick="openReport('r3')">
+        <div class="report-tag macro">● Macro</div>
+        <div class="card-date">Feb 2, 2026 · Week 5</div>
+        <h3 class="card-title">Fed Holds at 3.50–3.75%: Patience or Paralysis?</h3>
+        <p class="card-excerpt">The FOMC voted to hold rates at its Jan 28 meeting, pausing after three consecutive cuts in late 2025. Two members dissented, preferring a 25bps cut. Powell cited improving balance of risks.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val">3.50%</div><div class="cn-label">Fed Floor</div></div>
+          <div class="cn-item"><div class="cn-val">3.75%</div><div class="cn-label">Fed Ceiling</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">7 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 4 -->
+      <div class="report-card" data-category="micro" onclick="openReport('r4')">
+        <div class="report-tag micro">● Micro</div>
+        <div class="card-date">Jan 27, 2026 · Week 4</div>
+        <h3 class="card-title">DeepSeek Wipes $589B from NVDA: Panic or Opportunity?</h3>
+        <p class="card-excerpt">NVIDIA fell 17% on Jan 27 as Chinese startup DeepSeek claimed to build a GPT-4 class model for $5.6M. The largest single-day market cap loss in history. Is the AI infrastructure thesis broken?</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val dn">−17%</div><div class="cn-label">NVDA 1D</div></div>
+          <div class="cn-item"><div class="cn-val dn">−$589B</div><div class="cn-label">Mkt Cap Lost</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">8 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 5 -->
+      <div class="report-card" data-category="weekly" onclick="openReport('r5')">
+        <div class="report-tag weekly">● Weekly Wrap</div>
+        <div class="card-date">Jan 24, 2026 · Week 3</div>
+        <h3 class="card-title">Week 3: Q4 Earnings Season Kicks Off, S&P Near ATH</h3>
+        <p class="card-excerpt">13% of S&P 500 companies had reported Q4 2025 results by Jan 23, with the index on track for its 10th consecutive quarter of earnings growth. Forward P/E sitting at 22.1x — above the 5yr avg of 20x.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val up">+1.34%</div><div class="cn-label">S&P Jan MTD</div></div>
+          <div class="cn-item"><div class="cn-val">22.1x</div><div class="cn-label">Fwd P/E</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">5 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 6 -->
+      <div class="report-card" data-category="micro" onclick="openReport('r6')">
+        <div class="report-tag micro">● Micro</div>
+        <div class="card-date">Jan 20, 2026 · Week 3</div>
+        <h3 class="card-title">Meta Platforms Deep Dive: Advertising Reacceleration and the AI Engagement Story</h3>
+        <p class="card-excerpt">Meta enters 2026 with reaccelerating ad revenue, AI-driven engagement improvements, and operating margins near 43%. A look at the bull and bear case for the world's largest social advertising platform.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val up">~21%</div><div class="cn-label">Q3 '25 Rev Growth</div></div>
+          <div class="cn-item"><div class="cn-val">43%</div><div class="cn-label">Op. Margin</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">9 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 7 -->
+      <div class="report-card" data-category="micro" onclick="openReport('r7')">
+        <div class="report-tag micro">● Micro</div>
+        <div class="card-date">Jan 12, 2026 · Week 2</div>
+        <h3 class="card-title">NVIDIA Deep Dive: Blackwell Architecture, the CUDA Moat, and Data Center TAM</h3>
+        <p class="card-excerpt">NVIDIA's Blackwell GPU platform entered volume production in late 2025. Data center revenue grew 78% YoY last quarter. We examine the durability of the CUDA moat and the AI compute TAM.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val up">78%</div><div class="cn-label">Data Ctr Growth</div></div>
+          <div class="cn-item"><div class="cn-val">$35B</div><div class="cn-label">Q3 Revenue</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">10 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 8 -->
+      <div class="report-card" data-category="macro" onclick="openReport('r8')">
+        <div class="report-tag macro">● Macro</div>
+        <div class="card-date">Jan 8, 2026 · Week 1</div>
+        <h3 class="card-title">2026 Macro Outlook: Rates, Tariffs, and the Path to a Soft Landing</h3>
+        <p class="card-excerpt">Opening 2026 with a macro framework. The Fed cut 175bps since Sep 2024, landing at 3.50–3.75%. CPI at 2.7% YoY as of December. Tariff uncertainty, a new Fed chair by May, and an election hangover.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val">2.7%</div><div class="cn-label">CPI Dec '25</div></div>
+          <div class="cn-item"><div class="cn-val">3.63%</div><div class="cn-label">Fed Rate</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">8 min read</span><span class="arrow">→</span></div>
+      </div>
+
+      <!-- REPORT 9 -->
+      <div class="report-card" data-category="portfolio" onclick="openReport('r9')">
+        <div class="report-tag portfolio">● Portfolio</div>
+        <div class="card-date">Jan 5, 2026 · Week 1</div>
+        <h3 class="card-title">2026Research: What This Project Is and How We'll Cover the Markets</h3>
+        <p class="card-excerpt">Launching 2026Research on the first market open of the year. An overview of the research philosophy, analytical framework, benchmarking methodology, and what readers can expect each week.</p>
+        <div class="card-number">
+          <div class="cn-item"><div class="cn-val">Weekly</div><div class="cn-label">Report Cadence</div></div>
+          <div class="cn-item"><div class="cn-val">SPY</div><div class="cn-label">Benchmark</div></div>
+        </div>
+        <div class="card-footer"><span class="read-time">4 min read</span><span class="arrow">→</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end .page -->
+
+<footer>
+  <a href="index.html" class="logo">2026<span>Research</span></a>
+  <p>Not financial advice. All content is for educational and research purposes only.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+
+// ── REPORT DATA ──────────────────────────────────────────────
+const reports = {
+
+  r1: {
+    tag: 'macro', tagLabel: 'Macro',
+    date: 'February 17, 2026', week: 'Week 7',
+    title: 'January CPI at 2.4%: Disinflation Resumes and Rate Cut Expectations Shift',
+    readTime: '6 min read',
+    keyData: [
+      { val: '2.4%', cls: 'up', label: 'CPI YoY Jan 2026' },
+      { val: '2.5%', cls: '', label: 'Core CPI YoY' },
+      { val: '3.0%', cls: '', label: 'Shelter Inflation' },
+    ],
+    body: `
+      <p>The Bureau of Labor Statistics released January 2026 CPI data on February 13, and the number came in below expectations across the board. Headline CPI rose <strong>2.4% year-over-year</strong>, down from 2.7% in December 2025 and below the 2.5% consensus estimate. Core CPI, which excludes food and energy, held at <strong>2.5%</strong> — the lowest reading since April 2021.</p>
+      <h3>What Drove the Decline?</h3>
+      <p>Shelter costs — which make up over one-third of the CPI basket — rose just <strong>0.2% month-over-month</strong>, bringing the annual rate down to 3.0%. This is the continuation of a trend: shelter disinflation was widely expected but has been slow to materialize. January's reading suggests it's now firmly underway. Energy fell 1.5% on the month. Used car prices fell 1.8%. Egg prices dropped 7% and are now down 34% over the past year. Airline fares bucked the trend, jumping 6.5%.</p>
+      <h3>Fed Implications</h3>
+      <p>The Fed held rates at <strong>3.50–3.75%</strong> at its January 28 meeting — the first pause after three consecutive cuts in late 2025. Two members dissented, preferring a 25bps cut. With this CPI print, markets are now pricing in <strong>two 25bps cuts in 2026</strong>, most likely beginning in June. Fed Chair Powell's term expires in May 2026, adding some uncertainty around future communication style.</p>
+      <h3>Sectors to Watch</h3>
+      <p>A falling rate environment is historically supportive of growth-oriented sectors. Technology, in particular, benefits from a lower discount rate applied to future earnings — high-multiple names are mechanically more attractive when the 10Y yield is declining. The 10Y UST sat at approximately <strong>4.38%</strong> following the CPI release, down from its recent range. Consumer discretionary and real estate also tend to benefit from disinflation. The key risk to this thesis remains a tariff-driven goods inflation resurgence, which Powell himself flagged as a near-term uncertainty.</p>
+    `,
+    sources: 'Bureau of Labor Statistics (BLS) CPI Release, Feb 13 2026. CNBC, "CPI inflation report January 2026." JPMorgan Wealth Management, "Fed Leaves Rates Unchanged to Start 2026." U.S. Bank, "Federal Reserve Calibrates Interest Rate Policy."'
+  },
+
+  r2: {
+    tag: 'weekly', tagLabel: 'Weekly Wrap',
+    date: 'February 28, 2026', week: 'Week 9',
+    title: 'February Closes Red: AI Spending Concerns and Late-Month Inflation Data Weigh on Markets',
+    readTime: '4 min read',
+    keyData: [
+      { val: '−1.4%', cls: 'dn', label: 'S&P 500 Feb Return' },
+      { val: '6,939', cls: '', label: 'S&P Jan Close' },
+      { val: '18.4', cls: '', label: 'VIX Feb Close' },
+    ],
+    body: `
+      <p>February 2026 ended on a sour note for equities. The S&P 500 and Nasdaq both finished the month in negative territory, dragged down by renewed concerns about the return on AI capital expenditure and a hotter-than-expected inflation reading late in the month. The Dow fell over <strong>500 points on February 26</strong> after fresh inflation data and mounting AI skepticism hit sentiment simultaneously.</p>
+      <h3>AI Capex Skepticism Grows</h3>
+      <p>The narrative dominating February was straightforward: hyperscalers are committing hundreds of billions to AI infrastructure — but where are the revenues? Microsoft, Amazon, and Alphabet have all guided for continued heavy capex through 2026. Investors, already sensitized by DeepSeek's efficiency claims in late January, are increasingly scrutinizing whether this spending will generate proportionate returns. This uncertainty weighed most heavily on semiconductor names and AI infrastructure plays across the board.</p>
+      <h3>Macro Backdrop</h3>
+      <p>Despite the monthly decline, January's <strong>+1.34%</strong> gain for the S&P means the "January Barometer" remains positive for 2026 — historically a meaningful indicator. Per Stock Trader's Almanac, a positive January has preceded a full-year S&P advance in 41 of 46 historical instances, with an average annual return of approximately 17% in those years. The broader macro backdrop remains a mix of signals: inflation cooling, Fed on hold, tariff risk elevated, and earnings growth still projected at a healthy clip.</p>
+      <h3>Areas of Interest</h3>
+      <p>Despite February's weakness, the pullback in AI-adjacent names has brought valuations closer to earth. Names with durable competitive moats in the semiconductor supply chain, cloud infrastructure, and digital advertising remain structurally interesting on weakness. Defensive sectors — healthcare, utilities, consumer staples — outperformed in February and may continue to attract rotation if macro uncertainty persists.</p>
+    `,
+    sources: 'Fidelity, "S&P 500 Weekly Decline Contributes to February Drop." CNBC, "Dow closes 500+ points lower." Motley Fool, "The S&P 500 Was Up in January — January Barometer Analysis." Stock Trader\'s Almanac data via CNBC Pro.'
+  },
+
+  r3: {
+    tag: 'macro', tagLabel: 'Macro',
+    date: 'February 2, 2026', week: 'Week 5',
+    title: 'Fed Holds at 3.50–3.75%: Two Dissenters, Tariff Risks, and the Powell Succession',
+    readTime: '7 min read',
+    keyData: [
+      { val: '3.50%', cls: '', label: 'Fed Funds Floor' },
+      { val: '3.75%', cls: '', label: 'Fed Funds Ceiling' },
+      { val: '4.4%', cls: '', label: 'Unemployment Rate' },
+    ],
+    body: `
+      <p>The Federal Open Market Committee voted on January 28 to hold the federal funds rate at <strong>3.50–3.75%</strong>, pausing a rate-cutting cycle that had delivered three consecutive 25bps reductions in late 2025. The move was widely expected, but two dissenting votes — both preferring a 25bps cut — signaled that internal debate remains active.</p>
+      <h3>Context: How We Got Here</h3>
+      <p>The Fed cut rates by a cumulative <strong>175 basis points</strong> between September 2024 and December 2025, bringing the rate to its lowest level since November 2022. The cuts were motivated by a softening labor market and inflation trending in the right direction. At the January meeting, Powell stated that economic activity had been expanding at a solid pace and that the balance of risks to the dual mandate was improving.</p>
+      <h3>Key Risks: Tariffs and the Chair Transition</h3>
+      <p>Two wildcards dominate the 2026 Fed outlook. First, tariffs: the Fed's Beige Book noted that cost pressures from import tariffs were beginning to pass through to consumers in several districts. Powell acknowledged these effects but characterized them as likely transitory. Second, Powell's term expires in <strong>May 2026</strong>. His successor — widely expected to be Kevin Warsh — is expected to be more dovish. Markets are pricing in two cuts for the full year, with June the earliest likely date for the first move.</p>
+      <h3>What a Paused Fed Means for Markets</h3>
+      <p>A Fed on hold is a relatively benign backdrop for equities — not stimulative, but not restrictive either. The 10Y Treasury yield at approximately 4.38% is the key variable to monitor. A meaningful move higher — driven by fiscal concerns or renewed goods inflation — would pressure high-multiple growth valuations. For now, the macro environment supports a constructive stance on equities, with selectivity around rate-sensitive sectors.</p>
+    `,
+    sources: 'Federal Reserve FOMC Statement, January 28, 2026. CNBC, "Fed rate decision January 2026: Holds key rate steady." Advisor Perspectives / dshort, "Fed\'s Interest Rate Decision: January 28, 2026." iShares / BlackRock, "Fed Outlook 2026." U.S. Bank Market Analysis.'
+  },
+
+  r4: {
+    tag: 'micro', tagLabel: 'Micro',
+    date: 'January 27, 2026', week: 'Week 4',
+    title: 'DeepSeek Wipes $589 Billion from NVIDIA: What the Selloff Actually Means',
+    readTime: '8 min read',
+    keyData: [
+      { val: '−17%', cls: 'dn', label: 'NVDA 1-Day Move' },
+      { val: '$589B', cls: 'dn', label: 'Market Cap Erased' },
+      { val: '$5.6M', cls: '', label: 'DeepSeek Claimed Cost' },
+    ],
+    body: `
+      <p>January 27, 2026 will be remembered as one of the most dramatic single sessions in U.S. stock market history. NVIDIA fell <strong>16.9%</strong>, erasing approximately <strong>$589 billion in market capitalization</strong> — the largest single-day market cap destruction ever recorded, more than doubling Meta's previous record set in 2022.</p>
+      <h3>What Happened?</h3>
+      <p>Chinese AI startup DeepSeek released its R1 reasoning model, claiming it was developed in two months at a cost of under <strong>$5.6 million</strong> — compared to the hundreds of millions spent by OpenAI, Google, and Meta on comparable models. The model reportedly matched or exceeded OpenAI's performance on several third-party benchmarks. The market immediately asked a pointed question: if frontier AI can be built cheaply, does the world need hundreds of thousands of $300,000 Nvidia H100 GPUs?</p>
+      <h3>The Bear Case</h3>
+      <p>The logic is clean: if training costs collapse, hyperscaler capex could shrink. Less capex equals less GPU demand equals lower revenues for Nvidia and its supply chain. Bernstein analyst Stacy Rasgon summarized the concern as the announcement raising questions about the need for million-GPU clusters as had been projected. The Nasdaq fell 3.1% on the day. Broadcom fell 17%, AMD fell 6%, ASML fell 6%.</p>
+      <h3>The Counter-Argument</h3>
+      <p>Several factors complicate the bear narrative. First, DeepSeek's claimed $5.6M figure almost certainly excludes prior research and infrastructure costs — the actual figure is likely multiples higher. Second, the <em>Jevons Paradox</em> is relevant: cheaper AI inference historically increases total demand, as more use cases become economically viable at lower cost. Third, as Raymond James noted, U.S. hyperscalers will likely leverage their GPU stockpiles as a competitive moat, requiring continued procurement. NVIDIA itself called DeepSeek's work an excellent AI advancement that requires significant numbers of NVIDIA GPUs. The AI infrastructure thesis is stressed but not broken — and the semiconductor supply chain remains worth watching closely.</p>
+    `,
+    sources: 'CNN Business, "A shocking Chinese AI advancement called DeepSeek is sending US stocks plunging." CNBC, "Nvidia drops nearly 17% as China\'s cheaper AI model DeepSeek sparks global tech sell-off." Yahoo Finance / Nvidia market data. Raymond James analyst Srini Pajjuri note, Jan 27. Bernstein analyst Stacy Rasgon note, Jan 27.'
+  },
+
+  r5: {
+    tag: 'weekly', tagLabel: 'Weekly Wrap',
+    date: 'January 24, 2026', week: 'Week 3',
+    title: 'Week 3: Q4 Earnings Begin, S&P Above 6,900, Valuations Stretched',
+    readTime: '5 min read',
+    keyData: [
+      { val: '+1.34%', cls: 'up', label: 'S&P 500 Jan MTD' },
+      { val: '22.1×', cls: '', label: 'Fwd P/E (S&P 500)' },
+      { val: '10th', cls: '', label: 'Consec. EPS Growth Qtr' },
+    ],
+    body: `
+      <p>The third week of 2026 brought the first meaningful batch of Q4 2025 earnings results. As of January 23, approximately <strong>13% of S&P 500 companies</strong> had reported, with the index on track for its <strong>10th consecutive quarter of year-over-year earnings growth</strong> — a streak that reflects the resilience of U.S. corporate earnings through an aggressive rate cycle.</p>
+      <h3>Early Earnings Scorecard</h3>
+      <p>Early results were mixed. The S&P 500 was tracking earnings growth for Q4 2025, with analysts projecting full-year 2026 EPS growth of <strong>14.7%</strong> per FactSet. However, the beat rate was running below recent averages — both the rate of positive surprises and their magnitude came in softer than the five-year average of 78% beats and 7.7% upside. Guidance from early reporters will be critical to watch as the season progresses.</p>
+      <h3>Valuation Context</h3>
+      <p>The forward 12-month P/E ratio for the S&P 500 stood at <strong>22.1×</strong> as of January 23 — above the 5-year average of 20.0× and the 10-year average of 18.8×. This premium is defensible in a soft-landing scenario but leaves limited room for earnings disappointment. Sectors trading at meaningful discounts to their historical averages — energy, financials, healthcare — are worth monitoring as potential areas of relative value.</p>
+      <h3>The January Barometer</h3>
+      <p>With the S&P up approximately 1.3% for January, the "January Barometer" is positive for 2026. Historically, a positive January has preceded a positive full year in 41 of 46 instances, per Stock Trader's Almanac. It is a data point worth noting, not a prediction.</p>
+    `,
+    sources: 'FactSet Earnings Insight, January 23 2026 (John Butters). CNBC, "January Barometer: S&P 500 squeaking out a gain is a good sign." Stock Trader\'s Almanac via CNBC Pro. BBAE, "S&P 500: The Winners and Losers of January 2026."'
+  },
+
+  r6: {
+    tag: 'micro', tagLabel: 'Micro',
+    date: 'January 20, 2026', week: 'Week 3',
+    title: 'Meta Platforms Deep Dive: Advertising Reacceleration and the AI Engagement Story',
+    readTime: '9 min read',
+    keyData: [
+      { val: '~21%', cls: 'up', label: 'Q3 \'25 Revenue Growth' },
+      { val: '43%', cls: 'up', label: 'Q3 \'25 Op. Margin' },
+      { val: '~24×', cls: '', label: 'Fwd P/E Jan 2026' },
+    ],
+    body: `
+      <p>Meta Platforms enters 2026 as one of the more interesting large-cap technology stories. The company has undergone a remarkable transformation since its 2022 lows — pivoting from a narrative of metaverse overspend and TikTok displacement to one of disciplined execution, AI-driven engagement growth, and reaccelerating advertising revenue.</p>
+      <h3>The Advertising Engine</h3>
+      <p>Meta's core advertising business has reaccelerated meaningfully. The company's "Year of Efficiency" cost discipline translated into explosive margin expansion — operating margins reached approximately <strong>43% in Q3 2025</strong>, among the highest in large-cap tech. Ad pricing improvements, driven by AI-powered targeting and creative tools, have sustained revenue growth of approximately <strong>21% year-over-year</strong> in Q3 2025. With digital ad spend recovering broadly and Meta's daily active user base exceeding 3.3 billion, the advertising engine is arguably stronger than it has ever been.</p>
+      <h3>AI as a Tailwind</h3>
+      <p>Meta has deployed AI recommendation systems across Facebook and Instagram that have measurably increased time-on-platform. Unlike many AI narratives, Meta's AI investments are already generating returns — in the form of higher engagement, better ad targeting, and reduced content moderation costs. The company's open-source Llama model strategy has attracted developer talent and reduced R&D costs relative to closed-model peers.</p>
+      <h3>Reality Labs and Optionality</h3>
+      <p>Reality Labs (VR/AR hardware and software) continues to generate significant losses, but recent commentary suggests the pace of loss growth is stabilizing. The market has largely stopped penalizing Meta for this spending. At current valuation levels, Reality Labs can be thought of as a call option on a potentially transformative computing platform — embedded at low incremental cost.</p>
+      <h3>Key Risks</h3>
+      <p>Regulatory risk in both the EU and the U.S. is persistent and non-trivial. A meaningful economic slowdown would hit digital advertising disproportionately. Competition for user attention from TikTok and YouTube Shorts remains intense. These are risks worth sizing against when thinking about the stock.</p>
+    `,
+    sources: 'Meta Platforms Q3 2025 Earnings Release and 10-Q. FactSet consensus estimates. Company filings via SEC EDGAR. Seeking Alpha, "Meta Platforms: The AI Advertising Machine." Bloomberg analyst coverage.'
+  },
+
+  r7: {
+    tag: 'micro', tagLabel: 'Micro',
+    date: 'January 12, 2026', week: 'Week 2',
+    title: 'NVIDIA Deep Dive: Blackwell Architecture, the CUDA Moat, and Data Center TAM',
+    readTime: '10 min read',
+    keyData: [
+      { val: '>$2T', cls: '', label: 'Est. Data Center TAM' },
+      { val: '78%', cls: 'up', label: 'Q3 FY26 Data Ctr Growth' },
+      { val: '$35B', cls: 'up', label: 'Q3 FY26 Revenue' },
+    ],
+    body: `
+      <p>NVIDIA begins 2026 as the defining infrastructure company of the AI investment cycle. With data center revenue growing <strong>78% year-over-year</strong> in the most recent quarter and total revenue reaching <strong>$35.1 billion</strong>, the scale of demand for AI compute is difficult to overstate. This report examines the durability of NVIDIA's competitive position.</p>
+      <h3>The Blackwell Ramp</h3>
+      <p>Nvidia's next-generation Blackwell GPU architecture entered volume production in late 2025. The platform offers substantial performance improvements over the Hopper generation (H100/H200) and is already commanding premium pricing from hyperscaler customers. Microsoft, Amazon, Google, and Meta have all guided for accelerating capital expenditure in 2026, with a significant share directed at Nvidia Blackwell systems. CEO Jensen Huang described Blackwell demand as "insane" — supply remains the binding constraint, not demand.</p>
+      <h3>The CUDA Software Moat</h3>
+      <p>CUDA, Nvidia's parallel computing platform, is arguably the deepest software moat in the semiconductor industry. Over two decades of developer tooling, library optimization, and ecosystem development mean that migrating workloads from Nvidia to AMD or any alternative is not simply a hardware swap — it requires rewriting and re-optimizing substantial software stacks. This switching cost is durable and often underweighted in valuation models that focus solely on hardware ASPs and margins.</p>
+      <h3>Total Addressable Market</h3>
+      <p>Consensus estimates for the AI compute TAM have been revised upward repeatedly. Each new generation of AI models — larger, more capable, more broadly deployed — requires more compute, not less. The combination of pre-training, post-training (fine-tuning, RLHF), and inference scaling means GPU demand is multidimensional and compounding. Industry estimates for the global data center TAM over the next decade have reached <strong>$2 trillion or more</strong>.</p>
+      <h3>Key Risks</h3>
+      <p>Export control restrictions on advanced chip sales to China remain a persistent overhang — China represented approximately 17% of revenue before restrictions tightened. The Jevons Paradox argument cuts both ways: while cheaper inference expands use cases, a dramatic collapse in per-query compute costs could eventually reduce revenue per model generation. Competition from AMD, Intel, and custom silicon (Google TPUs, Amazon Trainium) is real, if currently limited in scale.</p>
+    `,
+    sources: 'NVIDIA Q3 FY2026 Earnings Release (Nov 2025) and Investor Day materials. Raymond James semiconductor coverage note. FactSet consensus estimates. U.S. export control framework analysis via Bloomberg. Bernstein research on AI compute TAM.'
+  },
+
+  r8: {
+    tag: 'macro', tagLabel: 'Macro',
+    date: 'January 8, 2026', week: 'Week 1',
+    title: '2026 Macro Outlook: Soft Landing Achieved, Now What?',
+    readTime: '8 min read',
+    keyData: [
+      { val: '2.7%', cls: '', label: 'CPI YoY Dec \'25' },
+      { val: '3.63%', cls: '', label: 'Fed Funds Midpoint' },
+      { val: '4.3%', cls: 'up', label: 'Q3 \'25 GDP Growth' },
+    ],
+    body: `
+      <p>We begin 2026 with an economy that has largely achieved what seemed impossible two years ago: inflation declining toward target without a recession. The Fed delivered <strong>175 basis points of cuts</strong> between September 2024 and December 2025, landing the federal funds rate at 3.50–3.75%. CPI ended 2025 at <strong>2.7% year-over-year</strong>. Core CPI held at 2.6%, matching November's reading. The labor market remains healthy with unemployment at 4.4%.</p>
+      <h3>The Soft Landing Scorecard</h3>
+      <p>By most measures, the soft landing has been achieved. GDP grew at a <strong>4.3% annualized rate</strong> in Q3 2025, driven by consumer spending and net exports. Inflation has declined from its 9.1% peak in mid-2022 to within roughly 70 basis points of the Fed's 2% target. Corporate earnings remained resilient throughout the rate cycle — Q4 2025 will mark the 10th consecutive quarter of S&P 500 earnings growth. This is a strong backdrop entering the year.</p>
+      <h3>Three Key Risks for 2026</h3>
+      <p>Despite the positive baseline, three risks deserve close attention. First, <strong>tariffs</strong>: the reimposition of broad tariffs could reignite goods inflation, which had been a key source of disinflation. Fed Vice Chair Jefferson flagged core goods inflation — running at 1.4% YoY — as the main remaining obstacle to hitting the 2% target. Second, <strong>Fed chair succession</strong>: Powell's term expires in May. The transition introduces uncertainty around communication style and policy signaling. Third, <strong>fiscal trajectory</strong>: the U.S. deficit path remains unsustainable at current spending levels, and any disruption (government shutdown, debt ceiling) could affect confidence and data flow.</p>
+      <h3>Sectors and Themes to Watch</h3>
+      <p>In a soft-landing environment with rates still above neutral, the most attractive sectors are typically those with pricing power, strong free cash flow, and earnings visibility. Technology (particularly AI infrastructure and software), select healthcare, and financial services with credit quality discipline fit this description. Small caps — which are more rate-sensitive — could outperform if cuts resume as expected. The AI productivity theme cuts across sectors and is likely to remain a dominant narrative throughout the year.</p>
+    `,
+    sources: 'Federal Reserve Vice Chair Jefferson speech, January 16, 2026. BLS CPI data December 2025. BEA GDP Release Q3 2025. iShares / BlackRock Fed Outlook 2026. FactSet 2026 earnings growth projections. CFI Trade, "US Inflation First Test in 2026."'
+  },
+
+  r9: {
+    tag: 'weekly', tagLabel: 'Weekly Wrap',
+    date: 'January 5, 2026', week: 'Week 1',
+    title: '2026Research: What This Project Is and How We\'ll Cover the Markets',
+    readTime: '4 min read',
+    keyData: [
+      { val: 'Weekly', cls: 'up', label: 'Report Cadence' },
+      { val: 'SPY', cls: '', label: 'Benchmark' },
+      { val: 'Jan 5', cls: '', label: 'Launch Date' },
+    ],
+    body: `
+      <p>2026Research publishes its first report today — January 5, 2026, the first market open of the year. This project is a finance student's attempt to build a rigorous, public research process from scratch. Every week we will publish at least one report. Every macro event of significance — Fed decisions, CPI prints, major earnings — will be covered. This is a research and learning exercise, not financial advice.</p>
+      <h3>What We Cover</h3>
+      <p>Reports fall into four categories. <strong>Macro</strong> reports cover the economic backdrop: Fed policy, inflation, employment, GDP, yield curve dynamics, and global macro developments. <strong>Micro</strong> reports are company or sector deep dives: earnings analysis, competitive positioning, valuation, and risk assessment. <strong>Weekly Wraps</strong> summarize the week's key market moves, data releases, and what to watch in the coming days. <strong>Portfolio</strong> updates document the live research portfolio — what we own, why, and how it's performing against the S&P 500 benchmark.</p>
+      <h3>The Research Framework</h3>
+      <p>Every company analysis will follow a consistent structure: business model and competitive moat, financial quality (earnings, margins, free cash flow), valuation (P/E, EV/EBITDA, FCF yield, PEG), and key risks. Macro analysis will be grounded in real data from primary sources — BLS, BEA, Federal Reserve, FactSet — and will always be explicitly cited. We will be wrong sometimes. When we are, we will say so.</p>
+      <h3>The Benchmark</h3>
+      <p>All analysis is measured against a simple standard: does our understanding of a company or macro situation produce insight that goes beyond what is already priced in? The S&P 500 (SPY) is the benchmark. Beating a passive index consistently is hard — harder than most people appreciate. Understanding <em>why</em> markets move is the goal of this project. Returns are the byproduct, not the objective.</p>
+    `,
+    sources: 'This report reflects the author\'s independent analysis and research framework. All data referenced will be sourced from primary publications. For educational purposes only — not financial advice.'
+  }
+
+};
+
+// ── MODAL LOGIC ──────────────────────────────────────────────
+function openReport(id) {
+  const r = reports[id];
+  if (!r) return;
+
+  const tagColors = { macro: 'macro', micro: 'micro', portfolio: 'portfolio', weekly: 'weekly' };
+  const dataStrip = r.keyData.map(d =>
+    `<div class="modal-data-item"><div class="val ${d.cls}">${d.val}</div><div class="lbl">${d.label}</div></div>`
+  ).join('');
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-eyebrow">
+      <span class="report-tag ${tagColors[r.tag]}" style="margin:0">● ${r.tagLabel}</span>
+      <span>${r.date}</span>
+      <span>${r.week}</span>
+      <span>${r.readTime}</span>
+    </div>
+    <h2 class="modal-title">${r.title}</h2>
+    <div class="modal-data-strip">${dataStrip}</div>
+    <div class="modal-body">${r.body}</div>
+    <div class="modal-source"><strong style="color:var(--blue-bright);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
+    <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is published as part of a finance student learning project. Nothing in this report constitutes financial advice. All analysis reflects the author's independent views at the time of writing.</div>
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── FILTER LOGIC ──────────────────────────────────────────────
+function filterReports(category, el) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+
+  const cards = document.querySelectorAll('.report-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const match = category === 'all' || card.dataset.category === category;
+    card.style.display = match ? 'block' : 'none';
+    if (match) visible++;
+  });
+
+  document.getElementById('reportsCount').textContent = `${visible} report${visible !== 1 ? 's' : ''} · Jan–Mar 2026`;
+}
+</script>
+</body>
+</html>
