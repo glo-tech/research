@@ -406,6 +406,130 @@
     .about-strip { grid-template-columns: 1fr; padding: 40px 24px; gap: 28px; }
     footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
   }
+  /* EARNINGS CALENDAR */
+  .earnings-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 72px;
+    position: relative; z-index: 1;
+  }
+  .earnings-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .earnings-title {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .earnings-title::before { content: ''; display: block; width: 18px; height: 1px; background: var(--blue-bright); }
+  .earnings-range {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .earnings-loading {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 24px 0;
+    text-align: center;
+  }
+  .earnings-day {
+    margin-bottom: 4px;
+  }
+  .earnings-day-label {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .earnings-day-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .earnings-day-label.today-label { color: var(--blue-bright); }
+  .earnings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 2px;
+  }
+  .earnings-item {
+    background: var(--deep);
+    padding: 10px 12px;
+    cursor: default;
+    transition: background 0.15s;
+  }
+  .earnings-item:hover { background: var(--surface); }
+  .earnings-item.holding {
+    background: rgba(240,192,96,0.06);
+    border-left: 2px solid rgba(240,192,96,0.5);
+  }
+  .earnings-item.holding:hover { background: rgba(240,192,96,0.1); }
+  .ei-ticker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+  .earnings-item.holding .ei-ticker { color: var(--gold); }
+  .ei-name {
+    font-size: 9px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+  }
+  .ei-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .ei-eps {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .ei-eps span { color: var(--text); }
+  .ei-time {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .ei-time.bmo { color: var(--blue-bright); border-color: var(--blue-dim); }
+  .ei-time.amc { color: var(--gold); border-color: rgba(240,192,96,0.3); }
+  .earnings-empty {
+    font-size: 10px;
+    color: var(--muted);
+    padding: 16px 0;
+    letter-spacing: 0.08em;
+  }
+  .earnings-error {
+    font-size: 10px;
+    color: var(--muted);
+    padding: 12px 14px;
+    background: var(--surface);
+    border-left: 2px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
 </style>
 </head>
 <body>
@@ -449,21 +573,21 @@
     </div>
 
     <div class="port-total">
-      <div class="amount" id="heroPortVal">$6,100.00</div>
-      <div class="since">Started Jan 5, 2026 at $5,000 &nbsp;·&nbsp; <span class="gain" id="heroReturnPct">+22.0%</span></div>
+      <div class="amount" id="heroPortVal">$5,000.00</div>
+      <div class="since">Started Jan 6, 2026 at $5,000 &nbsp;·&nbsp; <span class="gain" id="heroReturnPct">+0.0%</span></div>
     </div>
 
     <div class="port-stats">
       <div class="port-stat">
-        <div class="s-val up" id="heroReturnAmt">+22.0%</div>
+        <div class="s-val up" id="heroReturnAmt">+0.0%</div>
         <div class="s-lbl">Total Return</div>
       </div>
       <div class="port-stat">
-        <div class="s-val up">+1,110</div>
-        <div class="s-lbl">SPX Put Jan 9</div>
+        <div class="s-val up">+$1,110</div>
+        <div class="s-lbl">Realized P&L</div>
       </div>
       <div class="port-stat">
-        <div class="s-val">4</div>
+        <div class="s-val">10</div>
         <div class="s-lbl">Open Positions</div>
       </div>
       <div class="port-stat">
@@ -474,38 +598,16 @@
 
     <div class="holdings-label">Current Holdings</div>
 
-    <div class="holding-row">
-      <div>
-        <div class="holding-ticker">NVDA</div>
-        <div class="holding-name">NVIDIA Corp.</div>
-      </div>
-      <div class="holding-price" id="p-nvda">—</div>
-      <div class="holding-chg" id="c-nvda">—</div>
-    </div>
-    <div class="holding-row">
-      <div>
-        <div class="holding-ticker">META</div>
-        <div class="holding-name">Meta Platforms</div>
-      </div>
-      <div class="holding-price" id="p-meta">—</div>
-      <div class="holding-chg" id="c-meta">—</div>
-    </div>
-    <div class="holding-row">
-      <div>
-        <div class="holding-ticker">AMZN</div>
-        <div class="holding-name">Amazon.com</div>
-      </div>
-      <div class="holding-price" id="p-amzn">—</div>
-      <div class="holding-chg" id="c-amzn">—</div>
-    </div>
-    <div class="holding-row">
-      <div>
-        <div class="holding-ticker">SPY</div>
-        <div class="holding-name">S&P 500 ETF</div>
-      </div>
-      <div class="holding-price" id="p-spy">—</div>
-      <div class="holding-chg" id="c-spy">—</div>
-    </div>
+    <div class="holding-row"><div><div class="holding-ticker">NVDA</div><div class="holding-name">NVIDIA Corp.</div></div><div class="holding-price" id="p-nvda">—</div><div class="holding-chg" id="c-nvda">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">META</div><div class="holding-name">Meta Platforms</div></div><div class="holding-price" id="p-meta">—</div><div class="holding-chg" id="c-meta">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">FTAI</div><div class="holding-name">FTAI Aviation</div></div><div class="holding-price" id="p-ftai">—</div><div class="holding-chg" id="c-ftai">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">RDDT</div><div class="holding-name">Reddit Inc.</div></div><div class="holding-price" id="p-rddt">—</div><div class="holding-chg" id="c-rddt">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">CELH</div><div class="holding-name">Celsius Holdings</div></div><div class="holding-price" id="p-celh">—</div><div class="holding-chg" id="c-celh">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">HOOD</div><div class="holding-name">Robinhood</div></div><div class="holding-price" id="p-hood">—</div><div class="holding-chg" id="c-hood">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">VTLE</div><div class="holding-name">Vitesse Energy</div></div><div class="holding-price" id="p-vtle">—</div><div class="holding-chg" id="c-vtle">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">XOM</div><div class="holding-name">ExxonMobil</div></div><div class="holding-price" id="p-xom">—</div><div class="holding-chg" id="c-xom">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">AMZN</div><div class="holding-name">Amazon.com</div></div><div class="holding-price" id="p-amzn">—</div><div class="holding-chg" id="c-amzn">—</div></div>
+    <div class="holding-row"><div><div class="holding-ticker">SPY</div><div class="holding-name">S&P 500 ETF</div></div><div class="holding-price" id="p-spy">—</div><div class="holding-chg" id="c-spy">—</div></div>
 
     <div class="port-cta"><a href="portfolio.html">Full portfolio tracker →</a></div>
   </div>
@@ -559,6 +661,15 @@
   </div>
 </div>
 
+<!-- EARNINGS CALENDAR -->
+<div class="earnings-section" id="earningsSection">
+  <div class="earnings-header">
+    <div class="earnings-title">Earnings Calendar</div>
+    <div class="earnings-range" id="earningsRange">Loading...</div>
+  </div>
+  <div id="earningsBody"><div class="earnings-loading">Fetching upcoming earnings...</div></div>
+</div>
+
 <!-- FOOTER -->
 <footer id="newsletter">
   <a href="index.html" class="footer-logo">Rosehill<span>Research</span></a>
@@ -570,12 +681,18 @@ const FINNHUB_KEY = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
 
 // Same positions as portfolio.html — must stay in sync
 const POSITIONS = {
-  NVDA: { shares: 7,  entry: 188.12 },
-  META: { shares: 2,  entry: 658.79 },
-  AMZN: { shares: 4,  entry: 233.06 },
-  SPY:  { shares: 1,  entry: 687.72 },
+  NVDA: { shares: 3,  entry: 187.24 },
+  META: { shares: 1,  entry: 652.00 },
+  AMZN: { shares: 1,  entry: 230.00 },
+  SPY:  { shares: 1,  entry: 595.00 },
+  FTAI: { shares: 2,  entry: 237.00 },
+  RDDT: { shares: 2,  entry: 252.00 },
+  CELH: { shares: 5,  entry: 58.00  },
+  HOOD: { shares: 2,  entry: 128.00 },
+  VTLE: { shares: 12, entry: 22.00  },
+  XOM:  { shares: 3,  entry: 114.00 },
 };
-const CASH = 2050.00;
+const CASH = 1401.28;
 const START_VALUE = 5000;
 
 async function finnhubQuote(sym) {
@@ -600,9 +717,12 @@ const TICKER_SYMBOLS = [
   { sym: 'NVDA', label: 'NVDA' },
   { sym: 'META', label: 'META' },
   { sym: 'AMZN', label: 'AMZN' },
-  { sym: 'AAPL', label: 'AAPL' },
-  { sym: 'MSFT', label: 'MSFT' },
-  { sym: 'TSLA', label: 'TSLA' },
+  { sym: 'FTAI', label: 'FTAI' },
+  { sym: 'RDDT', label: 'RDDT' },
+  { sym: 'CELH', label: 'CELH' },
+  { sym: 'HOOD', label: 'HOOD' },
+  { sym: 'VTLE', label: 'VTLE' },
+  { sym: 'XOM',  label: 'XOM' },
   { sym: 'GLD',  label: 'GOLD' },
   { sym: 'TLT',  label: '20Y BOND' },
 ];
@@ -629,7 +749,7 @@ async function buildTicker() {
 }
 
 // ── PORTFOLIO SNAPSHOT — live prices + calculated total ──
-const PORT_SYMS = ['NVDA', 'META', 'AMZN', 'SPY'];
+const PORT_SYMS = ['NVDA', 'META', 'AMZN', 'SPY', 'FTAI', 'RDDT', 'CELH', 'HOOD', 'VTLE', 'XOM'];
 
 async function loadPrices() {
   let equityValue = 0;
@@ -683,6 +803,101 @@ async function loadPrices() {
 
 buildTicker();
 loadPrices();
+
+  // ── EARNINGS CALENDAR ─────────────────────────────────────
+  const EC_KEY   = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
+  const HOLDINGS = ['NVDA','META','AMZN','SPY','FTAI','RDDT','CELH','HOOD','VTLE','XOM'];
+
+  function ecDateStr(d) {
+    return d.toISOString().split('T')[0];
+  }
+
+  function ecFmtDay(dateStr) {
+    const d = new Date(dateStr + 'T12:00:00');
+    const today = new Date(); today.setHours(0,0,0,0);
+    const target = new Date(dateStr + 'T00:00:00');
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const diff = Math.round((target - today) / 86400000);
+    const label = diff === 0 ? 'Today' : diff === 1 ? 'Tomorrow' : `${days[d.getDay()]} ${months[d.getMonth()]} ${d.getDate()}`;
+    return { label, isToday: diff === 0 };
+  }
+
+  async function loadEarningsCalendar() {
+    const today = new Date();
+    const end   = new Date(); end.setDate(today.getDate() + 13);
+    const from  = ecDateStr(today);
+    const to    = ecDateStr(end);
+
+    const rangeEl = document.getElementById('earningsRange');
+    const bodyEl  = document.getElementById('earningsBody');
+    if (!rangeEl || !bodyEl) return;
+
+    const fmtRange = (d) => {
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${months[d.getMonth()]} ${d.getDate()}`;
+    };
+    rangeEl.textContent = `${fmtRange(today)} – ${fmtRange(end)}`;
+
+    try {
+      const url = `https://finnhub.io/api/v1/calendar/earnings?from=${from}&to=${to}&token=${EC_KEY}`;
+      const res  = await fetch(url);
+      const data = await res.json();
+      const list = (data.earningsCalendar || []).filter(e => e.symbol && /^[A-Z]{1,5}$/.test(e.symbol));
+
+      if (!list.length) {
+        bodyEl.innerHTML = '<div class="earnings-empty">No earnings scheduled in this window.</div>';
+        return;
+      }
+
+      // group by date
+      const byDate = {};
+      list.forEach(e => {
+        if (!byDate[e.date]) byDate[e.date] = [];
+        byDate[e.date].push(e);
+      });
+
+      const sortedDates = Object.keys(byDate).sort();
+
+      bodyEl.innerHTML = sortedDates.map(date => {
+        const { label, isToday } = ecFmtDay(date);
+        const items = byDate[date]
+          .sort((a,b) => {
+            const aH = HOLDINGS.includes(a.symbol) ? 0 : 1;
+            const bH = HOLDINGS.includes(b.symbol) ? 0 : 1;
+            return aH - bH || a.symbol.localeCompare(b.symbol);
+          })
+          .slice(0, 24); // cap at 24 per day to keep it clean
+
+        const cards = items.map(e => {
+          const isHolding = HOLDINGS.includes(e.symbol);
+          const eps = e.epsEstimate != null ? `Est. <span>$${parseFloat(e.epsEstimate).toFixed(2)}</span>` : '<span>—</span>';
+          const hour = e.hour === 'bmo' ? 'BMO' : e.hour === 'amc' ? 'AMC' : '';
+          const timeTag = hour ? `<div class="ei-time ${e.hour}">${hour}</div>` : '';
+          const name = (e.name || '').replace(/,? Inc\.?|,? Corp\.?|,? Ltd\.?/g,'').slice(0,22);
+          return `
+            <div class="earnings-item${isHolding ? ' holding' : ''}">
+              <div class="ei-ticker">${e.symbol}</div>
+              ${name ? `<div class="ei-name">${name}</div>` : ''}
+              <div class="ei-meta"><div class="ei-eps">${eps}</div>${timeTag}</div>
+            </div>`;
+        }).join('');
+
+        return `
+          <div class="earnings-day">
+            <div class="earnings-day-label${isToday ? ' today-label' : ''}">${label}</div>
+            <div class="earnings-grid">${cards}</div>
+          </div>`;
+      }).join('');
+
+    } catch(err) {
+      bodyEl.innerHTML = '<div class="earnings-error">Could not load earnings calendar. Check API key or network.</div>';
+    }
+  }
+
+  loadEarningsCalendar();
+  // ── END EARNINGS CALENDAR ──────────────────────────────────
+
 </script>
 </body>
 </html>

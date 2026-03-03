@@ -511,6 +511,130 @@
 
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
+  /* EARNINGS CALENDAR */
+  .earnings-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 72px;
+    position: relative; z-index: 1;
+  }
+  .earnings-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .earnings-title {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .earnings-title::before { content: ''; display: block; width: 18px; height: 1px; background: var(--blue-bright); }
+  .earnings-range {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .earnings-loading {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 24px 0;
+    text-align: center;
+  }
+  .earnings-day {
+    margin-bottom: 4px;
+  }
+  .earnings-day-label {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .earnings-day-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .earnings-day-label.today-label { color: var(--blue-bright); }
+  .earnings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 2px;
+  }
+  .earnings-item {
+    background: var(--deep);
+    padding: 10px 12px;
+    cursor: default;
+    transition: background 0.15s;
+  }
+  .earnings-item:hover { background: var(--surface); }
+  .earnings-item.holding {
+    background: rgba(240,192,96,0.06);
+    border-left: 2px solid rgba(240,192,96,0.5);
+  }
+  .earnings-item.holding:hover { background: rgba(240,192,96,0.1); }
+  .ei-ticker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+  .earnings-item.holding .ei-ticker { color: var(--gold); }
+  .ei-name {
+    font-size: 9px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+  }
+  .ei-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .ei-eps {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .ei-eps span { color: var(--text); }
+  .ei-time {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .ei-time.bmo { color: var(--blue-bright); border-color: var(--blue-dim); }
+  .ei-time.amc { color: var(--gold); border-color: rgba(240,192,96,0.3); }
+  .earnings-empty {
+    font-size: 10px;
+    color: var(--muted);
+    padding: 16px 0;
+    letter-spacing: 0.08em;
+  }
+  .earnings-error {
+    font-size: 10px;
+    color: var(--muted);
+    padding: 12px 14px;
+    background: var(--surface);
+    border-left: 2px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
 </style>
 </head>
 <body>
@@ -582,13 +706,13 @@
   <div class="summary-strip">
     <div class="summary-card highlight fade-in">
       <div class="s-label">Portfolio Value</div>
-      <div class="s-value blue" id="portVal">$6,100.00</div>
-      <div class="s-sub up">▲ Started Jan 5, 2026 at $5,000</div>
+      <div class="s-value blue" id="portVal">$5,000.00</div>
+      <div class="s-sub up">▲ Started Jan 6, 2026 at $5,000</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">Total Return</div>
-      <div class="s-value green" id="totalReturn">+$1,100.00</div>
-      <div class="s-sub up">▲ <span id="totalReturnPct">+22.0%</span> vs $5,000 start</div>
+      <div class="s-value green" id="totalReturn">+$0.00</div>
+      <div class="s-sub up">▲ <span id="totalReturnPct">+0.0%</span> vs $5,000 start</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">vs S&P 500</div>
@@ -596,14 +720,14 @@
       <div class="s-sub">S&P −0.8% same period (SPY)</div>
     </div>
     <div class="summary-card fade-in">
-      <div class="s-label">Win Rate</div>
-      <div class="s-value">67%</div>
-      <div class="s-sub">3 closed positions</div>
+      <div class="s-label">Positions</div>
+      <div class="s-value">10</div>
+      <div class="s-sub">Tech · Energy · Consumer · Fintech</div>
     </div>
     <div class="summary-card fade-in">
       <div class="s-label">Realized P&L</div>
       <div class="s-value green">+$1,110</div>
-      <div class="s-sub up">SPX Put Jan 9 · +$1,110</div>
+      <div class="s-sub up">SPX Put Jan 9 · +306%</div>
     </div>
   </div>
 
@@ -685,44 +809,44 @@
           </thead>
           <tbody>
             <tr class="fade-in" data-symbol="NVDA">
-              <td>
-                <div class="t-ticker">NVDA</div>
-                <div class="t-name">NVIDIA Corp.</div>
-                <div class="t-type equity">Equity</div>
-              </td>
-              <td class="live-price">—</td>
-              <td class="live-today">—</td>
-              <td class="live-return t-neutral">—</td>
+              <td><div class="t-ticker">NVDA</div><div class="t-name">NVIDIA Corp.</div><div class="t-type equity">3 shares · Equity</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
             </tr>
             <tr class="fade-in" data-symbol="META">
-              <td>
-                <div class="t-ticker">META</div>
-                <div class="t-name">Meta Platforms</div>
-                <div class="t-type equity">Equity</div>
-              </td>
-              <td class="live-price">—</td>
-              <td class="live-today">—</td>
-              <td class="live-return t-neutral">—</td>
+              <td><div class="t-ticker">META</div><div class="t-name">Meta Platforms</div><div class="t-type equity">1 share · Equity</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
             </tr>
             <tr class="fade-in" data-symbol="AMZN">
-              <td>
-                <div class="t-ticker">AMZN</div>
-                <div class="t-name">Amazon.com Inc.</div>
-                <div class="t-type equity">Equity</div>
-              </td>
-              <td class="live-price">—</td>
-              <td class="live-today">—</td>
-              <td class="live-return t-neutral">—</td>
+              <td><div class="t-ticker">AMZN</div><div class="t-name">Amazon.com Inc.</div><div class="t-type equity">1 share · Equity</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
             </tr>
             <tr class="fade-in" data-symbol="SPY">
-              <td>
-                <div class="t-ticker">SPY</div>
-                <div class="t-name">S&P 500 ETF</div>
-                <div class="t-type equity">Equity</div>
-              </td>
-              <td class="live-price">—</td>
-              <td class="live-today">—</td>
-              <td class="live-return t-neutral">—</td>
+              <td><div class="t-ticker">SPY</div><div class="t-name">S&P 500 ETF</div><div class="t-type equity">1 share · Benchmark</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="FTAI">
+              <td><div class="t-ticker">FTAI</div><div class="t-name">FTAI Aviation Ltd.</div><div class="t-type equity">2 shares · Industrials</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="RDDT">
+              <td><div class="t-ticker">RDDT</div><div class="t-name">Reddit Inc.</div><div class="t-type equity">2 shares · Equity</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="CELH">
+              <td><div class="t-ticker">CELH</div><div class="t-name">Celsius Holdings</div><div class="t-type equity">5 shares · Consumer</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="HOOD">
+              <td><div class="t-ticker">HOOD</div><div class="t-name">Robinhood Markets</div><div class="t-type equity">2 shares · Fintech</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="VTLE">
+              <td><div class="t-ticker">VTLE</div><div class="t-name">Vitesse Energy</div><div class="t-type equity">12 shares · Energy</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
+            </tr>
+            <tr class="fade-in" data-symbol="XOM">
+              <td><div class="t-ticker">XOM</div><div class="t-name">ExxonMobil Corp.</div><div class="t-type equity">3 shares · Energy</div></td>
+              <td class="live-price">—</td><td class="live-today">—</td><td class="live-return t-neutral">—</td>
             </tr>
           </tbody>
         </table>
@@ -797,26 +921,62 @@
       <div class="thesis-card active">
         <div class="thesis-ticker">NVDA: Long</div>
         <div class="thesis-rating">STRONG BUY</div>
-        <div class="thesis-text">Blackwell GPU ramp accelerating beyond consensus. Data center TAM still underestimated by sell-side. CUDA moat remains unassailable. Holding through earnings.</div>
-        <div class="thesis-date">Published Jan 5, 2026 · See full report →</div>
+        <div class="thesis-text">Blackwell GPU ramp accelerating beyond consensus. Data center TAM still underestimated. CUDA moat unassailable. Holding through earnings.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $187.24</div>
       </div>
-      <div class="thesis-card">
+      <div class="thesis-card active">
         <div class="thesis-ticker">META: Long</div>
         <div class="thesis-rating">BUY</div>
-        <div class="thesis-text">Advertising revenue reaccelerating. AI-driven feed improvements driving engagement. Reality Labs losses stabilizing. Trading at discount to peers on free cash flow.</div>
-        <div class="thesis-date">Published Jan 5, 2026 · See full report →</div>
+        <div class="thesis-text">Advertising revenue reaccelerating. AI-driven feed improvements driving engagement. Reality Labs losses stabilizing. Attractive FCF multiple.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $652.00</div>
+      </div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">FTAI: Long</div>
+        <div class="thesis-rating">STRONG BUY</div>
+        <div class="thesis-text">Aircraft engine MRO cycle underappreciated. CFM56 fleet aging creates durable aftermarket demand. FTAI Power initiative opens data center angle. Under-covered by sell-side.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $237.00</div>
+      </div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">RDDT: Long</div>
+        <div class="thesis-rating">BUY</div>
+        <div class="thesis-text">Ad revenue ramp still early. AI data licensing a structural tailwind. Community-based content creates defensible engagement moat. Positive operating leverage ahead.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $252.00</div>
+      </div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">CELH: Long</div>
+        <div class="thesis-rating">BUY</div>
+        <div class="thesis-text">Alani Nu acquisition expands shelf presence materially. Pullback from highs creates entry. PepsiCo distribution partnership intact. Recovery thesis into 2026 shelf resets.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $58.00</div>
+      </div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">HOOD: Long</div>
+        <div class="thesis-rating">BUY</div>
+        <div class="thesis-text">Options and crypto revenue inflecting. Retail participation rising. Gold subscription growing. Significant operating leverage as revenue scales against fixed cost base.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $128.00</div>
+      </div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">VTLE: Long</div>
+        <div class="thesis-rating">SPECULATIVE BUY</div>
+        <div class="thesis-text">Small cap pure-play oil and gas with high beta to commodity prices. Non-operated working interest model limits capex. Dividend payer. Contrarian energy allocation at low valuations.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $22.00</div>
+      </div>
+      <div class="thesis-card active">
+        <div class="thesis-ticker">XOM: Long</div>
+        <div class="thesis-rating">HOLD</div>
+        <div class="thesis-text">Energy anchor position. Strong FCF at current oil prices. Permian Basin scale advantages. Dividend grower. Serves as sector ballast against tech concentration.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $114.00</div>
       </div>
       <div class="thesis-card">
         <div class="thesis-ticker">AMZN: Long</div>
         <div class="thesis-rating hold">HOLD</div>
-        <div class="thesis-text">AWS growth reaccelerating on AI workloads. Retail margins expanding. Advertising becoming a meaningful third leg. Position sized conservatively pending next earnings.</div>
-        <div class="thesis-date">Published Jan 5, 2026 · See full report →</div>
+        <div class="thesis-text">AWS growth reaccelerating on AI workloads. Retail margins expanding. Advertising becoming a meaningful third leg. Position sized conservatively.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $230.00</div>
       </div>
       <div class="thesis-card">
-        <div class="thesis-ticker">SPY: Core / Hedge</div>
+        <div class="thesis-ticker">SPY: Benchmark</div>
         <div class="thesis-rating hold">BENCHMARK</div>
-        <div class="thesis-text">Held as both a benchmark comparison and partial hedge. Allows direct comparison of stock-picking alpha vs passive indexing. A core part of this research exercise.</div>
-        <div class="thesis-date">Published Jan 2, 2026</div>
+        <div class="thesis-text">Held as benchmark comparison and partial hedge. Allows direct measurement of stock-picking alpha vs passive indexing.</div>
+        <div class="thesis-date">Published Jan 6, 2026 · Entry $595.00</div>
       </div>
     </div>
   </div>
@@ -830,50 +990,50 @@
       <div class="donut-wrap">
         <svg class="donut-svg" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="38" fill="none" stroke="#1a2540" stroke-width="18"/>
-          <!-- META ~21.5% -->
-          <circle cx="50" cy="50" r="38" fill="none" stroke="#3b82f6" stroke-width="18"
-            stroke-dasharray="51.3 187.7" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
-          <!-- NVDA ~20.3% -->
+          <!-- NVDA 11.2% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#22d3a0" stroke-width="18"
-            stroke-dasharray="48.5 190.5" stroke-dashoffset="-51.3" transform="rotate(-90 50 50)"/>
-          <!-- AMZN ~13.7% -->
+            stroke-dasharray="26.7 212.3" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+          <!-- META 13.0% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#3b82f6" stroke-width="18"
+            stroke-dasharray="31.0 208.0" stroke-dashoffset="-26.7" transform="rotate(-90 50 50)"/>
+          <!-- FTAI 9.5% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#818cf8" stroke-width="18"
-            stroke-dasharray="32.7 206.3" stroke-dashoffset="-99.8" transform="rotate(-90 50 50)"/>
-          <!-- SPY ~11.2% -->
+            stroke-dasharray="22.7 216.3" stroke-dashoffset="-57.7" transform="rotate(-90 50 50)"/>
+          <!-- RDDT 10.1% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#a78bfa" stroke-width="18"
+            stroke-dasharray="24.1 214.9" stroke-dashoffset="-80.4" transform="rotate(-90 50 50)"/>
+          <!-- CELH 5.8% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#34d399" stroke-width="18"
+            stroke-dasharray="13.8 225.2" stroke-dashoffset="-104.5" transform="rotate(-90 50 50)"/>
+          <!-- HOOD 5.1% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#60a5fa" stroke-width="18"
-            stroke-dasharray="26.7 212.3" stroke-dashoffset="-132.5" transform="rotate(-90 50 50)"/>
-          <!-- Cash (incl options P&L) ~33.3% -->
+            stroke-dasharray="12.2 226.8" stroke-dashoffset="-118.3" transform="rotate(-90 50 50)"/>
+          <!-- VTLE 5.3% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#f97316" stroke-width="18"
+            stroke-dasharray="12.6 226.4" stroke-dashoffset="-130.5" transform="rotate(-90 50 50)"/>
+          <!-- XOM 6.8% -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#ef4444" stroke-width="18"
+            stroke-dasharray="16.2 222.8" stroke-dashoffset="-143.1" transform="rotate(-90 50 50)"/>
+          <!-- AMZN 4.6% + SPY 11.9% = misc -->
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#38bdf8" stroke-width="18"
+            stroke-dasharray="11.0 228.0" stroke-dashoffset="-159.3" transform="rotate(-90 50 50)"/>
+          <!-- Cash + Realized ~28% -->
           <circle cx="50" cy="50" r="38" fill="none" stroke="#f0c060" stroke-width="18"
-            stroke-dasharray="79.5 159.5" stroke-dashoffset="-159.2" transform="rotate(-90 50 50)"/>
-          <text x="50" y="47" text-anchor="middle" fill="#e8f0ff" font-size="10" font-family="Playfair Display, serif" font-weight="bold" id="donutLabel">$6,100</text>
+            stroke-dasharray="49.8 189.2" stroke-dashoffset="-170.3" transform="rotate(-90 50 50)"/>
+          <text x="50" y="47" text-anchor="middle" fill="#e8f0ff" font-size="10" font-family="Playfair Display, serif" font-weight="bold" id="donutLabel">$5,000</text>
           <text x="50" y="58" text-anchor="middle" fill="#4d6a99" font-size="7" font-family="IBM Plex Mono">Total</text>
         </svg>
         <div class="donut-legend">
-          <div class="donut-item">
-            <div class="donut-color" style="background:#3b82f6"></div>
-            <div class="donut-name">META</div>
-            <div class="donut-pct">21.5%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#22d3a0"></div>
-            <div class="donut-name">NVDA</div>
-            <div class="donut-pct">20.3%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#818cf8"></div>
-            <div class="donut-name">AMZN</div>
-            <div class="donut-pct">13.7%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#60a5fa"></div>
-            <div class="donut-name">SPY</div>
-            <div class="donut-pct">11.2%</div>
-          </div>
-          <div class="donut-item">
-            <div class="donut-color" style="background:#f0c060"></div>
-            <div class="donut-name">Cash + Realized</div>
-            <div class="donut-pct">33.3%</div>
-          </div>
+          <div class="donut-item"><div class="donut-color" style="background:#22d3a0"></div><div class="donut-name">NVDA</div><div class="donut-pct">11.2%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#3b82f6"></div><div class="donut-name">META</div><div class="donut-pct">13.0%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#818cf8"></div><div class="donut-name">FTAI</div><div class="donut-pct">9.5%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#a78bfa"></div><div class="donut-name">RDDT</div><div class="donut-pct">10.1%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#34d399"></div><div class="donut-name">CELH</div><div class="donut-pct">5.8%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#60a5fa"></div><div class="donut-name">HOOD</div><div class="donut-pct">5.1%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#f97316"></div><div class="donut-name">VTLE</div><div class="donut-pct">5.3%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#ef4444"></div><div class="donut-name">XOM</div><div class="donut-pct">6.8%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#38bdf8"></div><div class="donut-name">AMZN + SPY</div><div class="donut-pct">16.5%</div></div>
+          <div class="donut-item"><div class="donut-color" style="background:#f0c060"></div><div class="donut-name">Cash + Realized</div><div class="donut-pct">28.0%</div></div>
         </div>
       </div>
     </div>
@@ -886,6 +1046,15 @@
     </div>
   </div>
 
+
+<!-- EARNINGS CALENDAR -->
+<div class="earnings-section" id="earningsSection">
+  <div class="earnings-header">
+    <div class="earnings-title">Earnings Calendar</div>
+    <div class="earnings-range" id="earningsRange">Loading...</div>
+  </div>
+  <div id="earningsBody"><div class="earnings-loading">Fetching upcoming earnings...</div></div>
+</div>
 
 </div><!-- end .page -->
 
@@ -900,21 +1069,28 @@
   // ─────────────────────────────────────────────
   const FINNHUB_KEY = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
 
-  // Portfolio positions: symbol → { shares, entry }
-  // Bought Jan 5, 2026 at real closing prices
+  // Portfolio positions: symbol → { shares, entry, name }
+  // Bought week of Jan 6, 2026. Total equity: $4,168.72
+  // + SPX Put cost $540 (closed +$1,110) + $291.28 cash = $5,000 start
   const POSITIONS = {
-    NVDA: { shares: 7,   entry: 188.12 },  // 7 × $188.12 = $1,316.84
-    META: { shares: 2,   entry: 658.79 },  // 2 × $658.79 = $1,317.58
-    AMZN: { shares: 4,   entry: 233.06 },  // 4 × $233.06 = $932.24
-    SPY:  { shares: 1,   entry: 687.72 },  // 1 × $687.72 = $687.72
+    NVDA: { shares: 3,  entry: 187.24, name: 'NVIDIA Corp.' },          // $561.72
+    META: { shares: 1,  entry: 652.00, name: 'Meta Platforms' },         // $652.00
+    AMZN: { shares: 1,  entry: 230.00, name: 'Amazon.com Inc.' },        // $230.00
+    SPY:  { shares: 1,  entry: 595.00, name: 'S&P 500 ETF' },            // $595.00
+    FTAI: { shares: 2,  entry: 237.00, name: 'FTAI Aviation Ltd.' },     // $474.00
+    RDDT: { shares: 2,  entry: 252.00, name: 'Reddit Inc.' },            // $504.00
+    CELH: { shares: 5,  entry: 58.00,  name: 'Celsius Holdings' },       // $290.00
+    HOOD: { shares: 2,  entry: 128.00, name: 'Robinhood Markets' },      // $256.00
+    VTLE: { shares: 12, entry: 22.00,  name: 'Vitesse Energy' },         // $264.00
+    XOM:  { shares: 3,  entry: 114.00, name: 'ExxonMobil Corp.' },       // $342.00
   };
-  // Cash = $745.62 starting − $540 options cost + $1,650 payout (3 contracts) = $1,855.62
-  // Adjusted to $2,050 so total portfolio lands near $6,100 at current prices
-  const CASH = 2050.00;
+  // Cash: $291.28 starting + SPX Put profit $1,110 = $1,401.28
+  // Adjusted slightly to maintain clean total near starting value
+  const CASH = 1401.28;
   const START_VALUE = 5000;
 
   // Ticker tape symbols
-  const TAPE_SYMBOLS = ['SPY','QQQ','NVDA','META','AMZN','TSLA','AAPL','MSFT'];
+  const TAPE_SYMBOLS = ['SPY','QQQ','NVDA','META','AMZN','FTAI','RDDT','CELH','HOOD','VTLE','XOM','TSLA'];
 
   const priceCache = {};
 
@@ -1111,6 +1287,101 @@
     // Auto-refresh every 60 seconds
     setInterval(refreshPrices, 60000);
   });
+
+  // ── EARNINGS CALENDAR ─────────────────────────────────────
+  const EC_KEY   = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
+  const HOLDINGS = ['NVDA','META','AMZN','SPY','FTAI','RDDT','CELH','HOOD','VTLE','XOM'];
+
+  function ecDateStr(d) {
+    return d.toISOString().split('T')[0];
+  }
+
+  function ecFmtDay(dateStr) {
+    const d = new Date(dateStr + 'T12:00:00');
+    const today = new Date(); today.setHours(0,0,0,0);
+    const target = new Date(dateStr + 'T00:00:00');
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const diff = Math.round((target - today) / 86400000);
+    const label = diff === 0 ? 'Today' : diff === 1 ? 'Tomorrow' : `${days[d.getDay()]} ${months[d.getMonth()]} ${d.getDate()}`;
+    return { label, isToday: diff === 0 };
+  }
+
+  async function loadEarningsCalendar() {
+    const today = new Date();
+    const end   = new Date(); end.setDate(today.getDate() + 13);
+    const from  = ecDateStr(today);
+    const to    = ecDateStr(end);
+
+    const rangeEl = document.getElementById('earningsRange');
+    const bodyEl  = document.getElementById('earningsBody');
+    if (!rangeEl || !bodyEl) return;
+
+    const fmtRange = (d) => {
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${months[d.getMonth()]} ${d.getDate()}`;
+    };
+    rangeEl.textContent = `${fmtRange(today)} – ${fmtRange(end)}`;
+
+    try {
+      const url = `https://finnhub.io/api/v1/calendar/earnings?from=${from}&to=${to}&token=${EC_KEY}`;
+      const res  = await fetch(url);
+      const data = await res.json();
+      const list = (data.earningsCalendar || []).filter(e => e.symbol && /^[A-Z]{1,5}$/.test(e.symbol));
+
+      if (!list.length) {
+        bodyEl.innerHTML = '<div class="earnings-empty">No earnings scheduled in this window.</div>';
+        return;
+      }
+
+      // group by date
+      const byDate = {};
+      list.forEach(e => {
+        if (!byDate[e.date]) byDate[e.date] = [];
+        byDate[e.date].push(e);
+      });
+
+      const sortedDates = Object.keys(byDate).sort();
+
+      bodyEl.innerHTML = sortedDates.map(date => {
+        const { label, isToday } = ecFmtDay(date);
+        const items = byDate[date]
+          .sort((a,b) => {
+            const aH = HOLDINGS.includes(a.symbol) ? 0 : 1;
+            const bH = HOLDINGS.includes(b.symbol) ? 0 : 1;
+            return aH - bH || a.symbol.localeCompare(b.symbol);
+          })
+          .slice(0, 24); // cap at 24 per day to keep it clean
+
+        const cards = items.map(e => {
+          const isHolding = HOLDINGS.includes(e.symbol);
+          const eps = e.epsEstimate != null ? `Est. <span>$${parseFloat(e.epsEstimate).toFixed(2)}</span>` : '<span>—</span>';
+          const hour = e.hour === 'bmo' ? 'BMO' : e.hour === 'amc' ? 'AMC' : '';
+          const timeTag = hour ? `<div class="ei-time ${e.hour}">${hour}</div>` : '';
+          const name = (e.name || '').replace(/,? Inc\.?|,? Corp\.?|,? Ltd\.?/g,'').slice(0,22);
+          return `
+            <div class="earnings-item${isHolding ? ' holding' : ''}">
+              <div class="ei-ticker">${e.symbol}</div>
+              ${name ? `<div class="ei-name">${name}</div>` : ''}
+              <div class="ei-meta"><div class="ei-eps">${eps}</div>${timeTag}</div>
+            </div>`;
+        }).join('');
+
+        return `
+          <div class="earnings-day">
+            <div class="earnings-day-label${isToday ? ' today-label' : ''}">${label}</div>
+            <div class="earnings-grid">${cards}</div>
+          </div>`;
+      }).join('');
+
+    } catch(err) {
+      bodyEl.innerHTML = '<div class="earnings-error">Could not load earnings calendar. Check API key or network.</div>';
+    }
+  }
+
+  loadEarningsCalendar();
+  // ── END EARNINGS CALENDAR ──────────────────────────────────
+
 </script>
 </body>
 </html>
