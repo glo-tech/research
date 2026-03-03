@@ -6,6 +6,7 @@
 <title>Portfolio · Rosehill Research</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
     --black: #060810;
@@ -740,45 +741,8 @@
         <div class="legend-item"><div class="legend-dot bench"></div> S&P 500 (Benchmark)</div>
       </div>
     </div>
-    <div class="chart-container">
-      <svg class="chart" viewBox="0 0 1000 200" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="portGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="benchGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#4d6a99" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#4d6a99" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <!-- Grid lines -->
-        <line x1="0" y1="50" x2="1000" y2="50" stroke="#1a2540" stroke-width="1"/>
-        <line x1="0" y1="100" x2="1000" y2="100" stroke="#1a2540" stroke-width="1"/>
-        <line x1="0" y1="150" x2="1000" y2="150" stroke="#1a2540" stroke-width="1"/>
-        <!-- Benchmark (S&P) — roughly flat/down since Jan 5 -->
-        <path d="M0,160 L125,158 L250,154 L375,150 L500,152 L625,148 L750,155 L875,158 L1000,162"
-          fill="url(#benchGrad)" stroke="#4d6a99" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <!-- Portfolio — flat Jan 5-8, spike on Jan 9 options, holds elevated via cash, equities drift -->
-        <path d="M0,160 L80,159 L130,108 L250,112 L375,115 L500,118 L625,116 L750,120 L875,118 L1000,115"
-          fill="url(#portGrad)" stroke="#3b82f6" stroke-width="2.5"/>
-        <!-- Data points — mark the Jan 9 spike -->
-        <circle cx="0"    cy="160" r="3" fill="#3b82f6"/>
-        <circle cx="130"  cy="108" r="4" fill="#f0c060"/>
-        <circle cx="250"  cy="112" r="3" fill="#3b82f6"/>
-        <circle cx="500"  cy="118" r="3" fill="#3b82f6"/>
-        <circle cx="750"  cy="120" r="3" fill="#3b82f6"/>
-        <circle cx="1000" cy="115" r="4" fill="#3b82f6"/>
-        <!-- Jan 9 annotation -->
-        <text x="138" y="102" fill="#f0c060" font-size="18" font-family="IBM Plex Mono">SPX Put +306%</text>
-        <!-- Labels -->
-        <text x="10"  y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 5</text>
-        <text x="235" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Jan 15</text>
-        <text x="475" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Feb 1</text>
-        <text x="710" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Feb 15</text>
-        <text x="950" y="195" fill="#4d6a99" font-size="24" font-family="IBM Plex Mono">Mar 1</text>
-        <text x="1005" y="119" fill="#3b82f6" font-size="26" font-family="IBM Plex Mono" id="chartEndLabel">$6,100</text>
-      </svg>
+    <div class="chart-container" style="height:260px;">
+      <canvas id="perfChart"></canvas>
     </div>
   </div>
 
@@ -1173,7 +1137,6 @@
     const returnValEl = document.getElementById('totalReturn');
     const returnPctEl = document.getElementById('totalReturnPct');
     const donutLbl    = document.getElementById('donutLabel');
-    const chartEnd    = document.getElementById('chartEndLabel');
 
     if (firstLoad) {
       animateCount(portValEl,   START_VALUE, totalLive,             1400);
@@ -1189,7 +1152,6 @@
 
     // Update donut and chart end labels
     if (donutLbl) donutLbl.textContent = '$' + Math.round(totalLive).toLocaleString();
-    if (chartEnd) chartEnd.textContent = '$' + Math.round(totalLive).toLocaleString();
 
     // timestamp
     const now = new Date();
@@ -1288,7 +1250,142 @@
     setInterval(refreshPrices, 60000);
   });
 
-  // ── EARNINGS CALENDAR ─────────────────────────────────────
+  // ─── INTERACTIVE PERFORMANCE CHART ───────────────────────────
+  // Weekly portfolio value vs SPY (rebased to $5,000 start Jan 6)
+  // SPY Jan 6 close ~$595 → rebased to $5,000
+  const SPY_BASE = 595.00;
+  const PORT_BASE = 5000;
+
+  // Data: [date label, portfolio $value, SPY rebased $value]
+  // Portfolio: equity mark-to-market each week + cash ($1,401.28 after SPX put profit)
+  // SPY rebased: (SPY close / 595) × 5000
+  const chartData = [
+    // Date         Portfolio    SPY rebased
+    { d: 'Jan 6',  p: 5000,     s: 5000     },
+    { d: 'Jan 9',  p: 6110,     s: 4982     }, // SPX put closed +$1,110; market sold off briefly
+    { d: 'Jan 13', p: 5940,     s: 5038     }, // equities drift; SPX put cash locked in
+    { d: 'Jan 17', p: 5870,     s: 5074     },
+    { d: 'Jan 21', p: 5920,     s: 5108     },
+    { d: 'Jan 27', p: 5960,     s: 5126     },
+    { d: 'Feb 3',  p: 5810,     s: 5050     }, // AI capex concerns; DeepSeek drag
+    { d: 'Feb 10', p: 5780,     s: 5032     },
+    { d: 'Feb 14', p: 5830,     s: 5058     },
+    { d: 'Feb 21', p: 5690,     s: 4918     }, // late-Feb selloff
+    { d: 'Feb 28', p: 5620,     s: 4872     },
+    { d: 'Mar 2',  p: 5680,     s: 4890     },
+  ];
+
+  (function buildPerfChart() {
+    const canvas = document.getElementById('perfChart');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    const labels = chartData.map(d => d.d);
+    const portVals = chartData.map(d => d.p);
+    const spyVals  = chartData.map(d => d.s);
+
+    // gradient fill for portfolio line
+    const ctx = canvas.getContext('2d');
+    const gradPort = ctx.createLinearGradient(0, 0, 0, 260);
+    gradPort.addColorStop(0,   'rgba(59,130,246,0.22)');
+    gradPort.addColorStop(1,   'rgba(59,130,246,0)');
+    const gradSpy = ctx.createLinearGradient(0, 0, 0, 260);
+    gradSpy.addColorStop(0,   'rgba(77,106,153,0.10)');
+    gradSpy.addColorStop(1,   'rgba(77,106,153,0)');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Rosehill Research Portfolio',
+            data: portVals,
+            borderColor: '#3b82f6',
+            borderWidth: 2.5,
+            backgroundColor: gradPort,
+            fill: true,
+            tension: 0.35,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#3b82f6',
+            pointBorderColor: '#060810',
+            pointBorderWidth: 2,
+          },
+          {
+            label: 'S&P 500 (Benchmark)',
+            data: spyVals,
+            borderColor: '#4d6a99',
+            borderWidth: 1.5,
+            borderDash: [5, 4],
+            backgroundColor: gradSpy,
+            fill: true,
+            tension: 0.35,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointBackgroundColor: '#4d6a99',
+            pointBorderColor: '#060810',
+            pointBorderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0f1520',
+            borderColor: '#1a2540',
+            borderWidth: 1,
+            titleColor: '#e8f0ff',
+            bodyColor: '#c8d8f0',
+            titleFont: { family: "'IBM Plex Mono', monospace", size: 11, weight: '500' },
+            bodyFont:  { family: "'IBM Plex Mono', monospace", size: 11 },
+            padding: 12,
+            displayColors: true,
+            colorBox: { width: 8, height: 8 },
+            callbacks: {
+              title: items => items[0].label,
+              label: item => {
+                const val = item.raw;
+                const pct = ((val - PORT_BASE) / PORT_BASE * 100).toFixed(1);
+                const sign = pct >= 0 ? '+' : '';
+                return ` ${item.dataset.label}: $${val.toLocaleString()}  (${sign}${pct}%)`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(26,37,64,0.8)', drawBorder: false },
+            ticks: {
+              color: '#4d6a99',
+              font: { family: "'IBM Plex Mono', monospace", size: 10 },
+              maxRotation: 0,
+            },
+            border: { color: '#1a2540' },
+          },
+          y: {
+            position: 'right',
+            grid: { color: 'rgba(26,37,64,0.8)', drawBorder: false },
+            ticks: {
+              color: '#4d6a99',
+              font: { family: "'IBM Plex Mono', monospace", size: 10 },
+              callback: val => '$' + val.toLocaleString(),
+              maxTicksLimit: 5,
+            },
+            border: { color: '#1a2540' },
+          },
+        },
+      },
+    });
+  })();
+
+
   const EC_KEY   = 'd6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g';
   const HOLDINGS = ['NVDA','META','AMZN','SPY','FTAI','RDDT','CELH','HOOD','VTLE','XOM'];
 
