@@ -268,6 +268,7 @@
   .featured-stat .fs-val { font-size: 14px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 2px; }
   .featured-stat .fs-val.up { color: var(--green); }
   .featured-stat .fs-val.dn { color: var(--red); }
+  .featured-stat .fs-val.gold { color: var(--gold); }
   .featured-stat .fs-lbl { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
   .featured-arrow { color: rgba(240,192,96,0.3); font-size: 16px; padding-top: 2px; transition: color 0.2s, transform 0.2s; flex-shrink: 0; }
@@ -400,6 +401,18 @@
 
 <script>
 const reports = [
+  {
+    id:'ftai-mar26', type:'monthly-pick', week:'Week 9', date:'Mar 2, 2026', day:'02', month:'Mar',
+    ticker:'FTAI',
+    title:'FTAI Aviation: The MRO Moat, the Asset-Light Pivot, and the Power Optionality No One Is Modeling',
+    excerpt:'A full SOTP + 3-scenario DCF on FTAI Aviation. Two high-margin segments, a nascent power turbine business targeting AI data centers, and a Q4 earnings miss that created the entry point. Base case: $340.',
+    keyData:[
+      {val:'Strong Buy', cls:'up', label:'Rosehill Rating'},
+      {val:'$340',       cls:'gold', label:'Base Case Target'},
+      {val:'+76%',       cls:'up', label:"FY25 Aero EBITDA Growth"}
+    ],
+    link:'ftai-pitch.html'
+  },
   {
     id:'mp1', type:'monthly-pick', week:'March 2026', date:'Mar 2, 2026', day:'02', month:'Mar',
     ticker: '———',
@@ -628,6 +641,7 @@ function filterReports(filter, el) {
 function openReport(id) {
   const r = reports.find(x => x.id === id);
   if (!r) return;
+  if (r.link) { window.open(r.link, '_blank'); return; }
   const strip = r.keyData.map(d =>
     `<div class="modal-data-item"><div class="val ${d.cls}">${d.val}</div><div class="lbl">${d.label}</div></div>`
   ).join('');

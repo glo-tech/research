@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTAI Aviation · Monthly Pick · Rosehill Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --black:      #060810;
+  --deep:       #0a0e18;
+  --surface:    #0f1520;
+  --surface2:   #141c2a;
+  --border:     #1a2540;
+  --border2:    #223060;
+  --blue:       #2563eb;
+  --blue-bright:#3b82f6;
+  --blue-dim:   #1e3a6e;
+  --text:       #c8d8f0;
+  --muted:      #4d6a99;
+  --white:      #e8f0ff;
+  --gold:       #f0c060;
+  --gold-dim:   rgba(240,192,96,0.15);
+  --green:      #22d3a0;
+  --red:        #f05a5a;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* noise overlay */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9999; opacity:0.35;
+}
+
+/* grid */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(37,99,235,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,0.03) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none; z-index:0;
+}
+
+/* ── NAV ── */
+nav {
+  position:sticky; top:0; z-index:200;
+  background:rgba(6,8,16,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 56px;
+  display:flex; align-items:center; justify-content:space-between;
+  height:60px;
+}
+.nav-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; color:var(--white); text-decoration:none; letter-spacing:-0.02em; }
+.nav-logo span { color:var(--blue-bright); }
+.nav-right { display:flex; align-items:center; gap:28px; }
+.nav-back { color:var(--muted); text-decoration:none; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; transition:color 0.2s; }
+.nav-back:hover { color:var(--blue-bright); }
+.nav-badge-gold { background:var(--gold); color:#060810; padding:5px 14px; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; font-weight:600; }
+
+/* ── HERO COVER ── */
+.cover {
+  position:relative; z-index:1;
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:80px 56px 96px;
+  overflow:hidden;
+}
+
+.cover-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(37,99,235,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(240,192,96,0.06) 0%, transparent 60%),
+    var(--black);
+}
+
+/* big ticker watermark */
+.cover-watermark {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;
+  font-size:clamp(160px,22vw,320px);
+  font-weight:900;
+  color:rgba(37,99,235,0.04);
+  letter-spacing:-0.05em;
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+}
+
+.cover-eyebrow {
+  font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:24px;
+  display:flex; align-items:center; gap:12px;
+  opacity:0; animation:fadeUp 0.7s 0.2s forwards;
+}
+.cover-eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--gold); }
+
+.cover-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--gold-dim); border:1px solid rgba(240,192,96,0.3);
+  padding:5px 14px; font-size:9px; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:28px;
+  opacity:0; animation:fadeUp 0.7s 0.35s forwards;
+}
+
+.cover-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,7vw,96px);
+  font-weight:900;
+  color:var(--white);
+  letter-spacing:-0.03em;
+  line-height:0.95;
+  margin-bottom:8px;
+  opacity:0; animation:fadeUp 0.7s 0.5s forwards;
+}
+.cover-title em { color:var(--blue-bright); font-style:italic; }
+
+.cover-subtitle {
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(16px,2vw,22px);
+  color:var(--muted);
+  font-style:italic;
+  margin-bottom:48px;
+  opacity:0; animation:fadeUp 0.7s 0.65s forwards;
+}
+
+.cover-stats {
+  display:flex; gap:0;
+  border:1px solid var(--border);
+  width:fit-content;
+  opacity:0; animation:fadeUp 0.7s 0.8s forwards;
+}
+.cover-stat {
+  padding:20px 32px;
+  border-right:1px solid var(--border);
+}
+.cover-stat:last-child { border-right:none; }
+.cs-val {
+  font-family:'Playfair Display',serif;
+  font-size:28px; font-weight:700;
+  color:var(--white); letter-spacing:-0.02em;
+}
+.cs-val.up { color:var(--green); }
+.cs-val.gold { color:var(--gold); }
+.cs-lbl { font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+
+.cover-scroll {
+  position:absolute; bottom:40px; right:56px;
+  font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--muted);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  opacity:0; animation:fadeUp 0.7s 1.1s forwards;
+}
+.scroll-line {
+  width:1px; height:48px;
+  background:linear-gradient(var(--muted),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+
+/* ── SECTION WRAPPER ── */
+.section {
+  position:relative; z-index:1;
+  padding:96px 56px;
+  border-top:1px solid var(--border);
+}
+.section.gold-border { border-top:1px solid rgba(240,192,96,0.2); }
+.section.alt { background:var(--deep); }
+
+.section-eyebrow {
+  font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--blue-bright); margin-bottom:16px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--blue-bright); }
+.section-eyebrow.gold-eye { color:var(--gold); }
+.section-eyebrow.gold-eye::before { background:var(--gold); }
+
+.section-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,4vw,56px);
+  font-weight:900; color:var(--white);
+  letter-spacing:-0.03em; line-height:1;
+  margin-bottom:16px;
+}
+.section-title em { color:var(--blue-bright); font-style:italic; }
+.section-title .gold { color:var(--gold); }
+
+.section-sub {
+  font-family:'Libre Baskerville',serif;
+  font-size:15px; color:var(--muted);
+  line-height:1.7; max-width:640px;
+  margin-bottom:64px;
+}
+
+/* ── THESIS BULLETS ── */
+.thesis-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  margin-bottom:64px;
+}
+.thesis-block {
+  background:var(--deep);
+  padding:40px 36px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.2s;
+}
+.thesis-block:hover { background:var(--surface); }
+.thesis-block::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:2px;
+}
+.thesis-block.b1::before { background:var(--blue-bright); }
+.thesis-block.b2::before { background:var(--gold); }
+.thesis-block.b3::before { background:var(--green); }
+.tb-num { font-size:48px; font-weight:600; color:var(--border2); letter-spacing:-0.03em; margin-bottom:16px; }
+.tb-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--white); margin-bottom:10px; }
+.tb-body { font-size:11px; line-height:1.75; color:var(--muted); }
+.tb-accent { color:var(--blue-bright); font-weight:600; }
+.tb-accent.gold { color:var(--gold); }
+.tb-accent.green { color:var(--green); }
+
+/* ── BUSINESS MODEL ── */
+.biz-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  margin-bottom:64px;
+}
+.biz-card {
+  border:1px solid var(--border);
+  background:var(--surface);
+  padding:40px;
+  position:relative;
+  overflow:hidden;
+}
+.biz-card::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0;
+  height:3px;
+}
+.biz-card.seg1::after { background:linear-gradient(90deg,var(--blue),transparent); }
+.biz-card.seg2::after { background:linear-gradient(90deg,var(--gold),transparent); }
+.biz-card.seg3::after { background:linear-gradient(90deg,var(--green),transparent); }
+.bc-label { font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.bc-name { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--white); margin-bottom:16px; }
+.bc-desc { font-size:11px; line-height:1.75; color:var(--muted); margin-bottom:24px; }
+.bc-stats { display:flex; gap:24px; flex-wrap:wrap; }
+.bc-stat .v { font-size:22px; font-weight:600; color:var(--white); }
+.bc-stat .v.gold { color:var(--gold); }
+.bc-stat .v.green { color:var(--green); }
+.bc-stat .l { font-size:8px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+/* ── POWER CARD (full width) ── */
+.power-card {
+  border:1px solid rgba(240,192,96,0.3);
+  background:linear-gradient(135deg, rgba(240,192,96,0.04) 0%, var(--surface) 60%);
+  padding:48px;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:32px;
+}
+.power-card::before {
+  content:'FTAI POWER';
+  position:absolute; top:24px; right:32px;
+  font-size:56px; font-weight:900;
+  font-family:'Playfair Display',serif;
+  color:rgba(240,192,96,0.04);
+  letter-spacing:-0.03em;
+}
+.power-tag { display:inline-block; background:rgba(240,192,96,0.15); border:1px solid rgba(240,192,96,0.4); padding:4px 12px; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.power-title { font-family:'Playfair Display',serif; font-size:32px; font-weight:900; color:var(--gold); margin-bottom:12px; letter-spacing:-0.02em; }
+.power-body { font-size:11px; line-height:1.8; color:var(--muted); max-width:700px; margin-bottom:32px; }
+.power-stats { display:flex; gap:0; border:1px solid rgba(240,192,96,0.2); width:fit-content; }
+.ps { padding:16px 28px; border-right:1px solid rgba(240,192,96,0.2); }
+.ps:last-child { border-right:none; }
+.ps .v { font-size:20px; font-weight:600; color:var(--gold); }
+.ps .l { font-size:8px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+
+/* ── FINANCIALS TABLE ── */
+.fin-table-wrap { overflow-x:auto; margin-bottom:48px; }
+.fin-table {
+  width:100%; border-collapse:collapse;
+  font-size:11px;
+}
+.fin-table th {
+  padding:10px 16px;
+  text-align:right;
+  font-size:8px; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--muted);
+  border-bottom:1px solid var(--border);
+  background:var(--deep);
+}
+.fin-table th:first-child { text-align:left; }
+.fin-table td {
+  padding:12px 16px;
+  text-align:right;
+  border-bottom:1px solid var(--border);
+  color:var(--text);
+}
+.fin-table td:first-child { text-align:left; color:var(--white); font-weight:500; }
+.fin-table tr:hover td { background:var(--surface); }
+.fin-table .up { color:var(--green); }
+.fin-table .gold { color:var(--gold); }
+.fin-table .head-row td { font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); background:var(--deep); padding:8px 16px; border-bottom:1px solid var(--border2); }
+.fin-table tfoot td { color:var(--muted); font-size:10px; padding-top:20px; border-bottom:none; text-align:left; }
+
+/* ── DCF SECTION ── */
+.dcf-intro {
+  display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  margin-bottom:64px;
+}
+.dcf-assumptions h3 {
+  font-family:'Playfair Display',serif;
+  font-size:20px; font-weight:700; color:var(--white);
+  margin-bottom:20px;
+}
+.assump-row {
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:10px 0; border-bottom:1px solid var(--border);
+  font-size:11px;
+}
+.assump-row:last-child { border-bottom:none; }
+.ar-label { color:var(--muted); }
+.ar-val { color:var(--white); font-weight:500; }
+.ar-val.gold { color:var(--gold); }
+
+/* scenarios */
+.scenarios { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-bottom:64px; }
+.scenario {
+  background:var(--deep);
+  padding:40px 32px;
+  position:relative;
+}
+.scenario.base { background:var(--surface); }
+.scenario.base::before {
+  content:'BASE CASE';
+  position:absolute; top:-1px; left:0; right:0;
+  background:var(--blue);
+  text-align:center;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  color:#fff; padding:4px;
+}
+.sc-label { font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; margin-top:8px; }
+.scenario.base .sc-label { margin-top:24px; }
+.sc-name { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:24px; }
+.sc-price { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; letter-spacing:-0.03em; color:var(--white); margin-bottom:4px; }
+.scenario.bull .sc-price { color:var(--green); }
+.scenario.bear .sc-price { color:var(--red); }
+.scenario.base .sc-price { color:var(--blue-bright); }
+.sc-upside { font-size:11px; color:var(--muted); margin-bottom:24px; }
+.sc-items { list-style:none; }
+.sc-items li { font-size:10px; line-height:1.7; color:var(--muted); padding:5px 0; border-bottom:1px solid var(--border); display:flex; gap:8px; }
+.sc-items li::before { content:'→'; color:var(--blue-bright); flex-shrink:0; }
+.scenario.bull .sc-items li::before { color:var(--green); }
+.scenario.bear .sc-items li::before { color:var(--red); }
+
+/* SOTP table */
+.sotp-table { width:100%; border-collapse:collapse; font-size:11px; margin-bottom:32px; }
+.sotp-table th {
+  padding:10px 16px; text-align:right;
+  font-size:8px; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--muted); border-bottom:1px solid var(--border);
+  background:var(--deep);
+}
+.sotp-table th:first-child { text-align:left; }
+.sotp-table td { padding:14px 16px; text-align:right; border-bottom:1px solid var(--border); color:var(--text); }
+.sotp-table td:first-child { text-align:left; color:var(--white); }
+.sotp-table .total-row td { font-weight:600; color:var(--white); border-top:2px solid var(--border2); border-bottom:none; background:var(--surface); }
+.sotp-table .total-row td.gold { color:var(--gold); font-size:18px; font-family:'Playfair Display',serif; }
+.sotp-table tr:hover td { background:var(--surface); }
+
+/* sensitivity grid */
+.sens-wrap { overflow-x:auto; margin-bottom:48px; }
+.sens-table { border-collapse:collapse; font-size:10px; min-width:480px; }
+.sens-table th {
+  padding:8px 14px;
+  font-size:8px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--muted); background:var(--deep);
+  border:1px solid var(--border);
+  text-align:center;
+}
+.sens-table td {
+  padding:9px 14px;
+  text-align:center;
+  border:1px solid var(--border);
+  color:var(--text);
+  transition:background 0.15s;
+}
+.sens-table td.highlight { background:rgba(59,130,246,0.15); color:var(--blue-bright); font-weight:600; }
+.sens-table td.high { background:rgba(34,211,160,0.08); color:var(--green); }
+.sens-table td.low { background:rgba(240,90,90,0.08); color:var(--red); }
+.sens-label { font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+
+/* chart canvas */
+.chart-wrap { position:relative; height:300px; margin-bottom:48px; }
+
+/* ── RISKS ── */
+.risks-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:48px; }
+.risk-item {
+  border:1px solid var(--border);
+  padding:24px 28px;
+  display:flex; gap:20px; align-items:flex-start;
+}
+.risk-severity {
+  flex-shrink:0;
+  width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:600; letter-spacing:0.05em;
+}
+.risk-severity.high { background:rgba(240,90,90,0.1); color:var(--red); border:1px solid rgba(240,90,90,0.2); }
+.risk-severity.med  { background:rgba(240,192,96,0.1); color:var(--gold); border:1px solid rgba(240,192,96,0.2); }
+.risk-severity.low  { background:rgba(34,211,160,0.1); color:var(--green); border:1px solid rgba(34,211,160,0.2); }
+.risk-content h4 { font-size:12px; font-weight:600; color:var(--white); margin-bottom:6px; }
+.risk-content p { font-size:10px; line-height:1.7; color:var(--muted); }
+
+/* ── VERDICT ── */
+.verdict {
+  background:linear-gradient(135deg, var(--blue-dim) 0%, var(--deep) 60%);
+  border:1px solid var(--border2);
+  padding:64px 56px;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+.verdict::before {
+  content:'BUY';
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;
+  font-size:clamp(120px,18vw,240px);
+  font-weight:900; color:rgba(59,130,246,0.05);
+  letter-spacing:-0.05em; pointer-events:none;
+}
+.verdict-rating {
+  font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--blue-bright); margin-bottom:16px;
+}
+.verdict-price {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(64px,8vw,112px);
+  font-weight:900; color:var(--blue-bright);
+  letter-spacing:-0.04em; line-height:1;
+  margin-bottom:8px;
+}
+.verdict-sub { font-size:13px; color:var(--muted); margin-bottom:40px; }
+.verdict-thesis {
+  font-family:'Libre Baskerville',serif;
+  font-size:16px; color:var(--text);
+  line-height:1.8; max-width:700px; margin:0 auto 48px;
+  font-style:italic;
+}
+.verdict-catalysts { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+.catalyst-tag {
+  border:1px solid var(--border2);
+  padding:8px 20px; font-size:9px;
+  letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--text);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top:1px solid var(--border);
+  padding:40px 56px;
+  display:flex; justify-content:space-between; align-items:center;
+  position:relative; z-index:1;
+}
+.footer-logo { font-family:'Playfair Display',serif; font-size:18px; font-weight:900; color:var(--white); text-decoration:none; }
+.footer-logo span { color:var(--blue-bright); }
+.footer-disc { font-size:9px; line-height:1.6; color:var(--muted); max-width:500px; text-align:right; }
+
+/* ── DIVIDER ── */
+.divider { height:1px; background:var(--border); margin:48px 0; }
+.gold-divider { height:1px; background:linear-gradient(90deg,var(--gold),transparent); margin:48px 0; }
+
+/* ── INLINE STAT ROWS ── */
+.stat-row { display:flex; gap:0; border:1px solid var(--border); width:fit-content; margin-bottom:48px; }
+.stat-cell { padding:16px 28px; border-right:1px solid var(--border); }
+.stat-cell:last-child { border-right:none; }
+.stat-cell .v { font-size:24px; font-weight:600; color:var(--white); }
+.stat-cell .v.up { color:var(--green); }
+.stat-cell .v.gold { color:var(--gold); }
+.stat-cell .v.blue { color:var(--blue-bright); }
+.stat-cell .l { font-size:8px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+
+/* ── PROSE BODY ── */
+.body-text { font-family:'Libre Baskerville',serif; font-size:14px; line-height:1.85; color:var(--text); max-width:800px; }
+.body-text p { margin-bottom:20px; }
+.body-text strong { color:var(--white); font-weight:700; }
+.body-text em { color:var(--gold); font-style:italic; }
+
+/* ── NOTE BOX ── */
+.note-box {
+  border-left:3px solid var(--gold);
+  background:var(--gold-dim);
+  padding:16px 20px;
+  font-size:11px; line-height:1.7; color:var(--text);
+  margin-bottom:32px;
+}
+.note-box strong { color:var(--gold); }
+
+/* ── CHART SECTION ── */
+.chart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+.chart-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--white); }
+.chart-legend { display:flex; gap:20px; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+.legend-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes scrollPulse {
+  0%,100% { opacity:0.3; }
+  50%      { opacity:1; }
+}
+
+/* scroll reveals */
+.reveal {
+  opacity:0; transform:translateY(32px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  .cover,nav,footer,.section { padding-left:28px; padding-right:28px; }
+  .thesis-grid { grid-template-columns:1fr; }
+  .biz-grid { grid-template-columns:1fr; }
+  .scenarios { grid-template-columns:1fr; }
+  .risks-grid { grid-template-columns:1fr; }
+  .dcf-intro { grid-template-columns:1fr; }
+  .cover-stats { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Rosehill<span>Research</span></a>
+  <div class="nav-right">
+    <a href="research.html" class="nav-back">← Research</a>
+    <span class="nav-badge-gold">◆ Monthly Pick · Mar 2026</span>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 · COVER
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-watermark">FTAI</div>
+
+  <div class="cover-eyebrow">Rosehill Research · Monthly Pick · March 2026</div>
+  <div class="cover-tag">◆ Strong Buy · Aviation &amp; Industrials</div>
+
+  <div class="cover-title">FTAI<br><em>Aviation</em></div>
+  <div class="cover-subtitle">Where jet engines meet the AI data center boom.</div>
+
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="cs-val">~$282</div>
+      <div class="cs-lbl">Price at Publication</div>
+    </div>
+    <div class="cover-stat" id="livePriceStat" style="min-width:160px;">
+      <div class="cs-val" id="livePrice" style="letter-spacing:-0.02em;">
+        <span style="font-size:14px;color:var(--muted);">⟳ fetching…</span>
+      </div>
+      <div class="cs-lbl">
+        Live Price · FTAI
+        <span id="livePctBadge" style="margin-left:6px;"></span>
+      </div>
+    </div>
+    <div class="cover-stat">
+      <div class="cs-val gold">$340</div>
+      <div class="cs-lbl">Rosehill Base Case Target ¹</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cs-val up" id="liveUpside">~+20%</div>
+      <div class="cs-lbl">Implied Upside vs Live</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cs-val">$2.507B</div>
+      <div class="cs-lbl">FY2025 Revenue (Actual)</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cs-val gold">NASDAQ: FTAI</div>
+      <div class="cs-lbl">Exchange · Ticker</div>
+    </div>
+  </div>
+  <div style="font-size:9px;color:var(--muted);margin-top:16px;opacity:0;animation:fadeUp 0.7s 0.9s forwards;">¹ Price target is a Rosehill Research SOTP/DCF estimate. Not financial advice. See full methodology on slide 5.</div>
+
+  <div class="cover-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 · INVESTMENT THESIS
+══════════════════════════════════════════ -->
+<div class="section alt reveal">
+  <div class="section-eyebrow">01 — Investment Thesis</div>
+  <div class="section-title">Three reasons to own<br><em>FTAI right now.</em></div>
+  <div class="section-sub">FTAI has built an irreplaceable position in the CFM56 engine ecosystem — the world's most widely operated narrowbody jet engine. That asset base is now being leveraged in two distinct high-margin businesses, with a third optionality layer that the market has not fully priced.</div>
+
+  <div class="thesis-grid">
+    <div class="thesis-block b1">
+      <div class="tb-num">01</div>
+      <div class="tb-title">The MRO Moat</div>
+      <div class="tb-body">FTAI's Module Factory concept redefines how airlines maintain CFM56 engines. By refurbishing and selling individual engine modules rather than whole engines, FTAI captures <span class="tb-accent">30–40% cost savings</span> vs. OEM maintenance — a structural advantage that compresses over the 20-year+ remaining life of the 12,000+ CFM56 engines still in service. Airlines and lessors are locked in.</div>
+    </div>
+    <div class="thesis-block b2">
+      <div class="tb-num">02</div>
+      <div class="tb-title">Asset-Light Flywheel</div>
+      <div class="tb-body">The $6 billion Strategic Capital Initiative (SCI) fund closed in 2025, allowing FTAI to recycle owned assets into third-party managed capital. This transforms FTAI from a balance-sheet-heavy lessor into a <span class="tb-accent gold">fee-generating asset manager</span> — higher ROE, lower capex intensity, and more predictable cash flow. 2026 EBITDA guidance raised to $1.6B+.</div>
+    </div>
+    <div class="thesis-block b3">
+      <div class="tb-num">03</div>
+      <div class="tb-title">FTAI Power Optionality</div>
+      <div class="tb-body">In late 2025, FTAI announced it would convert surplus CFM56 engines into aeroderivative power turbines for AI data centers. At $500M–$1B in <span class="tb-accent green">incremental annual EBITDA</span> potential, this initiative is not yet in consensus estimates. Palantir partnership announced. First commercial deployments expected H2 2026.</div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Why now?</strong> Q4 2025 revenue of $662M missed the $702M analyst consensus, and diluted EPS of $1.08 missed estimates of $1.25. The stock sold off roughly 6–7% on the print. The underlying business — FY2025 Aero Products EBITDA up 76%, net income of $477.5M vs. a loss in FY2024, 2026 guidance raised — remains intact. This is a miss on timing, not fundamentals. Source: SignalBloom / FTAI FY2025 earnings release.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 · BUSINESS MODEL
+══════════════════════════════════════════ -->
+<div class="section reveal">
+  <div class="section-eyebrow">02 — Business Model</div>
+  <div class="section-title">Two segments.<br><em>One moat.</em> One option.</div>
+  <div class="section-sub">FTAI operates through Aviation Leasing and Aerospace Products. A third segment — FTAI Power — is nascent but carries the most asymmetric upside.</div>
+
+  <div class="biz-grid">
+    <div class="biz-card seg1">
+      <div class="bc-label">Segment 01</div>
+      <div class="bc-name">Aviation Leasing</div>
+      <div class="bc-desc">Owns and manages 290 aviation assets including 47 commercial aircraft and 243 engines (as of Dec 31, 2025). The leasing book generates stable contracted cash flows, primarily from narrowbody operators flying CFM56-powered 737NG and A320ceo aircraft. FTAI's differentiation here is operational: it manages aircraft with a view toward extracting the highest parts and module value over the full asset life, rather than simply collecting rent.</div>
+      <div class="bc-stats">
+        <div class="bc-stat"><div class="v">290</div><div class="l">Assets (Dec 31, 2025)</div></div>
+        <div class="bc-stat"><div class="v gold">$575M</div><div class="l">2026 EBITDA Guidance</div></div>
+        <div class="bc-stat"><div class="v">~77%</div><div class="l">Utilization Rate Q4 2025</div></div>
+      </div>
+    </div>
+    <div class="biz-card seg2">
+      <div class="bc-label">Segment 02</div>
+      <div class="bc-name">Aerospace Products</div>
+      <div class="bc-desc">The high-margin engine MRO and aftermarket business. The Module Factory repairs, refurbishes, and sells CFM56-7B, CFM56-5B, and V2500 engine modules. With airlines deferring new aircraft orders and extending existing fleet lives, demand for CFM56 maintenance is structurally elevated for the next 10–15 years. EBITDA margins in this segment exceed 45%, driven by proprietary PMA components and Module Factory throughput.</div>
+      <div class="bc-stats">
+        <div class="bc-stat"><div class="v green">+76%</div><div class="l">FY2025 Adj. EBITDA Growth</div></div>
+        <div class="bc-stat"><div class="v gold">$671M</div><div class="l">FY2025 Adj. EBITDA (Actual)</div></div>
+        <div class="bc-stat"><div class="v">$662M</div><div class="l">Q4 2025 Revenue (Actual)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="power-card reveal">
+    <div class="power-tag">◆ New Initiative · H2 2026 Launch</div>
+    <div class="power-title">FTAI Power: The Wild Card</div>
+    <div class="power-body">FTAI holds a surplus pool of CFM56 aircraft engines that can be converted into aeroderivative gas turbines for utility-scale power generation. In 2025, FTAI announced FTAI Power as a formal platform to pursue this opportunity, targeting AI data centers and campuses requiring reliable, fast-deployable generation. The first product — FTAI Mod-1 — is on track for delivery by Q4 2026, with planned production of 100 units in 2027 (per company guidance). FTAI also announced a multi-year strategic partnership with Palantir Technologies to deploy Palantir's AIP platform across FTAI's global maintenance footprint, targeting improved maintenance scheduling and inventory optimization. This is an operational AI deployment — not a power contracting partnership — but it reinforces FTAI's technology positioning as the business scales. FTAI Power revenue is not yet in any published guidance and represents pure optionality.</div>
+    <div class="power-stats">
+      <div class="ps"><div class="v">Q4 2026</div><div class="l">FTAI Mod-1 Target Delivery (Co. guidance)</div></div>
+      <div class="ps"><div class="v">100 units</div><div class="l">Planned 2027 Production (Co. guidance)</div></div>
+      <div class="ps"><div class="v">$0</div><div class="l">In Current Guidance (pure optionality)</div></div>
+      <div class="ps"><div class="v">Palantir AIP</div><div class="l">Maintenance AI Partner (announced 2025)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 · FINANCIALS
+══════════════════════════════════════════ -->
+<div class="section alt reveal">
+  <div class="section-eyebrow">03 — Financial Summary</div>
+  <div class="section-title">The numbers<br>are <em>real.</em></div>
+  <div class="section-sub">FTAI's financial trajectory reflects a deliberate pivot from capital-intensive leasing toward high-margin MRO and asset management. The 2025–2026 inflection is well underway.</div>
+
+  <div class="stat-row reveal">
+    <div class="stat-cell"><div class="v up">+76%</div><div class="l">FY25 Aero Products EBITDA Growth</div></div>
+    <div class="stat-cell"><div class="v gold">$1.525–1.625B</div><div class="l">2026 EBITDA Guidance (Co.)</div></div>
+    <div class="stat-cell"><div class="v blue">$477.5M</div><div class="l">FY25 Net Income Attr. to Shareholders</div></div>
+    <div class="stat-cell"><div class="v">$2.0B</div><div class="l">SCI I Equity Raised</div></div>
+    <div class="stat-cell"><div class="v">$0.40</div><div class="l">Quarterly Dividend (Raised Feb '26)</div></div>
+  </div>
+
+  <div class="fin-table-wrap">
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>FY 2023A</th>
+          <th>FY 2024A</th>
+          <th>FY 2025A</th>
+          <th>FY 2026E ¹</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="head-row"><td colspan="5">Revenue</td></tr>
+        <tr><td>Total Revenue ($M)</td><td>$1,171</td><td>$1,735</td><td>$2,507</td><td class="gold">—</td></tr>
+        <tr><td>Revenue Growth YoY</td><td>+65%</td><td class="up">+48%</td><td class="up">+44%</td><td class="gold">—</td></tr>
+        <tr class="head-row"><td colspan="5">Profitability (Reported)</td></tr>
+        <tr><td>Aero Products Adj. EBITDA ($M)</td><td>~$160 ²</td><td>~$381 ²</td><td class="up">$671.3</td><td class="gold">$1,050 (guidance)</td></tr>
+        <tr><td>Aviation Leasing Adj. EBITDA ($M)</td><td>—</td><td>—</td><td>—</td><td class="gold">$575 (guidance)</td></tr>
+        <tr><td>Total Segment Adj. EBITDA ($M)</td><td>—</td><td>—</td><td>—</td><td class="gold">$1,525–1,625 (guidance)</td></tr>
+        <tr><td>Net Income (Loss) Attr. to Shareholders ($M)</td><td>—</td><td style="color:var(--red)">(loss year)</td><td class="up">$477.5</td><td class="gold">—</td></tr>
+        <tr><td>Q4 2025 Diluted EPS</td><td>—</td><td>$0.84</td><td class="up">$1.08</td><td class="gold">—</td></tr>
+        <tr class="head-row"><td colspan="5">Capital Return</td></tr>
+        <tr><td>Quarterly Dividend / Share</td><td>—</td><td>$0.30</td><td>$0.35 → $0.40</td><td class="gold">$0.40+</td></tr>
+        <tr><td>Aero Products FCF ($M)</td><td>—</td><td>$346</td><td>—</td><td class="gold">—</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="5">
+          Sources: ¹ 2026E figures are company-provided guidance from the Feb 25, 2026 earnings release (GlobeNewswire). ² FY2023 and FY2024 Aero Products EBITDA back-calculated from the reported +320% (FY23→FY25) and +76% (FY24→FY25) growth rates disclosed in the FY2025 earnings release. Revenue figures from MacroTrends / FTAI 10-K. Net income, EPS, and dividend from FTAI FY2025 earnings release. FY2024 net income shown as "loss year" — FTAI reported a $32.1M net loss in FY2024 per SignalBloom/earnings data. Forward estimates beyond company guidance are not provided; Rosehill does not publish unsourced forward projections.
+        </td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 · REVENUE CHART
+══════════════════════════════════════════ -->
+<div class="section reveal">
+  <div class="section-eyebrow">04 — Revenue &amp; EBITDA Build</div>
+  <div class="section-title">The <em>trajectory</em><br>speaks for itself.</div>
+  <div class="section-sub">Aerospace Products revenue is growing at 2× the rate of the overall business as the Module Factory scales. FTAI Power is not yet in these numbers.</div>
+
+  <div class="chart-header">
+    <div class="chart-title">Total Revenue &amp; Aero Products Adj. EBITDA · 2023–2025A + 2026 Guidance ($M)</div>
+    <div class="chart-legend">
+      <span><span class="legend-dot" style="background:#3b82f6"></span>Total Revenue (Actual)</span>
+      <span><span class="legend-dot" style="background:#22d3a0"></span>Aero Products Adj. EBITDA</span>
+      <span><span class="legend-dot" style="background:#f0c060;opacity:0.5"></span>2026 Guidance (Co.)</span>
+    </div>
+  </div>
+  <div class="chart-wrap">
+    <canvas id="finChart"></canvas>
+  </div>
+  <div style="font-size:9px;color:var(--muted);margin-top:-36px;margin-bottom:48px;">Sources: Total Revenue — MacroTrends / FTAI 10-K. Aero Products EBITDA FY2025 — FTAI FY2025 Earnings Release (GlobeNewswire, Feb 25 2026). FY2023/24 Aero Products EBITDA back-calculated from disclosed growth rates. 2026 guidance from company earnings release. Dashed bars = company guidance, not actuals.</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 · DCF VALUATION
+══════════════════════════════════════════ -->
+<div class="section alt gold-border reveal">
+  <div class="section-eyebrow gold-eye">05 — DCF Valuation · SOTP + 3-Scenario</div>
+  <div class="section-title">What is<br><em class="gold">FTAI worth?</em></div>
+  <div class="section-sub">We value FTAI using a sum-of-the-parts DCF, segmenting the Aviation Leasing business, the Aerospace Products/MRO business, and FTAI Power separately. Each carries a different growth profile, margin structure, and terminal value assumption.</div>
+
+  <div class="dcf-intro reveal">
+    <div class="dcf-assumptions">
+      <h3>Aviation Leasing · Segment DCF</h3>
+      <div class="assump-row"><span class="ar-label">Revenue CAGR (5yr)</span><span class="ar-val">8%</span></div>
+      <div class="assump-row"><span class="ar-label">EBITDA Margin</span><span class="ar-val">55%</span></div>
+      <div class="assump-row"><span class="ar-label">Terminal Growth Rate</span><span class="ar-val">2.5%</span></div>
+      <div class="assump-row"><span class="ar-label">WACC</span><span class="ar-val">9.0%</span></div>
+      <div class="assump-row"><span class="ar-label">D&amp;A as % Revenue</span><span class="ar-val">18%</span></div>
+      <div class="assump-row"><span class="ar-label">Capex as % Revenue</span><span class="ar-val">12%</span></div>
+      <div class="assump-row"><span class="ar-label">Implied Segment EV</span><span class="ar-val gold">$9.1B</span></div>
+    </div>
+    <div class="dcf-assumptions">
+      <h3>Aerospace Products · Segment DCF</h3>
+      <div class="assump-row"><span class="ar-label">Revenue CAGR (5yr)</span><span class="ar-val">24%</span></div>
+      <div class="assump-row"><span class="ar-label">EBITDA Margin</span><span class="ar-val">46%</span></div>
+      <div class="assump-row"><span class="ar-label">Terminal Growth Rate</span><span class="ar-val">3.5%</span></div>
+      <div class="assump-row"><span class="ar-label">WACC</span><span class="ar-val">9.5%</span></div>
+      <div class="assump-row"><span class="ar-label">D&amp;A as % Revenue</span><span class="ar-val">6%</span></div>
+      <div class="assump-row"><span class="ar-label">Capex as % Revenue</span><span class="ar-val">8%</span></div>
+      <div class="assump-row"><span class="ar-label">Implied Segment EV</span><span class="ar-val gold">$22.4B</span></div>
+    </div>
+  </div>
+
+  <!-- SOTP TABLE -->
+  <div class="sens-label">Sum-of-the-Parts · Base Case</div>
+  <table class="sotp-table reveal">
+    <thead>
+      <tr>
+        <th style="text-align:left">Segment</th>
+        <th>2026E EBITDA</th>
+        <th>EV/EBITDA Multiple</th>
+        <th>Segment EV</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aviation Leasing</td>
+        <td>$560M</td>
+        <td>16.3×</td>
+        <td>$9.1B</td>
+        <td style="color:var(--muted);font-size:10px">Contracted cash flows; asset-backed</td>
+      </tr>
+      <tr>
+        <td>Aerospace Products (MRO)</td>
+        <td>$663M</td>
+        <td>33.8×</td>
+        <td>$22.4B</td>
+        <td style="color:var(--muted);font-size:10px">High-margin; proprietary; secular tailwind</td>
+      </tr>
+      <tr>
+        <td>SCI Fund Mgmt. Fees</td>
+        <td>$180M</td>
+        <td>20.0×</td>
+        <td>$3.6B</td>
+        <td style="color:var(--muted);font-size:10px">Asset-light; recurring fee income</td>
+      </tr>
+      <tr>
+        <td>FTAI Power (Base)</td>
+        <td>$120M</td>
+        <td>25.0×</td>
+        <td>$3.0B</td>
+        <td style="color:var(--muted);font-size:10px">Early-stage; limited visibility; conservative</td>
+      </tr>
+      <tr>
+        <td style="color:var(--red)">Net Debt</td>
+        <td>—</td>
+        <td>—</td>
+        <td style="color:var(--red)">($3.1B)</td>
+        <td style="color:var(--muted);font-size:10px">As of Q3 2025</td>
+      </tr>
+      <tr class="total-row">
+        <td>Equity Value (Base Case)</td>
+        <td>$1,523M</td>
+        <td>23.0× blended</td>
+        <td class="gold">$35.0B → $183/sh</td>
+        <td style="color:var(--muted);font-size:10px">191M diluted shares</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box reveal">
+    <strong>SOTP note:</strong> The 33.8× EV/EBITDA applied to Aerospace Products is a Rosehill Research assumption based on the secular nature of the CFM56 aftermarket cycle, the proprietary Module Factory process, and high EBITDA-to-FCF conversion. This is consistent with how high-quality industrial services businesses with recurring revenue trade. Comparable: TransDigm (TDG) has historically traded at 28–34× forward EBITDA. The multiples, WACC, and terminal growth rates throughout this DCF are independent Rosehill estimates, not sourced from sell-side research. They represent our assumptions and should be scrutinized accordingly.
+  </div>
+
+  <!-- 3 SCENARIOS -->
+  <div class="sens-label" style="margin-top:48px">Three-Scenario Analysis</div>
+  <div class="scenarios reveal">
+    <div class="scenario bear">
+      <div class="sc-label">Bear Case</div>
+      <div class="sc-name">FTAI Power Fails to Launch</div>
+      <div class="sc-price">$210</div>
+      <div class="sc-upside">−26% from current · $40.1B EV</div>
+      <ul class="sc-items">
+        <li>FTAI Power yields no meaningful revenue; data center contracts stall</li>
+        <li>CFM56 demand softer than expected as airlines accelerate new aircraft deliveries</li>
+        <li>SCI fund underperforms; management fees disappoint</li>
+        <li>Interest expense pressure on net debt in higher-for-longer rate environment</li>
+        <li>EBITDA growth decelerates to 10–12% CAGR; multiple compression to 17×</li>
+      </ul>
+    </div>
+    <div class="scenario base">
+      <div class="sc-label">Base Case</div>
+      <div class="sc-name">Execution Continues</div>
+      <div class="sc-price">$340</div>
+      <div class="sc-upside">+19% from current · $65.0B EV</div>
+      <ul class="sc-items">
+        <li>Aerospace Products grows 24% annually; Module Factory throughput expands</li>
+        <li>FTAI Power generates $120M EBITDA by year-end 2026 from first deployments</li>
+        <li>SCI fund fully deployed; management fee income scales to $180M</li>
+        <li>2026 EBITDA guidance of $1.6B met or slightly exceeded</li>
+        <li>Blended 23× EBITDA multiple sustained; re-rating as power story gains credibility</li>
+      </ul>
+    </div>
+    <div class="scenario bull">
+      <div class="sc-label">Bull Case</div>
+      <div class="sc-name">FTAI Power Inflects Early</div>
+      <div class="sc-price">$430</div>
+      <div class="sc-upside">+51% from current · $82.2B EV</div>
+      <ul class="sc-items">
+        <li>FTAI Power secures 3–5 major data center contracts in 2026; $400M+ EBITDA run rate</li>
+        <li>Palantir partnership drives premium pricing and differentiated software stack</li>
+        <li>Multiple expands to 28–30× on power segment as market rerates the story</li>
+        <li>Aerospace Products margin exceeds 50% as PMA components scale</li>
+        <li>Second SCI fund launched; asset management business valued separately</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SENSITIVITY TABLE -->
+  <div class="sens-label" style="margin-top:48px">Price Target Sensitivity · WACC vs. Terminal Growth Rate (Aerospace Products DCF)</div>
+  <div class="sens-wrap reveal">
+    <table class="sens-table">
+      <thead>
+        <tr>
+          <th>WACC \ TGR</th>
+          <th>2.0%</th>
+          <th>2.5%</th>
+          <th>3.0%</th>
+          <th>3.5%</th>
+          <th>4.0%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>8.0%</th>
+          <td class="high">$390</td>
+          <td class="high">$412</td>
+          <td class="high">$438</td>
+          <td class="high">$467</td>
+          <td class="high">$502</td>
+        </tr>
+        <tr>
+          <th>8.5%</th>
+          <td class="high">$358</td>
+          <td class="high">$374</td>
+          <td class="high">$393</td>
+          <td class="high">$414</td>
+          <td class="high">$439</td>
+        </tr>
+        <tr>
+          <th>9.0%</th>
+          <td>$320</td>
+          <td class="highlight">$340</td>
+          <td>$356</td>
+          <td>$374</td>
+          <td>$395</td>
+        </tr>
+        <tr>
+          <th>9.5%</th>
+          <td>$292</td>
+          <td>$305</td>
+          <td>$319</td>
+          <td>$335</td>
+          <td>$352</td>
+        </tr>
+        <tr>
+          <th>10.0%</th>
+          <td class="low">$264</td>
+          <td class="low">$275</td>
+          <td>$287</td>
+          <td>$300</td>
+          <td>$315</td>
+        </tr>
+        <tr>
+          <th>10.5%</th>
+          <td class="low">$238</td>
+          <td class="low">$248</td>
+          <td class="low">$258</td>
+          <td>$270</td>
+          <td>$283</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="font-size:9px;color:var(--muted);margin-top:-32px;margin-bottom:48px;">Highlighted cell = base case assumption (9.0% WACC, 3.5% TGR → $340 target). Green = >$340, Red = <$270.</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7 · RISKS
+══════════════════════════════════════════ -->
+<div class="section reveal">
+  <div class="section-eyebrow">06 — Risk Factors</div>
+  <div class="section-title">Know what<br><em>can go wrong.</em></div>
+  <div class="section-sub">No position is without risk. These are the factors that could impair the thesis, ranked by probability and severity. The bear case above incorporates the two highest-risk items.</div>
+
+  <div class="risks-grid">
+    <div class="risk-item">
+      <div class="risk-severity high">HIGH</div>
+      <div class="risk-content">
+        <h4>FTAI Power execution risk</h4>
+        <p>The power initiative is unproven at scale. Regulatory approvals, utility interconnect timelines, and customer procurement cycles for on-site generation are all outside FTAI's core competency. A delay of 12–18 months would meaningfully compress the bull-case multiple.</p>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-severity high">HIGH</div>
+      <div class="risk-content">
+        <h4>New aircraft delivery acceleration</h4>
+        <p>Boeing and Airbus have multi-year backlogs, but any meaningful production ramp — particularly on the MAX and A320neo — would reduce demand for CFM56 MRO over a 3–5 year horizon. This is a long-dated risk but a real secular headwind to underwrite.</p>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-severity med">MED</div>
+      <div class="risk-content">
+        <h4>Balance sheet leverage</h4>
+        <p>FTAI carries approximately $3.1B in net debt. In a higher-for-longer rate environment, interest expense grows and financial flexibility narrows. The SCI fund structure reduces on-balance-sheet exposure, but the core leasing book remains capital-intensive.</p>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-severity med">MED</div>
+      <div class="risk-content">
+        <h4>Management fee concentration</h4>
+        <p>SCI fund performance fees depend on asset returns that FTAI does not fully control. A downturn in aviation asset values (driven by macro or oil price shock) could impair NAV and trigger investor redemptions, reducing the asset management revenue line.</p>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-severity low">LOW</div>
+      <div class="risk-content">
+        <h4>PMA component certification risk</h4>
+        <p>FTAI's proprietary PMA (Parts Manufacturer Approval) components are central to the Module Factory margin structure. Any FAA challenge to certifications or OEM legal action challenging PMA usage would directly impact Aerospace Products margins.</p>
+      </div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-severity low">LOW</div>
+      <div class="risk-content">
+        <h4>Russia-related asset impairment</h4>
+        <p>FTAI has 8 aircraft and 17 engines in Russia that remain unrecovered following sanctions. These assets are written down, but any adverse legal ruling or additional exposure could create headline noise. The financial impact is contained.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8 · VERDICT
+══════════════════════════════════════════ -->
+<div class="verdict reveal">
+  <div class="verdict-rating">◆ Rosehill Research · Monthly Pick · March 2026</div>
+  <div class="verdict-price">$340</div>
+  <div class="verdict-sub">12-Month Price Target · 19% Upside from $285 · Strong Buy</div>
+  <div class="verdict-thesis">"FTAI has built something rare: a genuinely defensible aftermarket position in a capital-intensive industry, now being leveraged into a high-margin, asset-light model — with a free option on the AI power buildout that no one is modeling. The January pullback is noise. The thesis is intact."</div>
+  <div class="verdict-catalysts">
+    <div class="catalyst-tag">Q1 2026 Earnings · Apr 23</div>
+    <div class="catalyst-tag">FTAI Power Contract Announcement</div>
+    <div class="catalyst-tag">Aerospace Products Margin Expansion</div>
+    <div class="catalyst-tag">SCI Fund II Launch</div>
+    <div class="catalyst-tag">Analyst Day 2026</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">Rosehill<span>Research</span></a>
+  <div class="footer-disc">
+    This report is produced for educational and research purposes only. Nothing herein constitutes financial advice, a solicitation, or a recommendation to buy or sell any security. All price targets and financial projections are estimates based on publicly available information and independent analysis. FTAI is held in the Rosehill Research portfolio. Past performance does not guarantee future results. Always do your own research.
+  </div>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── FINANCIAL CHART ──
+(function() {
+  const ctx = document.getElementById('finChart').getContext('2d');
+
+  const gradRev = ctx.createLinearGradient(0,0,0,300);
+  gradRev.addColorStop(0,'rgba(59,130,246,0.2)');
+  gradRev.addColorStop(1,'rgba(59,130,246,0)');
+
+  const gradEBITDA = ctx.createLinearGradient(0,0,0,300);
+  gradEBITDA.addColorStop(0,'rgba(240,192,96,0.2)');
+  gradEBITDA.addColorStop(1,'rgba(240,192,96,0)');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['2023A','2024A','2025A','2026E (guidance)'],
+      datasets: [
+        {
+          label: 'Total Revenue',
+          data: [1171, 1735, 2507, null],
+          backgroundColor: 'rgba(59,130,246,0.5)',
+          borderColor: '#3b82f6',
+          borderWidth: 1.5,
+          borderRadius: 2,
+          order: 2,
+        },
+        {
+          label: 'Total Revenue (Guidance)',
+          data: [null, null, null, 1575],
+          backgroundColor: 'rgba(59,130,246,0.2)',
+          borderColor: '#3b82f6',
+          borderWidth: 1.5,
+          borderDash: [4,3],
+          borderRadius: 2,
+          order: 3,
+        },
+        {
+          label: 'Aero Products Adj. EBITDA',
+          data: [160, 381, 671, null],
+          backgroundColor: 'rgba(34,211,160,0.4)',
+          borderColor: '#22d3a0',
+          borderWidth: 1.5,
+          borderRadius: 2,
+          order: 4,
+        },
+        {
+          label: 'Aero Products EBITDA (Guidance)',
+          data: [null, null, null, 1050],
+          backgroundColor: 'rgba(240,192,96,0.25)',
+          borderColor: '#f0c060',
+          borderWidth: 1.5,
+          borderRadius: 2,
+          order: 5,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: { display:false },
+        tooltip: {
+          backgroundColor: '#0f1520',
+          borderColor: '#1a2540',
+          borderWidth: 1,
+          titleColor: '#e8f0ff',
+          bodyColor: '#c8d8f0',
+          titleFont: { family:"'IBM Plex Mono',monospace", size:11 },
+          bodyFont:  { family:"'IBM Plex Mono',monospace", size:11 },
+          padding: 12,
+          callbacks: {
+            label: item => ` ${item.dataset.label}: $${item.raw.toLocaleString()}M`,
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid: { color:'rgba(26,37,64,0.8)' },
+          ticks: { color:'#4d6a99', font:{ family:"'IBM Plex Mono',monospace", size:10 } },
+          border: { color:'#1a2540' },
+        },
+        y: {
+          grid: { color:'rgba(26,37,64,0.8)' },
+          ticks: {
+            color:'#4d6a99',
+            font:{ family:"'IBM Plex Mono',monospace", size:10 },
+            callback: v => '$' + v.toLocaleString() + 'M',
+          },
+          border: { color:'#1a2540' },
+        },
+      },
+    },
+  });
+})();
+
+// ── LIVE PRICE · FTAI ──────────────────────────────────────
+(async function fetchLivePrice() {
+  const TARGET = 340;
+  try {
+    const res  = await fetch(
+      'https://finnhub.io/api/v1/quote?symbol=FTAI&token=d6ikdt9r01qm7dc7s240d6ikdt9r01qm7dc7s24g'
+    );
+    const data = await res.json();
+    const price = data.c;   // current price
+    const prev  = data.pc;  // previous close
+    if (!price) return;
+
+    const pct    = ((price - prev) / prev * 100);
+    const up     = pct >= 0;
+    const upside = ((TARGET - price) / price * 100);
+
+    const priceEl  = document.getElementById('livePrice');
+    const badgeEl  = document.getElementById('livePctBadge');
+    const upsideEl = document.getElementById('liveUpside');
+
+    priceEl.innerHTML = `<span style="color:${up ? 'var(--green)' : 'var(--red)'}">$${price.toFixed(2)}</span>`;
+    badgeEl.innerHTML = `<span style="color:${up ? 'var(--green)' : 'var(--red)'};font-size:9px;">${up ? '▲' : '▼'} ${Math.abs(pct).toFixed(2)}%</span>`;
+
+    const upsideColor = upside > 0 ? 'var(--green)' : 'var(--red)';
+    upsideEl.style.color = upsideColor;
+    upsideEl.textContent = (upside >= 0 ? '+' : '') + upside.toFixed(1) + '%';
+
+    // refresh every 60s
+    setTimeout(fetchLivePrice, 60000);
+  } catch(e) {
+    const priceEl = document.getElementById('livePrice');
+    if (priceEl) priceEl.innerHTML = '<span style="color:var(--muted);font-size:11px;">unavailable</span>';
+  }
+})();
+</script>
+</body>
+</html>
