@@ -21,37 +21,14 @@
     --red: #f05a5a;
     --white: #e8f0ff;
     --gold: #f0c060;
+    --gold-dim: rgba(240,192,96,0.12);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: 'IBM Plex Mono', monospace; min-height: 100vh; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.35; }
 
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'IBM Plex Mono', monospace;
-    min-height: 100vh;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.35;
-  }
-
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(6,8,16,0.96);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 60px;
-  }
+  nav { position: sticky; top: 0; z-index: 200; background: rgba(6,8,16,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
   .nav-logo span { color: var(--blue-bright); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
@@ -60,7 +37,6 @@
   .nav-badge { background: var(--blue); color: #fff; padding: 6px 16px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
 
   .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 64px 48px 96px; }
-
   .page-header { margin-bottom: 48px; }
   .page-eyebrow { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
   .page-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-bright); }
@@ -68,103 +44,25 @@
   .page-title em { font-style: italic; color: var(--blue-bright); }
   .page-sub { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 500px; }
 
-  /* CONTENT + SIDEBAR LAYOUT */
-  .content-layout {
-    display: grid;
-    grid-template-columns: 1fr 220px;
-    gap: 48px;
-    align-items: start;
-  }
-
+  .content-layout { display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: start; }
   .report-column { min-width: 0; }
 
-  /* SIDEBAR */
-  .research-sidebar {
-    position: sticky;
-    top: 80px;
-  }
-
-  .sidebar-pinned {
-    border: 1px solid rgba(240,192,96,0.2);
-    background: var(--deep);
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  .sidebar-pinned-header {
-    padding: 14px 16px 12px;
-    border-bottom: 1px solid rgba(240,192,96,0.15);
-    cursor: pointer;
-    transition: background 0.15s;
-  }
+  .research-sidebar { position: sticky; top: 80px; }
+  .sidebar-pinned { border: 1px solid rgba(240,192,96,0.2); background: var(--deep); overflow: hidden; margin-bottom: 20px; }
+  .sidebar-pinned-header { padding: 14px 16px 12px; border-bottom: 1px solid rgba(240,192,96,0.15); cursor: pointer; transition: background 0.15s; }
   .sidebar-pinned-header:hover { background: rgba(240,192,96,0.04); }
-
-  .sidebar-pinned-eyebrow {
-    font-size: 8px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 6px;
-  }
+  .sidebar-pinned-eyebrow { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 6px; }
   .sidebar-pinned-eyebrow::before { content: '📌 '; }
-
-  .sidebar-pinned-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    transition: color 0.2s;
-  }
+  .sidebar-pinned-title { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--white); line-height: 1.3; letter-spacing: -0.01em; transition: color 0.2s; }
   .sidebar-pinned-header:hover .sidebar-pinned-title { color: var(--gold); }
-
-  .sidebar-pinned-date {
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    margin-top: 5px;
-  }
-
-  .sidebar-meth {
-    padding: 14px 16px;
-  }
-
-  .sidebar-meth-label {
-    font-size: 8px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sidebar-meth-item {
-    margin-bottom: 14px;
-  }
+  .sidebar-pinned-date { font-size: 9px; letter-spacing: 0.08em; color: var(--muted); margin-top: 5px; }
+  .sidebar-meth { padding: 14px 16px; }
+  .sidebar-meth-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .sidebar-meth-item { margin-bottom: 14px; }
   .sidebar-meth-item:last-child { margin-bottom: 0; }
-
-  .sidebar-meth-title {
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .sidebar-meth-desc {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 10px;
-    line-height: 1.6;
-    color: var(--muted);
-  }
-
-  .sidebar-meth-desc em {
-    color: var(--gold);
-    font-style: normal;
-  }
+  .sidebar-meth-title { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 4px; }
+  .sidebar-meth-desc { font-family: 'Libre Baskerville', serif; font-size: 10px; line-height: 1.6; color: var(--muted); }
+  .sidebar-meth-desc em { color: var(--gold); font-style: normal; }
 
   .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 52px; }
   .tab { padding: 12px 28px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; user-select: none; }
@@ -175,117 +73,48 @@
   .week-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; display: flex; align-items: center; gap: 16px; }
   .week-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .report-row {
-    display: grid;
-    grid-template-columns: 64px 1fr 20px;
-    gap: 24px;
-    align-items: start;
-    padding: 18px 12px;
-    margin: 0 -12px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
+  .report-row { display: grid; grid-template-columns: 64px 1fr 20px; gap: 24px; align-items: start; padding: 18px 12px; margin: 0 -12px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.15s; }
   .report-row:last-child { border-bottom: none; }
   .report-row:hover { background: rgba(37,99,235,0.05); }
-
   .report-date { padding-top: 2px; }
   .report-date .day { font-size: 24px; font-weight: 300; color: var(--text); display: block; letter-spacing: -0.03em; line-height: 1; }
   .report-date .mon { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-
   .report-tag { display: inline-block; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; padding: 2px 7px; border: 1px solid; margin-bottom: 7px; }
   .report-tag.weekly { color: var(--blue-bright); border-color: var(--blue-dim); }
   .report-tag.special { color: var(--blue-bright); border-color: var(--blue-dim); }
   .report-tag.monthly-pick { color: var(--gold); border-color: rgba(240,192,96,0.4); }
+  .report-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 5px; transition: color 0.2s; }
+  .report-row:hover .report-title { color: var(--blue-bright); }
+  .report-excerpt { font-family: 'Libre Baskerville', serif; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  .report-arrow { color: var(--border); padding-top: 3px; font-size: 14px; transition: color 0.2s, transform 0.2s; }
+  .report-row:hover .report-arrow { color: var(--blue-bright); transform: translateX(3px); }
 
-  /* FEATURED CARD for Monthly Pick */
-  .report-featured {
-    background: var(--deep);
-    border: 1px solid rgba(240,192,96,0.25);
-    padding: 24px 28px;
-    margin: 0 -12px 2px;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.15s;
-  }
+  /* Featured Monthly Pick card */
+  .report-featured { background: var(--deep); border: 1px solid rgba(240,192,96,0.25); padding: 24px 28px; margin: 0 -12px 2px; cursor: pointer; transition: border-color 0.2s, background 0.15s; }
   .report-featured:hover { border-color: rgba(240,192,96,0.55); background: rgba(240,192,96,0.03); }
-
-  .featured-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 14px;
-  }
-
-  .featured-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
+  .featured-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .featured-date-block { text-align: center; min-width: 40px; }
   .featured-date-block .day { font-size: 28px; font-weight: 300; color: var(--gold); display: block; letter-spacing: -0.03em; line-height: 1; }
   .featured-date-block .mon { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-
   .featured-divider { width: 1px; height: 40px; background: rgba(240,192,96,0.2); }
-
-  .featured-label-block { }
   .featured-eyebrow { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; opacity: 0.8; }
   .featured-ticker { font-size: 22px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; line-height: 1; }
-
-  .featured-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    margin-bottom: 8px;
-    transition: color 0.2s;
-  }
+  .featured-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 8px; transition: color 0.2s; }
   .report-featured:hover .featured-title { color: var(--gold); }
-
-  .featured-excerpt {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 12px;
-    line-height: 1.65;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-
-  .featured-stats {
-    display: flex;
-    gap: 1px;
-    background: var(--border);
-  }
-
-  .featured-stat {
-    background: var(--surface);
-    padding: 10px 14px;
-    flex: 1;
-  }
+  .featured-excerpt { font-family: 'Libre Baskerville', serif; font-size: 12px; line-height: 1.65; color: var(--muted); margin-bottom: 16px; }
+  .featured-stats { display: flex; gap: 1px; background: var(--border); }
+  .featured-stat { background: var(--surface); padding: 10px 14px; flex: 1; }
   .featured-stat .fs-val { font-size: 14px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 2px; }
   .featured-stat .fs-val.up { color: var(--green); }
   .featured-stat .fs-val.dn { color: var(--red); }
   .featured-stat .fs-val.gold { color: var(--gold); }
   .featured-stat .fs-lbl { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
-  .featured-arrow { color: rgba(240,192,96,0.3); font-size: 16px; padding-top: 2px; transition: color 0.2s, transform 0.2s; flex-shrink: 0; }
-  .report-featured:hover .featured-arrow { color: var(--gold); transform: translateX(3px); }
-
-  .report-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 5px; transition: color 0.2s; }
-  .report-row:hover .report-title { color: var(--blue-bright); }
-  .report-excerpt { font-family: 'Libre Baskerville', serif; font-size: 12px; line-height: 1.6; color: var(--muted); }
-
-  .report-arrow { color: var(--border); padding-top: 3px; font-size: 14px; transition: color 0.2s, transform 0.2s; }
-  .report-row:hover .report-arrow { color: var(--blue-bright); transform: translateX(3px); }
-
   .empty-state { text-align: center; padding: 64px 0; color: var(--muted); font-size: 11px; letter-spacing: 0.1em; display: none; }
   .empty-state.visible { display: block; }
 
-  /* MODAL */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(6,8,16,0.94); backdrop-filter: blur(10px); z-index: 1000; display: none; overflow-y: auto; padding: 48px 24px; }
+  /* Modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(6,8,16,0.94); backdrop-filter: blur(10px); z-index: 500; display: none; overflow-y: auto; padding: 48px 24px; }
   .modal-overlay.open { display: flex; justify-content: center; align-items: flex-start; }
   .modal { background: var(--deep); border: 1px solid var(--border); max-width: 700px; width: 100%; padding: 52px; position: relative; animation: modalIn 0.2s ease; }
   @keyframes modalIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -299,6 +128,7 @@
   .modal-data-item .val { font-size: 18px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 3px; }
   .modal-data-item .val.up { color: var(--green); }
   .modal-data-item .val.dn { color: var(--red); }
+  .modal-data-item .val.gold { color: var(--gold); }
   .modal-data-item .lbl { font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
   .modal-body { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.8; color: var(--text); }
   .modal-body h3 { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-bright); margin: 24px 0 10px; padding-top: 20px; border-top: 1px solid var(--border); }
@@ -307,6 +137,20 @@
   .modal-body em { font-style: italic; color: var(--gold); }
   .modal-source { font-size: 10px; color: var(--muted); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); line-height: 1.7; }
   .modal-disclaimer { margin-top: 16px; padding: 12px 14px; background: var(--surface); border-left: 2px solid var(--blue-dim); font-size: 10px; color: var(--muted); line-height: 1.6; }
+
+  /* Full report button   only shown for monthly picks */
+  .modal-full-report-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 28px; padding: 16px 20px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(240,192,96,0.35);
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+  .modal-full-report-btn:hover { background: rgba(240,192,96,0.18); border-color: rgba(240,192,96,0.6); }
+  .modal-full-report-btn .btn-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+  .modal-full-report-btn .btn-arrow { color: var(--gold); font-size: 14px; transition: transform 0.2s; }
+  .modal-full-report-btn:hover .btn-arrow { transform: translateX(4px); }
 
   footer { background: var(--deep); border-top: 1px solid var(--border); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
   footer .logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--white); text-decoration: none; }
@@ -342,12 +186,10 @@
   <div class="page-header">
     <div class="page-eyebrow">Research Archive · Rosehill Research</div>
     <h1 class="page-title">Weekly <em>Reports</em></h1>
-    <p class="page-sub">Market analysis published every week. Real data, cited sources. Not financial advice — this is a finance student research project.</p>
+    <p class="page-sub">Market analysis published every week. Real data, cited sources. Not financial advice   this is a finance student research project.</p>
   </div>
 
   <div class="content-layout">
-
-    <!-- MAIN REPORT COLUMN -->
     <div class="report-column">
       <div class="tabs">
         <div class="tab active" onclick="filterReports('all', this)">All Reports</div>
@@ -358,7 +200,6 @@
       <div class="empty-state" id="emptyState">No reports in this category yet.</div>
     </div>
 
-    <!-- STICKY SIDEBAR -->
     <div class="research-sidebar">
       <div class="sidebar-pinned">
         <div class="sidebar-pinned-header" onclick="openReport('r1')">
@@ -378,12 +219,11 @@
           </div>
           <div class="sidebar-meth-item">
             <div class="sidebar-meth-title">Heatseeker</div>
-            <div class="sidebar-meth-desc">Maps dealer gamma exposure at every strike. On Jan 9, Hedge Nodes sat well below price. The selloff moved straight into negative gamma territory — sharp, fast, exactly what the map showed. Sold at <em>+306%</em> before the reversal.</div>
+            <div class="sidebar-meth-desc">Maps dealer gamma exposure at every strike. On Jan 9, Hedge Nodes sat well below price. The selloff moved straight into negative gamma territory   sharp, fast, exactly what the map showed. Sold at <em>+306%</em> before the reversal.</div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -401,36 +241,36 @@
 
 <script>
 const reports = [
+
+  // ── MONTHLY PICKS ─────────────────────────────────────────
   {
-    id:'ftai-mar26', type:'monthly-pick', week:'Week 9', date:'Mar 2, 2026', day:'02', month:'Mar',
+    id:'ftai-mar26',
+    type:'monthly-pick',
+    week:'Week 9',
+    date:'Mar 2, 2026',
+    day:'02',
+    month:'Mar',
     ticker:'FTAI',
     title:'FTAI Aviation: The MRO Moat, the Asset-Light Pivot, and the Power Optionality No One Is Modeling',
     excerpt:'A full SOTP + 3-scenario DCF on FTAI Aviation. Two high-margin segments, a nascent power turbine business targeting AI data centers, and a Q4 earnings miss that created the entry point. Base case: $340.',
     keyData:[
-      {val:'Strong Buy', cls:'up', label:'Rosehill Rating'},
+      {val:'Strong Buy', cls:'up',   label:'Rosehill Rating'},
       {val:'$340',       cls:'gold', label:'Base Case Target'},
-      {val:'+76%',       cls:'up', label:"FY25 Aero EBITDA Growth"}
+      {val:'+76%',       cls:'up',   label:'FY25 Aero EBITDA Growth'}
     ],
-    link:'ftai-pitch.html'
+    pitchFile:'ftai-pitch.html',
+    summary:`
+      <p>FTAI Aviation is the dominant independent platform for CFM56 engine maintenance   the most widely operated narrowbody jet engine in the world with over 12,000 still in service. Through its proprietary <strong>Module Factory</strong> process, FTAI repairs and sells individual engine modules at 30to40% cost savings versus OEM, a structural advantage with a 10to15 year runway as airlines extend ageing fleets.</p>
+      <h3>Why Now</h3>
+      <p>Q4 2025 revenue of $662M missed the $702M analyst consensus, and EPS of $1.08 missed estimates of $1.25. The stock sold off roughly 7%. The underlying business was unaffected: FY2025 Aerospace Products Adj. EBITDA grew <strong>76% to $671.3M</strong>, net income turned to a $477.5M profit after a loss year in FY2024, and management raised 2026 Adj. EBITDA guidance to <strong>$1.525to1.625B</strong>. This is a timing miss, not a thesis break.</p>
+      <h3>Three Pillars</h3>
+      <p><strong>1. The MRO Moat.</strong> The CFM56 aftermarket cycle is structural   airlines cannot simply swap engines as Boeing and Airbus backlogs stretch years out. FTAI captures this with proprietary PMA components and Module Factory throughput. <strong>2. Asset-Light Flywheel.</strong> The $2B SCI I fund converts balance-sheet assets into fee-generating managed capital, improving ROE. SCI II fundraising has now launched. <strong>3. FTAI Power.</strong> Converting surplus CFM56s into aeroderivative power turbines for AI data centers. The first product (Mod-1) targets Q4 2026 delivery and carries <em>zero revenue in current guidance</em>   pure optionality.</p>
+      <h3>Valuation Summary</h3>
+      <p>Using a sum-of-the-parts DCF across three segments plus a 3-scenario analysis: <strong>Bear $210</strong> (FTAI Power fails, CFM56 demand softens), <strong>Base $340</strong> (execution continues, Power adds modest early revenue), <strong>Bull $430</strong> (Power inflects early, multiple expands). Base case implies approximately 20% upside from current levels using a 9.0% WACC and 3.5% terminal growth on the Aerospace Products segment.</p>`,
+    sources:'FTAI Aviation FY2025 Earnings Release, GlobeNewswire, Feb 25 2026. FTAI 2025 10-K via TradingView. MacroTrends revenue data. SignalBloom earnings analysis. All forward estimates and DCF assumptions are independent Rosehill Research analysis   not financial advice.'
   },
-  {
-    id:'mp1', type:'monthly-pick', week:'March 2026', date:'Mar 2, 2026', day:'02', month:'Mar',
-    ticker: '———',
-    title:'Monthly Pick: Coming Soon',
-    excerpt:'The first equity deep dive is in progress. This will be a full research note covering business model, competitive positioning, valuation, and a base/bull/bear DCF. Check back soon.',
-    keyData:[
-      {val:'TBD',cls:'',label:'Target Price'},
-      {val:'TBD',cls:'',label:'Upside / Downside'},
-      {val:'TBD',cls:'',label:'Rating'}
-    ],
-    body:`
-      <p>The first Monthly Pick is being prepared. Each Monthly Pick will follow a full equity research format:</p>
-      <h3>What to Expect</h3>
-      <p>Business overview and competitive positioning. Revenue model breakdown. Historical financials and margin analysis. Valuation: comparable companies, EV/EBITDA, P/E, and a three-scenario DCF (bear, base, bull). Key risks and thesis invalidation triggers. A final rating and price target.</p>
-      <h3>The Goal</h3>
-      <p>This is the most serious research on the site. Weekly Wraps cover the macro. Monthly Picks go deep on a single name, the way a junior analyst at a fund or bank would be expected to. That's the standard we're holding ourselves to.</p>`,
-    sources:'First Monthly Pick forthcoming. Check back soon.'
-  },
+
+  // ── WEEKLY WRAPS ──────────────────────────────────────────
   {
     id:'r9', type:'weekly', week:'Week 9', date:'Feb 28, 2026', day:'28', month:'Feb',
     title:'February Closes Red: AI Spending Concerns and Late-Month Inflation Data Weigh',
@@ -441,7 +281,7 @@ const reports = [
       <h3>AI Capex Skepticism</h3>
       <p>The narrative dominating February was straightforward: hyperscalers are committing hundreds of billions to AI infrastructure, but where are the revenues? Microsoft, Amazon, and Alphabet all guided for continued heavy capex through 2026. Investors are increasingly scrutinizing whether this spending will generate proportionate returns. Semiconductor names and AI infrastructure plays bore the brunt of the pressure.</p>
       <h3>Macro Backdrop</h3>
-      <p>Despite the monthly decline, January's <strong>+1.4%</strong> gain means the January Barometer remains positive for 2026. Per Stock Trader's Almanac, a positive January has preceded a full-year advance in 41 of 46 historical instances, with an average return of approximately 17% in those years. The broader environment remains mixed: inflation cooling, Fed on hold, tariff risk elevated, earnings growth still healthy.</p>
+      <p>Despite the monthly decline, January's <strong>+1.4%</strong> gain means the January Barometer remains positive for 2026. Per Stock Trader's Almanac, a positive January has preceded a full-year advance in 41 of 46 historical instances, with an average return of approximately 17% in those years.</p>
       <h3>What to Watch in March</h3>
       <p>Key events: next CPI release, FOMC minutes, continuation of Q4 earnings. February weakness in technology has brought valuations closer to reasonable levels in some names. Defensive sectors including healthcare, utilities, and consumer staples outperformed in February and may continue attracting rotation if macro uncertainty persists.</p>`,
     sources:"Fidelity Markets. CNBC, \"Dow closes 500+ points lower.\" Motley Fool, January Barometer analysis. Stock Trader's Almanac data."
@@ -456,24 +296,24 @@ const reports = [
       <h3>What Drove the Decline?</h3>
       <p>Shelter costs rose just <strong>0.2% month-over-month</strong>, bringing the annual rate to 3.0%. Energy fell 1.5%. Used car prices fell 1.8%. Egg prices dropped 7%, now down 34% year-over-year. Airline fares bucked the trend, jumping 6.5%.</p>
       <h3>Fed Implications</h3>
-      <p>The Fed held at <strong>3.50–3.75%</strong> on January 28. With this print, markets are pricing <strong>two 25bps cuts in 2026</strong>, most likely beginning in June. The 10Y UST yield sat at approximately 4.38% following the release.</p>
+      <p>The Fed held at <strong>3.50to3.75%</strong> on January 28. With this print, markets are pricing <strong>two 25bps cuts in 2026</strong>, most likely beginning in June. The 10Y UST yield sat at approximately 4.38% following the release.</p>
       <h3>Sector Implications</h3>
-      <p>A falling rate environment historically supports growth-oriented sectors. Technology benefits from a lower discount rate on future earnings. Consumer discretionary and real estate also tend to benefit. The key risk remains tariff-driven goods inflation resurgence. The Fed's Beige Book flagged early signs of tariff pass-through in several districts.</p>`,
+      <p>A falling rate environment historically supports growth-oriented sectors. Technology benefits from a lower discount rate on future earnings. The key risk remains tariff-driven goods inflation resurgence. The Fed's Beige Book flagged early signs of tariff pass-through in several districts.</p>`,
     sources:"Bureau of Labor Statistics CPI Release, Feb 13 2026. CNBC, \"CPI inflation report January 2026.\" JPMorgan Wealth Management, \"Fed Leaves Rates Unchanged to Start 2026.\" U.S. Bank, \"Federal Reserve Calibrates Interest Rate Policy.\""
   },
   {
     id:'r7', type:'weekly', week:'Week 5', date:'Feb 2, 2026', day:'02', month:'Feb',
-    title:"Fed Holds at 3.50–3.75%: Two Dissenters, Tariff Risk, and the Powell Succession",
+    title:"Fed Holds at 3.50to3.75%: Two Dissenters, Tariff Risk, and the Powell Succession",
     excerpt:"The FOMC paused its cutting cycle at the January 28 meeting. Two members dissented in favor of a cut. Powell's term expires in May and succession uncertainty is growing.",
     keyData:[{val:'3.50%',cls:'',label:'Fed Floor'},{val:'3.75%',cls:'',label:'Fed Ceiling'},{val:'4.4%',cls:'',label:'Unemployment'}],
     body:`
-      <p>The FOMC voted on January 28 to hold the federal funds rate at <strong>3.50–3.75%</strong>, pausing a cutting cycle that delivered three consecutive 25bps reductions in late 2025. Two dissenting votes, both preferring a cut, signaled active internal debate.</p>
+      <p>The FOMC voted on January 28 to hold the federal funds rate at <strong>3.50to3.75%</strong>, pausing a cutting cycle that delivered three consecutive 25bps reductions in late 2025. Two dissenting votes, both preferring a cut, signaled active internal debate.</p>
       <h3>Context</h3>
       <p>The Fed cut rates by a cumulative <strong>175 basis points</strong> between September 2024 and December 2025. At the January meeting, Powell noted economic activity had been expanding at a solid pace and that the balance of risks to the dual mandate was improving.</p>
       <h3>Key Risks: Tariffs and the Chair Transition</h3>
-      <p>Two wildcards dominate: First, tariffs. The Fed's Beige Book noted cost pressures beginning to pass through to consumers. Second, Powell's term expires in <strong>May 2026</strong>. His successor is widely expected to be Kevin Warsh. Markets are pricing two cuts for the full year, with June the earliest probable date.</p>
+      <p>Two wildcards dominate: First, tariffs. The Fed's Beige Book noted cost pressures beginning to pass through to consumers. Second, Powell's term expires in <strong>May 2026</strong>. Markets are pricing two cuts for the full year, with June the earliest probable date.</p>
       <h3>Market Implications</h3>
-      <p>A Fed on hold is a benign but not stimulative backdrop. The 10Y Treasury yield remains the key variable. A meaningful move higher would pressure high-multiple growth valuations. The current environment broadly supports a constructive stance on equities, with selectivity around rate-sensitive sectors.</p>`,
+      <p>A Fed on hold is a benign but not stimulative backdrop. The 10Y Treasury yield remains the key variable. A meaningful move higher would pressure high-multiple growth valuations.</p>`,
     sources:"Federal Reserve FOMC Statement, January 28, 2026. CNBC, \"Fed rate decision January 2026.\" Advisor Perspectives, \"Fed's Interest Rate Decision.\" iShares / BlackRock, \"Fed Outlook 2026.\""
   },
   {
@@ -486,7 +326,7 @@ const reports = [
       <h3>Early Earnings Scorecard</h3>
       <p>Full-year 2026 EPS growth is projected at <strong>14.7%</strong> per FactSet, but the beat rate is running below recent averages. Both the rate of positive surprises and their magnitude are softer than the 5-year averages of 78% beats and 7.7% upside. Management guidance will be critical as the season progresses.</p>
       <h3>Valuation</h3>
-      <p>The forward 12-month P/E for the S&P 500 stood at <strong>22.1x</strong>, above the 5-year average of 20.0x and the 10-year average of 18.8x. This premium is defensible in a soft-landing scenario with strong earnings growth, but leaves limited room for disappointment. Sectors at discounts to their historical averages including energy, financials, and healthcare are worth monitoring for relative value.</p>
+      <p>The forward 12-month P/E for the S&P 500 stood at <strong>22.1x</strong>, above the 5-year average of 20.0x and the 10-year average of 18.8x. Sectors at discounts to their historical averages including energy, financials, and healthcare are worth monitoring for relative value.</p>
       <h3>January Barometer</h3>
       <p>With the S&P up approximately 1.4% for January, the January Barometer is positive. A positive January has historically preceded a positive full year in 41 of 46 instances per Stock Trader's Almanac. Worth noting, not predicting.</p>`,
     sources:"FactSet Earnings Insight, January 23 2026. CNBC, \"January Barometer.\" Stock Trader's Almanac via CNBC Pro."
@@ -497,11 +337,11 @@ const reports = [
     excerpt:'A week of Fed speeches and inflation data ahead of the January 28 FOMC meeting. Hyperscaler capex guidance reignites the debate about AI infrastructure spend sustainability.',
     keyData:[{val:'2.7%',cls:'',label:"CPI Dec '25 YoY"},{val:'4.38%',cls:'',label:'10Y Yield'},{val:'4.4%',cls:'',label:'Unemployment'}],
     body:`
-      <p>The second week of January brought a string of Federal Reserve official speeches ahead of the January 28 FOMC meeting. Fed Vice Chair Jefferson, speaking on January 16, noted that CPI rose <strong>2.7% year-over-year</strong> in December, unchanged from November, with core CPI also holding at 2.6%. He flagged core goods inflation, running at 1.4% YoY, as the main remaining obstacle to reaching the 2% target. Markets broadly expect the Fed to hold at the January 28 meeting.</p>
+      <p>The second week of January brought a string of Federal Reserve official speeches ahead of the January 28 FOMC meeting. Fed Vice Chair Jefferson, speaking on January 16, noted that CPI rose <strong>2.7% year-over-year</strong> in December, unchanged from November, with core CPI also holding at 2.6%. He flagged core goods inflation, running at 1.4% YoY, as the main remaining obstacle to reaching the 2% target.</p>
       <h3>Labor Market Context</h3>
-      <p>Following December's soft jobs print of just <strong>50,000 nonfarm payrolls</strong>, released the prior week, labor market weakness is becoming a more prominent part of the Fed conversation. Full-year 2025 payroll growth averaged only 49,000 per month, a sharp deceleration from 168,000 per month in 2024. The unemployment rate held at <strong>4.4%</strong>. Two FOMC members who would later dissent at the January 28 meeting, preferring a cut, are believed to have cited this labor softness.</p>
+      <p>Following December's soft jobs print of just <strong>50,000 nonfarm payrolls</strong>, full-year 2025 payroll growth averaged only 49,000 per month, a sharp deceleration from 168,000 per month in 2024. The unemployment rate held at <strong>4.4%</strong>.</p>
       <h3>The AI Capex Debate</h3>
-      <p>Early technology guidance has reignited debate about the sustainability of AI infrastructure spending. The combined capex budgets of the four major hyperscalers are projected to exceed $300 billion in 2026. Bears argue this will compress margins without proportionate revenue. Bulls point to AI-driven productivity gains still in early innings. Goldman Sachs projects <strong>12% S&P 500 EPS growth</strong> for 2026, with AI a key driver. This debate will define technology sector performance throughout the year.</p>`,
+      <p>Early technology guidance has reignited debate about the sustainability of AI infrastructure spending. The combined capex budgets of the four major hyperscalers are projected to exceed $300 billion in 2026. Goldman Sachs projects <strong>12% S&P 500 EPS growth</strong> for 2026, with AI a key driver.</p>`,
     sources:"Federal Reserve Vice Chair Jefferson speech, January 16 2026. BLS December 2025 Jobs Report, January 9 2026. Goldman Sachs 2026 Equity Outlook, January 6 2026. Bloomberg rates data."
   },
   {
@@ -510,26 +350,26 @@ const reports = [
     excerpt:'December payrolls came in at just 50K, well below the 60K estimate. NVIDIA analysis covers Blackwell architecture, the CUDA moat, and the data center TAM. 2026 macro framework outlined.',
     keyData:[{val:'50K',cls:'dn',label:"NFP Dec '25"},{val:'78%',cls:'up',label:'NVDA Data Ctr Growth'},{val:'$35B',cls:'up',label:'NVDA Q3 Revenue'}],
     body:`
-      <p>The first full trading week of 2026 brought a weaker-than-expected December jobs report. Nonfarm payrolls rose just <strong>50,000</strong> in December, below the 60,000 consensus estimate and down from a downwardly revised 56,000 in November. The unemployment rate held at <strong>4.4%</strong>. Full-year 2025 payroll growth totalled 584,000, an average monthly gain of 49,000, well below 2024's pace of 168,000 per month. The soft labor market reinforces the case for the Fed to resume cutting later in 2026.</p>
+      <p>The first full trading week of 2026 brought a weaker-than-expected December jobs report. Nonfarm payrolls rose just <strong>50,000</strong> in December, below the 60,000 consensus estimate. Full-year 2025 payroll growth totalled 584,000, an average monthly gain of 49,000, well below 2024's pace of 168,000 per month.</p>
       <h3>NVIDIA: Blackwell and the CUDA Moat</h3>
-      <p>NVIDIA's data center revenue grew <strong>78% year-over-year</strong> in its most recent quarter, with total revenue reaching $35.1 billion. The Blackwell GPU architecture entered volume production in late 2025. Crucially, the CUDA software ecosystem, built over two decades, creates switching costs that are often underweighted in hardware-focused analysis. Migrating AI workloads from Nvidia requires rewriting software stacks, not just swapping chips. This moat is durable.</p>
+      <p>NVIDIA's data center revenue grew <strong>78% year-over-year</strong> in its most recent quarter, with total revenue reaching $35.1 billion. The Blackwell GPU architecture entered volume production in late 2025. The CUDA software ecosystem, built over two decades, creates switching costs that are often underweighted in hardware-focused analysis. This moat is durable.</p>
       <h3>2026 Macro Framework</h3>
-      <p>Our framework for 2026 rests on three pillars: inflation continuing toward the 2% target, corporate earnings growing at approximately 12–15% driven by AI productivity tailwinds, and the Fed delivering one to two rate cuts beginning no earlier than June. Goldman Sachs projects 12% EPS growth for the S&P 500 in 2026. Primary risks: tariff-driven goods inflation, fiscal concerns, and the Fed chair transition in May.</p>`,
+      <p>Our framework for 2026 rests on three pillars: inflation continuing toward the 2% target, corporate earnings growing at approximately 12to15% driven by AI productivity tailwinds, and the Fed delivering one to two rate cuts beginning no earlier than June. Primary risks: tariff-driven goods inflation, fiscal concerns, and the Fed chair transition in May.</p>`,
     sources:"BLS Employment Situation December 2025, released January 9 2026. NVIDIA Q3 FY2026 Earnings Release. FactSet and Goldman Sachs earnings projections. Federal Reserve Beige Book, January 2026."
   },
   {
     id:'r2', type:'weekly', week:'Week 1', date:'Jan 5, 2026', day:'05', month:'Jan',
-    title:'2026 Macro Outlook: Soft Landing Achieved — Now the Hard Part',
-    excerpt:'Opening the year with a full macro framework. Fed at 3.50–3.75% after 175bps of cuts. CPI at 2.7%. Q3 GDP grew 4.3%. Three key risks for 2026: tariffs, the Fed transition, and fiscal.',
+    title:'2026 Macro Outlook: Soft Landing Achieved   Now the Hard Part',
+    excerpt:'Opening the year with a full macro framework. Fed at 3.50to3.75% after 175bps of cuts. CPI at 2.7%. Q3 GDP grew 4.3%. Three key risks for 2026: tariffs, the Fed transition, and fiscal.',
     keyData:[{val:'2.7%',cls:'',label:"CPI Dec '25"},{val:'3.63%',cls:'',label:'Fed Midpoint'},{val:'4.3%',cls:'up',label:"Q3 '25 GDP"}],
     body:`
       <p>We begin 2026 with an economy that has largely achieved what seemed impossible two years ago: inflation declining toward target without a recession. The Fed delivered <strong>175 basis points of cuts</strong> between September 2024 and December 2025. CPI ended 2025 at <strong>2.7% YoY</strong>. GDP grew at <strong>4.3% annualized</strong> in Q3 2025. Unemployment stands at 4.4%.</p>
       <h3>The Soft Landing Scorecard</h3>
-      <p>Inflation has declined from its 9.1% peak in mid-2022 to within roughly 70 basis points of the Fed's 2% target. Corporate earnings remained resilient throughout the rate cycle. Q4 2025 will mark the 10th consecutive quarter of S&P 500 earnings growth. Consumer spending has held up. This is a strong baseline.</p>
+      <p>Inflation has declined from its 9.1% peak in mid-2022 to within roughly 70 basis points of the Fed's 2% target. Q4 2025 will mark the 10th consecutive quarter of S&P 500 earnings growth. Consumer spending has held up. This is a strong baseline.</p>
       <h3>Three Key Risks for 2026</h3>
-      <p>First, <strong>tariffs</strong>: reimposition of broad tariffs could reignite goods inflation, the primary remaining obstacle to hitting 2%. Second, <strong>Fed succession</strong>: Powell's term expires in May, introducing uncertainty around communication and policy signaling. Third, <strong>fiscal trajectory</strong>: the U.S. deficit path remains unsustainable at current spending levels.</p>
+      <p>First, <strong>tariffs</strong>: reimposition of broad tariffs could reignite goods inflation. Second, <strong>Fed succession</strong>: Powell's term expires in May. Third, <strong>fiscal trajectory</strong>: the U.S. deficit path remains unsustainable at current spending levels.</p>
       <h3>Themes to Watch</h3>
-      <p>In a soft-landing environment with rates still above neutral, the most attractive areas tend to have pricing power, strong free cash flow, and earnings visibility. Technology, select healthcare, and disciplined financials fit this description. The AI productivity theme cuts across sectors and is likely to dominate narrative throughout 2026.</p>`,
+      <p>In a soft-landing environment with rates still above neutral, the most attractive areas tend to have pricing power, strong free cash flow, and earnings visibility. Technology, select healthcare, and disciplined financials fit this description.</p>`,
     sources:"Federal Reserve Vice Chair Jefferson speech, Jan 16 2026. BLS CPI data December 2025. BEA GDP Q3 2025. iShares / BlackRock Fed Outlook 2026. FactSet 2026 earnings projections."
   },
   {
@@ -544,7 +384,7 @@ const reports = [
       <h3>What This Is Not</h3>
       <p>The portfolio tracker and the numbers on this site are filler. They exist to make the project feel real and give the research some skin in the game, but they are not the point. I am not trying to beat the market. I am not running a fund. I am not giving financial advice, not to you, not to anyone. If you are making investment decisions based on anything written here, please don't.</p>
       <h3>What This Actually Is</h3>
-      <p>A discipline tool. Every week I have to sit down, read what happened, understand it well enough to write about it clearly, and publish it. That process of reading, synthesizing, writing, and being wrong sometimes is the entire value of this project. The research is the product. Everything else is window dressing.</p>
+      <p>A discipline tool. Every week I have to sit down, read what happened, understand it well enough to write about it clearly, and publish it. That process is the entire value of this project. The research is the product. Everything else is window dressing.</p>
       <h3>What to Expect</h3>
       <p>A <strong>Weekly Wrap</strong> every week covering what happened in markets, what the data showed, and what I'm watching going forward. A <strong>Monthly Pick</strong> each month going deep on a single equity: business model, financials, valuation, DCF. Real data, cited sources, honest takes. That's the whole thing.</p>`,
     sources:"This report reflects the author's independent research framework. For educational purposes only, not financial advice."
@@ -563,7 +403,6 @@ function groupByWeek(list) {
 
 function tagLabel(type) {
   if (type === 'monthly-pick') return '◆ Monthly Pick';
-  if (type === 'special') return '● Weekly Wrap';
   return '● Weekly Wrap';
 }
 
@@ -573,22 +412,13 @@ function tagClass(type) {
 
 function renderReports(filter) {
   let filtered;
-  if (filter === 'all') {
-    filtered = reports;
-  } else if (filter === 'weekly') {
-    filtered = reports.filter(r => r.type === 'weekly' || r.type === 'special');
-  } else {
-    filtered = reports.filter(r => r.type === filter);
-  }
+  if (filter === 'all') filtered = reports;
+  else if (filter === 'weekly') filtered = reports.filter(r => r.type === 'weekly' || r.type === 'special');
+  else filtered = reports.filter(r => r.type === filter);
 
-  const list = document.getElementById('reportList');
+  const list  = document.getElementById('reportList');
   const empty = document.getElementById('emptyState');
-
-  if (filtered.length === 0) {
-    list.innerHTML = '';
-    empty.classList.add('visible');
-    return;
-  }
+  if (filtered.length === 0) { list.innerHTML = ''; empty.classList.add('visible'); return; }
   empty.classList.remove('visible');
 
   list.innerHTML = groupByWeek(filtered).map(g => `
@@ -613,8 +443,7 @@ function renderReports(filter) {
               <div class="featured-title">${r.title}</div>
               <div class="featured-excerpt">${r.excerpt}</div>
               <div class="featured-stats">${stats}</div>
-            </div>
-          `;
+            </div>`;
         }
         return `
           <div class="report-row" onclick="openReport('${r.id}')">
@@ -625,11 +454,9 @@ function renderReports(filter) {
               <div class="report-excerpt">${r.excerpt}</div>
             </div>
             <div class="report-arrow">→</div>
-          </div>
-        `;
+          </div>`;
       }).join('')}
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function filterReports(filter, el) {
@@ -641,19 +468,39 @@ function filterReports(filter, el) {
 function openReport(id) {
   const r = reports.find(x => x.id === id);
   if (!r) return;
-  if (r.link) { window.open(r.link, '_blank'); return; }
+
   const strip = r.keyData.map(d =>
     `<div class="modal-data-item"><div class="val ${d.cls}">${d.val}</div><div class="lbl">${d.label}</div></div>`
   ).join('');
-  document.getElementById('modalBody').innerHTML = `
-    <div class="modal-tag"><span class="report-tag ${tagClass(r.type)}" style="margin:0">${tagLabel(r.type)}</span></div>
-    <h2 class="modal-title">${r.title}</h2>
-    <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
-    <div class="modal-data-strip">${strip}</div>
-    <div class="modal-body">${r.body}</div>
-    <div class="modal-source"><strong style="color:var(--blue-bright);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
-    <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>
-  `;
+
+  if (r.type === 'monthly-pick') {
+    // Summary modal with optional full pitch deck button
+    const fullBtn = r.pitchFile
+      ? `<a class="modal-full-report-btn" href="${r.pitchFile}" target="_blank">
+           <span class="btn-label">◆ View Full Pitch Deck   DCF, SOTP &amp; Scenarios</span>
+           <span class="btn-arrow">→</span>
+         </a>`
+      : '';
+    document.getElementById('modalBody').innerHTML = `
+      <div class="modal-tag"><span class="report-tag monthly-pick" style="margin:0">◆ Monthly Pick · ${r.ticker}</span></div>
+      <h2 class="modal-title">${r.title}</h2>
+      <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
+      <div class="modal-data-strip">${strip}</div>
+      <div class="modal-body">${r.summary}</div>
+      ${fullBtn}
+      <div class="modal-source"><strong style="color:var(--gold);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
+      <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
+  } else {
+    document.getElementById('modalBody').innerHTML = `
+      <div class="modal-tag"><span class="report-tag ${tagClass(r.type)}" style="margin:0">${tagLabel(r.type)}</span></div>
+      <h2 class="modal-title">${r.title}</h2>
+      <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
+      <div class="modal-data-strip">${strip}</div>
+      <div class="modal-body">${r.body}</div>
+      <div class="modal-source"><strong style="color:var(--blue-bright);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
+      <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
+  }
+
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
