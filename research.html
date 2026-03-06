@@ -3,46 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Research — Weekly Wraps & Monthly Equity Picks | Rosehill Research</title>
-<meta name="description" content="Nine weeks of market research wraps covering NFP, Fed meetings, Big Tech earnings, NVDA, DeepSeek, and AI narrative shifts. Plus monthly deep-dive equity picks.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://glointernational.org/research.html">
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://glointernational.org/research.html">
-<meta property="og:title" content="Research — Weekly Wraps & Monthly Equity Picks | Rosehill Research">
-<meta property="og:description" content="Nine weeks of market research wraps covering NFP, Fed meetings, Big Tech earnings, NVDA, DeepSeek, and AI narrative shifts. Plus monthly deep-dive equity picks.">
-<meta property="og:site_name" content="Rosehill Research">
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Research — Weekly Wraps & Monthly Equity Picks | Rosehill Research">
-<meta name="twitter:description" content="Weekly market research covering macro, earnings, Fed, and AI themes. Monthly equity deep dives.">
-<!-- JSON-LD: CollectionPage -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Research — Rosehill Research",
-  "url": "https://glointernational.org/research.html",
-  "description": "Weekly market research wraps and monthly equity deep dives.",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "Rosehill Research",
-    "url": "https://glointernational.org"
-  },
-  "hasPart": [
-    { "@type": "Article", "name": "Week 9: February Closes Red — AI Spending Concerns & Inflation", "datePublished": "2026-03-02" },
-    { "@type": "Article", "name": "Week 8: DeepSeek + AI Narrative Shift", "datePublished": "2026-02-23" },
-    { "@type": "Article", "name": "Week 7: NVDA Earnings Recap + Market Structure", "datePublished": "2026-02-16" },
-    { "@type": "Article", "name": "Week 6: NVDA Earnings Preview", "datePublished": "2026-02-09" },
-    { "@type": "Article", "name": "Week 5: Big Tech Earnings (META, AMZN, MSFT)", "datePublished": "2026-02-02" },
-    { "@type": "Article", "name": "Week 4: Fed Meeting, Earnings Season Opens", "datePublished": "2026-01-26" },
-    { "@type": "Article", "name": "Week 3: CPI Data + Fed Watch", "datePublished": "2026-01-19" },
-    { "@type": "Article", "name": "Week 2: Jobs Report NFP + SPX Put Trade Recap", "datePublished": "2026-01-12" },
-    { "@type": "Article", "name": "Week 1: Site Intro + 2026 Macro Outlook", "datePublished": "2026-01-05" }
-  ]
-}
-</script>
+<title>Research · Rosehill Research</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -174,6 +135,14 @@
   .modal-body p { margin-bottom: 14px; }
   .modal-body strong { color: var(--white); }
   .modal-body em { font-style: italic; color: var(--gold); }
+  .modal-radar { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .modal-radar-title { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .modal-radar-section { margin-bottom: 18px; }
+  .modal-radar-section-label { font-family: 'IBM Plex Mono', monospace; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .modal-radar ul { list-style: none; padding: 0; margin: 0; }
+  .modal-radar ul li { font-family: 'Libre Baskerville', serif; font-size: 13px; line-height: 1.7; color: var(--text); padding: 7px 0 7px 16px; border-bottom: 1px solid var(--border); position: relative; }
+  .modal-radar ul li:last-child { border-bottom: none; }
+  .modal-radar ul li::before { content: '-'; position: absolute; left: 0; color: var(--blue-bright); font-size: 10px; top: 9px; }
   .modal-source { font-size: 10px; color: var(--muted); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); line-height: 1.7; }
   .modal-disclaimer { margin-top: 16px; padding: 12px 14px; background: var(--surface); border-left: 2px solid var(--blue-dim); font-size: 10px; color: var(--muted); line-height: 1.6; }
 
@@ -290,8 +259,8 @@ const reports = [
     day:'02',
     month:'Mar',
     ticker:'FTAI',
-    title:'FTAI Aviation: The MRO Moat, the Asset-Light Pivot, and the Power Optionality No One Is Modeling',
-    excerpt:'A full SOTP + 3-scenario DCF on FTAI Aviation. Two high-margin segments, a nascent power turbine business targeting AI data centers, and a Q4 earnings miss that created the entry point. Base case: $340.',
+    title:'FTAI Aviation: The Engine Shop Printing Money While the Market Looks the Other Way',
+    excerpt:'A full SOTP + 3-scenario DCF on FTAI Aviation. Two high-margin segments, a power turbine business targeting AI data centers, and a Q4 miss that handed us the entry point. Base case: $340.',
     keyData:[
       {val:'Strong Buy', cls:'up',   label:'Rosehill Rating'},
       {val:'$340',       cls:'gold', label:'Base Case Target'},
@@ -299,134 +268,181 @@ const reports = [
     ],
     pitchFile:'ftai-pitch.html',
     summary:`
-      <p>FTAI Aviation is the dominant independent platform for CFM56 engine maintenance   the most widely operated narrowbody jet engine in the world with over 12,000 still in service. Through its proprietary <strong>Module Factory</strong> process, FTAI repairs and sells individual engine modules at 30to40% cost savings versus OEM, a structural advantage with a 10to15 year runway as airlines extend ageing fleets.</p>
-      <h3>Why Now</h3>
-      <p>Q4 2025 revenue of $662M missed the $702M analyst consensus, and EPS of $1.08 missed estimates of $1.25. The stock sold off roughly 7%. The underlying business was unaffected: FY2025 Aerospace Products Adj. EBITDA grew <strong>76% to $671.3M</strong>, net income turned to a $477.5M profit after a loss year in FY2024, and management raised 2026 Adj. EBITDA guidance to <strong>$1.525to1.625B</strong>. This is a timing miss, not a thesis break.</p>
-      <h3>Three Pillars</h3>
-      <p><strong>1. The MRO Moat.</strong> The CFM56 aftermarket cycle is structural   airlines cannot simply swap engines as Boeing and Airbus backlogs stretch years out. FTAI captures this with proprietary PMA components and Module Factory throughput. <strong>2. Asset-Light Flywheel.</strong> The $2B SCI I fund converts balance-sheet assets into fee-generating managed capital, improving ROE. SCI II fundraising has now launched. <strong>3. FTAI Power.</strong> Converting surplus CFM56s into aeroderivative power turbines for AI data centers. The first product (Mod-1) targets Q4 2026 delivery and carries <em>zero revenue in current guidance</em>   pure optionality.</p>
-      <h3>Valuation Summary</h3>
-      <p>Using a sum-of-the-parts DCF across three segments plus a 3-scenario analysis: <strong>Bear $210</strong> (FTAI Power fails, CFM56 demand softens), <strong>Base $340</strong> (execution continues, Power adds modest early revenue), <strong>Bull $430</strong> (Power inflects early, multiple expands). Base case implies approximately 20% upside from current levels using a 9.0% WACC and 3.5% terminal growth on the Aerospace Products segment.</p>`,
-    sources:'FTAI Aviation FY2025 Earnings Release, GlobeNewswire, Feb 25 2026. FTAI 2025 10-K via TradingView. MacroTrends revenue data. SignalBloom earnings analysis. All forward estimates and DCF assumptions are independent Rosehill Research analysis   not financial advice.'
+      <p>Quick quiz: which company repairs the most common jet engine in the world, does it 30-40% cheaper than the manufacturer, and is quietly turning spare engines into power turbines for AI data centers? If you knew the answer was FTAI Aviation, nice work. If you had no idea, that's kind of the point - this one flies under the radar.</p>
+      <p>The CFM56 engine powers most of the narrowbody planes you've ever sat on. There are over <strong>12,000 of them still in service</strong>. FTAI built a proprietary repair process called the <strong>Module Factory</strong> that lets them fix individual engine modules rather than the whole engine - faster, cheaper, and with margins OEMs can't touch. With Boeing and Airbus backlogs running years deep, airlines are stuck flying aging planes. Which means they need FTAI. That dynamic has at least <strong>10-15 more years</strong> of runway.</p>
+      <h3>🎯 Why Now - The Miss That Wasn't</h3>
+      <p>Q4 2025 revenue came in at $662M against a $702M consensus. EPS of $1.08 missed estimates of $1.25. Stock dropped roughly 7%. On the surface it looks bad. But FY2025 Aerospace Products Adj. EBITDA grew <strong>76% to $671.3M</strong>, net income flipped to a <strong>$477.5M profit</strong> after a loss year in FY2024, and management raised 2026 guidance to <strong>$1.525-$1.625B</strong> in Adj. EBITDA. The business is fine. The market overreacted to a messy quarter. That gap is the opportunity.</p>
+      <h3>🏗️ The Three Things That Matter</h3>
+      <p><strong>1. The MRO Moat.</strong> Airlines physically cannot swap CFM56s for newer engines right now - the backlogs won't allow it. FTAI owns the aftermarket with proprietary parts and throughput that takes years to replicate. <strong>2. The Asset-Light Shift.</strong> The $2B SCI I fund turns balance-sheet assets into fee income, improving ROE without adding capital intensity. SCI II is already in fundraising. <strong>3. FTAI Power.</strong> They're converting surplus CFM56 engines into turbines for AI data centers. First product targets Q4 2026. Management has put <em>zero revenue</em> from this in guidance. It's a free call option sitting on the balance sheet.</p>
+      <h3>📊 The Numbers</h3>
+      <p>Three-scenario SOTP DCF: <strong>Bear $210</strong> (Power fails, core demand softens), <strong>Base $340</strong> (business executes, Power contributes early revenue), <strong>Bull $430</strong> (Power inflects faster than expected, multiple re-rates). Base case is roughly 20% upside from here, using a 9.0% WACC and 3.5% terminal growth on the Aerospace segment. Full model is in the pitch deck.</p>`,
+    sources:'FTAI Aviation FY2025 Earnings Release, GlobeNewswire, Feb 25 2026. FTAI 2025 10-K via TradingView. MacroTrends revenue data. SignalBloom earnings analysis. All forward estimates and DCF assumptions are my own - not financial advice.'
   },
 
   // ── WEEKLY WRAPS ──────────────────────────────────────────
   {
+    id:'r10', type:'weekly', week:'Week 10', date:'Mar 6, 2026', day:'06', month:'Mar',
+    title:'War, Oil, and a Jobs Report Nobody Wanted: The Week Everything Hit at Once',
+    excerpt:'US and Israel struck Iran, the Strait of Hormuz effectively closed, oil crossed $90, and February payrolls came in at -92K. The market had a lot to process.',
+    keyData:[{val:'-92K',cls:'dn',label:'Feb NFP'},{val:'$90+',cls:'dn',label:'Brent Crude'},{val:'4.4%',cls:'dn',label:'Unemployment'}],
+    body:`
+      <p>I genuinely do not know where to start with this week. The US and Israel struck Iran, Iran closed the Strait of Hormuz, oil crossed $90 for the first time since 2023, and then Friday morning dropped a jobs report that lost 92,000 positions against expectations of gaining 50,000. That is four separate market-moving events in five days. The S&P fell over 1% on Friday alone. The Dow was down 1.8% at the open. I have not seen a week this chaotic since I started writing these.</p>
+      <h3>💣 OK So About Iran</h3>
+      <p>Over the weekend of March 1-2, US and Israeli forces launched coordinated strikes on Iran that killed Supreme Leader Ayatollah Ali Khamenei. Iran responded by declaring the Strait of Hormuz closed and threatening to fire on any ship attempting to pass. Quick geography refresher: the Strait handles about a fifth of all global seaborne oil trade. When it closes, the whole energy market freaks out, which is exactly what happened. Brent crude was above $82 by Tuesday and crossed $90 by Friday. Gas at the pump hit $3.25 nationally - up 27 cents in a single week, the biggest jump since Russia invaded Ukraine in 2022.</p>
+      <p>Tuesday was particularly wild. The Dow swung more than 1,200 points intraday before recovering to close down around 400. Trump said the Navy would escort tankers through the strait, which helped. But by Thursday, Iran had hit an oil tanker with a missile and QatarEnergy - operator of the world's largest LNG export facility - halted operations after a drone attack. As of Friday, this is still very much an active situation.</p>
+      <h3>📉 And Then the Jobs Report Showed Up</h3>
+      <p>Friday morning, right before the open, BLS dropped February NFP: <strong>-92,000 jobs</strong>. Wall Street was expecting +50,000. It was the third month of negative payrolls in the last five. And the revisions made the headline look generous - December got revised from +48K all the way down to <strong>-17,000</strong>, and January was cut by another 4K. Combined, that is 69,000 jobs that were reported and then took back. Healthcare lost 28K due to a Kaiser Permanente strike. Federal government shed 10,000 more as the DOGE cuts keep flowing through. Unemployment ticked up to <strong>4.4%</strong>.</p>
+      <p>Here is the Fed's problem: a weak labor market like this normally screams "cut rates." But oil above $90 screams the opposite - energy prices feed straight into inflation, and the Fed does not want to ease policy into an oil shock. Morgan Stanley literally called it being "between a rock and a hard place." Futures markets pushed the first cut back to July. I do not envy Powell right now.</p>
+      <h3>🛢️ The Oil Math Is Worth Understanding</h3>
+      <p>Goldman Sachs put out a note saying that without a real sustained supply disruption, Brent fair value is around $65. So the market at $90 is essentially pricing in roughly four weeks of disruption. If the conflict drags past that and regional storage fills up, Goldman says oil could go triple digits through forced demand destruction - meaning prices have to get high enough that people literally stop buying. Every $1 increase in oil translates to about 2.5 cents at the pump, so the move from $65 to $90 is something like 62 cents per gallon already showing up in inflation data.</p>
+      <h3>👀 What I Am Watching Next Week</h3>
+      <p>February CPI drops next week and it is going to be the most important print in months. If the oil spike is already showing up, the Fed is stuck. The single most important variable for markets right now is honestly whether the Strait of Hormuz reopens - that is what would reverse the oil trade fastest. Defense and energy stocks had a great week. Tech and small caps got hit hard. The Russell 2000 is now barely green on the year and fading.</p>`,
+    bullets:{
+      ma:[
+        "Defense and aerospace names surged all week as the Iran conflict drove expectations of sustained military spending. Northrop Grumman, Raytheon, and Palantir were among the standout performers.",
+        "Tanker stocks had a breakout week - Frontline, DHT Holdings, and International Seaways all popped 5-7% on Monday alone as Strait of Hormuz disruption made every ship in the water more valuable.",
+        "Target beat Q4 earnings estimates on Tuesday ($2.44 EPS vs $2.16 consensus) and was one of the few consumer names to have a good week, with the CEO calling the January sales recovery 'an important milestone.'"
+      ],
+      alts:[
+        "Oil above $90 is a direct headwind for commercial real estate - higher energy costs feed into operating expenses for building owners and squeeze NOI margins, particularly for older assets with less efficient systems.",
+        "Private credit managers are watching the oil shock closely. A sustained inflation reacceleration delays Fed cuts, which keeps base rates elevated and floating-rate loan coupons high - good for lenders, tough for borrowers approaching maturity walls.",
+        "The roughly $2T in CRE debt maturities expected through end of 2026 becomes more complicated if the rate cut timeline gets pushed back further. Refinancing pressure builds the longer the Fed stays on hold.",
+        "LNG markets are in chaos - QatarEnergy halted the world's largest LNG export facility after an Iranian drone attack. European natural gas futures surged 20% on Tuesday. Infrastructure and energy-adjacent real assets had a strong week on the volatility."
+      ]
+    },
+    sources:'BLS Employment Situation February 2026, released March 6 2026. CNBC markets coverage March 2-6 2026. Bloomberg oil and energy reporting. TheStreet stock market recap March 6 2026. Goldman Sachs oil research via Fortune. Morgan Stanley Iran conflict analysis. AAA gas price data via CNBC. Kpler Strait of Hormuz analysis March 1 2026.'
+  },
+
+  {
     id:'r9', type:'weekly', week:'Week 9', date:'Feb 28, 2026', day:'28', month:'Feb',
-    title:'February Closes Red: AI Spending Concerns and Late-Month Inflation Data Weigh',
-    excerpt:'The S&P 500 and Nasdaq finished February in negative territory. AI capex ROI doubts and a late-month inflation reading hit sentiment hard.',
+    title:'February Closed Red and the Market Has Questions About Its AI Tab',
+    excerpt:'The S&P 500 and Nasdaq finished February in the red. AI capex ROI doubts and a late-month inflation print hit at the same time.',
     keyData:[{val:'−0.4%',cls:'dn',label:'S&P 500 Feb MTD'},{val:'19.86',cls:'',label:'VIX Feb 27'},{val:'6,909',cls:'',label:'S&P Feb 26 Close'}],
     body:`
-      <p>February 2026 ended on a sour note for equities. The S&P 500 and Nasdaq both finished the month in negative territory, dragged down by renewed concerns about AI capital expenditure returns and a late-month inflation reading. The Dow fell over <strong>500 points on February 26</strong> after fresh data and mounting AI skepticism hit simultaneously.</p>
-      <h3>AI Capex Skepticism</h3>
-      <p>The narrative dominating February was straightforward: hyperscalers are committing hundreds of billions to AI infrastructure, but where are the revenues? Microsoft, Amazon, and Alphabet all guided for continued heavy capex through 2026. Investors are increasingly scrutinizing whether this spending will generate proportionate returns. Semiconductor names and AI infrastructure plays bore the brunt of the pressure.</p>
-      <h3>Macro Backdrop</h3>
-      <p>Despite the monthly decline, January's <strong>+1.4%</strong> gain means the January Barometer remains positive for 2026. Per Stock Trader's Almanac, a positive January has preceded a full-year advance in 41 of 46 historical instances, with an average return of approximately 17% in those years.</p>
-      <h3>What to Watch in March</h3>
-      <p>Key events: next CPI release, FOMC minutes, continuation of Q4 earnings. February weakness in technology has brought valuations closer to reasonable levels in some names. Defensive sectors including healthcare, utilities, and consumer staples outperformed in February and may continue attracting rotation if macro uncertainty persists.</p>`,
-    sources:"Fidelity Markets. CNBC, \"Dow closes 500+ points lower.\" Motley Fool, January Barometer analysis. Stock Trader's Almanac data."
+      <p>February ended like a group project where one person did everything last minute and it still was not good enough. The S&P and Nasdaq both closed the month red. The Dow fell over <strong>500 points on February 26</strong> alone. The culprit was AI spending skepticism running headfirst into a late-month inflation print at the worst possible moment. I came into February cautiously optimistic and I am leaving it just cautious.</p>
+      <h3>🤖 The AI Bill Is Coming Due</h3>
+      <p>The question that defined February was one I have been thinking about since earnings season started: hyperscalers are committing hundreds of billions to AI infrastructure - Microsoft, Amazon, Alphabet all guided for heavier capex in 2026 - but where is the actual revenue from it? That used to be a detail investors were happy to overlook. In February, they stopped overlooking it. At some point spend has to become earnings, and the market started asking that out loud. Chip stocks and AI infrastructure names felt it most.</p>
+      <h3>📅 One Bright Spot Worth Holding Onto</h3>
+      <p>January closed up <strong>+1.4%</strong>, which keeps the January Barometer green. Per Stock Trader's Almanac, a positive January has led to a positive full year in <strong>41 of 46 cases</strong> - roughly 17% average return in those years. I am not using this as a trading signal. But when March gets rough, which it already is shaping up to be, it is a useful data point to have in the back of your head.</p>
+      <h3>👀 What March Is Actually About</h3>
+      <p>CPI print, FOMC minutes, and the tail end of Q4 earnings. Honestly the February selloff brought some tech valuations back to earth, which is not entirely bad - expensive markets need occasional corrections to stay functional. Healthcare, utilities, and staples held up well through the choppiness. The 10-year yield is still the number I am watching most closely. Everything else is kind of noise around it.</p>`,
+    bullets:{
+      ma:[
+        "Google's $32B acquisition of cloud security firm Wiz is still clearing international regulators after DOJ signed off. Biggest deal in Alphabet's history - a bet that cloud security is the next enterprise arms race.",
+        "SoftBank agreed to buy ABB's robotics division for $5.4B, pushing hard into industrial automation and AI hardware. Targeting mid-to-late 2026 close.",
+        "2025 was the second-strongest M&A year on record at roughly $4.9T in deal value, up 40% year-over-year. Barclays says 2026 pipelines are stronger than they've ever been. The theme: fewer deals, bigger conviction, larger tickets."
+      ],
+      alts:[
+        "Private credit now sits at ~$2.5T in global AUM and is projected to hit $3.5T by 2029. Spreads are compressing as the field gets crowded - manager quality and underwriting discipline are becoming the differentiators.",
+        "Trump's August 2025 executive order opened 401(k) plans to alternative assets. Private credit managers see this as a massive retail capital unlock - potentially trillions in new inflows over time.",
+        "Commercial real estate values are still roughly 19% below 2022 peaks, but BlackRock and Apollo are both calling this the best entry point in years. Favored sectors: industrial, multifamily, and data centers. Office is still complicated.",
+        "Roughly $2T in CRE debt maturities are expected through end of 2026. Banks are pulling back from riskier development loans - private lenders are filling the gap with mezzanine and bridge structures.",
+        "PE dry powder is significant and exit channels are opening back up. IPO market improving, secondary market liquidity returning - capital is starting to recycle into new deals at a faster pace."
+      ]
+    },
+    sources:'Fidelity Markets. CNBC. Motley Fool, January Barometer analysis. Stock Trader Almanac data.'
   },
   {
     id:'r8', type:'special', week:'Special Report', date:'Feb 17, 2026', day:'17', month:'Feb',
-    title:'January CPI at 2.4%: Disinflation Resumes and Rate Cut Timeline Shifts',
-    excerpt:'Headline CPI came in at 2.4% YoY, below the 2.5% consensus. Core CPI at its lowest since April 2021. Markets now pricing two cuts in 2026.',
+    title:'Inflation Blinked: January CPI at 2.4%, Best Core Reading Since 2021',
+    excerpt:'Headline CPI came in at 2.4% YoY, below the 2.5% consensus. Core at its lowest since April 2021. Markets are now pricing two cuts this year.',
     keyData:[{val:'2.4%',cls:'up',label:'CPI YoY Jan'},{val:'2.5%',cls:'',label:'Core CPI YoY'},{val:'3.0%',cls:'',label:'Shelter Inflation'}],
     body:`
-      <p>The Bureau of Labor Statistics released January 2026 CPI data on February 13. Headline CPI rose <strong>2.4% year-over-year</strong>, down from 2.7% in December 2025 and below the 2.5% consensus. Core CPI held at <strong>2.5%</strong>, the lowest reading since April 2021.</p>
-      <h3>What Drove the Decline?</h3>
-      <p>Shelter costs rose just <strong>0.2% month-over-month</strong>, bringing the annual rate to 3.0%. Energy fell 1.5%. Used car prices fell 1.8%. Egg prices dropped 7%, now down 34% year-over-year. Airline fares bucked the trend, jumping 6.5%.</p>
-      <h3>Fed Implications</h3>
-      <p>The Fed held at <strong>3.50to3.75%</strong> on January 28. With this print, markets are pricing <strong>two 25bps cuts in 2026</strong>, most likely beginning in June. The 10Y UST yield sat at approximately 4.38% following the release.</p>
-      <h3>Sector Implications</h3>
-      <p>A falling rate environment historically supports growth-oriented sectors. Technology benefits from a lower discount rate on future earnings. The key risk remains tariff-driven goods inflation resurgence. The Fed's Beige Book flagged early signs of tariff pass-through in several districts.</p>`,
-    sources:"Bureau of Labor Statistics CPI Release, Feb 13 2026. CNBC, \"CPI inflation report January 2026.\" JPMorgan Wealth Management, \"Fed Leaves Rates Unchanged to Start 2026.\" U.S. Bank, \"Federal Reserve Calibrates Interest Rate Policy.\""
+      <p>I do not write these things very often, but the January CPI print was genuinely good news. BLS released it on February 13 and it came in below expectations: headline at <strong>2.4% year-over-year</strong>, down from 2.7% in December, below the 2.5% consensus. Core at <strong>2.5%</strong> - the best reading since April 2021. The Fed's 2% target suddenly looks less like a theoretical goal and more like something that could actually happen this year.</p>
+      <h3>🧾 What Actually Moved the Number</h3>
+      <p>The big one was shelter. It had been holding inflation up for basically two years straight and it finally cooperated - just <strong>0.2% month-over-month</strong>, bringing the annual rate down to 3.0%. Energy fell 1.5%. Used cars dropped 1.8%. Eggs fell 7% and are now down <strong>34% year-over-year</strong>, which is wild given where egg prices were a year ago. One sore spot I have to mention: airline fares jumped 6.5%. Flights are still painful. But everything else was moving in the right direction for the first time in a while.</p>
+      <h3>🏦 What the Fed Does With This</h3>
+      <p>They held at <strong>3.50-3.75%</strong> in January and this print does not change that in the near term. What it does is give them cover to cut later in the year without looking like they are panicking or rushing. Markets are now pricing <strong>two 25bps cuts in 2026</strong>, most likely starting in June. The 10Y yield sat around <strong>4.38%</strong> after the release - not celebrating, not worried, just watching.</p>
+      <h3>📈 What This Means for Portfolios</h3>
+      <p>Lower rates are good for growth stocks in theory because future earnings get discounted less. That is the tailwind here. The risk that flips it: tariffs pushing goods prices back up. The Fed's own Beige Book had already flagged early signs of tariff cost pass-through in a few districts before this print came out. The disinflation story is intact - I believe that - but it is not a done deal. Watch the trade policy headlines as closely as you watch the CPI ones.</p>`,
+    sources:'Bureau of Labor Statistics CPI Release, Feb 13 2026. CNBC. JPMorgan Wealth Management. U.S. Bank.'
   },
   {
     id:'r7', type:'weekly', week:'Week 5', date:'Feb 2, 2026', day:'02', month:'Feb',
-    title:"Fed Holds at 3.50to3.75%: Two Dissenters, Tariff Risk, and the Powell Succession",
-    excerpt:"The FOMC paused its cutting cycle at the January 28 meeting. Two members dissented in favor of a cut. Powell's term expires in May and succession uncertainty is growing.",
+    title:"The Fed Held Rates - and Two Members Voted Against That",
+    excerpt:"The FOMC paused its cutting cycle at January 28. Two members dissented in favor of a cut. Powell's term is up in May and nobody's talking about it enough.",
     keyData:[{val:'3.50%',cls:'',label:'Fed Floor'},{val:'3.75%',cls:'',label:'Fed Ceiling'},{val:'4.4%',cls:'',label:'Unemployment'}],
     body:`
-      <p>The FOMC voted on January 28 to hold the federal funds rate at <strong>3.50to3.75%</strong>, pausing a cutting cycle that delivered three consecutive 25bps reductions in late 2025. Two dissenting votes, both preferring a cut, signaled active internal debate.</p>
-      <h3>Context</h3>
-      <p>The Fed cut rates by a cumulative <strong>175 basis points</strong> between September 2024 and December 2025. At the January meeting, Powell noted economic activity had been expanding at a solid pace and that the balance of risks to the dual mandate was improving.</p>
-      <h3>Key Risks: Tariffs and the Chair Transition</h3>
-      <p>Two wildcards dominate: First, tariffs. The Fed's Beige Book noted cost pressures beginning to pass through to consumers. Second, Powell's term expires in <strong>May 2026</strong>. Markets are pricing two cuts for the full year, with June the earliest probable date.</p>
-      <h3>Market Implications</h3>
-      <p>A Fed on hold is a benign but not stimulative backdrop. The 10Y Treasury yield remains the key variable. A meaningful move higher would pressure high-multiple growth valuations.</p>`,
-    sources:"Federal Reserve FOMC Statement, January 28, 2026. CNBC, \"Fed rate decision January 2026.\" Advisor Perspectives, \"Fed's Interest Rate Decision.\" iShares / BlackRock, \"Fed Outlook 2026.\""
+      <p>The Fed did nothing at the January 28 meeting, which is sometimes the most interesting outcome possible. Rates stay at <strong>3.50-3.75%</strong> - a pause on a cutting cycle that had moved 25bps three times in a row. The decision was not even clean: two members dissented, both pushing for a cut. I want to highlight that because it does not get enough attention. There is a real, substantive debate happening inside that institution right now about whether to move or stay put, and the 7-2 vote was not as settled as the headline makes it look.</p>
+      <h3>📖 Where We Are in the Cycle</h3>
+      <p>The Fed cut <strong>175 basis points</strong> total between September 2024 and December 2025. That is a meaningful amount of easing in a pretty short stretch. Powell's comment at the January meeting was essentially: things are in good shape, labor market looks solid, let's wait for more data before doing anything. Which is reasonable. The two dissenters clearly see a weakening labor market as reason enough to act sooner. That tension is worth tracking as the year goes on - one more weak jobs print and that 7-2 probably shifts.</p>
+      <h3>⚠️ The Two Wild Cards Nobody Wants to Talk About</h3>
+      <p><strong>Tariffs</strong> are the first one. The Beige Book already flagged early signs of cost pass-through to consumers in several districts. If tariffs reignite goods inflation, the Fed faces a genuinely ugly choice: hold rates and risk the labor market cracking, or ease and let inflation creep back up. Neither is good. The second wild card - and I think this is underpriced by markets - is the <strong>chair transition</strong>. Powell is out in <strong>May 2026</strong>. A new Fed chair means new communication style, new priorities, and real uncertainty about how they respond to surprises. Markets have barely started pricing this in.</p>
+      <h3>📉 The Number I Keep Coming Back To</h3>
+      <p>The 10-year Treasury yield. It is the variable that connects the Fed, growth stocks, and the real economy more directly than anything else. A meaningful move higher puts pressure on equity valuations pretty quickly. Right now markets are pricing two cuts for the year with June as the likely first move. If inflation data comes in hot between now and then, that timeline shifts - and so does a lot of what is currently priced into equities.</p>`,
+    sources:'Federal Reserve FOMC Statement, January 28, 2026. CNBC. Advisor Perspectives. iShares / BlackRock Fed Outlook 2026.'
   },
   {
     id:'r5', type:'weekly', week:'Week 3', date:'Jan 24, 2026', day:'24', month:'Jan',
-    title:'Week 3: Q4 Earnings Begin, S&P Above 6,900, Valuations Stretched',
-    excerpt:'13% of S&P 500 companies have reported. Forward P/E at 22.1x, above the 5-year average. 2026 EPS growth projected at 14.7%. January Barometer showing +1.4% for the month.',
+    title:'Earnings Season Kicked Off, Valuations Are Stretched, and Guidance Is Everything',
+    excerpt:'About 13% of the S&P 500 has reported. Forward P/E sitting at 22.1x. Full-year EPS growth projected at 14.7%. January Barometer up 1.4%.',
     keyData:[{val:'+1.4%',cls:'up',label:'S&P Jan MTD'},{val:'22.1x',cls:'',label:'Fwd P/E'},{val:'14.7%',cls:'up',label:'2026 EPS Est.'}],
     body:`
-      <p>The third week of 2026 brought the first meaningful Q4 2025 earnings results. As of January 23, approximately <strong>13% of S&P 500 companies</strong> had reported, with the index on track for its <strong>10th consecutive quarter of year-over-year earnings growth</strong>.</p>
-      <h3>Early Earnings Scorecard</h3>
-      <p>Full-year 2026 EPS growth is projected at <strong>14.7%</strong> per FactSet, but the beat rate is running below recent averages. Both the rate of positive surprises and their magnitude are softer than the 5-year averages of 78% beats and 7.7% upside. Management guidance will be critical as the season progresses.</p>
-      <h3>Valuation</h3>
-      <p>The forward 12-month P/E for the S&P 500 stood at <strong>22.1x</strong>, above the 5-year average of 20.0x and the 10-year average of 18.8x. Sectors at discounts to their historical averages including energy, financials, and healthcare are worth monitoring for relative value.</p>
-      <h3>January Barometer</h3>
-      <p>With the S&P up approximately 1.4% for January, the January Barometer is positive. A positive January has historically preceded a positive full year in 41 of 46 instances per Stock Trader's Almanac. Worth noting, not predicting.</p>`,
-    sources:"FactSet Earnings Insight, January 23 2026. CNBC, \"January Barometer.\" Stock Trader's Almanac via CNBC Pro."
+      <p>Every quarter earnings season runs the same ritual. CEOs talk for 45 minutes without saying anything, analysts ask softball questions, and everyone tries to figure out whether the actual number matters or whether guidance is the only thing anyone cares about. Early verdict this quarter: guidance is the only thing anyone cares about. As of January 23, roughly <strong>13% of S&P 500 companies</strong> had reported and the index was on pace for its <strong>10th straight quarter of earnings growth</strong>. That is a genuinely impressive streak. The problem is the market has had a long time to price it in.</p>
+      <h3>📋 The Numbers Look Fine, But the Bar Was High</h3>
+      <p>Full-year 2026 EPS growth is projected at <strong>14.7%</strong> per FactSet. That is a solid number. The issue is that both the beat rate and the magnitude of beats are running below 5-year averages - historically around 78% of companies beat, with about 7.7% upside to estimates. Companies are clearing the bar by less than usual, and the market is noticing. You are seeing decent reports get muted reactions because expectations were already aggressive going in. This is what an expensive, well-covered market looks like.</p>
+      <h3>💸 On Valuations: Expensive Does Not Mean It Falls Tomorrow</h3>
+      <p>Forward P/E sitting at <strong>22.1x</strong>, above both the 5-year average of 20.0x and the 10-year average of 18.8x. I want to be clear about what that means and what it does not mean. It does not mean the market crashes next month. Markets can stay expensive for years. What it does mean is there is very little cushion if something disappoints - any miss gets punished harder than it would in a cheaper market. The sectors still trading at discounts to their own historical averages - energy, financials, healthcare - are worth keeping a watchlist for if you want equity exposure without fully paying up.</p>
+      <h3>🌡️ The January Barometer</h3>
+      <p>S&P is up roughly <strong>1.4%</strong> month-to-date through January 23, which makes the January Barometer positive. Per Stock Trader's Almanac, that has historically preceded a positive full year in 41 of 46 cases. I am not trading off it. But it is a useful data point and the kind of thing I want on record for when things get choppy later in the year.</p>`,
+    sources:'FactSet Earnings Insight, January 23 2026. CNBC. Stock Trader Almanac via CNBC Pro.'
   },
   {
     id:'r4', type:'weekly', week:'Week 2', date:'Jan 17, 2026', day:'17', month:'Jan',
-    title:'Week 2: Fed Officials Speak, Inflation Expectations, and the AI Capex Debate',
-    excerpt:'A week of Fed speeches and inflation data ahead of the January 28 FOMC meeting. Hyperscaler capex guidance reignites the debate about AI infrastructure spend sustainability.',
+    title:"Fed Officials Are Talking, Inflation Is Sticky, and Big Tech Just Dropped a $300B Number",
+    excerpt:'A week of Fed speeches ahead of the January 28 FOMC. Inflation holding above target. Hyperscaler capex projections are raising some eyebrows.',
     keyData:[{val:'2.7%',cls:'',label:"CPI Dec '25 YoY"},{val:'4.38%',cls:'',label:'10Y Yield'},{val:'4.4%',cls:'',label:'Unemployment'}],
     body:`
-      <p>The second week of January brought a string of Federal Reserve official speeches ahead of the January 28 FOMC meeting. Fed Vice Chair Jefferson, speaking on January 16, noted that CPI rose <strong>2.7% year-over-year</strong> in December, unchanged from November, with core CPI also holding at 2.6%. He flagged core goods inflation, running at 1.4% YoY, as the main remaining obstacle to reaching the 2% target.</p>
-      <h3>Labor Market Context</h3>
-      <p>Following December's soft jobs print of just <strong>50,000 nonfarm payrolls</strong>, full-year 2025 payroll growth averaged only 49,000 per month, a sharp deceleration from 168,000 per month in 2024. The unemployment rate held at <strong>4.4%</strong>.</p>
-      <h3>The AI Capex Debate</h3>
-      <p>Early technology guidance has reignited debate about the sustainability of AI infrastructure spending. The combined capex budgets of the four major hyperscalers are projected to exceed $300 billion in 2026. Goldman Sachs projects <strong>12% S&P 500 EPS growth</strong> for 2026, with AI a key driver.</p>`,
-    sources:"Federal Reserve Vice Chair Jefferson speech, January 16 2026. BLS December 2025 Jobs Report, January 9 2026. Goldman Sachs 2026 Equity Outlook, January 6 2026. Bloomberg rates data."
+      <p>Week 2 was almost entirely about the January 28 FOMC decision that had not happened yet. That is sort of how pre-meeting weeks work - Fed officials go on the speaking circuit and say things that are technically not commitments but are basically commitments. Fed Vice Chair Jefferson confirmed December CPI at <strong>2.7% year-over-year</strong>, core at 2.6%, and flagged core goods at 1.4% as the last stubborn piece that needs to cooperate. The message from all of it: patience. The Fed wants to cut eventually. They are just not comfortable doing it yet.</p>
+      <h3>💼 The Jobs Market Is Slowing and It Deserves More Attention</h3>
+      <p>December NFP came in at <strong>50,000</strong>, below the already-modest 60K estimate. I keep coming back to this number: 2025 averaged just <strong>49,000 jobs per month</strong>. In 2024 that number was 168,000. That is not a rounding error, that is a fundamental shift in how quickly the labor market is adding jobs. Unemployment held at <strong>4.4%</strong>, so we are not in crisis territory, but the trajectory is clearly softer. The Fed is watching this just as closely as inflation, and so am I.</p>
+      <h3>🤖 Big Tech's Big Number</h3>
+      <p>The headline that kept coming up this week: combined AI infrastructure capex from the major hyperscalers is expected to exceed <strong>$300 billion in 2026</strong>. Goldman is projecting <strong>12% S&P 500 EPS growth</strong> for the year and calling AI productivity a key driver, and that might turn out to be right. But the question I keep asking - one I do not think has a clean answer yet - is when exactly all that spending shows up in earnings. Right now it is mostly faith. Eventually the market will want evidence.</p>`,
+    sources:'Federal Reserve Vice Chair Jefferson speech, January 16 2026. BLS December 2025 Jobs Report. Goldman Sachs 2026 Equity Outlook. Bloomberg rates data.'
   },
   {
     id:'r3', type:'weekly', week:'Week 1', date:'Jan 10, 2026', day:'10', month:'Jan',
-    title:'Week 1: Weak Jobs Data, NVIDIA Deep Dive, and the 2026 Macro Framework',
-    excerpt:'December payrolls came in at just 50K, well below the 60K estimate. NVIDIA analysis covers Blackwell architecture, the CUDA moat, and the data center TAM. 2026 macro framework outlined.',
+    title:"Weak Jobs, NVIDIA Deep Dive, and the Framework I'm Using for 2026",
+    excerpt:'December payrolls: just 50K. NVIDIA data center revenue up 78% - but the CUDA moat is the real thesis. Plus the three things to watch all year.',
     keyData:[{val:'50K',cls:'dn',label:"NFP Dec '25"},{val:'78%',cls:'up',label:'NVDA Data Ctr Growth'},{val:'$35B',cls:'up',label:'NVDA Q3 Revenue'}],
     body:`
-      <p>The first full trading week of 2026 brought a weaker-than-expected December jobs report. Nonfarm payrolls rose just <strong>50,000</strong> in December, below the 60,000 consensus estimate. Full-year 2025 payroll growth totalled 584,000, an average monthly gain of 49,000, well below 2024's pace of 168,000 per month.</p>
-      <h3>NVIDIA: Blackwell and the CUDA Moat</h3>
-      <p>NVIDIA's data center revenue grew <strong>78% year-over-year</strong> in its most recent quarter, with total revenue reaching $35.1 billion. The Blackwell GPU architecture entered volume production in late 2025. The CUDA software ecosystem, built over two decades, creates switching costs that are often underweighted in hardware-focused analysis. This moat is durable.</p>
-      <h3>2026 Macro Framework</h3>
-      <p>Our framework for 2026 rests on three pillars: inflation continuing toward the 2% target, corporate earnings growing at approximately 12to15% driven by AI productivity tailwinds, and the Fed delivering one to two rate cuts beginning no earlier than June. Primary risks: tariff-driven goods inflation, fiscal concerns, and the Fed chair transition in May.</p>`,
-    sources:"BLS Employment Situation December 2025, released January 9 2026. NVIDIA Q3 FY2026 Earnings Release. FactSet and Goldman Sachs earnings projections. Federal Reserve Beige Book, January 2026."
+      <p>First full trading week of the year and the jobs report came in soft right out of the gate. December NFP: <strong>50,000</strong> against a 60K estimate. Full-year 2025 averaged just 49,000 jobs per month - down from 168,000 per month in 2024. That is not a typo. The labor market really did slow down that much. We are not in recession territory - unemployment is 4.4%, consumers are still spending - but I am going to keep this trend on my radar all year because deceleration that sustained tends to eventually matter.</p>
+      <h3>🟢 NVIDIA: Why I Keep Coming Back to the Software Layer</h3>
+      <p>Data center revenue up <strong>78% year-over-year</strong>, total revenue at <strong>$35.1 billion</strong>, Blackwell GPUs in volume production. The hardware story is well-covered and impressive. What I think gets underweighted in most NVIDIA coverage is <strong>CUDA</strong>. That software ecosystem took 20 years to build. Developers learn it in school. Companies build entire infrastructure stacks on top of it. Teams specialize in it. A competitor can theoretically build a faster chip - Applied Micro, AMD, and custom silicon from the hyperscalers are all trying. What they cannot quickly replicate is two decades of software tooling and the institutional inertia that comes with it. That is the actual moat. The hardware is impressive. The software lock-in is the thesis.</p>
+      <h3>🗺️ My Framework for 2026</h3>
+      <p>Three things I am building around this year: inflation keeps moving toward 2% (slowly, messily, but directionally correct), corporate earnings grow somewhere in the 12-15% range with AI productivity showing up gradually in margins, and the Fed cuts once or twice starting around June. The risks I am watching most closely: tariffs reigniting goods inflation, concerns around the fiscal deficit, and the Fed chair transition in May. I expect most of the macro surprises this year to connect back to one of those three.</p>`,
+    sources:'BLS Employment Situation December 2025, released January 9 2026. NVIDIA Q3 FY2026 Earnings Release. FactSet and Goldman Sachs earnings projections. Federal Reserve Beige Book, January 2026.'
   },
   {
     id:'r2', type:'weekly', week:'Week 1', date:'Jan 5, 2026', day:'05', month:'Jan',
-    title:'2026 Macro Outlook: Soft Landing Achieved   Now the Hard Part',
-    excerpt:'Opening the year with a full macro framework. Fed at 3.50to3.75% after 175bps of cuts. CPI at 2.7%. Q3 GDP grew 4.3%. Three key risks for 2026: tariffs, the Fed transition, and fiscal.',
+    title:'The Soft Landing Happened. Now What?',
+    excerpt:'Inflation down from 9.1% to 2.7%, no recession, Fed cut 175bps. We got what everyone said was impossible. Here is the 2026 framework and the three things that could still break it.',
     keyData:[{val:'2.7%',cls:'',label:"CPI Dec '25"},{val:'3.63%',cls:'',label:'Fed Midpoint'},{val:'4.3%',cls:'up',label:"Q3 '25 GDP"}],
     body:`
-      <p>We begin 2026 with an economy that has largely achieved what seemed impossible two years ago: inflation declining toward target without a recession. The Fed delivered <strong>175 basis points of cuts</strong> between September 2024 and December 2025. CPI ended 2025 at <strong>2.7% YoY</strong>. GDP grew at <strong>4.3% annualized</strong> in Q3 2025. Unemployment stands at 4.4%.</p>
-      <h3>The Soft Landing Scorecard</h3>
-      <p>Inflation has declined from its 9.1% peak in mid-2022 to within roughly 70 basis points of the Fed's 2% target. Q4 2025 will mark the 10th consecutive quarter of S&P 500 earnings growth. Consumer spending has held up. This is a strong baseline.</p>
-      <h3>Three Key Risks for 2026</h3>
-      <p>First, <strong>tariffs</strong>: reimposition of broad tariffs could reignite goods inflation. Second, <strong>Fed succession</strong>: Powell's term expires in May. Third, <strong>fiscal trajectory</strong>: the U.S. deficit path remains unsustainable at current spending levels.</p>
-      <h3>Themes to Watch</h3>
-      <p>In a soft-landing environment with rates still above neutral, the most attractive areas tend to have pricing power, strong free cash flow, and earnings visibility. Technology, select healthcare, and disciplined financials fit this description.</p>`,
-    sources:"Federal Reserve Vice Chair Jefferson speech, Jan 16 2026. BLS CPI data December 2025. BEA GDP Q3 2025. iShares / BlackRock Fed Outlook 2026. FactSet 2026 earnings projections."
+      <p>Two years ago the consensus was basically: inflation this high, rates this low, something bad is coming. Recession, market crash, some kind of forced reckoning. The Fed proved everyone wrong. They hiked to 5.25%, inflation fell from 9.1% to 2.7%, and there was no recession. Then they cut <strong>175 basis points</strong> between September 2024 and December 2025. GDP grew at <strong>4.3% annualized</strong> in Q3 2025. Unemployment is at 4.4%. I want to be honest that I did not expect it to go this cleanly. Almost nobody did. The soft landing happened, which means 2026 starts from a genuinely good place.</p>
+      <h3>📊 Where Things Actually Stand Right Now</h3>
+      <p>Inflation is about 70 basis points away from the Fed's 2% target. Q4 2025 will be the <strong>10th consecutive quarter of S&P 500 earnings growth</strong>. The consumer has held up. Corporate balance sheets are mostly healthy. This is a solid starting point - not euphoric, not fragile, just solid. The question I am sitting with as we enter 2026 is not whether the economy is in good shape right now. It clearly is. The question is what disrupts it from here, because something always comes along eventually.</p>
+      <h3>⚠️ Three Things That Could Break the Story</h3>
+      <p><strong>Tariffs:</strong> If broad tariffs come back aggressively, goods inflation comes back with them, and the Fed gets boxed in. That is the scenario that makes 2026 genuinely hard to navigate. <strong>Fed succession:</strong> Powell is out in May. A new chair introduces real uncertainty - different communication style, different priorities, potentially a different reaction function entirely. I think markets have underpriced this. <strong>Fiscal drift:</strong> The deficit trajectory is not sustainable in the long run, and bond markets have been remarkably patient about it. I am not calling a debt crisis, but it sits in my peripheral vision as a tail risk worth acknowledging.</p>
+      <h3>🔍 What I Think Makes Sense to Own This Year</h3>
+      <p>In this kind of environment - rates still above neutral, growth decent but not explosive - the companies that tend to do well are ones with real pricing power, visible free cash flow, and earnings you can actually model confidently. Tech with genuine margins (not just revenue growth), select healthcare, disciplined financials. If I am wrong and the rate-cut timeline gets pushed back, energy and industrials with strong balance sheets look interesting as a hedge. That is roughly the framework I am working from heading into the year.</p>`,
+    sources:'Federal Reserve Vice Chair Jefferson speech, Jan 16 2026. BLS CPI data December 2025. BEA GDP Q3 2025. iShares / BlackRock Fed Outlook 2026. FactSet 2026 earnings projections.'
   },
   {
     id:'r1', type:'weekly', week:'Week 1', date:'Jan 5, 2026', day:'05', month:'Jan',
-    title:"Rosehill Research: What This Project Is and How We'll Cover the Markets",
-    excerpt:'A simple side project to stay honest about how well I actually understand markets. The portfolio is filler. The research is the point.',
+    title:"What This Is, Why I'm Doing It, and What to Expect",
+    excerpt:"A finance student holding himself accountable in public. The portfolio is the accountability mechanism. The research is the actual point.",
     keyData:[{val:'Weekly',cls:'',label:'Report Cadence'},{val:'SPY',cls:'',label:'Benchmark'},{val:'Jan 5',cls:'up',label:'Launch Date'}],
     body:`
-      <p>This is a side project. Nothing more, nothing less.</p>
-      <p>I'm a finance student who wants to stay honest with myself about how well I actually understand markets, not just in theory, but week to week, when the data comes out and things move. It's easy to have opinions. It's harder to write them down, publish them, and look back at them later.</p>
-      <p>That's what this is for.</p>
-      <h3>What This Is Not</h3>
-      <p>The portfolio tracker and the numbers on this site are filler. They exist to make the project feel real and give the research some skin in the game, but they are not the point. I am not trying to beat the market. I am not running a fund. I am not giving financial advice, not to you, not to anyone. If you are making investment decisions based on anything written here, please don't.</p>
-      <h3>What This Actually Is</h3>
-      <p>A discipline tool. Every week I have to sit down, read what happened, understand it well enough to write about it clearly, and publish it. That process is the entire value of this project. The research is the product. Everything else is window dressing.</p>
-      <h3>What to Expect</h3>
-      <p>A <strong>Weekly Wrap</strong> every week covering what happened in markets, what the data showed, and what I'm watching going forward. A <strong>Monthly Pick</strong> each month going deep on a single equity: business model, financials, valuation, DCF. Real data, cited sources, honest takes. That's the whole thing.</p>`,
-    sources:"This report reflects the author's independent research framework. For educational purposes only, not financial advice."
+      <p>This started as a simple question I kept asking myself: do I actually understand markets, or do I just think I do? Those are very different things, and it is embarrassingly easy to confuse them when you are not testing yourself publicly. So this is the test.</p>
+      <p>Every week I have to sit down, read what actually happened, and understand it well enough to write about it clearly. That is it. The writing is the accountability mechanism - you cannot bullshit your way through an explanation of why the Fed moved or what an earnings miss actually means for a company's valuation. You either understand it or you do not, and putting it in writing makes that pretty obvious pretty fast.</p>
+      <h3>🧠 What This Is Not</h3>
+      <p>Not financial advice. Not a fund. Not a performance flex. The portfolio exists to make the research feel real and give me actual skin in the game, but the portfolio is not the point. If you are here looking for stock tips, I am probably not the right source - I am a finance student, not a professional, and this is explicitly a learning project. I am treating it seriously, but it is a learning project.</p>
+      <h3>📋 The Format</h3>
+      <p>A <strong>Weekly Wrap</strong> every week covering what moved, what the data said, and what I am watching going into the next week. A <strong>Monthly Pick</strong> each month going deep on a single stock - business model, financials, valuation, full DCF. Real data, cited sources. I will be upfront when I get things wrong, which I expect to happen fairly often. That is kind of the point.</p>
+      <h3>🤝 How to Read This</h3>
+      <p>Like you would read a classmate's work - engage with the reasoning, push back where you disagree, form your own view. The back-and-forth is more useful than any individual report I write. Let's see how this goes.</p>`,
+    sources:'Independent research framework. Educational purposes only, not financial advice.'
   }
 ];
 
@@ -536,6 +552,12 @@ function openReport(id) {
       <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
       <div class="modal-data-strip">${strip}</div>
       <div class="modal-body">${r.body}</div>
+      ${r.bullets ? `
+      <div class="modal-radar">
+        <div class="modal-radar-title">🗞 Also On Our Radar</div>
+        ${r.bullets.ma ? `<div class="modal-radar-section"><div class="modal-radar-section-label">M&amp;A &amp; Corporate</div><ul>${r.bullets.ma.map(b => '<li>'+b+'</li>').join('')}</ul></div>` : ''}
+        ${r.bullets.alts ? `<div class="modal-radar-section"><div class="modal-radar-section-label">Alternatives</div><ul>${r.bullets.alts.map(b => '<li>'+b+'</li>').join('')}</ul></div>` : ''}
+      </div>` : ''}
       <div class="modal-source"><strong style="color:var(--blue-bright);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
       <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
   }
