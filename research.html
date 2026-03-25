@@ -67,6 +67,7 @@
   .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 52px; }
   .tab { padding: 12px 28px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; user-select: none; }
   .tab.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+  .tab.active.radar-active { color: var(--green); border-bottom-color: var(--green); }
   .tab:hover:not(.active) { color: var(--text); }
 
   .week-group { margin-bottom: 52px; }
@@ -83,6 +84,29 @@
   .report-tag.weekly { color: var(--blue-bright); border-color: var(--blue-dim); }
   .report-tag.special { color: var(--blue-bright); border-color: var(--blue-dim); }
   .report-tag.monthly-pick { color: var(--gold); border-color: rgba(240,192,96,0.4); }
+  .report-tag.alt-radar { color: var(--green); border-color: rgba(34,211,160,0.35); }
+
+  /* Alt Radar card */
+  .report-radar { background: var(--deep); border: 1px solid rgba(34,211,160,0.2); padding: 22px 28px; margin: 0 -12px 2px; cursor: pointer; transition: border-color 0.2s, background 0.15s; }
+  .report-radar:hover { border-color: rgba(34,211,160,0.45); background: rgba(34,211,160,0.03); }
+  .radar-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .radar-date-block { text-align: center; min-width: 40px; }
+  .radar-date-block .day { font-size: 28px; font-weight: 300; color: var(--green); display: block; letter-spacing: -0.03em; line-height: 1; }
+  .radar-date-block .mon { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .radar-divider { width: 1px; height: 40px; background: rgba(34,211,160,0.2); }
+  .radar-eyebrow { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; opacity: 0.8; }
+  .radar-issue { font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: 0.04em; }
+  .radar-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 8px; transition: color 0.2s; }
+  .report-radar:hover .radar-title { color: var(--green); }
+  .radar-excerpt { font-family: 'Libre Baskerville', serif; font-size: 12px; line-height: 1.65; color: var(--muted); margin-bottom: 14px; }
+  .radar-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .radar-tag { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 8px; border: 1px solid rgba(34,211,160,0.25); color: var(--green); opacity: 0.7; }
+
+  /* Alt Radar modal body extras */
+  .modal-body ul { padding-left: 18px; margin-bottom: 14px; }
+  .modal-body ul li { margin-bottom: 8px; line-height: 1.7; }
+  .modal-body .radar-section-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin: 24px 0 10px; padding-top: 20px; border-top: 1px solid var(--border); display: block; }
+  .modal-tag.alt-radar-tag .report-tag { color: var(--green); border-color: rgba(34,211,160,0.35); }
   .report-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 5px; transition: color 0.2s; }
   .report-row:hover .report-title { color: var(--blue-bright); }
   .report-excerpt { font-family: 'Libre Baskerville', serif; font-size: 12px; line-height: 1.6; color: var(--muted); }
@@ -195,6 +219,7 @@
         <div class="tab active" onclick="filterReports('all', this)">All Reports</div>
         <div class="tab" onclick="filterReports('weekly', this)">Weekly Wraps</div>
         <div class="tab" onclick="filterReports('monthly-pick', this)">Monthly Pick</div>
+        <div class="tab" onclick="filterReports('alt-radar', this)">◈ Alt Radar</div>
       </div>
       <div id="reportList"></div>
       <div class="empty-state" id="emptyState">No reports in this category yet.</div>
@@ -241,6 +266,66 @@
 
 <script>
 const reports = [
+
+  // ── ALT RADAR ─────────────────────────────────────────────
+  {
+    id:'ar1', type:'alt-radar', issue:'#1', week:'Week 12', date:'Mar 21, 2026', day:'21', month:'Mar',
+    sectors:['Private Equity','Venture Capital','M&A','Sports'],
+    title:'Alt Radar #1: Apollo Goes to Japan, Blackstone Buys a Cricket Team, and AI VC Is Getting Weird',
+    excerpt:'PE deal flow heating up despite the macro chaos. Apollo does its biggest Japan deal ever. Blackstone makes its first sports bet. Trian and General Catalyst raise their Janus Henderson offer. And the VC world officially lost the plot in February.',
+    keyData:[{val:'$3.7B',cls:'up',label:'Apollo Japan Deal'},{val:'$1.78B',cls:'up',label:'Blackstone IPL Buy'},{val:'$189B',cls:'gold',label:'Feb VC Funding'}],
+    body:`
+      <p>Starting this as a place to write about the stuff I find interesting outside of public markets. Private equity, venture, hedge funds, real assets, distressed situations, whatever catches my eye. I do not have access to deal rooms or LP decks obviously, so this is me reading the same public sources anyone can find and trying to actually understand what is going on rather than just reading the headline. First issue. We will see how it goes.</p>
+
+      <span class="radar-section-label">Private Equity</span>
+
+      <h3>Apollo Buys a Japanese Glass Company for $3.7B and I Had to Read It Three Times</h3>
+      <p>So Apollo agreed to acquire Nippon Sheet Glass, which makes architectural, automotive, and solar glass in Japan, in a deal worth about $3.7 billion. This is their biggest PE investment in Japan ever. My first reaction was genuinely just: why does a glass company need a private equity rescue?</p>
+      <p>Turns out NSG bought a UK glassmaker called Pilkington back in 2006 and has basically been drowning in that debt ever since. We are talking about 20 years of carrying a balance sheet that never really healed. Apollo is coming in with about $1 billion in fresh equity and coordinating a debt-to-equity swap with NSG's Japanese bank lenders, which I had to look up because I had not seen that structure described quite that way before. The banks effectively trade their loans for ownership stakes. NSG gets a cleaner balance sheet. Apollo controls the company.</p>
+      <p>The thesis is that NSG can pivot toward solar glass and EV glazing, which are both growing fast. Whether a century-old manufacturer can actually pull that off under private equity ownership is a different question. But I thought the structure of the deal was genuinely interesting to understand.</p>
+      <ul>
+        <li>Shareholder vote in late June, closing around March 2027</li>
+        <li>The Pilkington acquisition in 2006 really is the whole backstory here. Worth looking up if you are curious about how one bad deal can haunt a company for two decades</li>
+        <li>Apollo is betting on solar and EV glass demand. Reasonable thesis, execution is the hard part</li>
+      </ul>
+
+      <h3>Blackstone Just Bought a Cricket Team and I Did Not Have That on My Bingo Card</h3>
+      <p>Blackstone, alongside some Indian conglomerates and a sports operations firm called Bolt Ventures, agreed to buy Royal Challengers Bengaluru, the reigning IPL champion, for about $1.78 billion. This is Blackstone's first sports investment ever. The firm has $1.3 trillion in assets under management and has never owned a sports franchise until right now.</p>
+      <p>The part that actually interested me from a finance perspective is which Blackstone vehicle is doing this. It is not one of their big institutional funds. It is BXPE, which is their perpetual private equity strategy built for wealthy individual investors. So they are essentially anchoring a retail-facing product to one of the most high-profile sports brands in one of the fastest-growing leagues in the world. That feels like it is at least partly a marketing decision alongside being an investment decision, and I do not think that is a criticism. It is just interesting to notice.</p>
+      <ul>
+        <li>The IPL is one of the highest-revenue sports leagues globally, not just in cricket</li>
+        <li>PE moving into sports has been a whole thing for a few years now (RedBird, Arctos, etc.) but this is the biggest name doing it for the first time</li>
+        <li>Genuinely had to google whether cricket was big enough to justify $1.78B. The answer is yes, emphatically</li>
+      </ul>
+
+      <h3>The Janus Henderson Bidding War Is Getting Messy</h3>
+      <p>Quick background because I had to piece this together myself: Nelson Peltz's hedge fund Trian has been an activist investor in Janus Henderson, a $493 billion asset manager, for about five years. In December they agreed to buy the whole company alongside General Catalyst, a growth equity firm, for about $7.4 billion. Then Victory Capital showed up with a competing offer worth roughly $8.6 billion.</p>
+      <p>This week Trian and General Catalyst raised their bid to $52 per share, or about $8 billion, to try to fend Victory off. Janus's board is still recommending the Trian deal even though Victory's offer is nominally higher, apparently because Trian's offer is all cash and Victory's includes stock. Shareholder vote is April 16.</p>
+      <p>What I found genuinely confusing at first was why a hedge fund and a growth equity firm were buying a mutual fund company together. I still do not have a fully clean answer but the activist angle makes more sense once you know Peltz has been pushing for changes at Janus for years. This is basically the exit from a long campaign.</p>
+      <ul>
+        <li>Victory's offer is higher on paper but Janus's board prefers the certainty of cash</li>
+        <li>Watch whether Victory comes back with a higher all-cash bid before April 16</li>
+        <li>Deal expected to close mid-2026 if it gets approved</li>
+      </ul>
+
+      <span class="radar-section-label">Venture Capital</span>
+
+      <h3>February VC Numbers Were Insane and Also Kind of Fine</h3>
+      <p>February 2026 was apparently the largest month of startup funding ever recorded: $189 billion globally. I saw that number and genuinely did not believe it at first. Then I read further and it turns out 83% of it went to three companies. OpenAI raised $110 billion. Anthropic raised $30 billion at a $380 billion valuation. Waymo raised $16 billion. Take those three out and February was a totally normal month.</p>
+      <p>I find the Anthropic one particularly hard to wrap my head around. $380 billion valuation for a company that is not public. That is bigger than Goldman Sachs. The round was co-led by Coatue and Singapore's sovereign wealth fund GIC, with Microsoft, Nvidia, and a bunch of others participating. Anthropic reportedly has $14 billion in annualised revenue, which at least gives you something to anchor the valuation to, but still. These numbers are genuinely new territory and I am not sure anyone knows exactly how to think about them yet.</p>
+      <ul>
+        <li><strong>Anthropic $30B Series G</strong> at $380B valuation. $14B ARR. Second-largest private VC deal ever</li>
+        <li><strong>ElevenLabs $500M Series D</strong> at $11B valuation, led by Sequoia. Voice AI. $330M+ ARR. Valuation tripled from their last round</li>
+        <li><strong>Mind Robotics $500M Series A</strong>, Rivian spin-out doing industrial robotics. First round at $500M is not something you see often</li>
+        <li><strong>Nexthop AI $500M Series B</strong> for AI networking hardware. Led by Lightspeed</li>
+        <li><strong>Temporal Technologies $300M Series D</strong> at $5B. Developer tools for workflow reliability. Led by a16z</li>
+      </ul>
+      <p>The honest takeaway from all of this is that AI is getting funded at a scale that makes it look more like infrastructure investment than traditional venture. The rest of VC is basically fighting over whatever is left. Non-AI SaaS is apparently having a brutal time raising anything right now.</p>
+
+      <span class="radar-section-label">One Thing I Did Not Know Before This Week</span>
+      <p>PE secondaries are apparently a much bigger deal than I realized. A secondary transaction is when an existing LP sells their stake in a PE fund to another investor before the fund winds down, instead of waiting years for the normal exit. Volume hit around $210 billion in 2025 and is growing fast. Goldman Sachs, Morgan Stanley, and Schwab all made acquisitions in the secondary market infrastructure space in the last year. The reason this matters is that it starts to create actual liquidity in what has always been an extremely illiquid asset class. Still not easy to access as a retail investor but the direction of travel is interesting.</p>`,
+    sources:'Private Equity Wire March 2026. Apollo Global Management press release March 23 2026. Blackstone press release March 24 2026. Reuters Janus Henderson March 24 2026. AI Funding Tracker March 2026. Crunchbase March 2026 weekly roundups. BlackRock Investment Institute. StepStone Group PE Outlook 2026. Wellington Management VC Outlook 2026.'
+  },
 
   // ── MONTHLY PICKS ─────────────────────────────────────────
   {
@@ -467,11 +552,14 @@ function groupByWeek(list) {
 
 function tagLabel(type) {
   if (type === 'monthly-pick') return '◆ Monthly Pick';
+  if (type === 'alt-radar') return '◈ Alt Radar';
   return '● Weekly Wrap';
 }
 
 function tagClass(type) {
-  return type === 'monthly-pick' ? 'monthly-pick' : 'weekly';
+  if (type === 'monthly-pick') return 'monthly-pick';
+  if (type === 'alt-radar') return 'alt-radar';
+  return 'weekly';
 }
 
 function renderReports(filter) {
@@ -507,6 +595,24 @@ function renderReports(filter) {
               <div class="featured-title">${r.title}</div>
               <div class="featured-excerpt">${r.excerpt}</div>
               <div class="featured-stats">${stats}</div>
+            </div>`;
+        }
+        if (r.type === 'alt-radar') {
+          const sectorTags = (r.sectors || []).map(s => `<span class="radar-tag">${s}</span>`).join('');
+          return `
+            <div class="report-radar" onclick="openReport('${r.id}')">
+              <div class="radar-meta">
+                <div class="radar-date-block"><span class="day">${r.day}</span><span class="mon">${r.month}</span></div>
+                <div class="radar-divider"></div>
+                <div>
+                  <div class="radar-eyebrow">◈ Alt Radar</div>
+                  <div class="radar-issue">Issue ${r.issue || '#1'}</div>
+                </div>
+                <div style="margin-left:auto"><span class="report-tag alt-radar" style="margin:0">◈ Alt Radar</span></div>
+              </div>
+              <div class="radar-title">${r.title}</div>
+              <div class="radar-excerpt">${r.excerpt}</div>
+              <div class="radar-tags">${sectorTags}</div>
             </div>`;
         }
         return `
@@ -553,6 +659,15 @@ function openReport(id) {
       <div class="modal-body">${r.summary}</div>
       ${fullBtn}
       <div class="modal-source"><strong style="color:var(--gold);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
+      <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
+  } else if (r.type === 'alt-radar') {
+    document.getElementById('modalBody').innerHTML = `
+      <div class="modal-tag alt-radar-tag"><span class="report-tag alt-radar" style="margin:0">◈ Alt Radar · Issue ${r.issue || '#1'}</span></div>
+      <h2 class="modal-title">${r.title}</h2>
+      <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
+      <div class="modal-data-strip">${strip}</div>
+      <div class="modal-body">${r.body}</div>
+      <div class="modal-source"><strong style="color:var(--green);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
       <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
   } else {
     document.getElementById('modalBody').innerHTML = `
