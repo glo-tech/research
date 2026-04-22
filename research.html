@@ -156,11 +156,15 @@
   .modal-data-item .lbl { font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
   .modal-body { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.8; color: var(--text); }
   .modal-body h3 { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-bright); margin: 24px 0 10px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .modal-body.gold-headers h3 { color: var(--gold); }
+  .modal-body.green-headers h3 { color: var(--green); }
   .modal-body p { margin-bottom: 14px; }
   .modal-body strong { color: var(--white); }
   .modal-body em { font-style: italic; color: var(--gold); }
   .modal-source { font-size: 10px; color: var(--muted); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); line-height: 1.7; }
   .modal-disclaimer { margin-top: 16px; padding: 12px 14px; background: var(--surface); border-left: 2px solid var(--blue-dim); font-size: 10px; color: var(--muted); line-height: 1.6; }
+  .modal-disclaimer.gold-disc { border-left-color: rgba(240,192,96,0.4); }
+  .modal-disclaimer.green-disc { border-left-color: rgba(34,211,160,0.4); }
 
   /* Full report button   only shown for monthly picks */
   .modal-full-report-btn {
@@ -356,6 +360,58 @@ const reports = [
   },
 
   // ── WEEKLY WRAPS ──────────────────────────────────────────
+  {
+    id:'r15', type:'weekly', week:'Week 15', date:'Apr 11, 2026', day:'11', month:'Apr',
+    title:'The Ceasefire Week: Dow Jumps 1,300 Points in a Day, WTI Drops 16%, and the Market Snaps Back Hard',
+    excerpt:'A Pakistan-brokered two-week ceasefire announced Tuesday evening sent the S&P up 2.5% the next day, its best single session since April 2025. S&P gained 3.6% for the week, best since November. March CPI came in at 3.3% year-over-year.',
+    keyData:[{val:'+3.6%',cls:'up',label:'S&P 500 Week'},{val:'6,816',cls:'up',label:'S&P Friday Close'},{val:'3.3%',cls:'dn',label:'March CPI YoY'}],
+    body:`
+      <p>This is the week that a lot of people have been waiting for. A ceasefire was announced, oil dropped, stocks ripped, and the market put in its best week since November in a single five-day stretch. I want to be careful not to get too excited about it given how many times the market has rallied and reversed on Iran headlines over the past six weeks, but the setup here felt different enough to write about properly.</p>
+
+      <h3>Tuesday Night: The Ceasefire</h3>
+      <p>Late Tuesday April 8, the White House announced a two-week ceasefire with Iran, brokered through Pakistan, contingent on Iran reopening the Strait of Hormuz. The announcement came less than two hours before Trump's April 6 deadline had been set to expire. Both sides confirmed the agreement, which made it immediately different from every prior round of Trump jawboning that Iran had publicly denied.</p>
+      <p>Wednesday was the result. The Dow surged <strong>1,325 points</strong>, or 2.85%, its best day since April 2025. The S&P 500 jumped <strong>2.51%</strong> to 6,782. The Nasdaq gained 2.80%. WTI crude futures dropped more than <strong>16%</strong> on the day, its biggest single-day decline since April 2020. That is a massive move.</p>
+      <p>The ceasefire was tested almost immediately. Israel launched strikes in Lebanon Wednesday. Iran accused the U.S. of violating three conditions of the agreement. The Strait remained effectively closed Thursday morning. Oil bounced back toward $100. But stocks held the bulk of their gains through the rest of the week, which tells you how starved the market was for any real resolution signal after five weeks of losses.</p>
+
+      <h3>March CPI: Already a Rearview Mirror Problem</h3>
+      <p>March CPI came in on Thursday. Headline was <strong>+0.9% month-over-month</strong> and <strong>+3.3% year-over-year</strong>. Core CPI, which strips out food and energy, was a much gentler <strong>+0.2% monthly and +2.6% annually</strong>, below expectations. The headline number was exactly what everyone expected it to be: the oil shock showing up in the data. The core number being soft was the more interesting read, because it suggests underlying inflation is not accelerating the way some people feared.</p>
+      <p>The honest reaction to this report was "well yes obviously." Oil went to $112 per barrel in March. Of course headline CPI was ugly. The more interesting question is what April and May look like if the ceasefire holds and oil continues to come down. If Brent gets back below $85 by May, the base effects actually become favorable and the inflation picture could improve quickly. That is a big if.</p>
+
+      <h3>The Week in Numbers</h3>
+      <p>S&P 500 closed Friday at <strong>6,816</strong>, up <strong>3.6%</strong> for the week, best since November. Nasdaq up <strong>4.7%</strong> for the week. Dow up <strong>3%</strong>. Russell 2000 up <strong>4.3%</strong>. All three major indexes year-to-date now essentially flat: S&P at -0.07%, Dow at +0.15%. Energy was the only sector in the red on the week, falling 4%, the mirror image of every prior week this year. VIX closed at 19.23 Friday, lowest since the war began. Brent ended the week below $100 after the ceasefire announcement, having been at $112 the Friday prior.</p>
+      <p>Kevin Warsh's Senate confirmation hearing for Fed chair was delayed, a person familiar told CNBC Thursday. No new date was announced. Powell stays in the seat for now.</p>
+
+      <h3>What I Am Watching</h3>
+      <p>The ceasefire runs two weeks, which takes us to roughly April 22. Weekend diplomatic talks were scheduled and the Strait is not fully open yet, so this situation is not resolved. Ed Yardeni cut his recession probability back to 20% from 35% after the ceasefire, which feels about right to me. The war created a lot of damage in a short period of time and the reversal will not be instant even if the strait reopens cleanly.</p>
+      <p>Q1 earnings season is starting now. The big banks report this week and next. The setup is genuinely interesting: companies reported into a quarter where the Iran war hit in the last month, oil spiked, and consumer confidence dropped. Guidance for Q2 is going to tell us a lot about how much of the oil shock companies are actually absorbing versus passing through. I am watching margin commentary closely.</p>
+      <p>On FTAI: the ceasefire is net neutral to mildly negative for the short-term thesis. Lower oil is good for airlines in general, which reduces the urgency of deferring new aircraft in the near term. But the long-run CFM56 runway does not change based on six weeks of oil volatility. Still holding.</p>`,
+    sources:'CNBC Markets April 7-11 2026. Financial Synergies Weekly Recap April 10 2026. Clearbrook Global Weekly Market Commentary April 13 2026. BLS Consumer Price Index March 2026, released April 9 2026. CNBC S&P 500 snaps its 5-week losing streak April 3 2026.'
+  },
+  {
+    id:'r14', type:'weekly', week:'Week 14', date:'Apr 4, 2026', day:'04', month:'Apr',
+    title:'The Losing Streak Ends: March Jobs Tripled Estimates, Ceasefire Talks Give the Market a Reason to Breathe',
+    excerpt:'The S&P 500 snapped its five-week losing streak with a 3.4% gain. March payrolls came in at 178,000 against a 59,000 estimate. Iran ceasefire framework discussions began. Nasdaq led the bounce.',
+    keyData:[{val:'+3.4%',cls:'up',label:'S&P 500 Week'},{val:'178K',cls:'up',label:'March Payrolls'},{val:'59K',cls:'',label:'Payrolls Estimate'}],
+    body:`
+      <p>Five weeks of losses. Then this week happened. The S&P 500 gained about 3.4% for the week ending April 4, snapping the longest losing streak since spring 2022. It is not a full recovery. The index closed the week at roughly 6,602, still down about 3.5% year-to-date. But the direction changed, and there were two specific things that drove it.</p>
+
+      <h3>March Jobs Report: I Genuinely Did Not Expect This</h3>
+      <p>The March employment situation report dropped Friday morning and it was a genuine surprise. Nonfarm payrolls came in at <strong>178,000</strong>, against a Dow Jones consensus estimate of 59,000. That is three times the forecast. The unemployment rate fell to <strong>4.3%</strong> from 4.4% in February.</p>
+      <p>To understand why this was so surprising, you have to know what preceded it. February's payrolls were revised to <strong>-133,000</strong>, which had been one of the worst monthly readings in years. A lot of that deterioration was tied to a healthcare workers' strike. In March, those workers came back. Healthcare added 76,000 jobs in the month, with roughly 35,000 being physicians' office workers returning from the strike. So some of the beat was mechanical rather than a sign of broad labor market strength. The three-month average came out to about 68,000 per month once you factor in the revisions, which is a much more modest number than the headline.</p>
+      <p>A few things beneath the surface were less encouraging. Average hourly earnings rose only 0.2% monthly and 3.5% annually, the slowest wage growth since May 2021. The average workweek fell 0.1 hours to 34.2. Labor force participation slipped to 61.9%. Long-term unemployment rose 322,000 over the year. So this is not a blowout labor market, but it is also not collapsing the way February's print suggested. The headline was good enough to take some steam out of the stagflation narrative, which had been building hard since the GDP revision.</p>
+
+      <h3>Iran: The First Real Ceasefire Signal</h3>
+      <p>For most of the week, the market was navigating the familiar pattern: partial optimism, partial denial. On Tuesday March 31, a report surfaced that Iranian President Pezeshkian was open to ending the war with guarantees. That unconfirmed headline alone sent the S&P up 2.91% for the day, its best session since May. The Dow gained 1,125 points.</p>
+      <p>Axios reported mid-week that the U.S., Iran, and regional mediators were discussing a potential 45-day ceasefire framework. Nothing was confirmed before the April 6 deadline but the tone of the week was the most constructive since the war began. Trump extended the April 6 deadline by ten more days earlier in the week, and for the first time markets seemed to interpret that as a sign of genuine progress rather than another delay tactic.</p>
+
+      <h3>The Week in Numbers</h3>
+      <p>S&P 500 up roughly <strong>3.4%</strong> for the week, closing around 6,602. Nasdaq led the bounce. WTI crude was actually higher on the week, gaining about 11% on Thursday alone as ceasefire hopes were not yet confirmed and supply concerns persisted. The market's ability to rally with oil still elevated was cited by several strategists as an encouraging sign that sentiment was turning. Conference Board consumer confidence for March came in at 91.8, up modestly from February and slightly above the 87.5 consensus. February job openings fell to 6.88 million, down 358,000 from January but in line with estimates. Not alarming, but not strong either.</p>
+
+      <h3>What I Am Watching</h3>
+      <p>The April 6 deadline extension put the next hard date at April 16. At the time of writing this the ceasefire has been announced (I am covering that in next week's report), but in the context of this week the key thing to watch was whether the jobs data would change the Fed's calculus. Short answer: not much. Markets ended the week pricing about a 79% chance of no rate change for all of 2026, with the remaining probability split roughly evenly between a cut and a hike. That is a very unusual distribution and reflects just how uncertain the picture is.</p>
+      <p>Q1 earnings season is about to start. The market rallied this week partly because the jobs data removed the worst-case economic scenario from the table. Now the question is whether corporate earnings can justify holding these levels even with the damage done by five weeks of oil shocks and consumer confidence deterioration.</p>`,
+    sources:'CNBC S&P 500 snaps its 5-week losing streak April 3 2026. BLS Employment Situation March 2026 via Bloomberg April 3 2026. Prism News March Jobs Report April 3 2026. CNBC S&P 500 fourth winning day April 5 2026. Clearbrook Global Weekly Market Commentary March 30 2026.'
+  },
   {
     id:'r13', type:'weekly', week:'Week 13', date:'Mar 27, 2026', day:'27', month:'Mar',
     title:'Five Weeks Down: The Dow Enters Correction, Trump Extends the Iran Deadline to April 6, and the Market Stops Believing Him',
@@ -575,11 +631,25 @@ const reports = [
 function groupByWeek(list) {
   const groups = {};
   list.forEach(r => {
+    // Use a sortable date key so groups come out in the right order
+    const dateKey = new Date(r.date).getTime() || 0;
     const key = r.week + '|' + r.month;
-    if (!groups[key]) groups[key] = { label: r.week + ' · ' + r.month + ' 2026', items: [] };
+    if (!groups[key]) groups[key] = {
+      label: r.week + ' · ' + r.month + ' 2026',
+      items: [],
+      dateKey,
+      type: r.type  // first item's type drives the label color
+    };
     groups[key].items.push(r);
   });
-  return Object.values(groups);
+  // Sort groups newest first
+  return Object.values(groups).sort((a, b) => b.dateKey - a.dateKey);
+}
+
+function weekLabelColor(type) {
+  if (type === 'monthly-pick') return 'var(--gold)';
+  if (type === 'alt-radar')    return 'var(--green)';
+  return 'var(--muted)';
 }
 
 function tagLabel(type) {
@@ -607,7 +677,7 @@ function renderReports(filter) {
 
   list.innerHTML = groupByWeek(filtered).map(g => `
     <div class="week-group">
-      <div class="week-label">${g.label}</div>
+      <div class="week-label" style="color:${weekLabelColor(g.type)}">${g.label}</div>
       ${g.items.map(r => {
         if (r.type === 'monthly-pick') {
           const stats = r.keyData.map(d =>
@@ -676,7 +746,6 @@ function openReport(id) {
   ).join('');
 
   if (r.type === 'monthly-pick') {
-    // Summary modal with optional full pitch deck button
     const fullBtn = r.pitchFile
       ? `<a class="modal-full-report-btn" href="${r.pitchFile}" target="_blank">
            <span class="btn-label">◆ View Full Pitch Deck   DCF, SOTP &amp; Scenarios</span>
@@ -688,19 +757,19 @@ function openReport(id) {
       <h2 class="modal-title">${r.title}</h2>
       <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
       <div class="modal-data-strip">${strip}</div>
-      <div class="modal-body">${r.summary}</div>
+      <div class="modal-body gold-headers">${r.summary}</div>
       ${fullBtn}
       <div class="modal-source"><strong style="color:var(--gold);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
-      <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
+      <div class="modal-disclaimer gold-disc">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
   } else if (r.type === 'alt-radar') {
     document.getElementById('modalBody').innerHTML = `
       <div class="modal-tag alt-radar-tag"><span class="report-tag alt-radar" style="margin:0">◈ Alt Radar · Issue ${r.issue || '#1'}</span></div>
       <h2 class="modal-title">${r.title}</h2>
       <div class="modal-meta"><span>${r.date}</span><span>${r.week}</span></div>
       <div class="modal-data-strip">${strip}</div>
-      <div class="modal-body">${r.body}</div>
+      <div class="modal-body green-headers">${r.body}</div>
       <div class="modal-source"><strong style="color:var(--green);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Sources</strong>${r.sources}</div>
-      <div class="modal-disclaimer">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
+      <div class="modal-disclaimer green-disc">⚠ Educational Disclaimer: This research is part of a finance student learning project. Nothing here constitutes financial advice.</div>`;
   } else {
     document.getElementById('modalBody').innerHTML = `
       <div class="modal-tag"><span class="report-tag ${tagClass(r.type)}" style="margin:0">${tagLabel(r.type)}</span></div>
