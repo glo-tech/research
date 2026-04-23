@@ -273,6 +273,79 @@ const reports = [
 
   // ── ALT RADAR ─────────────────────────────────────────────
   {
+    id:'ar3', type:'alt-radar', issue:'#3', week:'Week 16', date:'Apr 18, 2026', day:'18', month:'Apr',
+    sectors:['Private Equity','Secondaries','M&A','Asset Management'],
+    title:'Alt Radar #3: Schroders Is Gone, Ping An Is Dumping Software PE, and the Secondaries Market Just Hit Another Record',
+    excerpt:'Schroders shareholders voted 99.9% to approve the Nuveen takeover. China\'s biggest insurer is selling $1B in Vista and KKR fund stakes. Partners Group closes a $9B secondaries fund. The active asset management consolidation wave is not slowing down.',
+    keyData:[{val:'£9.9B',cls:'up',label:'Schroders/Nuveen Deal'},{val:'$1B',cls:'dn',label:'Ping An PE Sale'},{val:'$9B',cls:'up',label:'Partners Group Secondaries'}],
+    body:`
+      <p>Three stories this week that all connect back to the same theme: capital is moving around in private markets in ways that were not really possible or normal five years ago. Secondaries are mainstream now, asset manager consolidation is accelerating, and Chinese institutional money is quietly repositioning out of software PE. Let me go through each one.</p>
+
+      <span class="radar-section-label">Asset Management</span>
+
+      <h3>Schroders Is Done — Nuveen Won With 99.9% of the Vote</h3>
+      <p>On April 16, Schroders shareholders voted to approve the £9.9 billion ($13.4B) takeover by Nuveen, which is TIAA's asset management subsidiary. The vote was 99.9% in favor, which is about as close to unanimous as you ever get in a public company shareholder meeting. The 75% threshold needed to pass it was almost an afterthought — the Schroders founding family owns 42% of the stock and had already said they were supporting the deal.</p>
+      <p>The combined group will manage roughly $2.5 trillion in assets across equities, fixed income, infrastructure, private capital, real estate, and what they call "natural capital." Schroders keeps its brand, keeps its London headquarters (which becomes the non-US HQ for the combined entity), and Richard Oldfield stays on as CEO reporting to Nuveen's William Huffman. So it is not a full absorption — more of a holding structure at least for the first year.</p>
+      <p>What I found genuinely interesting is the timing of the vote. On the same day shareholders approved the deal, Schroders also reported £2.2 billion in net client outflows for Q1 2026, which it attributed directly to the Iran war uncertainty. Group AUM fell from £823.7B to £814.4B. So Schroders is entering this merger with some momentum working against it. The bullish read is that combining with a $1.3T AUM firm gives it the distribution and product breadth to fight back. The bearish read is that you are doing a major integration while also managing outflows.</p>
+      <ul>
+        <li>This is the fifth major active asset management consolidation in two years — Franklin Templeton/Legg Mason, Invesco/MassMutual, Jupiter/Merian, and now Schroders/Nuveen</li>
+        <li>The pressure is structural: passive funds and ETFs keep taking share, and smaller active managers can no longer afford the technology and distribution infrastructure to compete</li>
+        <li>Schroders is 222 years old. Founded in 1800. That is a genuinely long time to be an independent firm</li>
+      </ul>
+
+      <span class="radar-section-label">Private Equity Secondaries</span>
+
+      <h3>Ping An Is Selling $1B in Software PE Stakes and the Reason Is Worth Understanding</h3>
+      <p>China's biggest insurer, Ping An, hired Campbell Lutyens in March to sell roughly $1 billion worth of fund stakes — primarily two Vista Equity Partners funds from the late 2010s and a North America-focused KKR fund. The process is still ongoing as of this writing.</p>
+      <p>The immediate reason is AI disruption fears hitting software SaaS valuations. PE firms raised enormous amounts of money between 2018 and 2022 to buy software companies at peak multiples, betting on the stability of recurring subscription revenue. That thesis held for years. Then generative AI showed up and suddenly every SaaS company had to answer a question it had never had to answer before: what happens to your product if a frontier model can just do what you do? Public software stocks have gotten crushed. Private exits have stalled because sponsors are not willing to sell at prices that crystallize losses. And private credit, which funded a lot of these buyouts, is starting to pull back from software borrowers.</p>
+      <p>Ping An is not alone in this move. According to The Middle Market, LPs across the market are using the secondary market to trim 2018-2022 vintage software PE exposure. JPMorgan data estimates 40% of private credit exposure is in technology — far ahead of healthcare at 15%. If that cohort starts repricing meaningfully, the secondaries market gets a lot busier very fast.</p>
+      <ul>
+        <li>The structure is interesting: Ping An sells the stake but reportedly continues managing the assets for the new investors — so it generates liquidity while growing its asset management business</li>
+        <li>Portfolio: roughly $850M in fund stakes plus $300M in unfunded commitments, per Secondaries Investor</li>
+        <li>Campbell Lutyens running the process — they are one of the top secondaries advisors globally</li>
+      </ul>
+
+      <h3>Partners Group Closes $9B Secondaries Fund</h3>
+      <p>Swiss private markets firm Partners Group raised more than $9 billion for its eighth flagship secondaries programme, which includes a closed-end fund and related vehicles. I did not know who Partners Group was before writing this, so quick background: they are a Swiss firm with about $150B in AUM, and they are one of the big specialist secondaries managers alongside Lexington Partners, Coller Capital, and Ardian.</p>
+      <p>Secondary transaction volume hit a record $226 billion in 2025 per PitchBook, up 41% from the year before. The market has gone from being a niche liquidity release valve — something LPs used in emergencies — to a core tool for portfolio management. Goldman Sachs surveyed LPs and found secondaries are one of the most underallocated strategies relative to target allocations. The infrastructure is now there: Goldman bought Industry Ventures, Morgan Stanley acquired EquityZen, Schwab moved for Forge Global. There is real institutional appetite to access this market.</p>
+      <ul>
+        <li>The Ping An deal above is a live example of exactly what secondaries funds like Partners Group exist to buy</li>
+        <li>CapVest, a healthcare-focused European PE firm, also closed its latest fund at €4.5B this week, above its €3.85B target — another data point that sector specialists with strong track records are still raising money even when generalist PE fundraising is tough</li>
+      </ul>
+
+      <span class="radar-section-label">One Thing That Surprised Me</span>
+      <p>I looked up GP-led continuation vehicles while writing about secondaries and they are growing faster than LP-led secondaries — up 62% year over year in 2025 per Bain. A continuation vehicle is when a PE firm moves a portfolio company into a new fund structure instead of selling it, allowing it to hold the asset longer while giving existing LPs the choice to cash out or roll over. It is basically a way to avoid a bad exit while not technically breaching fund life limits. Bain notes that LPs generally only tolerate one per year per GP before they start pushing back. I did not realize this was already a permanent feature of the market, not a workaround.`,
+    sources:'Reuters Schroders shareholder vote April 16 2026. Private Banker International Schroders Nuveen April 16 2026. Bloomberg Ping An PE stakes April 13 2026. The Middle Market Secondaries Edge April 2026. AltAssets Partners Group April 20 2026. AltAssets CapVest April 17 2026. JPMorgan Private Market Secondaries 2026. Bain Global Private Equity Report 2026. PitchBook secondaries volume data.'
+  },
+  {
+    id:'ar2', type:'alt-radar', issue:'#2', week:'Week 14', date:'Apr 4, 2026', day:'04', month:'Apr',
+    sectors:['Venture Capital','Private Equity','AI'],
+    title:'Alt Radar #2: Q1 VC Hit $330 Billion and That Number Is Almost Meaningless',
+    excerpt:'Global VC doubled to a record $330.9B in Q1 2026 per KPMG. Four companies raised $188B of it. Seed deal count fell 31%. Strip out OpenAI, Anthropic, xAI, and Waymo and the rest of the world\'s startups split $109B. The headline is technically true and practically misleading.',
+    keyData:[{val:'$330.9B',cls:'up',label:'Q1 Global VC'},{val:'-31%',cls:'dn',label:'Seed Deal Count YoY'},{val:'80%',cls:'',label:'AI Share of VC'}],
+    body:`
+      <p>KPMG put out their Venture Pulse report this week covering Q1 2026 and the headline number is $330.9 billion in global venture capital investment — more than double the $128.6B from Q4 2025 and the largest quarter ever recorded by a significant margin. I saw that number and immediately wanted to understand what was actually inside it, because numbers that size usually have an explanation.</p>
+      <p>The explanation is four companies. And I think the explanation makes the number almost meaningless as a signal about the health of the startup ecosystem.</p>
+
+      <h3>The Four Companies That Own the Headline</h3>
+      <p>OpenAI raised $122 billion at an $852 billion valuation. Amazon put in $50 billion alone. Nvidia contributed $30 billion. SoftBank another $30 billion. That is one round, and it already exceeds the entire annual VC output of most countries. Anthropic raised $30.6 billion at a $380 billion valuation — second largest private VC deal in history. xAI raised $20 billion. Waymo raised $16 billion.</p>
+      <p>Those four rounds combined: $188 billion. Out of a $330.9 billion quarter. That is 63% of all global venture capital in the quarter going to four companies. Strip them out and the remaining startups in the world split roughly $109 billion. That number would still rank as a historically strong quarter — probably top five ever — but it tells a completely different story about where money is actually going.</p>
+      <p>There is also a category question worth raising. Amazon committing $50 billion to OpenAI is not a venture capital investment in any traditional sense. It is a strategic allocation by a $2 trillion company to secure AI infrastructure access and competitive positioning. When that gets counted in the same column as a $5 million seed check to a founder building a logistics software startup, the number loses signal value. KPMG counts it because it technically qualifies. But it is measuring something different than what VC data is supposed to measure.</p>
+
+      <h3>The Part That Actually Concerns Me</h3>
+      <p>Seed deal count fell 31% year over year to about 3,700 deals globally. Total seed dollars went up 30% to $12 billion. So the average seed check size is getting bigger while fewer companies are getting funded. Early-stage investment rose 38%, but that looks modest against the 200%+ surge in late-stage AI. Capital is concentrating upward — larger rounds, later stages, one sector.</p>
+      <p>Crunchbase reported a stat that I had to re-read: only 15.5% of companies that raised seed funding in Q1 2023 had secured a Series A by Q1 2025. That conversion rate should be somewhere around 30-40% historically. The pipeline from seed to Series A is narrowing badly, and that was before the current concentration wave made things harder for anyone outside AI.</p>
+      <p>In Europe the pattern was even more extreme — funding dollars rose nearly 30% year over year, but deal volume fell 40%. More money into fewer companies. The non-AI founder in Europe or anywhere else is raising in an environment where LPs, VCs, and allocators are all tilted hard toward a single sector that is getting funded at a scale that crowds everything else out.</p>
+
+      <h3>The Valuation Question</h3>
+      <p>OpenAI at $852 billion is now bigger than Goldman Sachs, Morgan Stanley, and JPMorgan combined. Anthropic at $380 billion has more implied value than most Fortune 100 companies. Neither is public. Neither has to mark their valuation against what public markets would actually price them at. When these companies eventually IPO — OpenAI is supposedly targeting Q4 2026 at around a $1 trillion valuation — those numbers are going to get tested. The investors who went in at $852B are betting that public markets agree. They might. Or they might not.</p>
+      <p>I am not saying AI is a bubble. I genuinely do not know. But I do think the concentration of capital in four private companies that have never had to defend their valuations to a public market is something worth paying attention to, and the $330.9 billion headline obscures that concern rather than surfacing it.</p>
+
+      <span class="radar-section-label">One Number That Put It in Perspective</span>
+      <p>AI captured 80% of global VC funding in Q1 2026. In Q1 2025 that number was 55%. In 2015 it was 10%. That is a ten-year run of increasing concentration that has now reached the point where AI and "VC" are nearly synonymous terms. I do not know what the right percentage is, but I do think a world where one sector gets eight out of every ten venture dollars raises legitimate questions about what happens to the founders — and the funds — that are building everything else.</p>`,
+    sources:'KPMG Venture Pulse Q1 2026 April 15 2026. Crunchbase Q1 2026 Global VC Report April 1 2026. GREY Journal Q1 2026 VC record April 2026. Crunchbase Three Charts Concentration April 2026. Crunchbase Europe Q1 2026 April 2026. PitchBook consumer AI analyst note Q1 2026.'
+  },
+  {
     id:'ar1', type:'alt-radar', issue:'#1', week:'Week 12', date:'Mar 21, 2026', day:'21', month:'Mar',
     sectors:['Private Equity','Venture Capital','M&A','Sports'],
     title:'Alt Radar #1: Apollo Goes to Japan, Blackstone Buys a Cricket Team, and AI VC Is Getting Weird',
@@ -360,6 +433,38 @@ const reports = [
   },
 
   // ── WEEKLY WRAPS ──────────────────────────────────────────
+  {
+    id:'r16', type:'weekly', week:'Week 16', date:'Apr 18, 2026', day:'18', month:'Apr',
+    title:'S&P Hits a New All-Time High: Iran Opens the Strait, Oil Drops 16%, and Earnings Season Starts Strong',
+    excerpt:'The S&P 500 closed at 7,126 on Friday, a new all-time high, after Iran declared the Strait of Hormuz open for commercial vessels. WTI fell 11.4% on Friday. Third straight week of gains. 88% of S&P companies reporting so far have beaten estimates.',
+    keyData:[{val:'7,126',cls:'up',label:'S&P Friday ATH'},{val:'-16%',cls:'up',label:'WTI Week'},{val:'88%',cls:'up',label:'Q1 Beat Rate'}],
+    body:`
+      <p>The market finally got what it has been waiting for since February 28. On Friday morning, Iran's foreign minister posted on X that the Strait of Hormuz was "completely open" for commercial vessels for the duration of the ceasefire. Oil fell off a cliff. Stocks hit an all-time high. The S&P 500 closed at <strong>7,126</strong> on Friday, up 1.2% on the day, the first record close since January and the third straight week of gains — the longest streak since Halloween.</p>
+      <p>This was a genuinely eventful week with multiple moving pieces, so let me go through them.</p>
+
+      <h3>The Strait Opens, Oil Craters</h3>
+      <p>WTI crude fell <strong>11.4%</strong> on Friday to $83.85 per barrel, its lowest level since March 10. Brent slid 9% to $90.38. For the full week, oil fell roughly <strong>16%</strong>, the worst weekly performance for crude since April 2020. That single data point tells you how much of the market's pain this year was an oil premium on top of whatever fundamentals actually warranted.</p>
+      <p>The announcement was not entirely clean. Trump confirmed the opening but noted the U.S. naval blockade would remain in place. Questions remain about how the strait would be administered going forward and who would be responsible for the mines Iran deployed during the war — the U.S. Navy is still working on finding and disarming them. Iran's announcement was specifically tied to the Lebanon ceasefire, not a permanent peace declaration. So the reopening is real but the underlying situation is still fragile.</p>
+      <p>Markets did not care about the caveats on Friday. Energy stocks got hit hard — APA Corporation fell more than 9%, Valero down more than 8.5%, Exxon down 5%, Chevron down 4%. The mirror image of every rally in energy over the prior seven weeks. Travel stocks went the other way: Royal Caribbean jumped 9.7%, United Airlines more than 9%, Expedia gained 5%. Airlines had been quietly pricing in an oil discount during the ceasefire weeks, and Friday confirmed it.</p>
+
+      <h3>The S&P Crossed 7,000 — and Then Kept Going</h3>
+      <p>Wednesday April 15 was a milestone: the S&P 500 closed at <strong>7,022.95</strong>, crossing 7,000 for the first time ever. Wednesday was also driven by Trump extending the ceasefire again, citing Iran's "seriously fractured" government. The Nasdaq hit a new all-time intraday high on Wednesday and closed at 24,016. By Friday the S&P was at 7,126, up more than 12% from its March 30 low of roughly 6,300. That is a full recovery from the Iran war losses and then some, in less than three weeks.</p>
+      <p>I want to be careful not to declare victory here. The Nasdaq is on its longest winning streak since 1992, which sounds impressive until you remember that streaks end. The forward P/E on the S&P is now <strong>20.9x</strong>, above both the 5-year average of 19.9x and the 10-year average of 18.9x. We came back fast and we are not cheap.</p>
+
+      <h3>Earnings: Actually Good So Far</h3>
+      <p>Q1 earnings season is off to a strong start. Per FactSet as of April 17, <strong>10%</strong> of S&P 500 companies have reported. Of those, <strong>88% beat EPS estimates</strong>, well above the 10-year average of 76%. Revenue growth is running at roughly 9.9% year over year, which would be the highest since Q3 2022. Financials have been the biggest positive surprise so far. FactSet is projecting full-year 2026 EPS growth of <strong>18%</strong>, with Q2 through Q4 all expected above 20%.</p>
+      <p>Netflix was the notable exception. It reported Q1 revenue of $12.25B, up 16% year over year, beating estimates. But it did not raise full-year revenue guidance and its Q2 guidance came in slightly below consensus. The stock fell 9.7% on Thursday despite the beat. Revenue is $50.7B-$51.7B for the year, ad revenue on track to roughly double to $3 billion. Good numbers, just not good enough relative to what the stock had priced in.</p>
+      <p>State Street and Fifth Third Bancorp both reported beats Friday alongside the Iran announcement. The combination of good earnings and the strait reopening was the cocktail the market needed to print a new record.</p>
+
+      <h3>The Week in Numbers</h3>
+      <p>S&P 500 closed at a new all-time high of <strong>7,126</strong> Friday, up 1.2% on the day. Third straight week of gains. WTI at $83.85 Friday, down 11.4% on the day, down 16% for the week. Brent at $90.38. Dow surged as many as 1,100 points on Friday before settling up 868 points, or 1.8%. Nasdaq up 1.5% Friday. Forward P/E 20.9x. 88% Q1 beat rate through 10% of the index. VIX at 18.92 Friday, lowest of the year.</p>
+
+      <h3>What I Am Watching</h3>
+      <p>The ceasefire is fragile and the strait's long-term status is not resolved. Iran declaring it open is not the same as a permanent peace treaty, and Trump's naval blockade still being in place is a meaningful asterisk. The next few weeks of diplomacy matter a lot. If things break down again, the war premium comes back fast.</p>
+      <p>Earnings season is really just getting started. Next week 93 S&P 500 companies report including seven Dow components. The early beat rate is encouraging but 10% of the index is a very small sample. I want to see what happens when the full picture comes in — especially guidance for Q2, which is the first quarter that would fully reflect whatever impact the Iran war had on operations, supply chains, and consumer sentiment.</p>
+      <p>On FTAI: the strait reopening is mildly negative for the short-term MRO thesis since lower oil reduces urgency for airlines to defer new aircraft. But the underlying CFM56 replacement cycle does not change based on a few weeks of oil prices, and the reopening removes a macro headwind that was genuinely a drag on valuations across the board. Net slightly positive for the portfolio.</p>`,
+    sources:'CBC News April 17 2026. NBC News Strait of Hormuz April 17 2026. Fortune April 17 2026. CNN Business April 17 2026. CNBC Stock Market Today April 17 2026. FactSet Earnings Season Update April 17 2026. Netflix Q1 2026 Shareholder Letter April 16 2026. 24/7 Wall St. April 21 2026. Wikipedia S&P 500 closing milestones.'
+  },
   {
     id:'r15', type:'weekly', week:'Week 15', date:'Apr 11, 2026', day:'11', month:'Apr',
     title:'The Ceasefire Week: Dow Jumps 1,300 Points in a Day, WTI Drops 16%, and the Market Snaps Back Hard',
