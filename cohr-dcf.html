@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COHR vs LITE — Coherent Corp DCF | Rosehill Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0a0e18;
+    --surface: #0f1520;
+    --border: #1a2540;
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --blue-dim: #1e3a6e;
+    --text: #c8d8f0;
+    --muted: #4d6a99;
+    --green: #22d3a0;
+    --red: #f05a5a;
+    --white: #e8f0ff;
+    --gold: #f0c060;
+    --gold-dim: rgba(240,192,96,0.1);
+    --amber: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; line-height: 1.6; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(6,8,16,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .nav-logo { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--blue-bright); }
+  .nav-right { display: flex; align-items: center; gap: 20px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .nav-right a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-right a:hover { color: var(--blue-bright); }
+  .nav-pill { background: var(--gold-dim); border: 1px solid rgba(240,192,96,0.3); color: var(--gold); padding: 5px 14px; font-size: 9px; letter-spacing: 0.14em; }
+
+  /* HERO */
+  .hero { padding: 56px 48px 44px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .hero-h1 { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 900; color: var(--white); letter-spacing: -0.03em; line-height: 1; margin-bottom: 16px; }
+  .hero-h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 480px; }
+  .hero-sub strong { color: var(--text); }
+  .hero-card { background: var(--deep); border: 1px solid rgba(240,192,96,0.2); padding: 24px; }
+  .hero-card-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; opacity: 0.8; }
+  .hero-stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .hero-stat-row:last-child { border-bottom: none; }
+  .hero-stat-key { font-size: 11px; color: var(--muted); }
+  .hero-stat-val { font-size: 13px; font-weight: 500; color: var(--white); }
+  .hero-stat-val.up { color: var(--green); }
+  .hero-stat-val.dn { color: var(--red); }
+  .hero-stat-val.gold { color: var(--gold); }
+
+  /* SECTION STRUCTURE */
+  .section { padding: 52px 48px; border-bottom: 1px solid var(--border); }
+  .section-eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+  .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 20px; }
+  .section-body { font-size: 14px; line-height: 1.8; color: var(--text); max-width: 680px; }
+  .section-body p { margin-bottom: 16px; }
+  .section-body strong { color: var(--white); }
+  .section-body em { font-style: italic; color: var(--gold); }
+
+  /* COMPARISON TABLE */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin: 32px 0; }
+  .compare-col { background: var(--deep); }
+  .compare-header { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .compare-header-ticker { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .compare-header-ticker.cohr { color: var(--gold); }
+  .compare-header-ticker.lite { color: var(--muted); }
+  .compare-header-sub { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.04em; }
+  .compare-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; border-bottom: 1px solid rgba(26,37,64,0.6); }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row-key { font-size: 11px; color: var(--muted); }
+  .compare-row-val { font-size: 12px; font-weight: 500; color: var(--white); }
+  .compare-row-val.better { color: var(--green); }
+  .compare-row-val.worse { color: var(--red); }
+  .compare-row-val.neutral { color: var(--gold); }
+
+  /* STUDENT NOTE CALLOUT */
+  .student-note { background: var(--surface); border-left: 2px solid var(--gold); padding: 16px 20px; margin: 24px 0; font-size: 13px; line-height: 1.75; color: var(--text); }
+  .student-note::before { content: '👤 My take: '; color: var(--gold); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 6px; }
+
+  /* INTERACTIVE DCF */
+  .dcf-section { padding: 52px 48px; }
+  .dcf-intro { max-width: 680px; font-size: 14px; line-height: 1.8; color: var(--text); margin-bottom: 40px; }
+  .dcf-intro p { margin-bottom: 14px; }
+  .dcf-intro strong { color: var(--white); }
+
+  .dcf-wrapper { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: start; }
+
+  .dcf-controls { background: var(--deep); border: 1px solid var(--border); padding: 24px; position: sticky; top: 78px; }
+  .dcf-controls-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+
+  .scenario-tabs { display: flex; gap: 1px; background: var(--border); margin-bottom: 24px; }
+  .scenario-tab { flex: 1; padding: 9px 8px; text-align: center; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); cursor: pointer; background: var(--surface); transition: all 0.15s; }
+  .scenario-tab.active { background: var(--black); color: var(--gold); }
+  .scenario-tab:hover:not(.active) { color: var(--text); }
+
+  .slider-group { margin-bottom: 20px; }
+  .slider-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .slider-name { font-size: 11px; color: var(--text); }
+  .slider-val { font-size: 13px; font-weight: 600; color: var(--gold); font-family: 'Fraunces', serif; letter-spacing: -0.01em; }
+  input[type=range] { width: 100%; height: 2px; background: var(--border); outline: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 4px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: var(--gold); cursor: pointer; border: 2px solid var(--black); }
+  input[type=range]::-webkit-slider-thumb:hover { background: var(--white); }
+  .slider-range { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); letter-spacing: 0.06em; }
+
+  .dcf-divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  .output-block { background: var(--surface); padding: 14px 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .output-key { font-size: 11px; color: var(--muted); }
+  .output-val { font-size: 15px; font-weight: 300; color: var(--white); letter-spacing: -0.02em; font-family: 'Fraunces', serif; }
+  .output-val.big { font-size: 28px; color: var(--gold); }
+  .output-val.up { color: var(--green); }
+  .output-val.dn { color: var(--red); }
+
+  /* RESULTS PANEL */
+  .dcf-results { }
+  .results-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+  .results-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+  .results-updated { font-size: 9px; color: var(--muted); letter-spacing: 0.1em; }
+
+  .price-targets { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 24px; }
+  .pt-cell { background: var(--deep); padding: 20px; text-align: center; }
+  .pt-label { font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .pt-val { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; }
+  .pt-val.bear { color: var(--red); }
+  .pt-val.base { color: var(--gold); }
+  .pt-val.bull { color: var(--green); }
+  .pt-upside { font-size: 11px; }
+  .pt-upside.pos { color: var(--green); }
+  .pt-upside.neg { color: var(--red); }
+
+  .active-scenario-banner { background: var(--gold-dim); border: 1px solid rgba(240,192,96,0.25); padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--text); }
+  .asb-label { font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+
+  .model-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 24px; }
+  .model-table th { text-align: left; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 400; }
+  .model-table td { padding: 9px 10px; border-bottom: 1px solid rgba(26,37,64,0.5); color: var(--text); }
+  .model-table tr:last-child td { border-bottom: none; }
+  .model-table td.num { text-align: right; font-family: 'Fraunces', serif; font-weight: 300; letter-spacing: -0.01em; }
+  .model-table td.year { color: var(--muted); font-size: 11px; }
+  .model-table td.fcf { color: var(--green); }
+  .model-table td.disc { color: var(--blue-bright); }
+  .model-table tr:hover td { background: rgba(26,37,64,0.3); }
+
+  .assumptions-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 24px; }
+  .as-cell { background: var(--surface); padding: 14px 16px; }
+  .as-label { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .as-val { font-size: 15px; font-weight: 300; color: var(--gold); font-family: 'Fraunces', serif; letter-spacing: -0.02em; }
+
+  .thesis-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 24px; }
+  .thesis-box { background: var(--deep); padding: 20px; }
+  .thesis-box-title { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 8px; }
+  .thesis-box-title.green { color: var(--green); }
+  .thesis-box-title.red { color: var(--red); }
+  .thesis-box-title.gold { color: var(--gold); }
+  .thesis-box-body { font-size: 12px; line-height: 1.7; color: var(--muted); }
+  .thesis-box-body strong { color: var(--text); }
+
+  .disclaimer { padding: 20px 24px; background: var(--surface); border-left: 2px solid var(--blue-dim); font-size: 11px; line-height: 1.65; color: var(--muted); margin-top: 32px; }
+
+  footer { background: var(--deep); border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer .logo { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 900; color: var(--white); text-decoration: none; }
+  footer .logo span { color: var(--blue-bright); }
+  footer p { font-size: 10px; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 40px 24px 32px; }
+    .section { padding: 40px 24px; }
+    .dcf-section { padding: 40px 24px; }
+    .dcf-wrapper { grid-template-columns: 1fr; }
+    .dcf-controls { position: static; }
+    nav { padding: 0 24px; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .price-targets { grid-template-columns: 1fr; }
+    .assumptions-strip { grid-template-columns: 1fr 1fr; }
+    .thesis-boxes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="research.html" class="nav-logo">Rosehill<span>Research</span></a>
+  <div class="nav-right">
+    <a href="research.html">Research</a>
+    <a href="portfolio.html">Portfolio</a>
+    <span class="nav-pill">◆ Monthly Pick · Jun 2026</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Monthly Pick · June 2026 · NYSE: COHR</div>
+    <h1 class="hero-h1">Coherent Corp.<br><em>The Quiet One</em></h1>
+    <p class="hero-sub">
+      Everyone is talking about Lumentum. <strong>Lumentum is up 1,255% in a year.</strong> Coherent does the same thing, for the same customers, using largely the same technology. It's up 449%. That gap is the whole thesis.
+    </p>
+    <div class="student-note" style="margin-top:24px;max-width:520px">
+      I found Coherent by looking for whatever Lumentum's less famous cousin was. Turned out to be a $7B revenue company with a $2 billion check from Nvidia on its balance sheet and capacity booked through 2028. I had to read the earnings call twice to make sure I wasn't missing something. I wasn't.
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hero-card-label">As of June 13, 2026</div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Stock Price</span><span class="hero-stat-val">~$360</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Market Cap</span><span class="hero-stat-val">~$70B</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Q3 FY26 Revenue</span><span class="hero-stat-val up">$1.81B (+21% YoY)</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Datacenter Revenue</span><span class="hero-stat-val up">$1.36B (+41% YoY)</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Non-GAAP EPS</span><span class="hero-stat-val up">$1.41 (+55% YoY)</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Q4 Revenue Guide</span><span class="hero-stat-val gold">$1.91–2.05B</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Forward P/E (vs LITE)</span><span class="hero-stat-val up">~49x vs ~159x</span></div>
+    <div class="hero-stat-row"><span class="hero-stat-key">Nvidia Equity Stake</span><span class="hero-stat-val gold">$2B</span></div>
+  </div>
+</div>
+
+<!-- WHAT THEY DO -->
+<div class="section">
+  <div class="section-eyebrow">The Business</div>
+  <h2 class="section-title">Light, not electrons. That's the whole thing.</h2>
+  <div class="section-body">
+    <p>When you train an AI model or run inference at scale, you need GPUs talking to each other constantly. For a long time they did this over copper wires. Copper works fine until you need to move more data than copper can carry, which is exactly what's happening right now. The solution is to use light instead of electricity. Optical transceivers convert electrical signals into light pulses, send them through fiber, and convert them back. Coherent makes those components.</p>
+    <p>The reason this matters for AI: a single Nvidia GPU cluster at scale has thousands of connections. As models get bigger and inference demand grows, those connections need to carry more bandwidth. The shift from 400G to 800G to 1.6T transceivers is happening in real time, and Coherent is one of maybe three companies in the world that can actually make 1.6T transceivers at volume. The other two are Lumentum and Applied Optoelectronics.</p>
+    <p>Coherent also makes the chips that go inside those transceivers. Indium phosphide lasers. They're scaling their 6-inch InP fabrication capacity and plan to more than quadruple it by end of 2027. That manufacturing capability is why Nvidia wrote them a $2 billion check. Not a customer contract. An equity investment. That's a different level of commitment.</p>
+  </div>
+  <div class="student-note">
+    I genuinely didn't understand what an optical transceiver was before writing this. The short version: it's a plugin module that slots into a network switch and makes the connection. The 1.6T part means it can move 1.6 terabits of data per second. For context, that's roughly 200 gigabytes per second. The reason AI needs this is that GPUs sit in racks and have to talk to each other constantly during training. Faster connections mean less time waiting.
+  </div>
+</div>
+
+<!-- COHR VS LITE -->
+<div class="section">
+  <div class="section-eyebrow">COHR vs LITE</div>
+  <h2 class="section-title">Same demand. Very different valuations.</h2>
+  <div class="section-body">
+    <p>This is the core of the pitch. Lumentum has been the AI optics story of the year. It's up 1,255% in twelve months. The press is all over it. Meanwhile Coherent is doing essentially the same thing, growing just as fast on the datacenter business, and trading at one-third the earnings multiple.</p>
+    <p>The gap exists for a few reasons. Coherent has a legacy industrial segment that's dragging on overall growth -- industrial revenue fell 41% YoY in Q3 while datacenter grew 41%. The blended number looks less impressive. Second, Coherent was late to fully pivot its messaging to AI. Lumentum's CEO is better at the investor story. Third, Coherent is a bigger company with more debt, which makes the valuation math look uglier on a per-share basis even when the underlying business is strong.</p>
+    <p>None of those things change what the datacenter business is actually doing.</p>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-header">
+        <div class="compare-header-ticker cohr">COHR</div>
+        <div class="compare-header-sub">Coherent Corp · NYSE</div>
+      </div>
+      <div class="compare-row"><span class="compare-row-key">Stock price (Jun 13)</span><span class="compare-row-val">~$360</span></div>
+      <div class="compare-row"><span class="compare-row-key">1-year return</span><span class="compare-row-val better">+449%</span></div>
+      <div class="compare-row"><span class="compare-row-key">Forward P/E</span><span class="compare-row-val better">~49x</span></div>
+      <div class="compare-row"><span class="compare-row-key">Price/Sales (TTM)</span><span class="compare-row-val better">~7x</span></div>
+      <div class="compare-row"><span class="compare-row-key">Q3 Revenue YoY</span><span class="compare-row-val better">+21%</span></div>
+      <div class="compare-row"><span class="compare-row-key">Datacenter revenue</span><span class="compare-row-val better">75% of total</span></div>
+      <div class="compare-row"><span class="compare-row-key">EPS growth (Q3)</span><span class="compare-row-val better">+55% YoY</span></div>
+      <div class="compare-row"><span class="compare-row-key">Nvidia relationship</span><span class="compare-row-val better">$2B equity stake</span></div>
+      <div class="compare-row"><span class="compare-row-key">Capacity visibility</span><span class="compare-row-val better">Booked to 2028–30</span></div>
+      <div class="compare-row"><span class="compare-row-key">Industrial drag</span><span class="compare-row-val worse">Yes, 25% of rev</span></div>
+      <div class="compare-row"><span class="compare-row-key">Media coverage</span><span class="compare-row-val worse">Low</span></div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-header">
+        <div class="compare-header-ticker lite">LITE</div>
+        <div class="compare-header-sub">Lumentum Holdings · NASDAQ</div>
+      </div>
+      <div class="compare-row"><span class="compare-row-key">Stock price (Jun 13)</span><span class="compare-row-val">~$978</span></div>
+      <div class="compare-row"><span class="compare-row-key">1-year return</span><span class="compare-row-val worse">+1,255%</span></div>
+      <div class="compare-row"><span class="compare-row-key">Forward P/E</span><span class="compare-row-val worse">~159x</span></div>
+      <div class="compare-row"><span class="compare-row-key">Price/Sales (TTM)</span><span class="compare-row-val worse">~12.85x</span></div>
+      <div class="compare-row"><span class="compare-row-key">Q3 Revenue YoY</span><span class="compare-row-val better">+90%</span></div>
+      <div class="compare-row"><span class="compare-row-key">Datacenter revenue</span><span class="compare-row-val better">~85% of total</span></div>
+      <div class="compare-row"><span class="compare-row-key">EPS growth (Q3)</span><span class="compare-row-val better">Higher</span></div>
+      <div class="compare-row"><span class="compare-row-key">Nvidia relationship</span><span class="compare-row-val">Supply agreement</span></div>
+      <div class="compare-row"><span class="compare-row-key">Capacity visibility</span><span class="compare-row-val better">LT agreements to 2027</span></div>
+      <div class="compare-row"><span class="compare-row-key">Industrial drag</span><span class="compare-row-val better">Minimal</span></div>
+      <div class="compare-row"><span class="compare-row-key">Media coverage</span><span class="compare-row-val worse">Very high</span></div>
+    </div>
+  </div>
+
+  <div class="student-note">
+    Lumentum's revenue growth rate is genuinely better right now. 90% vs 21% is not close. But some of that reflects Lumentum's smaller base and faster pivot away from legacy telecom. Coherent has more revenue to grow. The question I couldn't answer definitively: does the multiple gap reflect a real quality difference in the business, or is it mostly that Lumentum got discovered first and the narrative ran with it? I lean toward the second, but I could be wrong.
+  </div>
+</div>
+
+<!-- INTERACTIVE DCF -->
+<div class="dcf-section">
+  <div class="section-eyebrow" style="margin-bottom:10px">Interactive DCF</div>
+  <h2 class="section-title" style="margin-bottom:0">Build your own thesis.</h2>
+  <div class="dcf-intro">
+    <p>This is a three-scenario DCF on Coherent's datacenter business. I've pre-loaded three scenarios but you can adjust every assumption yourself. The model uses a sum-of-parts approach: datacenter segment valued on DCF, industrial segment valued on EV/EBITDA, net debt subtracted to get equity value per share.</p>
+    <p>Every number here is my own estimate based on the Q3 FY2026 earnings release and guidance. <strong>This is a student learning exercise, not financial advice.</strong></p>
+  </div>
+
+  <div class="dcf-wrapper">
+
+    <!-- CONTROLS -->
+    <div class="dcf-controls">
+      <div class="dcf-controls-label">Assumptions</div>
+
+      <div class="scenario-tabs">
+        <div class="scenario-tab active" onclick="loadScenario('bear',this)">Bear</div>
+        <div class="scenario-tab" onclick="loadScenario('base',this)">Base</div>
+        <div class="scenario-tab" onclick="loadScenario('bull',this)">Bull</div>
+        <div class="scenario-tab" onclick="loadScenario('custom',this)">Custom</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Datacenter Revenue Growth Yr 1</span>
+          <span class="slider-val" id="val-dcGrowth1">35%</span>
+        </div>
+        <input type="range" id="dcGrowth1" min="10" max="80" value="35" oninput="updateDCF()">
+        <div class="slider-range"><span>10%</span><span>80%</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Datacenter Revenue Growth Yr 2-3</span>
+          <span class="slider-val" id="val-dcGrowth2">25%</span>
+        </div>
+        <input type="range" id="dcGrowth2" min="5" max="60" value="25" oninput="updateDCF()">
+        <div class="slider-range"><span>5%</span><span>60%</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Terminal Growth Rate</span>
+          <span class="slider-val" id="val-tgr">4%</span>
+        </div>
+        <input type="range" id="tgr" min="1" max="8" step="0.5" value="4" oninput="updateDCF()">
+        <div class="slider-range"><span>1%</span><span>8%</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">WACC</span>
+          <span class="slider-val" id="val-wacc">9%</span>
+        </div>
+        <input type="range" id="wacc" min="6" max="14" step="0.5" value="9" oninput="updateDCF()">
+        <div class="slider-range"><span>6%</span><span>14%</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">FCF Margin (Datacenter, Yr 5)</span>
+          <span class="slider-val" id="val-fcfMargin">22%</span>
+        </div>
+        <input type="range" id="fcfMargin" min="10" max="35" value="22" oninput="updateDCF()">
+        <div class="slider-range"><span>10%</span><span>35%</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Industrial EV/EBITDA Multiple</span>
+          <span class="slider-val" id="val-indMult">6x</span>
+        </div>
+        <input type="range" id="indMult" min="3" max="12" value="6" oninput="updateDCF()">
+        <div class="slider-range"><span>3x</span><span>12x</span></div>
+      </div>
+
+      <div class="dcf-divider"></div>
+
+      <div class="output-block">
+        <span class="output-key">Active Price Target</span>
+        <span class="output-val big" id="out-target">$—</span>
+      </div>
+      <div class="output-block">
+        <span class="output-key">Upside / Downside</span>
+        <span class="output-val" id="out-upside">—</span>
+      </div>
+      <div class="output-block">
+        <span class="output-key">Implied Return (ann.)</span>
+        <span class="output-val" id="out-ann">—</span>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="dcf-results">
+
+      <div class="price-targets">
+        <div class="pt-cell">
+          <div class="pt-label">Bear Case</div>
+          <div class="pt-val bear" id="pt-bear">$—</div>
+          <div class="pt-upside" id="up-bear">—</div>
+        </div>
+        <div class="pt-cell">
+          <div class="pt-label">Base Case</div>
+          <div class="pt-val base" id="pt-base">$—</div>
+          <div class="pt-upside" id="up-base">—</div>
+        </div>
+        <div class="pt-cell">
+          <div class="pt-label">Bull Case</div>
+          <div class="pt-val bull" id="pt-bull">$—</div>
+          <div class="pt-upside" id="up-bull">—</div>
+        </div>
+      </div>
+
+      <div class="active-scenario-banner">
+        <div>
+          <div class="asb-label">Active Scenario</div>
+          <div id="scenario-desc" style="font-size:13px;color:var(--text);margin-top:3px">Bear: CPO delayed, industrial drag persists, no China recovery</div>
+        </div>
+      </div>
+
+      <div class="assumptions-strip">
+        <div class="as-cell"><div class="as-label">Yr 1 DC Growth</div><div class="as-val" id="as-g1">—</div></div>
+        <div class="as-cell"><div class="as-label">Yr 2-3 DC Growth</div><div class="as-val" id="as-g2">—</div></div>
+        <div class="as-cell"><div class="as-label">WACC</div><div class="as-val" id="as-wacc">—</div></div>
+        <div class="as-cell"><div class="as-label">Terminal Growth</div><div class="as-val" id="as-tgr">—</div></div>
+      </div>
+
+      <div class="results-header">
+        <div class="results-title">5-Year DCF Model — Datacenter Segment</div>
+      </div>
+
+      <table class="model-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th style="text-align:right">DC Revenue</th>
+            <th style="text-align:right">Growth</th>
+            <th style="text-align:right">FCF Margin</th>
+            <th style="text-align:right">FCF</th>
+            <th style="text-align:right">Discount Factor</th>
+            <th style="text-align:right">PV of FCF</th>
+          </tr>
+        </thead>
+        <tbody id="dcf-table-body"></tbody>
+      </table>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:24px">
+        <div style="background:var(--surface);padding:14px 16px"><div style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">PV of FCFs (5yr)</div><div style="font-size:16px;font-weight:300;color:var(--green);font-family:'Fraunces',serif" id="pv-fcfs">—</div></div>
+        <div style="background:var(--surface);padding:14px 16px"><div style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Terminal Value (PV)</div><div style="font-size:16px;font-weight:300;color:var(--blue-bright);font-family:'Fraunces',serif" id="pv-tv">—</div></div>
+        <div style="background:var(--surface);padding:14px 16px"><div style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Industrial Segment Value</div><div style="font-size:16px;font-weight:300;color:var(--muted);font-family:'Fraunces',serif" id="ind-val">—</div></div>
+        <div style="background:var(--surface);padding:14px 16px"><div style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Net Debt</div><div style="font-size:16px;font-weight:300;color:var(--red);font-family:'Fraunces',serif">($2.7B)</div></div>
+      </div>
+
+      <div class="thesis-boxes">
+        <div class="thesis-box">
+          <div class="thesis-box-title green">Why I think this works</div>
+          <div class="thesis-box-body">
+            <strong>Nvidia's $2B equity stake is not normal.</strong> Customers don't take equity positions in their suppliers. Strategic partners do. That relationship gives Coherent visibility and manufacturing support no contract can replicate.<br><br>
+            <strong>Capacity booked through 2028.</strong> Some contracts extend to 2030. In a world where hyperscaler capex cycles can reverse, multi-year take-or-pay agreements are genuinely valuable.<br><br>
+            <strong>The valuation gap vs LITE is hard to justify on fundamentals.</strong> 49x vs 159x earnings for businesses doing the same thing for the same customers is a big gap to maintain indefinitely.
+          </div>
+        </div>
+        <div class="thesis-box">
+          <div class="thesis-box-title red">What could go wrong</div>
+          <div class="thesis-box-body">
+            <strong>Industrial segment is still 25% of revenue and shrinking.</strong> It's a drag on margins and narrative. If it doesn't stabilize, it keeps clouding the AI story.<br><br>
+            <strong>CPO (co-packaged optics) could disrupt the transceiver model.</strong> If hyperscalers move to CPO faster than expected, pluggable transceiver volumes could soften. Both Coherent and Lumentum are betting on CPO too, but the timeline is uncertain.<br><br>
+            <strong>Customer concentration.</strong> Nvidia is a massive portion of the revenue outlook. Jensen Huang's comments move this stock. That's a single point of risk.
+          </div>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        ⚠ <strong style="color:var(--white)">Educational disclaimer:</strong> This DCF is a student learning exercise built on publicly available financial data from Coherent's Q3 FY2026 earnings release (May 6, 2026) and management guidance. All forward projections are my own estimates and reflect significant uncertainty. Nothing here is financial advice. Sources: Coherent Corp 8-K Q3 FY2026 via SEC EDGAR. Coherent Q3 FY2026 earnings call transcript via Yahoo Finance. Futurum Research COHR Q3 FY2026 analysis. JPMorgan COHR/LITE note June 12 2026 via CoinCentral. 24/7 Wall St optics comparison May 2026. Simply Wall St COHR analysis June 2026.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="research.html" class="logo">Rosehill<span>Research</span></a>
+  <p>Not financial advice. Student research project.<br>Rosehill Research · June 2026</p>
+</footer>
+
+<script>
+const CURRENT_PRICE = 360;
+const SHARES_OUT = 195; // million shares approx
+const NET_DEBT = 2700; // $M
+const IND_EBITDA = 180; // $M annual industrial EBITDA estimate
+const DC_BASE_REV = 5600; // $M annualized datacenter run rate (Q3 * 4 approx)
+
+const scenarios = {
+  bear: {
+    dcGrowth1: 15, dcGrowth2: 12, tgr: 2.5, wacc: 11, fcfMargin: 16, indMult: 4,
+    desc: 'Bear: CPO delayed, industrial drag persists, no China recovery'
+  },
+  base: {
+    dcGrowth1: 35, dcGrowth2: 25, tgr: 4, wacc: 9, fcfMargin: 22, indMult: 6,
+    desc: 'Base: AI transceiver demand holds, margins expand, industrial stabilizes'
+  },
+  bull: {
+    dcGrowth1: 55, dcGrowth2: 38, tgr: 5, wacc: 8, fcfMargin: 28, indMult: 8,
+    desc: 'Bull: CPO inflects early, Nvidia relationship expands, new cloud buyers'
+  },
+  custom: {
+    dcGrowth1: 35, dcGrowth2: 25, tgr: 4, wacc: 9, fcfMargin: 22, indMult: 6,
+    desc: 'Custom: your assumptions'
+  }
+};
+
+let currentScenario = 'bear';
+
+function setSliders(s) {
+  document.getElementById('dcGrowth1').value = s.dcGrowth1;
+  document.getElementById('dcGrowth2').value = s.dcGrowth2;
+  document.getElementById('tgr').value = s.tgr;
+  document.getElementById('wacc').value = s.wacc;
+  document.getElementById('fcfMargin').value = s.fcfMargin;
+  document.getElementById('indMult').value = s.indMult;
+}
+
+function loadScenario(name, el) {
+  currentScenario = name;
+  document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  setSliders(scenarios[name]);
+  updateDCF();
+}
+
+function fmt(n) { return '$' + n.toFixed(0) + 'B'; }
+function fmtM(n) { return '$' + (n/1000).toFixed(1) + 'B'; }
+function pct(n) { return n.toFixed(1) + '%'; }
+
+function runDCF(g1, g2, g4, tgr, wacc, fcfMgn) {
+  // Growth schedule: yr1=g1, yr2=g2, yr3=g2, yr4=g4, yr5=g4
+  const g4r = Math.max(5, g2 - 8);
+  let rev = DC_BASE_REV;
+  const rows = [];
+  let pvFCFs = 0;
+  const growthSchedule = [g1, g2, g2, g4r, g4r];
+  // FCF margin ramps linearly from 15% to fcfMgn
+  const startMargin = 15;
+
+  for (let i = 0; i < 5; i++) {
+    const yr = 2027 + i;
+    const gr = growthSchedule[i];
+    rev = rev * (1 + gr/100);
+    const margin = startMargin + (fcfMgn - startMargin) * (i / 4);
+    const fcf = rev * margin / 100;
+    const df = Math.pow(1 + wacc/100, -(i+1));
+    const pv = fcf * df;
+    pvFCFs += pv;
+    rows.push({ yr, rev, gr, margin, fcf, df, pv });
+  }
+
+  // Terminal value
+  const lastFCF = rows[4].fcf;
+  const tv = lastFCF * (1 + tgr/100) / ((wacc - tgr)/100);
+  const pvTV = tv * Math.pow(1 + wacc/100, -5);
+
+  return { rows, pvFCFs, pvTV };
+}
+
+function calcTarget(g1, g2, tgr, wacc, fcfMgn, indMult) {
+  const { rows, pvFCFs, pvTV } = runDCF(g1, g2, 0, tgr, wacc, fcfMgn);
+  const indValue = IND_EBITDA * indMult;
+  const equity = pvFCFs + pvTV + indValue - NET_DEBT;
+  const pricePerShare = equity / SHARES_OUT;
+  return { rows, pvFCFs, pvTV, indValue, pricePerShare };
+}
+
+function updateDCF() {
+  const g1 = +document.getElementById('dcGrowth1').value;
+  const g2 = +document.getElementById('dcGrowth2').value;
+  const tgr = +document.getElementById('tgr').value;
+  const wacc = +document.getElementById('wacc').value;
+  const fcfMgn = +document.getElementById('fcfMargin').value;
+  const indMult = +document.getElementById('indMult').value;
+
+  document.getElementById('val-dcGrowth1').textContent = pct(g1);
+  document.getElementById('val-dcGrowth2').textContent = pct(g2);
+  document.getElementById('val-tgr').textContent = pct(tgr);
+  document.getElementById('val-wacc').textContent = pct(wacc);
+  document.getElementById('val-fcfMargin').textContent = pct(fcfMgn);
+  document.getElementById('val-indMult').textContent = indMult + 'x';
+
+  // Current scenario target
+  const cur = calcTarget(g1, g2, tgr, wacc, fcfMgn, indMult);
+  const upside = ((cur.pricePerShare - CURRENT_PRICE) / CURRENT_PRICE * 100);
+  const annReturn = (Math.pow(cur.pricePerShare / CURRENT_PRICE, 1/3) - 1) * 100;
+
+  document.getElementById('out-target').textContent = '$' + Math.max(0, cur.pricePerShare).toFixed(0);
+  const upEl = document.getElementById('out-upside');
+  upEl.textContent = (upside >= 0 ? '+' : '') + upside.toFixed(1) + '%';
+  upEl.className = 'output-val ' + (upside >= 0 ? 'up' : 'dn');
+  const annEl = document.getElementById('out-ann');
+  annEl.textContent = (annReturn >= 0 ? '+' : '') + annReturn.toFixed(1) + '% / yr (3yr)';
+  annEl.className = 'output-val ' + (annReturn >= 0 ? 'up' : 'dn');
+
+  // Fixed scenario targets
+  const bear = calcTarget(scenarios.bear.dcGrowth1, scenarios.bear.dcGrowth2, scenarios.bear.tgr, scenarios.bear.wacc, scenarios.bear.fcfMargin, scenarios.bear.indMult);
+  const base = calcTarget(scenarios.base.dcGrowth1, scenarios.base.dcGrowth2, scenarios.base.tgr, scenarios.base.wacc, scenarios.base.fcfMargin, scenarios.base.indMult);
+  const bull = calcTarget(scenarios.bull.dcGrowth1, scenarios.bull.dcGrowth2, scenarios.bull.tgr, scenarios.bull.wacc, scenarios.bull.fcfMargin, scenarios.bull.indMult);
+
+  function setPT(id, uid, val) {
+    const up = ((val - CURRENT_PRICE) / CURRENT_PRICE * 100);
+    document.getElementById(id).textContent = '$' + Math.max(0, val).toFixed(0);
+    const uel = document.getElementById(uid);
+    uel.textContent = (up >= 0 ? '+' : '') + up.toFixed(0) + '% vs current';
+    uel.className = 'pt-upside ' + (up >= 0 ? 'pos' : 'neg');
+  }
+  setPT('pt-bear', 'up-bear', bear.pricePerShare);
+  setPT('pt-base', 'up-base', base.pricePerShare);
+  setPT('pt-bull', 'up-bull', bull.pricePerShare);
+
+  // Scenario description
+  const desc = currentScenario === 'custom'
+    ? 'Custom: your assumptions'
+    : scenarios[currentScenario]?.desc || '';
+  document.getElementById('scenario-desc').textContent = desc;
+
+  // Assumptions strip
+  document.getElementById('as-g1').textContent = pct(g1);
+  document.getElementById('as-g2').textContent = pct(g2);
+  document.getElementById('as-wacc').textContent = pct(wacc);
+  document.getElementById('as-tgr').textContent = pct(tgr);
+
+  // DCF table
+  const tbody = document.getElementById('dcf-table-body');
+  tbody.innerHTML = cur.rows.map(r => `
+    <tr>
+      <td class="year">${r.yr}</td>
+      <td class="num">$${(r.rev/1000).toFixed(1)}B</td>
+      <td class="num">${r.gr.toFixed(0)}%</td>
+      <td class="num">${r.margin.toFixed(1)}%</td>
+      <td class="num fcf">$${(r.fcf/1000).toFixed(2)}B</td>
+      <td class="num disc">${r.df.toFixed(3)}x</td>
+      <td class="num">${(r.pv/1000).toFixed(2)}B</td>
+    </tr>`).join('');
+
+  document.getElementById('pv-fcfs').textContent = '$' + (cur.pvFCFs/1000).toFixed(1) + 'B';
+  document.getElementById('pv-tv').textContent = '$' + (cur.pvTV/1000).toFixed(1) + 'B';
+  document.getElementById('ind-val').textContent = '$' + (cur.indValue/1000).toFixed(1) + 'B';
+}
+
+// Initialize
+loadScenario('bear', document.querySelector('.scenario-tab'));
+</script>
+</body>
+</html>
