@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — The Research Is the Point | Rosehill Research</title>
-<meta name="description" content="Rosehill Research is a personal finance and investing project by a Fordham University student. Weekly market research and a live portfolio as accountability infrastructure.">
+<meta name="description" content="Rosehill Research is a student-run finance and equity research project by Jonathan Guerrero and Ryan Leszyk, both Fordham Gabelli students. Weekly market research, monthly equity deep dives, and a live portfolio.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://glointernational.org/about.html">
 <!-- Open Graph -->
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://glointernational.org/about.html">
 <meta property="og:title" content="About — The Research Is the Point | Rosehill Research">
-<meta property="og:description" content="A Fordham University finance student's research and investing project. Weekly market wraps, monthly equity deep dives, and a live $10K portfolio.">
+<meta property="og:description" content="Two Fordham Gabelli students publishing weekly market analysis, monthly equity research, and private markets coverage. The research is the point.">
 <meta property="og:site_name" content="Rosehill Research">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
@@ -24,7 +24,7 @@
   "@type": "AboutPage",
   "name": "About — Rosehill Research",
   "url": "https://glointernational.org/about.html",
-  "description": "About Rosehill Research — a personal finance learning and accountability project by a Fordham University finance student.",
+  "description": "About Rosehill Research — a student-run equity and markets research project by Jonathan Guerrero and Ryan Leszyk, Fordham Gabelli School of Business.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Rosehill Research",
@@ -33,7 +33,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #060810;
@@ -56,7 +56,7 @@
   body {
     background: var(--black);
     color: var(--text);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
   }
 
@@ -79,7 +79,7 @@
     display: flex; align-items: center; justify-content: space-between;
     height: 60px;
   }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
   .nav-logo span { color: var(--blue-bright); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
@@ -102,7 +102,7 @@
   .page-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-bright); }
 
   .page-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Fraunces', serif;
     font-size: 64px; font-weight: 900;
     color: var(--white);
     letter-spacing: -0.03em;
@@ -119,7 +119,7 @@
   }
 
   .prose p {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
     line-height: 1.85;
     color: var(--text);
@@ -134,7 +134,7 @@
   }
 
   .prose h3 {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -233,14 +233,14 @@
     margin-bottom: 8px;
   }
   .principle-desc {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 11px;
     line-height: 1.65;
     color: var(--muted);
   }
 
   .methodology-intro {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     line-height: 1.8;
     color: var(--muted);
@@ -281,7 +281,7 @@
   }
 
   .meth-body {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 11px;
     line-height: 1.75;
     color: var(--muted);
@@ -307,7 +307,7 @@
     align-items: center;
     position: relative; z-index: 1;
   }
-  footer .logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--white); text-decoration: none; }
+  footer .logo { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 900; color: var(--white); text-decoration: none; }
   footer .logo span { color: var(--blue-bright); }
   footer p { font-size: 10px; color: var(--muted); }
 
@@ -321,6 +321,50 @@
     .principles { grid-template-columns: 1fr; }
     .meth-grid { grid-template-columns: 1fr; }
   }
+
+  /* Co-authors */
+  .authors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin: 28px 0 0;
+  }
+  .author-card {
+    background: var(--deep);
+    padding: 24px;
+  }
+  .author-card-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  .author-card-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .author-card-role {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  .author-card-body {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+  .author-card-body strong { color: var(--text); }
+
 </style>
 </head>
 <body>
@@ -338,33 +382,33 @@
 
 <div class="page">
 
-  <div class="page-eyebrow">About This Project</div>
-  <h1 class="page-title">This is a<br><em>side project.</em></h1>
+  <div class="page-eyebrow">About</div>
+  <h1 class="page-title">Rosehill<br><em>Research</em></h1>
 
   <div class="about-body">
 
     <div class="prose">
-      <p class="lead">Nothing more, nothing less. Jonathan Guerrero, a finance student at Fordham's Gabelli School of Business trying to build a stronger, more honest foundation in how markets actually work.</p>
+      <p class="lead">Jonathan Guerrero and Ryan Leszyk, two finance students at Fordham's Gabelli School of Business. Jonathan started this in January 2026. Ryan joined as co-author in June 2026.</p>
 
-      <p>The classroom gives you the frameworks. What it doesn't give you is the discipline of showing up every week, reading what happened, and being forced to explain it clearly enough to put it in writing. The gap between understanding concepts and understanding markets in real time is what this project is trying to close.</p>
+      <p>The site exists because writing forces you to actually understand what you're talking about. Every week we have to read what happened, figure out what mattered, and explain it clearly enough to publish. That process is more useful than any class we've taken.</p>
 
-      <p>It's easy to have opinions about markets. It's harder to commit them to paper before you know how things play out. So that's the exercise: read, synthesize, write, publish, and look back later. The paper trail is the whole point.</p>
+      <h3>Who covers what</h3>
 
-      <h3>The Portfolio</h3>
+      <p><strong>Jonathan</strong> handles the macro side: weekly wraps, Alt Radar (private equity and alternatives), and the monthly equity deep dives. The FTAI and COHR DCFs are his work.</p>
 
-      <p>There's a portfolio tracker on this site. The positions are real, the prices are live, and the performance is tracked against the S&P 500. The portfolio isn't the focus though. Think of it as <em>accountability infrastructure.</em> It gives the research something to be measured against and keeps the analysis grounded in something with actual stakes.</p>
+      <p><strong>Ryan</strong> focuses on equities and the broader market. Individual stocks, sector analysis, earnings. He brings a more bottom-up approach to the research.</p>
 
-      <p>The numbers aren't the point. <strong>The research is the point.</strong> If the portfolio does well, great. If it doesn't, that's a learning outcome too, and it'll be documented honestly either way.</p>
+      <h3>The portfolio</h3>
 
-      <h3>What Gets Published</h3>
+      <p>There's a live portfolio on this site benchmarked against the S&P 500. The positions are real. It's there to keep the research honest, not to show off returns.</p>
 
-      <p>A <strong>Weekly Wrap</strong> every week covering what happened in markets, what the data showed, and what to watch going into the next week. Occasional <strong>Special Reports</strong> when something significant happens mid-cycle that warrants coverage right away: a Fed surprise, a macro shock, an earnings result that changes the picture.</p>
+      <h3>What we publish</h3>
 
-      <p>All macro data is sourced from primary publications: BLS, BEA, the Federal Reserve, FactSet. Everything cited. When the analysis is wrong, that gets acknowledged too.</p>
+      <p>A <strong>Weekly Wrap</strong> every week. A <strong>Monthly Pick</strong> each month with a full DCF. <strong>Alt Radar</strong> every other week covering private markets. Everything is sourced from primary data. When we're wrong we say so.</p>
 
-      <h3>A Note on Advice</h3>
+      <h3>On advice</h3>
 
-      <p>Nothing written here is financial advice. This is a student research project. If you're making investment decisions based on anything published on this site, please reconsider. The goal here is to learn how to think about markets clearly, not to tell anyone what to do with their money.</p>
+      <p>Nothing here is financial advice. We're students. Don't make investment decisions based on anything on this site.</p>
     </div>
 
     <div class="sidebar">
@@ -372,8 +416,12 @@
       <div class="sidebar-card">
         <div class="sidebar-label">Project Details</div>
         <div class="sidebar-item">
-          <span class="si-key">Author</span>
+          <span class="si-key">Founded by</span>
           <span class="si-val">Jonathan Guerrero</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">Co-author</span>
+          <span class="si-val">Ryan Leszyk</span>
         </div>
         <div class="sidebar-item">
           <span class="si-key">School</span>
@@ -404,17 +452,40 @@
           <span class="si-val blue">Every week</span>
         </div>
         <div class="sidebar-item">
-          <span class="si-key">★ Special Report</span>
-          <span class="si-val">As needed</span>
+          <span class="si-key">◆ Monthly Pick</span>
+          <span class="si-val">Monthly</span>
+        </div>
+        <div class="sidebar-item">
+          <span class="si-key">◈ Alt Radar</span>
+          <span class="si-val">Every other week</span>
         </div>
       </div>
 
       <div class="sidebar-disclaimer">
-        ⚠ Not financial advice. This is a student research project published for educational and accountability purposes only.
+        ⚠ Not financial advice. Student research project published for educational and accountability purposes only.
       </div>
 
     </div>
 
+  </div>
+
+  <div class="authors-grid">
+    <div class="author-card">
+      <div class="author-card-eyebrow">Founder &middot; Jan 2026</div>
+      <div class="author-card-name">Jonathan Guerrero</div>
+      <div class="author-card-role">Macro &middot; Alt Radar &middot; Monthly Picks</div>
+      <div class="author-card-body">
+        Gabelli School of Business, Fordham University. Covers macro, weekly wraps, Alt Radar, and monthly equity deep dives.
+      </div>
+    </div>
+    <div class="author-card">
+      <div class="author-card-eyebrow">Co-author &middot; Jun 2026</div>
+      <div class="author-card-name">Ryan Leszyk</div>
+      <div class="author-card-role">Equities &middot; Sector Analysis &middot; Earnings</div>
+      <div class="author-card-body">
+        Gabelli School of Business, Fordham University. Focuses on individual equities, sector dynamics, and earnings analysis.
+      </div>
+    </div>
   </div>
 
   <div class="section-divider"><span>How the Research Works</span></div>
