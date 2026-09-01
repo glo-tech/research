@@ -1,6 +1,96 @@
 const reports = [
 
       {
+    id:'rsummer', type:'weekly', week:'Summer 2026', date:'Sep 1, 2026', day:'01', month:'Sep',
+    title:'Two Months Gone: I Was in Latin America, Ryan Was Watching the Market Fall Apart',
+    excerpt:'I spent the summer valuing farmland and real estate in Latin America. Ryan kept writing. Eight weeks of market notes condensed below, from the SpaceX IPO through a Nasdaq correction, three Fed dissenters, and SpaceX losing $500B in seven weeks.',
+    keyData:[{val:'$500B',cls:'dn',label:'SPCX Market Cap Lost'},{val:'3',cls:'',label:'Fed Hawkish Dissenters'},{val:'-10%',cls:'dn',label:'Nasdaq 100 Correction'}],
+    body:`<p>Two months. No posts. I owe an explanation and a lot of catch-up.</p>
+
+<p>I spent the summer working in the alternatives space, specifically valuing and researching real assets in Latin America: farmland and real estate, mostly in Brazil and Colombia. It was the most useful thing I've done since starting this site. Actual fieldwork, actual comps, actual conversations about soil quality and irrigation rights with people who've been doing this for decades. I'll have more to say about that in Alt Radar. For now, just know it's the reason the posts stopped.</p>
+
+<p>One thing that changed while I was away: Ryan and I talked about how we want to divide coverage going forward. He's going to anchor the market and equities side, weekly price action, earnings, macro data, the stuff that moves the tape week to week. I'm going to focus on the alternatives and private markets side through Alt Radar, and keep doing the Monthly Picks with the full DCF work. It's a cleaner split and honestly plays to what each of us actually spent the summer doing.</p>
+
+<p>Ryan kept writing while I was gone. Eight weeks of notes. Below is the condensed version, dated and bulleted, so you can get oriented fast.</p>
+
+<h3>What Ryan Was Watching</h3>
+
+<p><strong>June 12: SpaceX IPO Week</strong></p>
+<ul>
+<li>CPI printed 4.2% YoY the same week SpaceX went public. Fordham raised tuition 4.5%. The Fed could not be reached for comment.</li>
+<li>Memory and hardware names got hit ahead of the IPO: Sandisk, AMD, and Micron all fell over 10%. Ryan's read: institutional dry powder getting pulled for SpaceX allocations.</li>
+<li>The equal-weighted S&P held up better than the cap-weighted index during the dip. Rotation signal, not a selloff. Money moving inside the market, not out of it.</li>
+<li>IPO book was massively oversubscribed. Institutional investors got filled at the offering price. Retail bought whatever was left at whatever price it opened Friday morning.</li>
+</ul>
+
+<p><strong>June 19: Rate Cuts Get Rain Checked</strong></p>
+<ul>
+<li>Fed held at 3.50 to 3.75%, as expected. The dot plot was the story: median 2026 projection moved to <strong>3.8%</strong>, implying a hike, not a cut. Easing-bias language stripped from the statement entirely.</li>
+<li>SpaceX ripped <strong>+20%</strong> on Monday alone on the Iran ceasefire announcement, on top of the 19% IPO-day pop. The retail bagholder thesis looked dead wrong for about four trading sessions.</li>
+<li>Dow hit a fresh record. Cheaper oil was doing more disinflation work than the Fed. Warsh was talking down rate cut expectations while the S&P set an all-time high behind him mid-presser.</li>
+</ul>
+
+<p><strong>June 26: Sell the Fed, Buy the Panic</strong></p>
+<ul>
+<li>Nasdaq <strong>-2.2%</strong>, S&P <strong>-1.4%</strong>. The market took a few days to actually digest what Warsh said. Turns out "we might hike" hits harder on a Wednesday than on a Monday.</li>
+<li>Sandisk and Micron fell 14% and 13% pre-earnings. Then Micron reported a blowout quarter and ripped <strong>+15.7%</strong> in a single session, dragging the Philadelphia Semiconductor Index up 3.2% with it.</li>
+<li>Apple hiked MacBook and iPad prices to protect margins. Fell 6.2% anyway.</li>
+<li>Q1 GDP revised up to <strong>2.1%</strong> from 1.6%. In a calmer tape that is an unambiguous win. Here it just gave the hawks more ammunition.</li>
+</ul>
+
+<p><strong>July 3: Half-Time</strong></p>
+<ul>
+<li>JPMorgan hiked its year-end S&P target to <strong>7,800</strong> from 7,200 and floated a "Blue Sky" scenario. Wall Street speak for getting on record before the line goes up.</li>
+<li>PCE printed at its highest level in roughly three years. Market shrugged because consumer spending held. Same logic as justifying a fourth credit card.</li>
+<li>June jobs report: <strong>57,000</strong> added, a sharp deceleration. Most people were mentally checked out for the 4th by the time it printed. Markets closed Thursday early, shut Friday.</li>
+</ul>
+
+<p><strong>July 10: Chips Ahoy</strong></p>
+<ul>
+<li>Micron committed <strong>$250B</strong> to US manufacturing through 2035. Started at $170B, bumped to $200B in June, now $250B. Also dropped $3B into GlobalWafers Texas silicon wafer operations on a 10-year supply deal.</li>
+<li>Meta confirmed it's rolling out a custom AI chip starting September. The AI trade has expanded from chips to memory, storage, servers, and the whole rack.</li>
+<li>Jobless claims came in at 215,000, better than expected. Existing home sales dropped to 4.09 million units. Two completely different economies sharing the same calendar.</li>
+</ul>
+
+<p><strong>July 17: Buffett Calls Bingo on the Casino</strong></p>
+<ul>
+<li>Buffett on CNBC: the market is being driven by speculation, not investing, and it's hard to find value when everyone would rather gamble. Landed differently with the Nasdaq down nearly 3% on the week.</li>
+<li>Chinese AI lab Moonshot dropped a new model reportedly narrowing the gap with top US labs. Semis rallied on cooler CPI then round-tripped. VanEck Semiconductor ETF finished <strong>-9%</strong> on the week, third weekly decline in four.</li>
+<li>SpaceX scrubbed a Starship test at the last second, engines refused to start. BlackRock beat and popped 5%. Taco Bell had a cyclospora outbreak and Yum Brands had its worst week since December.</li>
+</ul>
+
+<p><strong>July 24: The Nasdaq Catches a Correction</strong></p>
+<ul>
+<li>Nasdaq 100 officially in correction, <strong>down 10%+</strong> from early June highs. Selling started in Asia overnight and followed the sun into US trading. SK Hynix fell 14.65% in a single session in Korea.</li>
+<li>Sandisk <strong>-14%</strong>. AMD, ARM, Micron, and Seagate all fell more than 8%. Dell dropped 8% for making the servers that hold the chips.</li>
+<li>Apple briefly crossed a <strong>$5 trillion</strong> market cap while the AI spenders got punished. JPMorgan put total 2026 AI infrastructure spend at $870B, up 77% YoY, with the four hyperscalers accounting for $750B of that alone.</li>
+</ul>
+
+<p><strong>July 31: Warsh Plays Hawk</strong></p>
+<ul>
+<li>Fed hawkish hold: rates unchanged, but <strong>three dissenting members</strong> wanted to hike. Largest hawkish dissent count since the 2022 to 2023 tightening cycle. Dow dropped over 800 points during the press conference.</li>
+<li>Microsoft posted its biggest single-day percentage gain since 2008 on cloud growth guidance. Meta tumbled despite AI spending on a plunge in cash flow. Same AI trade, two completely different verdicts.</li>
+<li>SpaceX has now lost more than <strong>$500B in market cap</strong> since its June 12 debut. The smart money got their allocation months before the IPO. Retail bought the celebration.</li>
+</ul>
+
+<p><strong>August 4: Missiles Recalled, Rally Reloaded</strong></p>
+<ul>
+<li>Trump called off planned Iran strikes Monday. Oil slid. Dow hit a fresh all-time high above <strong>53,000</strong>. S&P and Nasdaq both gained over 1%.</li>
+<li>ISM manufacturing employment hit its highest reading since August 2022 and crossed into expansion for the first time in nearly three years.</li>
+<li>Palantir blowout earnings, raised full-year guidance on surging commercial AI demand. July jobs report was the main event given June's soft 57,000 print.</li>
+</ul>
+
+<h3>Monthly Pick Check-In</h3>
+<ul>
+<li><strong>FTAI:</strong> haven't touched it. CFM56 MRO demand doesn't care about a semiconductor correction or an Iran ceasefire. Still holding.</li>
+<li><strong>COHR:</strong> the Nasdaq correction hurt the optical names generally, but the Nvidia relationship and the 2028 backlog are intact. Still holding, watching closely.</li>
+</ul>`,
+    sources:'Ryan Leszyk weekly notes, June through August 2026. JPMorgan S&P 500 target revision July 3 2026. BLS jobs report June 2026. ISM manufacturing report August 2026. CNBC Buffett interview July 2026. VanEck SMH semiconductor ETF performance data. Micron earnings Q3 FY2026. Palantir Q2 2026 earnings. Federal Reserve June 2026 and July 2026 meeting minutes.',
+    author:'Jonathan Guerrero'
+  },
+
+
+      {
     id:'r25', type:'weekly', week:'Week 25', date:'Jun 22, 2026', day:'22', month:'Jun',
     title:'Peace Deal Signed, Already Cracking. Fed Pivots to Hikes. SpaceX Does a Round Trip in a Week.',
     excerpt:'Warsh held rates but the Fed now leans toward a hike, not a cut. The US-Iran peace deal got signed and started fraying within days. SpaceX ran 60% then gave a third of it back.',
