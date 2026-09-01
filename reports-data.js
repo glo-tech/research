@@ -2,16 +2,16 @@ const reports = [
 
       {
     id:'rsummer', type:'weekly', week:'Summer 2026', date:'Sep 1, 2026', day:'01', month:'Sep',
-    title:'Two Months Gone: I Was in Latin America, Ryan Was Watching the Market Fall Apart',
-    excerpt:'I spent the summer valuing farmland and real estate in Latin America. Ryan kept writing. Eight weeks of market notes condensed below, from the SpaceX IPO through a Nasdaq correction, three Fed dissenters, and SpaceX losing $500B in seven weeks.',
+    title:'I Was in the DR and Uruguay. Ryan Kept Writing. Here\'s What Happened.',
+    excerpt:'Two months off. Spent the summer doing real asset valuation work in the Dominican Republic and Uruguay, farmland, real estate, the kind of stuff that doesn\'t move on a dot plot. Ryan kept the market notes going. Condensed below.',
     keyData:[{val:'$500B',cls:'dn',label:'SPCX Market Cap Lost'},{val:'3',cls:'',label:'Fed Hawkish Dissenters'},{val:'-10%',cls:'dn',label:'Nasdaq 100 Correction'}],
-    body:`<p>Two months. No posts. I owe an explanation and a lot of catch-up.</p>
+    body:`<p>Two months, no posts. I'm not going to oversell the reason.</p>
 
-<p>I spent the summer working in the alternatives space, specifically valuing and researching real assets in Latin America: farmland and real estate, mostly in Brazil and Colombia. It was the most useful thing I've done since starting this site. Actual fieldwork, actual comps, actual conversations about soil quality and irrigation rights with people who've been doing this for decades. I'll have more to say about that in Alt Radar. For now, just know it's the reason the posts stopped.</p>
+<p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual physical things in the ground that don't care what the Fed's dot plot says. It was a good reminder that most of the world's capital doesn't live in a brokerage account. I'll get into the specifics in Alt Radar soon. For now that's why this went dark.</p>
 
-<p>One thing that changed while I was away: Ryan and I talked about how we want to divide coverage going forward. He's going to anchor the market and equities side, weekly price action, earnings, macro data, the stuff that moves the tape week to week. I'm going to focus on the alternatives and private markets side through Alt Radar, and keep doing the Monthly Picks with the full DCF work. It's a cleaner split and honestly plays to what each of us actually spent the summer doing.</p>
+<p>While I was gone Ryan kept writing, which is exactly what I was hoping would happen. We also figured out a cleaner split for how we're going to run this going forward. He's taking the markets and equities side, price action, earnings, macro data week to week. I'll focus on Alt Radar and the Monthly Picks. Plays to what we each actually did this summer.</p>
 
-<p>Ryan kept writing while I was gone. Eight weeks of notes. Below is the condensed version, dated and bulleted, so you can get oriented fast.</p>
+<p>Below is his two months of notes compressed into dated bullets. It was a genuinely weird stretch of market. The SpaceX IPO, a Nasdaq correction, Warsh getting hawkish, and the market somehow ending at all-time highs anyway.</p>
 
 <h3>What Ryan Was Watching</h3>
 
