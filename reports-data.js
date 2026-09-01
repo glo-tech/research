@@ -1,15 +1,51 @@
 const reports = [
 
       {
+    id:'ar6', type:'alt-radar', issue:'#6', week:'Summer Catch-Up', date:'Sep 1, 2026', day:'01', month:'Sep',
+    sectors:['Private Aviation','Private Equity','Real Estate','M&A'],
+    title:'Alt Radar #6: PE Discovers Private Jets, Bridgepoint Buys Into US Real Estate, and UK Takeovers Cross $100B',
+    excerpt:'Private equity is circling private aviation: Onex acquired Canada\'s largest fractional jet operator, Wheels Up did a Delta-backed rescue loan, and Surf Air brought in Palantir to run charter ops. Bridgepoint bought Kayne Anderson Real Estate for $1.4B. And UK PE deal flow crossed $100 billion today.',
+    keyData:[{val:'$1.4B',cls:'up',label:'Bridgepoint/Kayne Deal'},{val:'$100B+',cls:'up',label:'UK PE Takeovers 2026'},{val:'$12M',cls:'',label:'Surf Air/Wheels Up BrokerOS'}],
+    body:`<p>Three stories from the summer. All connected by the same thing: private capital moving into places it wasn't five years ago.</p>
+
+<span class="radar-section-label">Private Aviation</span>
+
+<h3>PE Found the Private Jet Business. Took Them Long Enough.</h3>
+<p>The private aviation market is valued at roughly <strong>$29.5B</strong> in 2026, up from $27B last year, and global business aviation hours hit 8.4 million in 2025, up 4% from the year before. Those aren't pandemic-distorted numbers anymore, that's structural demand. PE is noticing.</p>
+<p>The clearest deal this summer: <strong>Onex Partners and TriWest Capital Partners</strong> agreed to acquire AirSprint, Canada's largest fractional private jet operator, in June. AirSprint runs 44 aircraft, has over 600 fractional owners, and operates across North America and into Europe. Founder and CEO both stay on, founder becomes chairman emeritus. Terms weren't disclosed but Onex has $22B invested across six funds and 590+ add-ons, so this is a bolt-on for them, not a stretch.</p>
+<p>Fractional ownership is the part of private aviation PE likes most. You're not buying an airline, you're buying a recurring revenue business with multi-year contracts, guaranteed access obligations, and a customer base that can absorb significant price increases without churning. The economics look more like SaaS than transportation once you understand the structure.</p>
+<p>Wheels Up had a rougher summer. The company closed a <strong>$100M Delta Air Lines-backed term loan</strong> in late May, existing lenders including Delta, Cox Investment Holdings, and CK Wheels rolled their exposure into the new facility. That's a rescue loan dressed up as a strategic move. Delta is both a lender and a commercial partner, which keeps the strategic relationship alive while managing the credit risk they already had. Separately, Wheels Up retired the Air Partner brand globally in May, consolidating everything under one name after acquiring the UK firm in 2022 for $107M.</p>
+<p>The most interesting structural play: <strong>Surf Air Mobility signed a $12M deal with Wheels Up</strong> to run Wheels Up's charter brokerage on its BrokerOS software, built on Palantir's Foundry and AI Platform. Two-year term at $8M, optional third year at $4.2M. Surf Air says the software cut time from lead to booking by 57% and increased trips closed per broker by 32% internally. For Wheels Up, it replaces multiple legacy platforms and outsources the tech infrastructure to a company that's specifically solving this problem. Private aviation has historically been fragmented and manual. AI-powered charter ops infrastructure is the picks-and-shovels play on the sector's growth.</p>
+
+<span class="radar-section-label">Real Assets / Manager M&A</span>
+
+<h3>Bridgepoint Just Bought Its Way Into US Real Estate</h3>
+<p>London-based Bridgepoint agreed to acquire <strong>Kayne Anderson Real Estate</strong> for <strong>$1.39B</strong> in late June, cash and stock. KARE manages $22B in assets across medical office, senior housing, student housing, multifamily, and light industrial. The deal adds real estate as Bridgepoint's fifth vertical alongside private equity, credit, infrastructure, and secondaries. Combined AUM hits $117B.</p>
+<p>Why this matters: Bridgepoint has been a European mid-market firm trying to build a global platform. US real estate was the gap. Buying KARE is faster than building it, and KARE's latest flagship fund, KAREP VII, closed at $5.12B in May, which means the fundraising engine is working. Al Rabil, co-founder and CEO, stays on. The combined entity operates as Kayne Bridgepoint. Transaction closes end of 2026 pending shareholder and regulatory approval.</p>
+<p>This is the fifth major alternatives manager deal of 2026 I've covered. CVC bought Marathon for $1.2B in January. Nuveen acquired Schroders for £9.9B in February (covered in ar3). Lazard bought Campbell Lutyens for $575M in April (covered in ar4). Sun Life took the remaining 49% of Crescent Capital for $829M in March. The pattern is: everyone is buying credit and real estate capabilities they don't have, and doing it now before the next rate cycle makes acquisitions more expensive. The consolidation wave we called in ar3 has not slowed down at all.</p>
+
+<span class="radar-section-label">UK PE</span>
+
+<h3>UK Takeovers Crossed $100B Today</h3>
+<p>Bloomberg reported this morning that UK PE-driven takeover activity crossed $100 billion for 2026. The latest batch of deals pushed it over: <strong>Veritas Capital</strong> agreed to buy industrial heat treatment company Bodycote for roughly <strong>$2.2B</strong>, buyout firm <strong>Epiris</strong> offered about <strong>$1B</strong> for telecom services provider Gamma Communications, and Norway's DNO picked up Capricorn Energy for about $292M.</p>
+<p>The UK has been the most active public PE target market in the world this year. The logic is pretty clear: sterling weakness makes UK assets cheap in dollar and euro terms, UK listed companies trade at persistent discounts to their US equivalents, and the regulatory environment has been more predictable for PE buyers than the US or continental Europe. Every firm with global deployment capacity has been using the UK as the place to get deals done when the US is too expensive or too slow.</p>
+
+<span class="radar-section-label">One Thing I'm Taking Back to School</span>
+<p>I spent the summer looking at real assets in the DR and Uruguay. The one thing I kept thinking about while reading all this PE aviation activity: the buyers looking at AirSprint and Wheels Up are using the same framework that's been applied to every "experiential" asset class over the last decade. Luxury hospitality, sports franchises, fine wine storage. The thesis is always the same: wealthy customers, recurring spend, pricing power, low price elasticity. Private aviation fits that box. Whether the returns materialize is a different question. The fractional model specifically relies on fleet utilization and aircraft availability guarantees that can get expensive to maintain during a downturn. The same demand that makes the sector attractive in a bull market is what creates oversupply when sentiment shifts. Something to watch.</p>`,
+    sources:'Forbes, Onex and TriWest acquire AirSprint, June 27 2026. Private Jet Card Comparisons, Wheels Up $100M Delta term loan, June 1 2026. Business Wire, Surf Air BrokerOS Wheels Up partnership, June 25 2026. SEC EDGAR, Surf Air 8-K BrokerOS filing, June 25 2026. Aviation Week, Surf Air Wheels Up BrokerOS, June 26 2026. Alternative Credit Investor, private credit consolidation 2026, August 17 2026. Bridgepoint Group press release, Kayne Anderson Real Estate acquisition, June 29 2026. Connect CRE, Bridgepoint Kayne Anderson deal, July 7 2026. Bloomberg, UK takeovers cross $100B, September 1 2026. Jettly, private aviation demand 2026, July 25 2026. Global Market Insights, business jets market size 2026.'
+  },
+
+
+      {
     id:'rsummer', type:'weekly', week:'Summer 2026', date:'Sep 1, 2026', day:'01', month:'Sep',
     title:'I Was in the DR and Uruguay. Ryan Kept Writing. Here\'s What Happened.',
-    excerpt:'Two months off. Spent the summer doing real asset valuation work in the Dominican Republic and Uruguay, farmland, real estate. Ryan kept the market notes going. Condensed below.',
+    excerpt:'Two months off. Spent the summer doing real asset valuation work in the Dominican Republic and Uruguay, farmland, real estate, the kind of stuff that doesn\'t move on a dot plot. Ryan kept the market notes going. Condensed below.',
     keyData:[{val:'$500B',cls:'dn',label:'SPCX Market Cap Lost'},{val:'3',cls:'',label:'Fed Hawkish Dissenters'},{val:'-10%',cls:'dn',label:'Nasdaq 100 Correction'}],
-    body:`<p>Two months, no posts. Sorry guys, summer was busy.</p>
+    body:`<p>Two months, no posts. I'm not going to oversell the reason.</p>
 
-<p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual interesting work that I hope to incorporate into my Alt reports. It was a good reminder that most of the world's capital doesn't live in a brokerage account. For now that's why I went dark.</p>
+<p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual physical things in the ground that don't care what the Fed's dot plot says. It was a good reminder that most of the world's capital doesn't live in a brokerage account. I'll get into the specifics in Alt Radar soon. For now that's why this went dark.</p>
 
-<p>Ryan kept writing over the summer. Ryan's taking lead on the markets and equities side, price action, earnings, macro data week to week. I'll focus on Alt Radar and the Monthly Picks.</p>
+<p>While I was gone Ryan kept writing, which is exactly what I was hoping would happen. We also figured out a cleaner split for how we're going to run this going forward. He's taking the markets and equities side, price action, earnings, macro data week to week. I'll focus on Alt Radar and the Monthly Picks. Plays to what we each actually did this summer.</p>
 
 <p>Below is his two months of notes compressed into dated bullets. It was a genuinely weird stretch of market. The SpaceX IPO, a Nasdaq correction, Warsh getting hawkish, and the market somehow ending at all-time highs anyway.</p>
 
