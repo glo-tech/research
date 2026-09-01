@@ -5,7 +5,7 @@ const reports = [
     title:'I Was in the DR and Uruguay. Ryan Kept Writing. Here\'s What Happened.',
     excerpt:'Two months off. Spent the summer doing real asset valuation work in the Dominican Republic and Uruguay, farmland, real estate. Ryan kept the market notes going. Condensed below.',
     keyData:[{val:'$500B',cls:'dn',label:'SPCX Market Cap Lost'},{val:'3',cls:'',label:'Fed Hawkish Dissenters'},{val:'-10%',cls:'dn',label:'Nasdaq 100 Correction'}],
-    body:`<p>Two months, no posts. I'm not going to oversell the reason.</p>
+    body:`<p>Two months, no posts. Sorry guys, summer was busy.</p>
 
 <p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual interesting work that I hope to incorporate into my Alt reports. It was a good reminder that most of the world's capital doesn't live in a brokerage account. For now that's why I went dark.</p>
 
