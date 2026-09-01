@@ -7,9 +7,9 @@ const reports = [
     keyData:[{val:'$500B',cls:'dn',label:'SPCX Market Cap Lost'},{val:'3',cls:'',label:'Fed Hawkish Dissenters'},{val:'-10%',cls:'dn',label:'Nasdaq 100 Correction'}],
     body:`<p>Two months, no posts. I'm not going to oversell the reason.</p>
 
-<p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual interesting work that I hope to incorporate into my Alt reports. It was a good reminder that most of the world's capital doesn't live in a brokerage account. I'll get into the specifics in Alt Radar soon. For now that's why this went dark.</p>
+<p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual interesting work that I hope to incorporate into my Alt reports. It was a good reminder that most of the world's capital doesn't live in a brokerage account. For now that's why I went dark.</p>
 
-<p>While I was gone Ryan kept writing. We figured out a cleaner split for how we're going to run this going forward. Ryan's taking lead on the markets and equities side, price action, earnings, macro data week to week. I'll focus on Alt Radar and the Monthly Picks.</p>
+<p>Ryan kept writing over the summer. Ryan's taking lead on the markets and equities side, price action, earnings, macro data week to week. I'll focus on Alt Radar and the Monthly Picks.</p>
 
 <p>Below is his two months of notes compressed into dated bullets. It was a genuinely weird stretch of market. The SpaceX IPO, a Nasdaq correction, Warsh getting hawkish, and the market somehow ending at all-time highs anyway.</p>
 
