@@ -48,7 +48,7 @@ const reports = [
     title:'I Was in the DR and Uruguay. Ryan Kept Writing. Here\'s What Happened.',
     excerpt:'Two months off. Spent the summer doing real asset valuation work in the Dominican Republic and Uruguay, farmland, real estate, the kind of stuff that doesn\'t move on a dot plot. Ryan kept the market notes going. Condensed below.',
     keyData:[{val:'$500B',cls:'dn',label:'SPCX Market Cap Lost'},{val:'3',cls:'',label:'Fed Hawkish Dissenters'},{val:'-10%',cls:'dn',label:'Nasdaq 100 Correction'}],
-    body:`<p>Two months, no posts. I'm not going to oversell the reason.</p>
+    body:`<p>Two months, no reports. Sorry guys, busy summer.</p>
 
 <p>I spent the summer doing real asset valuation work in the Dominican Republic and Uruguay. Farmland, real estate, actual physical things in the ground that don't care what the Fed's dot plot says. It was a good reminder that most of the world's capital doesn't live in a brokerage account. I'll get into the specifics in Alt Radar soon. For now that's why this went dark.</p>
 
