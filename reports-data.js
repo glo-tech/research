@@ -1,6 +1,78 @@
 const reports = [
 
       {
+    id:'r27', type:'weekly', week:'Week 27', date:'Sep 16, 2026', day:'16', month:'Sep',
+    title:'They\'re Calling It the 777 Economy: $7 Gas, 7% Mortgages, $700K Asking Price',
+    excerpt:'The numbers aren\'t exactly 777. But the vibe is. Gas up 30% year over year, 30-year mortgage hitting 7.08% the same day the Fed raised rates, and median monthly housing payments at a 14-month high. Also Anthropic is profitable if you don\'t count the losses.',
+    keyData:[{val:'7.08%',cls:'dn',label:'30-Yr Mortgage (New High)'},{val:'$4.16',cls:'dn',label:'Avg Gas/Gal (+30% YoY)'},{val:'$2,641',cls:'dn',label:'Median Monthly Payment'}],
+    body:`<p>Okay the numbers aren\'t EXACTLY 777. But the vibe is.</p>
+
+<h3>Gas Is Not Cheap</h3>
+<p>National average hit <strong>$4.16</strong> a gallon last week per EIA data, up <strong>30.2% year over year</strong>. California is at $5.99, Washington at $5.54, Hawaii $5.40. Premium fuel nationally is $5.17. Indiana is at $3.59 and is basically the only state winning right now.</p>
+
+<p>The $7 in the title is not a stretch if you drive diesel in California.</p>
+
+<h3>Mortgages Are Almost 7%. Today Might Push Them There.</h3>
+<p>The 30-year fixed averaged 6.76% as of September 10, up from 6.71% the week prior, per Freddie Mac. As of today the 30-year fixed is at <strong>7.08%</strong> according to the Mortgage Research Center, a one-year high. The Fed is literally deciding rates at 2pm today as I\'m writing this. (They raised rates, second one pretty much confirmed later this year.)</p>
+
+<p>Mortgage applications fell 4.1% last week, the steepest weekly drop since July. Refinancing applications dropped 8.8%. Nobody is buying, nobody is refinancing, everyone is sitting watching the 10-year tick higher.</p>
+
+<p>Median home price nationally is around <strong>$410,700</strong>. Median monthly payment hit a 14-month high of <strong>$2,641</strong>. The $700K in the title is coastal asking prices, not the national median. But coastal is where people live so it counts.</p>
+
+<h3>Anthropic Is "Profitable" If You Don\'t Count the Losses</h3>
+<p>This one is not housing or gas related but it\'s too funny to leave out.</p>
+
+<p>Anthropic told a group of investors its adjusted operating income is set to be positive for the second consecutive quarter. AOI is an accounting technique that strips out non-recurring costs. Posting a positive AOI is very different from posting a profit on net income, under which Anthropic remains billions of dollars in the red.</p>
+
+<p>So I guess I\'d be a profitable options trader if you didn\'t count my losses.</p>
+
+<h3>The Numbers</h3>
+<p>S&amp;P came into this week at 7,718. The Fed decision at 2pm today is the number. Hike probability was sitting above 50%. They hiked. Second one pretty much confirmed later this year. Either way the <strong>10-year touched 5.00%</strong> yesterday for the first time since 2023. That\'s the real story this week.</p>`,
+    sources:'EIA Weekly Retail Gasoline and Diesel Prices, September 7 2026. AAA Gas Prices September 10 2026. Freddie Mac PMMS 30-year fixed rate September 10 2026. Mortgage Research Center 30-year fixed September 16 2026. MBA Mortgage Applications September 11 2026. Redfin Weekly Housing Market Update September 10 2026. NAR Existing Home Sales August 2026. Futurism, Anthropic adjusted operating income September 2026. Financial Times, Anthropic AOI positive second consecutive quarter.',
+    author:'Jonathan Guerrero'
+  },
+
+
+      {
+    id:'r26', type:'weekly', week:'Week 26', date:'Sep 5, 2026', day:'05', month:'Sep',
+    title:'Cooks, Jobs and Oil',
+    excerpt:'Apple has a new CEO. The August jobs report came in at 162,000, triple what anyone expected, and the market sold off anyway. Good news is bad news is back. Oil hit $96 on Iran. The September 16 Fed meeting is now a live coin flip on a hike.',
+    keyData:[{val:'162K',cls:'',label:'Aug Jobs vs 53K Est.'},{val:'58%',cls:'dn',label:'Sep Hike Probability'},{val:'$96',cls:'dn',label:'Brent Crude'}],
+    body:`<p>September started loud. Three things.</p>
+
+<h3>Apple Has a New CEO</h3>
+<p>John Ternus took over from Tim Cook on September 1. Cook moves to executive chairman. Ternus has been at Apple since 2001, ran hardware engineering since 2021, the guy behind every iPhone, iPad, and Mac for the last five years. Engineer brain, not supply chain or finance like Cook. Stock up 3% on his first day. Make of that what you will.</p>
+
+<p>First time on stage as CEO is September 9. New iPhone and reportedly a foldable device. Haven\'t had a new CEO opening a new product category since Jobs. Worth watching.</p>
+
+<h3>The Jobs Report Broke Everyone\'s Brain</h3>
+<p>August payrolls came in at <strong>162,000</strong>. Economists expected around 53,000. Unemployment held at 4.1%.</p>
+
+<p>Normally great news. Not this cycle. Warsh\'s Fed cares more about inflation than the labor market, so a blowout jobs number means more wage pressure, more reason to hike. September rate hike probability jumped to <strong>58%</strong> by Friday close. Market sold off into the weekend.</p>
+
+<p>Good news is bad news is back.</p>
+
+<h3>Oil at $96</h3>
+<p>US-Iran flared up again. Brent crude hit <strong>~$96</strong>, WTI above $91, oil up nearly 10% on the week. Energy was the only sector that had a clean five sessions.</p>
+
+<p>The problem is what $96 oil does to CPI, which prints Friday. Last major data point before the September 16 Fed meeting. If it comes in hot, the hike is basically done.</p>
+
+<p>10-year yield hit <strong>4.78%</strong>, highest since November 2023. Strong jobs, rising energy, and a Fed that might hike again in two weeks will do that.</p>
+
+<h3>The Numbers</h3>
+<p>S&amp;P closed at 7,718, up 0.1% for the week. Nasdaq +0.4%, Dow -0.3%. Flat headline, bumpy five sessions underneath. August overall was decent: S&amp;P +2.6%, Nasdaq +3.9%. Nike hit a 52-week low at $38.07, levels not seen in over 20 years.</p>
+
+<h3>Monthly Pick Check-In</h3>
+<ul>
+<li><strong>FTAI:</strong> nothing new. Still holding.</li>
+<li><strong>COHR:</strong> quiet week. Nvidia AI ecosystem news didn\'t hurt. Still holding.</li>
+</ul>`,
+    sources:'RIA Advisors Weekly Market Recap, September 5 2026. Alain Guillot Stock Market Recap September 1-4 2026. Manulife John Hancock Weekly Market Recap September 2026. T. Rowe Price Global Markets Weekly Update September 2026. Apple Newsroom, Tim Cook executive chairman John Ternus CEO September 1 2026. BLS August jobs report September 5 2026. Yahoo Finance S&P 500 historical data September 2026.',
+    author:'Jonathan Guerrero'
+  },
+
+
+      {
     id:'ar6', type:'alt-radar', issue:'#6', week:'Summer Catch-Up', date:'Sep 1, 2026', day:'01', month:'Sep',
     sectors:['Private Aviation','Private Equity','Real Estate','M&A'],
     title:'Alt Radar #6: PE Discovers Private Jets, Bridgepoint Buys Into US Real Estate, and UK Takeovers Cross $100B',
