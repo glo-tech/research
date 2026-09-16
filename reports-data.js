@@ -36,14 +36,14 @@ const reports = [
       {
     id:'r26', type:'weekly', week:'Week 26', date:'Sep 5, 2026', day:'05', month:'Sep',
     title:'Cooks, Jobs and Oil',
-    excerpt:'Apple has a new CEO. The August jobs report came in at 162,000, triple what anyone expected, and the market sold off anyway. Good news is bad news is back. Oil hit $96 on Iran. The September 16 Fed meeting is now a live coin flip on a hike.',
+    excerpt:'Apple has a new CEO. The August jobs report came in at 162,000, triple what anyone expected, and the market sold off anyway. Good news, bad news is back! Oil hit $96 on Iran. The September 16 Fed meeting is now a live coin flip on a hike.',
     keyData:[{val:'162K',cls:'',label:'Aug Jobs vs 53K Est.'},{val:'58%',cls:'dn',label:'Sep Hike Probability'},{val:'$96',cls:'dn',label:'Brent Crude'}],
     body:`<p>September started loud. Three things.</p>
 
 <h3>Apple Has a New CEO</h3>
-<p>John Ternus took over from Tim Cook on September 1. Cook moves to executive chairman. Ternus has been at Apple since 2001, ran hardware engineering since 2021, the guy behind every iPhone, iPad, and Mac for the last five years. Engineer brain, not supply chain or finance like Cook. Stock up 3% on his first day. Make of that what you will.</p>
+<p>John Ternus took over from Tim Cook on September 1. Cook moves to executive chairman. Ternus has been at Apple since 2001, ran hardware engineering since 2021, the guy behind every iPhone, iPad, and Mac for the last five years. Engineer, not supply chain or finance like Cook. Stock up 3% on his first day. Make of that what you will.</p>
 
-<p>First time on stage as CEO is September 9. New iPhone and reportedly a foldable device. Haven\'t had a new CEO opening a new product category since Jobs. Worth watching.</p>
+<p>First time on stage as CEO is September 9. New iPhone and reportedly a foldable device. Haven\'t had a new CEO opening a new product category since Jobs.</p>
 
 <h3>The Jobs Report Broke Everyone\'s Brain</h3>
 <p>August payrolls came in at <strong>162,000</strong>. Economists expected around 53,000. Unemployment held at 4.1%.</p>
