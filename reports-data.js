@@ -33,6 +33,7 @@ const reports = [
   },
 
 
+
       {
     id:'r26', type:'weekly', week:'Week 26', date:'Sep 5, 2026', day:'05', month:'Sep',
     title:'Cooks, Jobs and Oil',
@@ -70,8 +71,6 @@ const reports = [
     sources:'RIA Advisors Weekly Market Recap, September 5 2026. Alain Guillot Stock Market Recap September 1-4 2026. Manulife John Hancock Weekly Market Recap September 2026. T. Rowe Price Global Markets Weekly Update September 2026. Apple Newsroom, Tim Cook executive chairman John Ternus CEO September 1 2026. BLS August jobs report September 5 2026. Yahoo Finance S&P 500 historical data September 2026.',
     author:'Jonathan Guerrero'
   },
-
-
       {
     id:'ar6', type:'alt-radar', issue:'#6', week:'Summer Catch-Up', date:'Sep 1, 2026', day:'01', month:'Sep',
     sectors:['Private Aviation','Private Equity','Real Estate','M&A'],
@@ -302,7 +301,7 @@ const reports = [
 
 
 
-  // ── ALT RADAR ─────────────────────────────────────────────
+  // ââ ALT RADAR âââââââââââââââââââââââââââââââââââââââââââââ
   {
     id:'ar4', type:'alt-radar', issue:'#4', week:'Week 18', date:'May 1, 2026', day:'01', month:'May',
     sectors:['Private Equity','M&A','Secondaries','Venture Capital'],
@@ -349,7 +348,7 @@ const reports = [
     sectors:['Private Equity','Secondaries','M&A','Asset Management'],
     title:'Alt Radar #3: Schroders Is Gone, Ping An Is Dumping Software PE, and the Secondaries Market Just Hit Another Record',
     excerpt:'Schroders shareholders voted 99.9% to approve the Nuveen takeover. China\'s biggest insurer is selling $1B in Vista and KKR fund stakes. Partners Group closes a $9B secondaries fund. The active asset management consolidation wave is not slowing down.',
-    keyData:[{val:'£9.9B',cls:'up',label:'Schroders/Nuveen Deal'},{val:'$1B',cls:'dn',label:'Ping An PE Sale'},{val:'$9B',cls:'up',label:'Partners Group Secondaries'}],
+    keyData:[{val:'Â£9.9B',cls:'up',label:'Schroders/Nuveen Deal'},{val:'$1B',cls:'dn',label:'Ping An PE Sale'},{val:'$9B',cls:'up',label:'Partners Group Secondaries'}],
     body:`Three stories this issue, all pointing at the same shift: secondaries are going mainstream, active managers are consolidating to survive, and big money is quietly bailing on software PE.
 
 <span class="radar-section-label">Asset Management</span>
@@ -439,7 +438,7 @@ const reports = [
   },
 
 
-  // ── MONTHLY PICK ──────────────────────────────────────────
+  // ââ MONTHLY PICK ââââââââââââââââââââââââââââââââââââââââââ
   {
     id:'mp2', type:'monthly-pick', week:'Week 24', date:'Jun 13, 2026', day:'13', month:'Jun',
     ticker:'COHR',
@@ -481,7 +480,7 @@ const reports = [
     sources:'FTAI Aviation FY2025 Earnings Release, GlobeNewswire, Feb 25 2026. FTAI 2025 10-K via TradingView. MacroTrends revenue data. SignalBloom earnings analysis. All forward estimates and DCF assumptions are independent Rosehill Research analysis, not financial advice.'
   },
 
-  // ── WEEKLY WRAPS ──────────────────────────────────────────
+  // ââ WEEKLY WRAPS ââââââââââââââââââââââââââââââââââââââââââ
   {
     id:'r18', type:'weekly', week:'Week 18', date:'May 1, 2026', day:'01', month:'May',
     title:'Six Weeks Up: Best April Since 1950, Apple Beats, GDP Misses, and Iran Is Still Not Resolved',
@@ -690,7 +689,7 @@ const reports = [
     id:'r9', type:'weekly', week:'Week 9', date:'Feb 28, 2026', day:'28', month:'Feb',
     title:'February Closes Red: AI Spending Concerns and Late-Month Inflation Data Weigh',
     excerpt:'The S&P 500 and Nasdaq finished February in negative territory. AI capex ROI doubts and a late-month inflation reading hit sentiment hard.',
-    keyData:[{val:'−0.4%',cls:'dn',label:'S&P 500 Feb MTD'},{val:'19.86',cls:'',label:'VIX Feb 27'},{val:'6,909',cls:'',label:'S&P Feb 26 Close'}],
+    keyData:[{val:'â0.4%',cls:'dn',label:'S&P 500 Feb MTD'},{val:'19.86',cls:'',label:'VIX Feb 27'},{val:'6,909',cls:'',label:'S&P Feb 26 Close'}],
     body:`
       <p>February 2026 ended on a sour note. The S&P 500 and Nasdaq both finished the month in negative territory, dragged down by renewed questions about AI capital expenditure returns and a late-month inflation reading. The Dow fell over <strong>500 points on February 26</strong> after fresh macro data and mounting AI skepticism hit simultaneously.</p>
 
